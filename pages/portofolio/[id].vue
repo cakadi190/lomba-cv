@@ -134,6 +134,9 @@
 </template>
 
 <script lang="ts" setup>
+useHead({
+  title: 'Cak Adi Website'
+})
 </script>
 
 <style scoped lang="scss">

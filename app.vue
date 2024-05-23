@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 useHead({
   titleTemplate: (titleChunk: any) => {
-    return titleChunk ? `Cak Adi • ${titleChunk}` : 'Cak Adi';
+    return titleChunk ? `${titleChunk} • Cak Adi` : 'Cak Adi';
   },
   meta: [
     { name: 'og:image', key: 'og:image', content: '/images/va-ogImg.png' },
