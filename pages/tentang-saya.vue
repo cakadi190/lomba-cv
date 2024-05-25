@@ -91,7 +91,7 @@
 						</div>
 
 						<!-- Skills -->
-						<div id="skills">
+						<div id="skills" class="pb-5 mb-5 border-bottom">
 							<h4>Keahlian Saya</h4>
 							<p class="opacity-75 mb-5">Keahlian profesional saya.</p>
 
@@ -106,10 +106,16 @@
 								</div>
 							</div>
 						</div>
+
+            <!-- Certification -->
+            <div id="certification">
+							<h4>Sertifikasi Saya</h4>
+							<p class="opacity-75 mb-5">Beberapa sertifikat yang sudah dan pernah saya dapatkan.</p>
+            </div>
 					</div>
 					<div class="col-md-3">
 						<div
-							class="card sticky-top rounded-4"
+							class="card sticky-top overflow-hidden rounded-4"
 							v-motion
 							:enter="enterSlideFromBottomToTop"
 							:initial="initialSlideFromBottomToTop"
@@ -143,6 +149,14 @@
                       Keahlian
 										</a>
 									</li>
+									<li class="nav-item" role="presentation">
+										<a
+                      href="#certification"
+											class="nav-link py-3 w-100 text-start"
+										>
+                      Sertifikasi
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -170,6 +184,13 @@ const skillset = ref([
 	{ icon: "devicon:java", name: "Java" },
 	{ icon: "devicon:dart", name: "Dart" },
 	{ icon: "devicon:kotlin", name: "Kotlin" },
+	{ icon: "devicon:express", name: "ExpressJS" },
+	{ icon: "devicon:adonisjs", name: "AdonisJS" },
+	{ icon: "devicon:vitejs", name: "ViteJS" },
+	{ icon: "devicon:mysql", name: "MySQL" },
+	{ icon: "devicon:mariadb", name: "MariaDB" },
+	{ icon: "devicon:mongodb", name: "MongoDB" },
+	{ icon: "devicon:sqlite", name: "SQLite" },
 	{ icon: "devicon:php", name: "PHP" },
 	{ icon: "devicon:html5", name: "HTML" },
 	{ icon: "devicon:css3", name: "CSS" },
@@ -177,6 +198,7 @@ const skillset = ref([
 	{ icon: "devicon:vuejs", name: "VueJS" },
 	{ icon: "devicon:bootstrap", name: "Bootstrap" },
 	{ icon: "devicon:tailwindcss", name: "TailwindCSS" },
+	{ icon: "devicon:angular", name: "AngularJS" },
 	{ icon: "devicon:jquery", name: "jQuery" },
 	{ icon: "devicon:typescript", name: "Typescript" },
 	{ icon: "devicon:git", name: "Git" },
@@ -233,26 +255,13 @@ useHead({
 		position: relative;
 		z-index: 0;
 		cursor: pointer;
-
-		&::after {
-			content: "";
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			border-radius: 0.5rem;
-			pointer-events: none;
-			background-color: rgba(var(--bs-primary-rgb), 0.25);
-			opacity: 0;
-			transition: opacity 0.2s ease;
-			transform: scale(0.9);
-		}
-
-		&:hover::after {
-			opacity: 1;
-			transform: scale(1);
-		}
+    transition: all .2s;
+    border-color: 1px solid transparent;
+    
+    &:hover {
+      transform: scale(1.05);
+      border-color: var(--bs-primary);
+    }
 	}
 }
 </style>
@@ -271,7 +280,7 @@ useHead({
 			}
 		}
 
-		&:first-child {
+		&:not(:last-child) {
 			border-bottom: 1px solid var(--bs-card-border-color);
 		}
 	}

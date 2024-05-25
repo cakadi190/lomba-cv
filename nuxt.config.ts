@@ -6,6 +6,13 @@ export default defineNuxtConfig({
     '~/assets/scss/app.scss',
   ],
 
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      failOnError: false, 
+    },
+  },
+
   modules: [
     '@vueuse/motion/nuxt',
     "@nuxt/image",

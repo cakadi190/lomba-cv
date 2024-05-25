@@ -10,7 +10,7 @@
 
 		<section class="need-space pt-0">
 			<div class="container">
-				<div class="row">
+				<div class="row flex-lg-row flex-column-reverse gy-4">
 					<div class="col-md-8">
 						<!-- Tab panes -->
 						<div class="tab-content" id="myTabContent">
@@ -20,7 +20,7 @@
 								role="tabpanel"
 								aria-labelledby="education-tab"
 							>
-								<div class="pb-4 mb-4 border-bottom" id="education">
+								<div class="pb-4 mb-4" id="education">
 									<div class="list-group list-group-flush">
 										<div
 											v-for="(item, index) in education"
@@ -57,8 +57,9 @@
 															</span>
 															<a
 																v-if="item.web"
-																class="text-decoration-none text-white fw-bold"
+																class="text-decoration-none"
 																:href="item.web"
+                                target="_blank"
 															>
 																{{
 																	item.web?.match(
@@ -132,7 +133,7 @@
 					</div>
 					<div class="col-md-4">
 						<div
-							class="card sticky-top rounded-4"
+							class="card sticky-top overflow-hidden rounded-4"
 							v-motion
 							:enter="enterSlideFromBottomToTop"
 							:initial="initialSlideFromBottomToTop"

@@ -45,6 +45,10 @@ import {
 	enterSlideFromBottomToTop,
 } from "~/components/motion";
 
+useHead({
+  title: 'Karir Saya'
+});
+
 const careerExp = ref([
 	{
 		position: "Magang Fullstack Web Developer",

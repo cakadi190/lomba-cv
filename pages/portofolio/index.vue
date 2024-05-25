@@ -36,6 +36,10 @@ import {
 	php,
 } from "~/components/techstack";
 
+useHead({
+  title: 'Daftar Portofolio'
+});
+
 const myPortofolio = ref([
 	{
 		name: "SIPDATA Pemuda Boyolali",

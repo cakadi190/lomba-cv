@@ -64,7 +64,7 @@ import {
 		bottom: 0;
 		left: 0;
 		z-index: -1;
-		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.5));
+		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
 
 		[data-bs-theme="dark"] & {
 			background: linear-gradient(

@@ -31,17 +31,23 @@ useHead({
 	],
 });
 
-const techStack = ref([
-	{ icon: "devicon:laravel", name: "Laravel" },
-	{ icon: "devicon:vuejs", name: "VueJS" },
-	{ icon: "devicon:bootstrap", name: "Bootstrap" },
-	{ icon: "devicon:nuxtjs", name: "NuxtJS" },
-	{ icon: "devicon:docker", name: "Docker" },
-	{ icon: "devicon-plain:wordpress", name: "WordPress" },
-	{ type: "separator" },
-	{ icon: "devicon:vscode", name: "Visual Studio Code" },
-	{ icon: "devicon:figma", name: "Figma" },
-	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
+type TechStackItem = {
+  icon?: string;
+  name?: string;
+  type?: 'separator';
+};
+
+const techStack = ref<TechStackItem[]>([
+  { icon: "devicon:laravel", name: "Laravel" },
+  { icon: "devicon:vuejs", name: "VueJS" },
+  { icon: "devicon:bootstrap", name: "Bootstrap" },
+  { icon: "devicon:nuxtjs", name: "NuxtJS" },
+  { icon: "devicon:docker", name: "Docker" },
+  { icon: "devicon-plain:wordpress", name: "WordPress" },
+  { type: "separator" },
+  { icon: "devicon:vscode", name: "Visual Studio Code" },
+  { icon: "devicon:figma", name: "Figma" },
+  { icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
 </script>
 
@@ -70,10 +76,11 @@ export default defineComponent({
 						:initial="initialSlideFromLeftToRight"
 						:enter="enterSlideFromLeftToRight"
 					>
-						<span class="text-primary text-decoration-underline">A</span
-						>mir&nbsp;Zuh<span class="text-primary text-decoration-underline"
-							>di</span
-						>&nbsp;Wibowo
+						<span class="text-primary text-decoration-underline">A</span>
+            <span>mir&nbsp;</span>
+            <span>Zuh</span>
+            <span class="text-primary text-decoration-underline">di</span>
+            <span>&nbsp;Wibowo</span>
 					</h1>
 					<p
 						v-motion
@@ -90,7 +97,7 @@ export default defineComponent({
 						class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center"
 					>
 						<NuxtLink
-							to="/contact-me"
+							to="/"
 							class="btn btn-primary d-flex align-items-center gap-2"
 							v-motion
 							:initial="initialSlideFromLeftToRight"
@@ -101,7 +108,7 @@ export default defineComponent({
 						</NuxtLink>
 
 						<NuxtLink
-							to="/download-cv"
+							to="https://s.id/cvnyaCakAdi"
 							class="btn btn-outline-primary d-flex align-items-center gap-2"
 							v-motion
 							:initial="initialSlideFromLeftToRight"
@@ -179,7 +186,7 @@ export default defineComponent({
 		bottom: 0;
 		left: 0;
 		z-index: -1;
-		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.5));
+		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
 
 		[data-bs-theme="dark"] & {
 			background: linear-gradient(

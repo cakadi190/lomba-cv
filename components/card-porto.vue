@@ -20,7 +20,6 @@ defineProps<{
 	>
 		<nuxt-link :to="`/portofolio/${data.slug}`" class="card overflow-hidden rounded-4">
 			<nuxt-img
-				:placeholder="img(`/nuxt.svg`, { h: 10, f: 'png', blur: 2, q: 50 })"
 				:src="data.image"
 				class="rounded-3 nuxt-img-top"
 				:alt="data.name"

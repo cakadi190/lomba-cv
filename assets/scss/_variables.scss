@@ -540,8 +540,8 @@ $border-widths: (
   5: 5px
 ) !default;
 $border-style:                solid !default;
-$border-color:                $gray-300 !default;
-$border-color-translucent:    rgba($black, .175) !default;
+$border-color:                rgba($gray-700, .175) !default;
+$border-color-translucent:    rgba($gray-700, .175) !default;
 // scss-docs-end border-variables
 
 // scss-docs-start border-radius-variables

@@ -87,7 +87,7 @@ const navbarMenu = ref([
 	{ name: "Pendidikan & Organisasi", link: "/pendidikan" },
 	{ name: "Penghargaan", link: "/penghargaan" },
 	{ name: "Karir", link: "/karir" },
-	// { name: "Kontak Saya", link: "/kontak" },
+	{ name: "Kontak Saya", link: "/kontak" },
 ]);
 
 const applyTheme = (themes: string) => {
@@ -130,7 +130,7 @@ const handleScroll = () => {
 		);
 		navbar.value?.classList.add("border-bottom");
 		navbar.value?.style.setProperty("--bs-bg-opacity", "0.75");
-		navbar.value?.style.setProperty("backdrop-filter", "blur(1rem)");
+		navbar.value?.style.setProperty("backdrop-filter", "blur(.25rem)");
 	} else {
 		navbar.value?.classList.remove(
 			theme.value === "dark" ? "bg-dark" : "bg-white"
@@ -142,6 +142,8 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  handleScroll();
+
 	navbar.value = document.querySelector(".navbar");
 	window.addEventListener("scroll", handleScroll);
 });

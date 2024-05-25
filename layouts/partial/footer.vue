@@ -51,12 +51,12 @@
 				<div class="col-lg-2 col-6">
 					<h5 class="h6">Ke(-rjaan/gabut)-an Saya</h5>
 					<ul class="list-unstyled">
-						<li><a href="#">Pendidikan</a></li>
-						<li><a href="#">Penghargaan</a></li>
-						<li><a href="#">Skill & Perkakas</a></li>
-						<li><a href="#">Layanan</a></li>
-						<li><a href="#">Portofolio Saya</a></li>
-						<li><a href="#">Karir</a></li>
+						<li><nuxt-link to="/pendidikan">Pendidikan</nuxt-link></li>
+						<li><nuxt-link to="/penghargaan">Penghargaan</nuxt-link></li>
+						<li><nuxt-link to="/skill">Skill & Perkakas</nuxt-link></li>
+						<li><nuxt-link to="/layanan">Layanan</nuxt-link></li>
+						<li><nuxt-link to="/portofolio">Portofolio Saya</nuxt-link></li>
+						<li><nuxt-link to="/karir">Karir</nuxt-link></li>
 					</ul>
 				</div>
 
