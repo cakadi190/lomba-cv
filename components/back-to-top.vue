@@ -2,8 +2,8 @@
   <div>
     <!-- Tombol Back to Top -->
     <button 
-      v-show="showButton" 
-      @click="scrollToTop" 
+      @click="scrollToTop"
+      :class="showButton ? '' : 'hidden'"
       class="btn btn-primary d-flex align-items-center gap-2 back-to-top"
     >
       <Icon name="fa6-solid:chevron-up" />
@@ -21,7 +21,7 @@ const scrollToTop = () => {
 };
 
 const checkScroll = () => {
-  showButton.value = window.scrollY > 200;
+  showButton.value = window.scrollY > 50;
 };
 
 onMounted(() => {
@@ -39,7 +39,7 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="scss">
 .back-to-top {
   position: fixed;
   bottom: 1rem;
@@ -50,5 +50,13 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all .2s;
+  visibility: visible;
+  
+  &.hidden {
+    visibility: hidden;
+    bottom: 0;
+    opacity: 0;
+  }
 }
 </style>

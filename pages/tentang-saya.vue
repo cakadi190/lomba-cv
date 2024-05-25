@@ -191,6 +191,8 @@ const skillset = ref([
 	{ icon: "devicon:mariadb", name: "MariaDB" },
 	{ icon: "devicon:mongodb", name: "MongoDB" },
 	{ icon: "devicon:sqlite", name: "SQLite" },
+	{ icon: "devicon:flutter", name: "Flutter" },
+	{ icon: "devicon:vercel", name: "Vercel" },
 	{ icon: "devicon:php", name: "PHP" },
 	{ icon: "devicon:html5", name: "HTML" },
 	{ icon: "devicon:css3", name: "CSS" },
