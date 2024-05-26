@@ -4,8 +4,6 @@ import {
 	enterSlideFromBottomToTop,
 } from "./motion";
 
-const img = useImage();
-
 defineProps<{
 	data: any;
 }>();
@@ -46,6 +44,8 @@ defineProps<{
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
 export default defineComponent({
 	name: "CardPorto",
 });

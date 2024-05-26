@@ -1,7 +1,40 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "moduleResolution": "Node"
-  }
+    "target": "ES2019",
+    "module": "ES2020",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "types": [
+      "node"
+    ]
+  },
+  "extends": "./.nuxt/tsconfig.json",
+  "include": [
+    "prisma/**/*.ts",
+    ".nuxt",
+    ".",
+    "./.nuxt/nuxt.d.ts",
+    "...config/nuxt.*",
+    "./**/*",
+    "./../../www-nod/runtime",
+    "./node_modules/@nuxt/image/runtime",
+    "./node_modules/nuxt-swiper/runtime",
+    "./node_modules/nuxt-svgo/runtime",
+    "./node_modules/@vesp/nuxt-fontawesome/runtime",
+    "./node_modules/@nuxtjs/color-mode/runtime",
+    "./node_modules/nuxt-icon/runtime",
+    "./node_modules/@nuxtjs/google-fonts/runtime",
+    "./node_modules/@nuxt/devtools/runtime",
+    "./node_modules/@nuxt/telemetry/runtime",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

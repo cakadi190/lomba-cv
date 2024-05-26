@@ -7,15 +7,14 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "seed": "node --loader ts-node/esm prisma/seed.ts --experimental-loader"
   },
   "dependencies": {
     "@duskmoon/vue3-typed-js": "^0.0.4",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/color-mode": "^3.4.1",
     "@nuxtjs/google-fonts": "^3.2.0",
-    "@types/bootstrap": "^5.2.10",
-    "@types/jquery": "^3.5.30",
     "@vueuse/motion": "^2.1.0",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
@@ -32,7 +31,14 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@prisma/client": "5.14.0",
+    "@types/bootstrap": "^5.2.10",
+    "@types/jquery": "^3.5.30",
+    "@types/node": "^20.12.12",
     "@vesp/nuxt-fontawesome": "^1.0.4",
-    "nuxt-icon": "^0.6.10"
+    "nuxt-icon": "^0.6.10",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

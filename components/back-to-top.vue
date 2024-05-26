@@ -7,8 +7,6 @@
       class="btn btn-primary d-flex align-items-center gap-2 back-to-top"
     >
       <Icon name="fa6-solid:chevron-up" />
-      <span class="d-none d-md-none d-lg-inline">
-      Back to Top</span>
     </button>
   </div>
 </template>
@@ -34,6 +32,8 @@ onUnmounted(() => {
 </script>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
 export default defineComponent({
   name: 'BackToTop'
 })

@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// # For Education # //
+model Education {
+  id            Int      @id @default(autoincrement())
+  name          String
+  logo          String?
+  web           String?
+  level         String
+  grade         String?
+  department    String?
+  studyProgram  String?
+  start         DateTime
+  end           DateTime?
+  place         String
+}
+
+// # For Organiation EXP # //
+model Organization {
+  id      Int    @id @default(autoincrement())
+  orgName String
+  desc    String
+  period  String
+}
+
+// # For Career EXP # //
+model Career {
+  id        Int      @id @default(autoincrement())
+  position  String
+  company   String
+  location  String
+  startDate DateTime
+  endDate   DateTime? // Nullable field
+}
+
+// # For Portofolio # //
+model Portfolio {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slug      String   @unique
+  image     String
+  techstack Json
+  desc      String
+}
+
+// # For Award EXP # //
+model Award {
+  id     Int      @id @default(autoincrement())
+  event  String
+  award  String
+  icon   String?
+  year   Int
+  rank   Int?
+  date   DateTime?
+}
