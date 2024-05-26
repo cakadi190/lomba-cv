@@ -83,7 +83,7 @@ const theme = ref("light");
 const navbarMenu = ref([
 	{ name: "Beranda", link: "/" },
 	{ name: "Portofolio", link: "/portofolio" },
-	{ name: "Tentang Saya", link: "/tentang-saya" },
+	{ name: "Tentang Saya", link: "/tentang/saya" },
 	{ name: "Pendidikan & Organisasi", link: "/pendidikan" },
 	{ name: "Penghargaan", link: "/penghargaan" },
 	{ name: "Karir", link: "/karir" },
@@ -125,16 +125,12 @@ onMounted(() => {
 
 const handleScroll = () => {
 	if (window.scrollY >= 50) {
-		navbar.value?.classList.add(
-			theme.value === "dark" ? "bg-dark" : "bg-white"
-		);
+		navbar.value?.classList.add("body-bg-rgb");
 		navbar.value?.classList.add("border-bottom");
 		navbar.value?.style.setProperty("--bs-bg-opacity", "0.75");
 		navbar.value?.style.setProperty("backdrop-filter", "blur(.25rem)");
 	} else {
-		navbar.value?.classList.remove(
-			theme.value === "dark" ? "bg-dark" : "bg-white"
-		);
+		navbar.value?.classList.remove("body-bg-rgb");
 		navbar.value?.classList.remove("border-bottom");
 		navbar.value?.style.removeProperty("--bs-bg-opacity");
 		navbar.value?.style.removeProperty("backdrop-filter");

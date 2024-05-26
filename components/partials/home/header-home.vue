@@ -62,7 +62,7 @@ export default defineComponent({
 		<div class="container">
 			<div class="row gy-4">
 				<div class="col-md-7 text-center text-lg-start">
-          <span class="breaking-news">Website ini mendapatkan penghargaan <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA Universitas Teknologi Digital Indonesia (d/h STMIK AKAKOM Yogyakarta)</a> tahun 2024.</span>
+          <span class="breaking-news">Website ini mendapatkan penghargaan 🏆 <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA Universitas Teknologi Digital Indonesia<span class="d-none d-xl-none d-xxl-inline-block">&nbsp;(d/h STMIK AKAKOM Yogyakarta)</span></a> tahun 2024.</span>
 
 					<h2
 						class="h4"
@@ -98,7 +98,7 @@ export default defineComponent({
 					<div
 						class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center"
 					>
-						<NuxtLink
+						<nuxt-link
 							to="/"
 							class="btn btn-primary d-flex align-items-center gap-2"
 							v-motion
@@ -107,9 +107,9 @@ export default defineComponent({
 						>
 							<Icon name="fa6-solid:phone" />
 							<span>Hubungi Saya</span>
-						</NuxtLink>
+						</nuxt-link>
 
-						<NuxtLink
+						<nuxt-link
 							to="https://s.id/cvnyaCakAdi"
 							class="btn btn-outline-primary d-flex align-items-center gap-2"
 							v-motion
@@ -118,7 +118,7 @@ export default defineComponent({
 						>
 							<Icon name="fa6-solid:file-pdf" />
 							<span>Resume</span>
-						</NuxtLink>
+						</nuxt-link>
 					</div>
 
 					<div

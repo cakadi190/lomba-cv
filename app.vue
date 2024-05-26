@@ -36,16 +36,24 @@ const handleSystemThemeChange = (e: MediaQueryListEvent) => {
 };
 
 onMounted(() => {
-  if (colorMode.preference === 'system') {
+  const mediamode = localStorage.getItem('mediamode');
+  const colorModePreference = colorMode.preference;
+
+  if (colorModePreference === 'system') {
     const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    applyTheme(systemThemeQuery.matches ? 'dark' : 'light');
-    systemThemeQuery.addEventListener('change', handleSystemThemeChange);
+    
+    if (mediamode === 'dark' || mediamode === 'light') {
+      applyTheme(mediamode);
+    } else {
+      applyTheme(systemThemeQuery.matches ? 'dark' : 'light');
+      systemThemeQuery.addEventListener('change', handleSystemThemeChange);
+    }
 
     return () => {
       systemThemeQuery.removeEventListener('change', handleSystemThemeChange);
     };
   } else {
-    applyTheme(colorMode.preference);
+    applyTheme(colorModePreference);
   }
 });
 
@@ -77,3 +85,20 @@ watch(
   }
 );
 </script>
+
+<style lang="scss" scoped>
+.bg-body {
+  background-color: var(--bs-body-bg) !important;
+}
+.bg-body-rgb {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+.color-body {
+  background-color: var(--bs-color-bg) !important;
+}
+.color-body-rgb {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-color-bg-rgb), var(--bs-color-opacity, 1)) !important;
+}
+</style>
