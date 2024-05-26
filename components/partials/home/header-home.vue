@@ -62,7 +62,7 @@ export default defineComponent({
 		<div class="container">
 			<div class="row gy-4">
 				<div class="col-md-7 text-center text-lg-start">
-          <span class="breaking-news">Website ini mendapatkan penghargaan <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi Desain Website Personal CV Maroon Day Universitas Teknologi Digital Indonesia (d/h STMIK AKAKOM Yogyakarta)</a> tahun 2024.</span>
+          <span class="breaking-news">Website ini mendapatkan penghargaan <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA Universitas Teknologi Digital Indonesia (d/h STMIK AKAKOM Yogyakarta)</a> tahun 2024.</span>
 
 					<h2
 						class="h4"
