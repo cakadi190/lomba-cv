@@ -48,10 +48,10 @@ const careerData = [
 ];
 
 async function seedCareers() {
-  truncateTable('career');
+  truncateTable('careers');
 
   for (const career of careerData) {
-    await prisma.career.create({
+    await prisma.careers.create({
       data: career,
     });
   }

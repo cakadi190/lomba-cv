@@ -7,7 +7,7 @@
 
 		<section class="need-space pt-0">
 			<div class="container">
-				<div class="row">
+				<div class="row flex-column-reverse flex-md-row gy-5">
 					<div class="col-md-9">
 						<!-- About Me -->
 						<div id="about-me">

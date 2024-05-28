@@ -80,8 +80,32 @@ const isAwardNew = computed(() => {
 	});
 });
 
-useHead({
-	title: "Penghargaan dan Sertifikasi",
+// SEO META
+const title = computed(() => "Penghargaan");
+const description = computed(
+  () => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`
+);
+const image = computed(() => "/images/meta-image.png");
+
+const route = useRoute();
+const url = ref('');
+
+onMounted(() => {
+  const baseUrl = `${window.location.protocol}//${window.location.host}`;
+  url.value = `${baseUrl}${route.fullPath}`;
+});
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: url, // Gunakan URL dinamis
 });
 
 const rankColor = ref(["first", "second", "third"]);

@@ -79,10 +79,10 @@ const educationData: Education[] = [
 ];
 
 async function seedEducations() {
-  truncateTable('education');
+  truncateTable('educations');
 
   for (const education of educationData) {
-    await prisma.education.create({
+    await prisma.educations.create({
       data: education,
     });
   }

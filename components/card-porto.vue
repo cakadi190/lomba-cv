@@ -12,11 +12,8 @@ defineProps<{
 <template>
 	<div
 		class="wrapper"
-		v-motion
-		:enter="enterSlideFromBottomToTop"
-		:initial="initialSlideFromBottomToTop"
 	>
-		<nuxt-link :to="`/portofolio/${data.slug}`" class="card overflow-hidden rounded-4">
+		<nuxt-link :to="`/portofolio/${data.slug}`" class="card h-100 overflow-hidden rounded-4">
 			<nuxt-img
 				:src="data.image"
 				class="rounded-3 nuxt-img-top"
@@ -34,7 +31,7 @@ defineProps<{
 					<Icon
 						:name="item"
             size="24"
-						v-for="(item, index) in data.techstack"
+						v-for="(item, index) in JSON.parse(data.techstack || [])"
 						:key="index"
 					/>
 				</div>

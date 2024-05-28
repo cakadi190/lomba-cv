@@ -1,3 +1,6 @@
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 import seedAwards from './seeders/seed_awards.ts';
 import seedOrganizations from './seeders/seed_organizations.ts';
 import seedCareers from './seeders/seed_careers.ts';
@@ -21,8 +24,11 @@ async function main() {
     await seedEducations();
     console.log('\x1b[32m\u2714  Educations seeded successfully');
   } catch (error) {
+    await prisma.$disconnect()
     console.error('\x1b[31m\u2718  Error seeding data:', error);
+    process.exit(1)
   } finally {
+    await prisma.$disconnect()
     process.exit(0);
   }
 }

@@ -10,14 +10,45 @@
 
 		<section class="need-space pt-0">
 			<div class="container">
-				<div class="row gy-4">
+				<div class="row gy-4" v-if="!pending && !error && data.data.length > 0">
 					<div
-						v-for="(item, index) in myPortofolio"
+						v-for="(item, index) in data?.data"
 						:key="index"
 						class="col-md-4"
 					>
 						<card-porto :data="item" />
 					</div>
+
+					<div class="col-md-12">
+						<div class="d-flex justify-content-center gap-3">
+							<nuxt-link
+								:to="
+									currentPage == 2
+										? `/portofolio`
+										: `/portofolio?page=${currentPage - 1}`
+								"
+								class="btn btn-primary"
+								:class="{ disabled: !data?.hasPrevPage }"
+							>
+								<Icon name="fa6-solid:chevron-left" />
+							</nuxt-link>
+							<nuxt-link
+								:to="`/portofolio?page=${currentPage + 1}`"
+								class="btn btn-primary"
+								:class="{ disabled: !data?.hasNextPage }"
+							>
+								<Icon name="fa6-solid:chevron-right" />
+							</nuxt-link>
+						</div>
+					</div>
+				</div>
+				<div class="row gy-4" v-else>
+					<nuxt-img
+						src="/images/errors/404.svg"
+						alt="Tidak Ditemukan"
+						height="250"
+					/>
+					<p class="text-center">Belum ada proyek yang dapat ditampilkan</p>
 				</div>
 			</div>
 		</section>
@@ -36,54 +67,56 @@ import {
 	php,
 } from "~/components/techstack";
 
-useHead({
-  title: 'Daftar Portofolio'
+const route = useRoute();
+const currentPage = ref(parseInt(route.query.page as string) || 1);
+
+// SEO META
+const title = computed(() => `Daftar Portofolio${currentPage.value > 1 ? ` - Halaman ${currentPage.value}` : ''}`);
+const description = computed(
+  () => `Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.`
+);
+const image = computed(() => "/images/meta-image.png");
+
+const url = ref('');
+
+onMounted(() => {
+  const baseUrl = `${window.location.protocol}//${window.location.host}`;
+  url.value = `${baseUrl}${route.fullPath}`;
 });
 
-const myPortofolio = ref([
-	{
-		name: "SIPDATA Pemuda Boyolali",
-		slug: "sipdata-pemuda-boyolali",
-		image: "/images/portofolio/sipdata-front.png",
-		techstack: laravelFullstackNonSPABootstrap,
-		desc: "Sistem Informasi database Pemuda MTA Cabang Boyolali untuk memonitor segala aktifitas kajian hingga manajemen dari Perwakilan hingga ke Cabang.",
-	},
-	{
-		name: "Personal Website Cak Adi",
-		slug: "cakadi-web",
-		image: "/images/portofolio/cakadi-home.png",
-		techstack: [...jqueryBootstrap, ...nuxt],
-		desc: "Website pribadi Cak Adi menampilkan portofolio, blog, dan kontak, dirancang untuk memperkenalkan keterampilan dan proyek terbaru Cak Adi secara profesional dan informatif.",
-	},
-	{
-		name: "Siperpus PHP Native",
-		slug: "siperpus",
-		image: "/images/portofolio/siperpus-front.png",
-		techstack: [...php, ...jqueryBootstrap, ...htmlCssJS],
-		desc: "Sistem perpustakaan berbasis PHP Native untuk mengelola data buku, anggota, peminjaman, dan pengembalian dengan antarmuka sederhana yang memudahkan administrasi perpustakaan.",
-	},
-	{
-		name: "Sistem Sewa Laptop",
-		slug: "sisfo-sewa-laptop",
-		image: "/images/portofolio/sewa-laptop-front.png",
-		techstack: [...php, ...jqueryBootstrap, ...htmlCssJS],
-		desc: "Aplikasi manajemen penyewaan laptop berbasis web yang memudahkan proses booking, pengelolaan inventaris, dan pelacakan pengembalian.",
-	},
-	{
-		name: "Perkopian Duniawi",
-		slug: "perkopian-duniawi",
-		image: "/images/portofolio/perkopian-duniawi-show.png",
-		techstack: [...kotlinJava, "devicon:android"],
-		desc: "Aplikasi mobile untuk para pecinta kopi, menyediakan informasi kafe terdekat, ulasan, dan rekomendasi menu kopi terbaik.",
-	},
-	{
-		name: "Sistem Data Organisasi",
-		slug: "sistem-data-organisasi",
-		image: "/images/portofolio/sidasi-back.png",
-		techstack: laravelFullstackNonSPABootstrap,
-		desc: "Platform manajemen data organisasi berbasis Laravel untuk mengelola anggota, kegiatan, dan dokumentasi dengan antarmuka intuitif.",
-	},
-]);
+useSeoMeta({
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: url, // Gunakan URL dinamis
+});
+
+interface PortfolioItem {
+	id: string;
+	name: string;
+	slug: string;
+	image: string;
+	techstack: any;
+	desc: string;
+	created_at: Date;
+	updated_at: Date;
+}
+
+const { data, pending, error, refresh } = await useAsyncData<any>(() => $fetch(`/api/portofolios?page=${currentPage.value || 1}`));
+
+watch(
+	() => route.fullPath,
+	() => {
+		currentPage.value = parseInt(route.query.page as string) || 1;
+		refresh();
+	}
+);
 </script>
 
 <style>

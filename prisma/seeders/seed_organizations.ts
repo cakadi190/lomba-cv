@@ -41,10 +41,10 @@ const organizationData = [
 ];
 
 async function seedOrganizations() {
-  truncateTable('education');
+  truncateTable('educations');
   
   for (const organization of organizationData) {
-    await prisma.organization.create({
+    await prisma.organizations.create({
       data: organization,
     });
   }

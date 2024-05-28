@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "seed": "node --loader ts-node/esm prisma/seed.ts --experimental-loader"
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "dependencies": {
     "@duskmoon/vue3-typed-js": "^0.0.4",

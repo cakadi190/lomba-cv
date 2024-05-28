@@ -9,13 +9,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // # For Education # //
-model Education {
-  id            Int      @id @default(autoincrement())
+model Educations {
+  id            String   @id @default(uuid())
   name          String
   logo          String?
   web           String?
@@ -26,43 +27,53 @@ model Education {
   start         DateTime
   end           DateTime?
   place         String
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt @default(now())
 }
 
-// # For Organiation EXP # //
-model Organization {
-  id      Int    @id @default(autoincrement())
-  orgName String
-  desc    String
-  period  String
+// # For Organization EXP # //
+model Organizations {
+  id        String @id @default(uuid())
+  orgName   String
+  desc      String
+  period    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 }
 
 // # For Career EXP # //
-model Career {
-  id        Int      @id @default(autoincrement())
+model Careers {
+  id        String   @id @default(uuid())
   position  String
   company   String
   location  String
   startDate DateTime
   endDate   DateTime? // Nullable field
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 }
 
-// # For Portofolio # //
-model Portfolio {
-  id        Int      @id @default(autoincrement())
+// # For Portfolio # //
+model Portfolios {
+  id        String   @id @default(uuid())
   name      String
   slug      String   @unique
   image     String
   techstack Json
   desc      String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 }
 
 // # For Award EXP # //
-model Award {
-  id     Int      @id @default(autoincrement())
-  event  String
-  award  String
-  icon   String?
-  year   Int
-  rank   Int?
-  date   DateTime?
+model Awards {
+  id       String   @id @default(uuid())
+  event    String
+  award    String
+  icon     String?
+  year     Int
+  rank     Int?
+  date     DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
 }
