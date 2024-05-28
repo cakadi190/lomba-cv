@@ -24,7 +24,12 @@
 			</div>
 			<div class="offcanvas-body">
 				<ul class="navbar-nav gap-2 justify-content-end flex-grow-1">
-					<li class="nav-item" v-for="(item, index) in navbarMenu" :key="index">
+					<li
+						class="nav-item"
+						@click="closingOffcanvas"
+						v-for="(item, index) in navbarMenu"
+						:key="index"
+					>
 						<nuxt-link
 							:class="item.link === $route.path ? 'active' : ''"
 							class="nav-link"
@@ -90,6 +95,13 @@ const navbarMenu = ref([
 	{ name: "Kontak Saya", link: "/kontak" },
 ]);
 
+const closingOffcanvas = () => {
+	const btnClose = document.querySelector("#offcanvas .btn-close");
+	if (btnClose instanceof HTMLElement) {
+		btnClose.click();
+	}
+};
+
 const applyTheme = (themes: string) => {
 	const logos = document.getElementsByClassName("site-logo");
 
@@ -138,7 +150,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  handleScroll();
+	handleScroll();
 
 	navbar.value = document.querySelector(".navbar");
 	window.addEventListener("scroll", handleScroll);

@@ -16,11 +16,11 @@
 				/>
 
 				<div
-					class="pt-5 pb-4 border-bottom mb-5 align-items-center d-flex justify-content-between gap-3"
+					class="pt-5 pb-4 flex-column flex-lg-row border-bottom mb-5 align-items-start align-items-lg-center d-flex justify-content-between gap-3"
 				>
 					<div>
 						<h1 class="h3">Website Cak Adi</h1>
-						<p class="opacity-75">
+						<p class="opacity-75 mb-0">
 							Merupakan sebuah web pribadi untuk keperluan portofolio.
 						</p>
 					</div>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row flex-column-reverse flex-md-row gy-5">
 					<div class="col-md-8">
 						<h3 id="description">Deskripsi Proyek</h3>
 
@@ -99,10 +99,8 @@
 							<Icon name="devicon:jquery" size="32" />
 						</div>
 					</div>
-        <div class="col-md-4">
-						<div
-							class="card sticky-top rounded-4"
-						>
+					<div class="col-md-4">
+						<div class="card sticky-top rounded-4">
 							<div class="card-header p-4">
 								<h4 class="mb-0">Navigasi</h4>
 							</div>
@@ -114,7 +112,10 @@
 									role="tablist"
 								>
 									<li class="nav-item" role="presentation">
-										<a href="#description" class="nav-link py-3 w-100 text-start">
+										<a
+											href="#description"
+											class="nav-link py-3 w-100 text-start"
+										>
 											Deskripsi Proyek
 										</a>
 									</li>
@@ -135,8 +136,8 @@
 
 <script lang="ts" setup>
 useHead({
-  title: 'Cak Adi Website'
-})
+	title: "Cak Adi Website",
+});
 </script>
 
 <style scoped lang="scss">
