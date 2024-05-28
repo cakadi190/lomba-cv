@@ -21,22 +21,52 @@
 
 					<div class="col-md-12">
 						<div class="d-flex justify-content-center gap-3">
-							<button class="btn btn-primary" @click="previous()" v-if="currentPage > 1">
-								Previous
+							<button
+								class="btn btn-primary"
+								@click="previous()"
+								v-if="currentPage > 1"
+							>
+								Kembali
 							</button>
-							<button class="btn btn-primary" @click="next()" v-if="data.hasNextPage">
-								Next
+							<button
+								class="btn btn-primary"
+								@click="next()"
+								v-if="data.hasNextPage"
+							>
+								Lanjut
 							</button>
 						</div>
 					</div>
 				</div>
+				<div class="row gy-4" v-else-if="pending">
+					<div class="col-md-6 text-center mx-auto">
+						<nuxt-img
+							src="/images/errors/loading.svg"
+							alt="Tidak Ditemukan"
+							height="250"
+						/>
+						<p class="text-center">Sedang dimuat</p>
+					</div>
+				</div>
+				<div class="row gy-4" v-else-if="error">
+					<div class="col-md-6 text-center mx-auto">
+						<nuxt-img
+							src="/images/errors/500.svg"
+							alt="Tidak Ditemukan"
+							height="250"
+						/>
+						<p class="text-center">Woops, Ada kesalahan di sisi peladen. Coba muat ulang halamannya.</p>
+					</div>
+				</div>
 				<div class="row gy-4" v-else>
-					<nuxt-img
-						src="/images/errors/404.svg"
-						alt="Tidak Ditemukan"
-						height="250"
-					/>
-					<p class="text-center">Belum ada proyek yang dapat ditampilkan</p>
+					<div class="col-md-6 mx-auto">
+						<nuxt-img
+							src="/images/errors/404.svg"
+							alt="Tidak Ditemukan"
+							height="250"
+						/>
+						<p class="text-center">Belum ada proyek yang dapat ditampilkan</p>
+					</div>
 				</div>
 			</div>
 		</section>
