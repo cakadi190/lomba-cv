@@ -18,9 +18,6 @@ useHead({
   titleTemplate: (titleChunk: any) => {
     return titleChunk ? `${titleChunk} • Cak Adi` : 'Cak Adi';
   },
-  meta: [
-    { name: 'og:image', key: 'og:image', content: '/images/va-ogImg.png' },
-  ]
 });
 
 const colorMode = useColorMode();
