@@ -45,8 +45,25 @@ import {
 	enterSlideFromBottomToTop,
 } from "~/components/motion";
 
-useHead({
-  title: 'Karir Saya'
+// SEO META
+const title = computed(() => "Karir Saya");
+const description = computed(
+  () => `Berikut daftar riwayat karir saya yang mana saya sudah berkarir di berbagai tempat.`
+);
+const image = computed(() => "/images/meta-image.png");
+const urlRequest = useRequestURL();
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
 const careerExp = ref([

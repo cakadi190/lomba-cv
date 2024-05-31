@@ -16,64 +16,99 @@ datasource db {
 
 // # For Education # //
 model educations {
-  id            String   @id @default(uuid())
-  name          String
-  logo          String?
-  web           String?
-  level         String
-  grade         String?
-  department    String?
-  studyProgram  String?
-  start         DateTime
-  end           DateTime?
-  place         String
+  id             String   @id @default(uuid())
+  name           String
+  logo           String?
+  web            String?
+  level          String
+  grade          String?
+  department     String?
+  studyProgram   String?
+  start          DateTime
+  end            DateTime?
+  place          String
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt @default(now())
 }
 
 // # For Organization EXP # //
 model organizations {
-  id        String @id @default(uuid())
-  orgName   String
-  desc      String
-  period    String
+  id         String @id @default(uuid())
+  orgName    String
+  desc       String?
+  period     String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 }
 
 // # For Career EXP # //
 model careers {
-  id        String   @id @default(uuid())
-  position  String
-  company   String
-  location  String
-  startDate DateTime
-  endDate   DateTime? // Nullable field
+  id         String   @id @default(uuid())
+  position   String
+  company    String
+  location   String
+  startDate  DateTime
+  endDate    DateTime?
+  portfolios PortfolioLink[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 }
 
 // # For Portfolio # //
 model portfolios {
-  id        String   @id @default(uuid())
-  name      String
-  slug      String   @unique
-  image     String
-  techstack Json
-  desc      String
+  id             String   @id @default(uuid())
+  name           String
+  slug           String   @unique
+  image          String
+  techstack      Json
+  shortDesc      String?
+  desc           String?
+  categories     PortfolioCategory[]
+  careerExperience PortfolioLink[]
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt @default(now())
+}
+
+// # For Portfolio Categories # //
+model portfolio_categories {
+  id         String @id @default(uuid())
+  name       String
+  color      String?
+  portfolios PortfolioCategory[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 }
 
 // # For Award EXP # //
 model awards {
-  id       String   @id @default(uuid())
-  event    String
-  award    String
-  icon     String?
-  year     Int
-  rank     Int?
-  date     DateTime?
+  id         String   @id @default(uuid())
+  event      String
+  award      String
+  icon       String?
+  year       Int
+  rank       Int?
+  date       DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
+}
+
+// Relation Models
+model PortfolioLink {
+  id         String   @id @default(uuid())
+  portfolio  portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolioId String?
+  career     careers? @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  careerId   String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt @default(now())
+}
+
+model PortfolioCategory {
+  id         String   @id @default(uuid())
+  portfolio  portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolioId String?
+  category   portfolio_categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 }

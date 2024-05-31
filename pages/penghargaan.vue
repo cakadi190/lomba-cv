@@ -70,30 +70,13 @@ import {
 } from "~/components/motion";
 import { differenceInDays } from "date-fns";
 
-const isAwardNew = computed(() => {
-	const now = new Date();
-	return awardsAndCertifications.value.map((award) => {
-		if (!award.date) return false;
-		const awardDate = new Date(award?.date as Date);
-		const daysDifference = differenceInDays(now, awardDate);
-		return daysDifference <= 30;
-	});
-});
-
 // SEO META
 const title = computed(() => "Penghargaan");
 const description = computed(
   () => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`
 );
 const image = computed(() => "/images/meta-image.png");
-
-const route = useRoute();
-const url = ref('');
-
-onMounted(() => {
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  url.value = `${baseUrl}${route.fullPath}`;
-});
+const urlRequest = useRequestURL();
 
 useSeoMeta({
   title,
@@ -105,7 +88,18 @@ useSeoMeta({
   description,
   ogDescription: description,
   twitterDescription: description,
-  ogUrl: url, // Gunakan URL dinamis
+  ogUrl: urlRequest.href,
+});
+
+// Rank Data
+const isAwardNew = computed(() => {
+	const now = new Date();
+	return awardsAndCertifications.value.map((award) => {
+		if (!award.date) return false;
+		const awardDate = new Date(award?.date as Date);
+		const daysDifference = differenceInDays(now, awardDate);
+		return daysDifference <= 30;
+	});
 });
 
 const rankColor = ref(["first", "second", "third"]);

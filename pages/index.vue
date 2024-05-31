@@ -10,14 +10,7 @@ const description = computed(
   () => `Seorang Fullstack Web Developer yang berbasis di Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang berbau teknologi.`
 );
 const image = computed(() => "/images/meta-image.png");
-
-const route = useRoute();
-const url = ref('');
-
-onMounted(() => {
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  url.value = `${baseUrl}${route.fullPath}`;
-});
+const urlRequest = useRequestURL();
 
 useSeoMeta({
   title,
@@ -29,7 +22,7 @@ useSeoMeta({
   description,
   ogDescription: description,
   twitterDescription: description,
-  ogUrl: url, // Gunakan URL dinamis
+  ogUrl: urlRequest.href,
 });
 </script>
 

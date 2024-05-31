@@ -86,11 +86,11 @@
 			<div class="row">
 				<div class="col-md-6 text-center text-lg-start">
 					<p class="mb-0">
-						Hak cipta &copy; 2024 Cak Adi. Hak cipta dilindungi undang-undang.
+						Hak cipta &copy; 2024 Cak Adi.
 					</p>
 				</div>
 				<div class="col-md-6 text-center text-lg-end">
-					<p class="mb-0">Made with ❤ by Ahsana Digital Intermedia.</p>
+					<p class="mb-0">Made with ❤ by Ahsana Digital Intermedia&trade;.</p>
 				</div>
 			</div>
 		</div>

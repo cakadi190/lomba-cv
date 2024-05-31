@@ -8,9 +8,26 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
-  title: "Hubungi Saya",
-})
+// SEO META
+const title = computed(() => "Hubungi Saya");
+const description = computed(
+  () => `Berikut kontak yang dapat dihubungi apabila anda tertarik dengan skill saya maupun ingin bekerjasama dengan saya.`
+);
+const image = computed(() => "/images/meta-image.png");
+const urlRequest = useRequestURL();
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
+});
 </script>
 
 <style>

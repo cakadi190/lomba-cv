@@ -195,10 +195,29 @@ import {
 	enterSlideFromBottomToTop,
 } from "~/components/motion";
 
-useHead({
-	title: "Riwayat Pendidikan",
+
+// SEO META
+const title = computed(() => "Pendidikan dan Organisasi");
+const description = computed(
+  () => `Daftar riwayat pendidikan saya, yang mana saya tampilkan daftar tempat saya bersekolah dan menempuh pendidikan. Serta saya telah mengikuti kegiatan apa saja.`
+);
+const image = computed(() => "/images/meta-image.png");
+const urlRequest = useRequestURL();
+
+useSeoMeta({
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
+// The Data
 const dateConverter = (date: string): string => {
 	const $dateInstance = new Date(date);
 	const $date = $dateInstance?.getDate();

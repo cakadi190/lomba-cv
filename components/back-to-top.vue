@@ -14,10 +14,6 @@
 <script lang="ts" setup>
 const showButton = ref(false);
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 const checkScroll = () => {
   showButton.value = window.scrollY > 50;
 };

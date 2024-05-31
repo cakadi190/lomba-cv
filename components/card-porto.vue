@@ -10,10 +10,11 @@ defineProps<{
 </script>
 
 <template>
-	<div
-		class="wrapper"
-	>
-		<nuxt-link :to="`/portofolio/${data.slug}`" class="card h-100 overflow-hidden rounded-4">
+	<div class="wrapper">
+		<nuxt-link
+			:to="`/portofolio/${data.slug}`"
+			class="card h-100 overflow-hidden rounded-4"
+		>
 			<nuxt-img
 				:src="data.image"
 				class="rounded-3 nuxt-img-top"
@@ -22,15 +23,26 @@ defineProps<{
 			/>
 
 			<div class="card-body p-4">
-				<h5 class="card-title mb-2">{{ data.name }}</h5>
+				<div class="d-flex gap-2 mb-2 justify-content-between">
+					<h5 class="card-title mb-0">{{ data.name }}</h5>
+					<!-- Place Category Here -->
+					<div v-if="data.categories.length">
+						<span
+							:style="{ backgroundColor: data.categories[0].category.color }"
+							class="badge text-white"
+						>
+							{{ data.categories[0].category.name }}
+						</span>
+					</div>
+				</div>
 				<p class="card-text opacity-75">
-					{{ data.desc }}
+					{{ data.shortDesc.substring(0, 150) }}&hellip;
 				</p>
 
 				<div class="d-flex gap-2 pt-2">
 					<Icon
 						:name="item"
-            size="24"
+						size="24"
 						v-for="(item, index) in JSON.parse(data.techstack || [])"
 						:key="index"
 					/>
