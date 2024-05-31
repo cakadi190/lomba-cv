@@ -35,12 +35,9 @@ defineProps<{
 						</span>
 					</div>
 				</div>
-        <div>{{ data.shortDesc.length }}</div>
 				<div class="card-text mb-3 opacity-75">
-					{{ data.shortDesc.substring(0, 150) }}
-          <span v-if="data.shortDesc.length > 150">
-            &hellip;
-          </span>
+					{{ data.shortDesc.substring(0, 175) }}
+          <span v-if="data.shortDesc.length > 175">&hellip;</span>
 				</div>
 
 				<div class="d-flex gap-2 pt-2">

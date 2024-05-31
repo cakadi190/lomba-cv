@@ -41,7 +41,7 @@
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>
 					</div>
-					<div class="col-md-12 mx-auto" v-else-if="!pending && !error && data.data.length > 0">
+					<div class="col-md-12 mx-auto" v-else-if="!pending && !error && data?.data?.length > 0">
             <div class="row">
               <div
                 class="col-md-6 col-lg-4 mb-4"
