@@ -56,17 +56,20 @@ model careers {
 
 // # For Portfolio # //
 model portfolios {
-  id             String   @id @default(uuid())
-  name           String
-  slug           String   @unique
-  image          String
-  techstack      Json
-  shortDesc      String?
-  desc           String?
-  categories     PortfolioCategory[]
+  id               String   @id @default(uuid())
+  name             String
+  slug             String   @unique
+  image            String
+  techstack        Json
+  shortDesc        String?
+  desc             String?
+  demoLink         String?
+  sourceCode       String?
+  private          Boolean @default(false)
+  categories       PortfolioCategory[]
   careerExperience PortfolioLink[]
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt @default(now())
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt @default(now())
 }
 
 // # For Portfolio Categories # //

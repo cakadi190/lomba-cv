@@ -132,7 +132,7 @@ const { data, error, pending, refresh, execute } = await useAsyncData<any>(
       lazy: true,
 		}),
 	{
-		watch: [currentPage],
+		watch: [currentPage, route],
 	}
 );
 

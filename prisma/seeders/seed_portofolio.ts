@@ -159,7 +159,7 @@ const myPortofolio: PortfolioItem[] = [
     slug: "visit-ngawi-2024",
     image: "/images/portofolio/visit-ngawi-front.png",
     techstack: [...jqueryBootstrap, "devicon:vercel"],
-    shortDesc: "Landing page promosi wisata Ngawi 2024.",
+    shortDesc: "Visit Ngawi 2024 adalah landing page yang dirancang untuk mempromosikan destinasi wisata di Ngawi. Halaman ini menampilkan informasi lengkap tentang tempat-tempat wisata, acara, dan aktivitas yang dapat dinikmati pengunjung di Ngawi.",
     desc: `<p>Visit Ngawi 2024 adalah landing page yang dirancang untuk mempromosikan destinasi wisata di Ngawi. Halaman ini menampilkan informasi lengkap tentang tempat-tempat wisata, acara, dan aktivitas yang dapat dinikmati pengunjung di Ngawi.</p>
            <p>Dikembangkan menggunakan jQuery, Bootstrap, dan Vercel, halaman ini menawarkan tampilan yang menarik dan responsif. Pengguna dapat dengan mudah menemukan informasi yang mereka butuhkan untuk merencanakan kunjungan mereka ke Ngawi.</p>
            <p>Proyek ini bertujuan untuk meningkatkan daya tarik wisata Ngawi, menarik lebih banyak wisatawan, dan mendukung pertumbuhan ekonomi lokal melalui sektor pariwisata.</p>`,
@@ -169,7 +169,7 @@ const myPortofolio: PortfolioItem[] = [
     slug: 'hummatech-landing-page',
     image: '/images/portofolio/hummatech-front.png',
     techstack: laravelFullstackNonSPABootstrap,
-    shortDesc: "Landing page untuk perusahaan teknologi Hummatech.",
+    shortDesc: "Landing Page Hummatech adalah halaman utama yang dirancang untuk menampilkan informasi tentang perusahaan teknologi Hummatech. Halaman ini berfungsi sebagai wajah online perusahaan, menampilkan layanan, produk, dan informasi kontak.",
     desc: `<p>Landing Page Hummatech adalah halaman utama yang dirancang untuk menampilkan informasi tentang perusahaan teknologi Hummatech. Halaman ini berfungsi sebagai wajah online perusahaan, menampilkan layanan, produk, dan informasi kontak.</p>
            <p>Dibangun dengan Laravel dan Bootstrap, halaman ini memastikan tampilan yang profesional dan responsif. Pengguna dapat dengan mudah menavigasi dan menemukan informasi yang mereka butuhkan tentang Hummatech.</p>
            <p>Proyek ini bertujuan untuk memperkuat kehadiran online Hummatech, meningkatkan visibilitas perusahaan, dan menarik calon pelanggan dan mitra bisnis melalui tampilan yang profesional dan informatif.</p>`,
@@ -179,7 +179,7 @@ const myPortofolio: PortfolioItem[] = [
     slug: 'hummatech-pkl',
     image: '/images/portofolio/pkl-hummatech-front.png',
     techstack: laravelFullstackNonSPABootstrap,
-    shortDesc: "Sistem informasi untuk pengelolaan PKL di Hummatech.",
+    shortDesc: "Sisfo PKL Hummatech adalah aplikasi yang dirancang untuk mempermudah pengelolaan Praktik Kerja Lapangan (PKL) di Hummatech. Aplikasi ini menyediakan fitur-fitur seperti pendaftaran peserta, monitoring, dan pelaporan hasil PKL.",
     desc: `<p>Sisfo PKL Hummatech adalah aplikasi yang dirancang untuk mempermudah pengelolaan Praktik Kerja Lapangan (PKL) di Hummatech. Aplikasi ini menyediakan fitur-fitur seperti pendaftaran peserta, monitoring, dan pelaporan hasil PKL.</p>
            <p>Dibangun menggunakan Laravel dan Bootstrap, aplikasi ini menawarkan antarmuka yang user-friendly dan efisien. Peserta PKL dan pengelola dapat dengan mudah mengakses dan mengelola informasi terkait PKL melalui aplikasi ini.</p>
            <p>Proyek ini bertujuan untuk meningkatkan efisiensi dalam pengelolaan PKL, memastikan semua data tercatat dengan baik, dan memberikan pengalaman yang lebih baik bagi peserta PKL.</p>`,
@@ -189,7 +189,7 @@ const myPortofolio: PortfolioItem[] = [
     slug: "museum-trinil",
     image: "/images/portofolio/museum-trinil-front.png",
     techstack: [...jqueryBootstrap, ...nuxt, "devicon:vercel"],
-    shortDesc: "Landing page untuk Museum Trinil.",
+    shortDesc: "Juara 🏆 #5 NIFC Universitas Muhammadiyah Riau 2024. Landing Page Museum Trinil adalah halaman utama yang dirancang untuk memberikan informasi lengkap tentang Museum Trinil. Halaman ini menampilkan sejarah museum, koleksi yang dimiliki, dan informasi kunjungan.",
     desc: `<p>Landing Page Museum Trinil adalah halaman utama yang dirancang untuk memberikan informasi lengkap tentang Museum Trinil. Halaman ini menampilkan sejarah museum, koleksi yang dimiliki, dan informasi kunjungan.</p>
            <p>Dikembangkan menggunakan jQuery, Bootstrap, Nuxt, dan Vercel, halaman ini menawarkan tampilan yang menarik dan informatif. Pengguna dapat dengan mudah menavigasi halaman dan menemukan informasi yang mereka butuhkan.</p>
            <p>Proyek ini bertujuan untuk meningkatkan kesadaran dan minat masyarakat terhadap Museum Trinil, serta mempermudah pengunjung dalam merencanakan kunjungan mereka ke museum.</p>`,
@@ -199,11 +199,21 @@ const myPortofolio: PortfolioItem[] = [
     slug: "cakadi-web",
     image: "/images/portofolio/cakadi-home.png",
     techstack: [...jqueryBootstrap, ...nuxt, "devicon:supabase", "devicon:vercel"],
-    shortDesc: "Situs pribadi untuk Cak Adi.",
+    shortDesc: "Juara 🏆 #3 Maroon Day UTDI 2024. Situs pribadi untuk Cak Adi yang dirancang untuk menampilkan informasi tentang Cak Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Cak Adi berbagi pengalaman dan karya-karyanya.",
     desc: `<p>Personal Website Cak Adi adalah situs pribadi yang dirancang untuk menampilkan informasi tentang Cak Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Cak Adi berbagi pengalaman dan karya-karyanya.</p>
            <p>Dikembangkan dengan jQuery, Bootstrap, Nuxt, Supabase, dan Vercel, situs ini menawarkan tampilan yang modern dan responsif. Pengguna dapat dengan mudah menavigasi melalui berbagai bagian situs untuk mengetahui lebih banyak tentang Cak Adi.</p>
            <p>Proyek ini bertujuan untuk memperkuat kehadiran online Cak Adi, memudahkan orang lain menemukan dan berinteraksi dengan Cak Adi, serta menampilkan karya-karya terbaiknya dalam satu platform.</p>`,
   },
+  {
+    "name": "Humma E-Sport",
+    "slug": "humma-e-sport",
+    "image": "/images/portofolio/humma-esport-home.png",
+    "techstack": laravelFullstackNonSPABootstrap,
+    "shortDesc": "Proyek Humma E-Sport adalah platform e-sport yang dibangun dengan teknologi Laravel dan Bootstrap.",
+    "desc": `<p>Proyek Humma E-Sport merupakan platform inovatif yang dirancang untuk komunitas e-sport. Menggunakan teknologi Laravel sebagai back-end dan Bootstrap untuk front-end, platform ini menawarkan pengalaman pengguna yang responsif dan dinamis. Platform ini dirancang untuk memenuhi kebutuhan berbagai pengguna, mulai dari pemain hingga penonton, dengan fitur-fitur canggih seperti streaming langsung, statistik permainan, dan forum komunitas.</p> 
+             <p>Platform ini juga dilengkapi dengan sistem manajemen turnamen yang komprehensif, memungkinkan penyelenggara turnamen untuk mengatur pertandingan, mengelola pendaftaran, dan melacak hasil secara real-time. Selain itu, Humma E-Sport menawarkan profil pengguna yang dapat disesuaikan, memungkinkan pemain untuk menunjukkan prestasi mereka dan berinteraksi dengan komunitas. Dengan menggunakan teknologi terkini, platform ini memastikan kinerja yang optimal dan keamanan data yang tinggi.</p> 
+             <p>Selain fitur utama tersebut, Humma E-Sport juga mengintegrasikan berbagai alat analitik untuk membantu pemain dan tim dalam menganalisis kinerja mereka. Alat ini menyediakan wawasan mendalam yang dapat digunakan untuk meningkatkan strategi permainan. Dengan desain yang intuitif dan fungsionalitas yang kuat, Humma E-Sport berupaya menjadi destinasi utama bagi para penggemar e-sport di seluruh dunia.</p>`
+  }
 ];
 
 
