@@ -63,7 +63,8 @@
 							</div>
 							<div class="d-flex flex-shrink-0 gap-3">
 								<a
-									href="https://cakadi.id/"
+                  v-if="!data.data[0].private"
+									:href="data.data[0].sourceCode"
 									target="_blank"
 									class="d-flex gap-2 align-items-center btn btn-outline-primary"
 								>
@@ -71,7 +72,7 @@
 									<span>Source Code</span>
 								</a>
 								<a
-									href="https://cakadi.id/"
+									:href="data.data[0].demoLink"
 									target="_blank"
 									class="d-flex gap-2 align-items-center btn btn-primary"
 								>
@@ -83,14 +84,14 @@
 
 						<div class="row flex-column-reverse flex-md-row gy-5">
 							<div class="col-md-8">
-								<div class="mb-4">
+								<div class="mb-5">
 									<h3 id="description">Deskripsi Proyek</h3>
 									<div
 										v-html="data.data[0]?.desc ?? `Belum ditambahkan deskripsi`"
 									/>
 								</div>
 
-								<div class="mb-4">
+								<div class="mb-5">
 									<h3 id="techstack">Dibangun Dengan</h3>
 
 									<div class="d-flex gap-3 align-items-center">
@@ -104,6 +105,15 @@
 										/>
 									</div>
 								</div>
+
+                <div class="mb-5" id="rating">
+                  <h3>Penilaian Proyek Ini</h3>
+
+                  <div class="alert bg-info-subtle d-flex gap-2">
+                    <Icon name="mdi:information-variant-circle" size="32" />
+                    <span>Mohon bersabar ya, karena fitur ini masih saya kembangkan untuk temen-temen yang mau ngasih penilaian di proyek ini.</span>
+                  </div>
+                </div>
 							</div>
 							<div class="col-md-4">
 								<div class="card sticky-top rounded-4">

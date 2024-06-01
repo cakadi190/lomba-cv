@@ -28,16 +28,15 @@ defineProps<{
 					<!-- Place Category Here -->
 					<div v-if="data.categories.length">
 						<span
-							:style="{ backgroundColor: data.categories[0].category.color }"
-							class="badge text-white"
+							:style="{ backgroundColor: data.categories[0].category.color, color: getColorContrastText(data.categories[0].category.color) }"
+							class="badge"
 						>
 							{{ data.categories[0].category.name }}
 						</span>
 					</div>
 				</div>
 				<div class="card-text mb-3 opacity-75">
-					{{ data.shortDesc.substring(0, 175) }}
-          <span v-if="data.shortDesc.length > 175">&hellip;</span>
+					{{ limitWords(data.shortDesc, 25) }}
 				</div>
 
 				<div class="d-flex gap-2 pt-2">

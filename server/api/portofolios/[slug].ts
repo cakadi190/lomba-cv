@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import portofolios from '.';
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {

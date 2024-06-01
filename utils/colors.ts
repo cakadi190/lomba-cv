@@ -98,3 +98,23 @@ export const hslToRgb = (h: number, s: number, l: number): string => {
 
   return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
 };
+
+/**
+ * Determines whether text color should be white or black based on contrast with the background color.
+ * @param {string} hexColor - Hexadecimal color string (e.g., '#RRGGBB').
+ * @param {string} white - Hexadecimal color string for white.
+ * @param {string} black - Hexadecimal color string for black.
+ * @returns {string} Either white or black as the recommended text color.
+ */
+export const getColorContrastText = (hexColor: string, white: string = '#fff', black: string = '#000'): string => {
+  // Convert hex color to RGB
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+
+  // Calculate YIQ (luminance) value
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+  // Determine text color based on contrast
+  return yiq >= 128 ? black : white;
+};
