@@ -18,12 +18,12 @@
 			</p>
 		</div>
 
-		<div class="mt-4 border-top pt-4">
+		<div class="mt-4 border-top pt-4" id="information">
 			<h4 class="mb-3">Informasi Kontak</h4>
 
 			<div class="card mb-4 overflow-hidden">
 				<div class="table-responsive">
-					<table class="table mb-0">
+					<table class="table mb-0 table-padded">
             <thead>
               <tr>
                 <th class="w-25 text-nowrap">Kontak</th>
@@ -34,6 +34,10 @@
               <tr>
                 <td class="text-nowrap w-25">Alamat</td>
                 <td>Ngawi, Jawa Timur&nbsp;&nbsp;<span data-bs-toggle="tooltip" data-bs-title="Maaf, saya tidak bisa memberikan alamat lengkap rumah saya dengan alasan privasi. Mohon untuk menghargainya!"><Icon size="14" name="bi:info-circle-fill" /></span></td>
+              </tr>
+              <tr>
+                <td class="text-nowrap w-25">Zona Waktu</td>
+                <td>GMT+07:00 (Indonesian Western Time / UTC+7)</td>
               </tr>
 							<tr>
 								<td class="w-25 text-nowrap">Surat Elektronik</td>
@@ -60,6 +64,43 @@
 
       <p>Jika Anda membutuhkan informasi lebih lanjut, seperti nomor telepon saya, jangan ragu untuk mengirimkan email kepada saya terlebih dahulu.</p>
 		</div>
+
+    <div class="mt-4 border-top pt-4" id="socmed">
+      <h4 class="mb-3">Sosial Media</h4>
+
+      <div class="card mb-4 overflow-hidden">
+        <div class="table-responsive">
+          <table class="table mb-0 table-padded">
+            <thead>
+              <tr>
+                <th class="w-25 text-nowrap">Platform</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="w-25 text-nowrap">Facebook</td>
+                <td>
+                  <a href="https://www.facebook.com/cakadi190">cakadi190</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-25 text-nowrap">Instagram</td>
+                <td>
+                  <a href="https://www.instagram.com/cakadi190/">cakadi190</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-25 text-nowrap">Twitter</td>
+                <td>
+                  <a href="https://twitter.com/cakadi190">cakadi190</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 	</section>
 </template>
 
@@ -75,5 +116,10 @@ const phone: Ref<string> = ref("081333550746");
 const website: Ref<string> = ref("https://www.cakadi.id");
 </script>
 
-<style>
+<style scoped lang="scss">
+.table-padded {
+  th, td {
+    padding: .625rem .875rem;
+  }
+}
 </style>
