@@ -128,8 +128,7 @@ const { data, error, pending, refresh, execute } = await useAsyncData<any>(
 			method: "GET",
 			query: {
 				page: currentPage.value,
-			},
-      lazy: true,
+			}
 		}),
 	{
 		watch: [currentPage, route],
