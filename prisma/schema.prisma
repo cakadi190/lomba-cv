@@ -68,6 +68,8 @@ model portfolios {
   private          Boolean @default(false)
   categories       PortfolioCategory[]
   careerExperience PortfolioLink[]
+  ratings          portfolio_ratings[]
+  galleries        portfolio_galleries[]
   created_at       DateTime @default(now())
   updated_at       DateTime @updatedAt @default(now())
 }
@@ -97,21 +99,43 @@ model awards {
 
 // Relation Models
 model PortfolioLink {
-  id         String   @id @default(uuid())
-  portfolio  portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  id          String   @id @default(uuid())
+  portfolio   portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String?
-  career     careers? @relation(fields: [careerId], references: [id], onDelete: Cascade)
-  careerId   String?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt @default(now())
+  career      careers? @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  careerId    String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt @default(now())
 }
 
 model PortfolioCategory {
-  id         String   @id @default(uuid())
-  portfolio  portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  id          String   @id @default(uuid())
+  portfolio   portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String?
-  category   portfolio_categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryId String?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt @default(now())
+  category    portfolio_categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt @default(now())
+}
+
+// # For Portfolio Ratings # //
+model portfolio_ratings {
+  id          String    @id @default(uuid())
+  rating      Int
+  comment     String?
+  portfolio   portfolios @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolioId String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt @default(now())
+}
+
+// # For Portfolio Galleries # //
+model portfolio_galleries {
+  id          String    @id @default(uuid())
+  imageUrl    String
+  description String?
+  portfolio   portfolios @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolioId String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt @default(now())
 }
