@@ -109,9 +109,9 @@
                 <div class="mb-5" id="rating">
                   <h3>Penilaian Proyek Ini</h3>
 
-                  <div class="alert bg-info-subtle d-flex gap-2">
-                    <Icon name="mdi:information-variant-circle" size="32" />
-                    <span>Mohon bersabar ya, karena fitur ini masih saya kembangkan untuk temen-temen yang mau ngasih penilaian di proyek ini.</span>
+                  <div class="alert bg-info-subtle d-flex gap-3">
+                    <Icon name="mdi:information-variant-circle" class="flex-shrink-0" size="32" />
+                    <span>Mohon bersabar ya, karena fitur ini masih saya kembangkan untuk temen-temen yang <em>mau ngasih</em> penilaian di proyek ini.</span>
                   </div>
                 </div>
 							</div>

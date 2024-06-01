@@ -11,6 +11,10 @@
   min-height: 7.5rem;
   padding: 7rem 0;
 }
+
+body {
+  overflow-x: hidden;
+}
 </style>
 
 <script lang="ts" setup>
