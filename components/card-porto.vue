@@ -17,7 +17,7 @@ defineProps<{
 		>
 			<nuxt-img
 				:src="data.image"
-				class="rounded-3 nuxt-img-top"
+				class="rounded-3 card-img-top"
 				:alt="data.name"
 				densities="x1 x2"
 			/>

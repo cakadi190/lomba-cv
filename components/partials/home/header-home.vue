@@ -32,22 +32,22 @@ useHead({
 });
 
 type TechStackItem = {
-  icon?: string;
-  name?: string;
-  type?: 'separator';
+	icon?: string;
+	name?: string;
+	type?: "separator";
 };
 
 const techStack = ref<TechStackItem[]>([
-  { icon: "devicon:laravel", name: "Laravel" },
-  { icon: "devicon:vuejs", name: "VueJS" },
-  { icon: "devicon:bootstrap", name: "Bootstrap" },
-  { icon: "devicon:nuxtjs", name: "NuxtJS" },
-  { icon: "devicon:docker", name: "Docker" },
-  { icon: "devicon-plain:wordpress", name: "WordPress" },
-  { type: "separator" },
-  { icon: "devicon:vscode", name: "Visual Studio Code" },
-  { icon: "devicon:figma", name: "Figma" },
-  { icon: "devicon:ubuntu", name: "Linux Ubuntu" },
+	{ icon: "devicon:laravel", name: "Laravel" },
+	{ icon: "devicon:vuejs", name: "VueJS" },
+	{ icon: "devicon:bootstrap", name: "Bootstrap" },
+	{ icon: "devicon:nuxtjs", name: "NuxtJS" },
+	{ icon: "devicon:docker", name: "Docker" },
+	{ icon: "devicon-plain:wordpress", name: "WordPress" },
+	{ type: "separator" },
+	{ icon: "devicon:vscode", name: "Visual Studio Code" },
+	{ icon: "devicon:figma", name: "Figma" },
+	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
 </script>
 
@@ -62,7 +62,24 @@ export default defineComponent({
 		<div class="container">
 			<div class="row gy-4">
 				<div class="col-md-7 text-center text-lg-start">
-          <span class="breaking-news">Website ini mendapatkan penghargaan 🏆 <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA Universitas Teknologi Digital Indonesia<span class="d-none d-xl-none d-xxl-inline-block">&nbsp;(d/h STMIK AKAKOM Yogyakarta)</span></a> tahun 2024.</span>
+					<div
+						v-motion
+						:initial="initialSlideFromLeftToRight"
+						:enter="enterSlideFromLeftToRight"
+						class="breaking-news"
+					>
+						Website ini mendapatkan penghargaan 🏆
+						<a
+							href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2"
+							target="_blank"
+							>#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA
+							Universitas Teknologi Digital Indonesia<span
+								class="d-none d-xl-none d-xxl-inline-block"
+								>&nbsp;(d/h STMIK AKAKOM Yogyakarta)</span
+							></a
+						>
+						tahun 2024.
+					</div>
 
 					<h2
 						class="h4"
@@ -79,10 +96,10 @@ export default defineComponent({
 						:enter="enterSlideFromLeftToRight"
 					>
 						<span class="text-primary text-decoration-underline">A</span>
-            <span>mir&nbsp;</span>
-            <span>Zuh</span>
-            <span class="text-primary text-decoration-underline">di</span>
-            <span>&nbsp;Wibowo</span>
+						<span>mir&nbsp;</span>
+						<span>Zuh</span>
+						<span class="text-primary text-decoration-underline">di</span>
+						<span>&nbsp;Wibowo</span>
 					</h1>
 					<p
 						v-motion
@@ -165,12 +182,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .breaking-news {
-  display: block;
-  margin-bottom: 1.5rem;
-  background: rgba(var(--bs-primary-rgb), .125);
-  padding: 1rem 1.5rem;
-  color: rgba(var(--bs-primary-rgb), 1);
-  border-radius: .75rem;
+	display: block;
+	margin-bottom: 1.5rem;
+	background: rgba(var(--bs-primary-rgb), 0.125);
+	padding: 1rem 1.5rem;
+	color: rgba(var(--bs-primary-rgb), 1);
+	border-radius: 0.75rem;
 }
 
 #masthead {

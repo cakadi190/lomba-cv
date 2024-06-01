@@ -9,6 +9,10 @@ import {
 	initialSlideFromLeftToRight,
 	enterSlideFromLeftToRight,
 } from "./motion";
+
+defineProps<{
+  backTo?: string;
+}>()
 </script>
 
 <template>
@@ -16,6 +20,11 @@ import {
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
+          <nuxt-link v-if="backTo" :to="backTo" class="btn btn-link text-decoration-none d-flex gap-2 p-0 align-items-center mb-4">
+            <Icon name="fa6-solid:chevron-left" />
+            <span>Kembali</span>
+          </nuxt-link>
+
 					<h1
 						v-motion
 						:enter="enterSlideFromLeftToRight"
