@@ -60,7 +60,6 @@ const { data, error, pending, refresh, execute } = useAsyncData<any>(
 	() =>
 		$fetch(`/api/portofolios/${route.params.id}`, {
 			method: "GET",
-			lazy: false,
 		})
 );
 

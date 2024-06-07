@@ -31,7 +31,7 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="data.data.length === 0"
+						v-else-if="!pending && !error && portofolios && portofolios.data.length === 0"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -41,31 +41,34 @@
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>
 					</div>
-					<div class="col-md-12 mx-auto" v-else-if="!pending && !error && data?.data?.length > 0">
-            <div class="row">
-              <div
-                class="col-md-6 col-lg-4 mb-4"
-                v-for="(item, index) in data.data"
-                :key="index"
-              >
-                <card-porto :data="item" />
-              </div>
-            </div>
+					<div
+						class="col-md-12 mx-auto"
+						v-else-if="!pending && !error && portofolios?.data?.length > 0"
+					>
+						<div class="row">
+							<div
+								class="col-md-6 col-lg-4 mb-4"
+								v-for="(item, index) in portofolios.data"
+								:key="index"
+							>
+								<card-porto :data="item" />
+							</div>
+						</div>
 
 						<div class="d-flex justify-content-center align-items-center gap-3">
 							<button
 								class="btn btn-primary"
-								:disabled="!data.hasPrevPage"
+								:disabled="!portofolios.hasPrevPage"
 								@click="previous"
 							>
 								<Icon name="fa6-solid:chevron-left" />
 							</button>
 
-              <span>Halaman {{ data.page }} dari {{ data.totalPage }}</span>
+							<span>Halaman {{ portofolios.page }} dari {{ portofolios.totalPage }}</span>
 
 							<button
 								class="btn btn-primary"
-								:disabled="!data.hasNextPage"
+								:disabled="!portofolios.hasNextPage"
 								@click="next"
 							>
 								<Icon name="fa6-solid:chevron-right" />
@@ -121,14 +124,14 @@ useSeoMeta({
 // Fetch Data
 updatePageFromQuery();
 
-const { data, error, pending, refresh, execute } = await useAsyncData<any>(
+const { data: portofolios, error, pending, refresh, execute } = await useAsyncData<any>(
 	"portofolio",
 	() =>
 		$fetch(`/api/portofolios`, {
 			method: "GET",
 			query: {
 				page: currentPage.value,
-			}
+			},
 		}),
 	{
 		watch: [currentPage, route],
