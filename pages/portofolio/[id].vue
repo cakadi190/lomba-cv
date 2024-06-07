@@ -30,7 +30,7 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="!pending && !error && data && data.data.length === 0"
+						v-else-if="!pending && !error && !data"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -41,7 +41,7 @@
 						/>
 					</div>
 					<div class="col-md-12" v-else>
-            {{ data }}
+						{{ data }}
 						<!-- <card-porto-details :data="data.data[0]" /> -->
 					</div>
 				</div>
@@ -51,21 +51,34 @@
 </template>
 
 <script lang="ts" setup>
-import cardPortoDetails from '~/components/card-porto-details.vue';
+import cardPortoDetails from "~/components/card-porto-details.vue";
 
 const { params } = useRoute();
 
 // Data
-const { data, error, pending } = useAsyncData<any>(
-	"portofolio-data",
-	() =>
-		$fetch(`/api/portofolios/${params.id}`, {
-			method: "GET",
-		})
+const { data, error, pending } = useFetch<any>(
+	`/api/portofolios/${params.id}`,
+	{
+		method: "GET",
+		transform: (a) => a?.data[0],
+	}
 );
+// const { data, error, pending } = useAsyncData<any>(
+// 	"portofolio-data",
+// 	() =>
+// 		$fetch(`/api/portofolios/${params.id}`, {
+// 			method: "GET",
+// 		}),
+//     {
+//       transform(a) {
+//         console.log(a)
+//         return a?.data[0];
+//       }
+//     }
+// );
 
 // SEO META
-const title = computed(() => data.value.data[0].name ?? "404");
+const title = computed(() => data.value?.name ?? "404");
 const description = computed(
 	() =>
 		`Seorang Fullstack Web Developer yang berbasis di Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang berbau teknologi.`
