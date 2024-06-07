@@ -125,7 +125,7 @@ const {
 	pending,
 	error,
 	refresh,
-} = await useFetch(() => `/api/portofolios?page=${page.value}`, {
+} = await useFetch<any>(() => `/api/portofolios?page=${page.value}`, {
 	method: "GET",
 	lazy: true,
 	server: false,
