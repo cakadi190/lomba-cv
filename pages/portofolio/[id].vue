@@ -41,8 +41,7 @@
 						/>
 					</div>
 					<div class="col-md-12" v-else>
-						{{ data }}
-						<!-- <card-porto-details :data="data.data[0]" /> -->
+						<card-porto-details :data="data" />
 					</div>
 				</div>
 			</div>
@@ -63,19 +62,6 @@ const { data, error, pending } = useFetch<any>(
 		transform: (a) => a?.data[0],
 	}
 );
-// const { data, error, pending } = useAsyncData<any>(
-// 	"portofolio-data",
-// 	() =>
-// 		$fetch(`/api/portofolios/${params.id}`, {
-// 			method: "GET",
-// 		}),
-//     {
-//       transform(a) {
-//         console.log(a)
-//         return a?.data[0];
-//       }
-//     }
-// );
 
 // SEO META
 const title = computed(() => data.value?.name ?? "404");
