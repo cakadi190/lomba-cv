@@ -25,7 +25,6 @@ defineProps<{
 			<div class="card-body p-4">
 				<div class="d-flex gap-2 mb-2 justify-content-between">
 					<h5 class="card-title mb-0">{{ data.name }}</h5>
-					<!-- Place Category Here -->
 					<div v-if="data.categories.length">
 						<span
 							:style="{ backgroundColor: data.categories[0].category.color, color: getColorContrastText(data.categories[0].category.color) }"
@@ -53,8 +52,6 @@ defineProps<{
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
 export default defineComponent({
 	name: "CardPorto",
 });

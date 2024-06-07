@@ -82,24 +82,21 @@
 </template>
 
 <script lang="ts" setup>
-import headerPage from "~/components/header-page.vue";
-import cardPorto from "~/components/card-porto.vue";
-import errorSection from "~/components/error-section.vue";
-
 const urlRequest = useRequestURL();
 const route = useRoute();
-const router = useRouter();
-const currentPage = ref(1);
-const interval = ref<null>(null);
 
-const setPage = (page: number) => {
-	router.push({ query: { ...route.query, page: page.toString() } });
-};
-
-const updatePageFromQuery = () => {
-	const page = parseInt(route.query.page as string, 10);
-	currentPage.value = !isNaN(page) && page > 0 ? page : 1;
-};
+const page = computed({
+	get() {
+		return Number(route.query.page?.toString()) || 1;
+	},
+	set(newPage: number) {
+		navigateTo({
+			query: {
+				page: newPage,
+			},
+		});
+	},
+});
 
 // SEO META
 const title = computed(() => `Daftar Portofolio`);
@@ -123,41 +120,24 @@ useSeoMeta({
 });
 
 // Fetch Data
-updatePageFromQuery();
-
-const { data: portofolios, error, pending, execute } = await useLazyAsyncData<any>(
-	"portofolio",
-	() =>
-		$fetch(`/api/portofolios`, {
-			method: "GET",
-			query: {
-				page: currentPage.value,
-			},
-		}),
-	{
-		watch: [currentPage, route],
-	}
-);
-
-onMounted(() => {
-  interval.value = setInterval(() => execute(), 20000);
+const {
+	data: portofolios,
+	pending,
+	error,
+	refresh,
+} = await useFetch(() => `/api/portofolios?page=${page.value}`, {
+	method: "GET",
+	lazy: true,
+	server: false,
 });
 
-// For Pagination
-const previous = (): void => {
-	if (currentPage.value != 1) {
-		scrollToTop();
-		currentPage.value = currentPage.value - 1;
-	}
-	setPage(currentPage.value);
+const next = () => {
+  page.value++;
+  refresh();
 };
-
-const next = (): void => {
-	if (currentPage.value + 1) {
-		scrollToTop();
-		currentPage.value = currentPage.value + 1;
-	}
-	setPage(currentPage.value);
+const previous = () => {
+  page.value--;
+  refresh();
 };
 </script>
 

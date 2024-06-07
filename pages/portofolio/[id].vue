@@ -50,11 +50,9 @@
 </template>
 
 <script lang="ts" setup>
-import cardPortoDetails from "~/components/card-porto-details.vue";
-
 const { params } = useRoute();
 
-// Data
+// Data Fetching from Server
 const { data, error, pending } = useFetch<any>(
 	`/api/portofolios/${params.id}`,
 	{

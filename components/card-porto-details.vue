@@ -19,7 +19,7 @@
 			</div>
 			<div class="d-flex flex-shrink-0 gap-3">
 				<a
-					v-if="!data.private"
+					v-if="!data.private && data.sourceCode"
 					:href="data.sourceCode"
 					target="_blank"
 					class="d-flex gap-2 align-items-center btn btn-outline-primary"
@@ -28,6 +28,7 @@
 					<span>Source Code</span>
 				</a>
 				<a
+          v-if="data.demoLink"
 					:href="data.demoLink"
 					target="_blank"
 					class="d-flex gap-2 align-items-center btn btn-primary"
@@ -75,10 +76,10 @@
 					</div>
 				</div>
 
-				<div class="mb-5" id="rating">
+				<div id="rating">
 					<h3>Penilaian Proyek Ini</h3>
 
-					<div class="alert bg-info-subtle d-flex gap-3">
+					<div class="alert bg-info-subtle mb-0 d-flex gap-3">
 						<Icon
 							name="mdi:information-variant-circle"
 							class="flex-shrink-0"
