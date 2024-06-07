@@ -33,7 +33,7 @@
 											<div class="row align-items-start align-items-md-center">
 												<div class="col-4 col-md-3">
 													<div class="bg-white rounded-circle p-3">
-														<nuxt-img
+														<nuxt-img preload
 															:src="
 																item.logo ?? '/images/education/default.png'
 															"

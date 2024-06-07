@@ -62,12 +62,12 @@ const { data, error, pending } = useFetch<any>(
 );
 
 // SEO META
-const title = computed(() => data.value?.name ?? "404");
+const title = computed(() => data.value?.name ?? "Portofolio Tidak Ditemukan");
 const description = computed(
 	() =>
-		`Seorang Fullstack Web Developer yang berbasis di Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang berbau teknologi.`
+    `Berikut detail proyek ${data.value?.name} yang sudah saya kerjakan dan selesaikan akhir-akhir ini.` ?? "Data tidak ditemukan"
 );
-const image = computed(() => "/images/meta-image.png");
+const image = computed(() => data.value?.image ?? "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({

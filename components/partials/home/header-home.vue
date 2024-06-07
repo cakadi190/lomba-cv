@@ -166,7 +166,7 @@ export default defineComponent({
 					</div>
 				</div>
 				<div class="col-md-5">
-					<nuxt-img
+					<nuxt-img preload
 						v-motion
 						:initial="initialSlideFromRightToLeft"
 						:enter="enterSlideFromRightToLeft"

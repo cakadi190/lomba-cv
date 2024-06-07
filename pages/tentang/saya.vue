@@ -53,7 +53,7 @@
 							<div class="mb-5 pb-5 border-bottom">
 								<div class="row gy-4">
 									<div class="col-md-5">
-										<nuxt-img
+										<nuxt-img preload
 											src="/images/programmer.svg"
 											v-motion
 											:enter="enterSlideFromLeftToRight"

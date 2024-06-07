@@ -15,7 +15,7 @@ defineProps<{
 			:to="`/portofolio/${data.slug}`"
 			class="card h-100 overflow-hidden rounded-4"
 		>
-			<nuxt-img
+			<nuxt-img preload
 				:src="data.image"
 				class="rounded-3 card-img-top"
 				:alt="data.name"
