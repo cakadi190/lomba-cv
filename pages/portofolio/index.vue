@@ -90,6 +90,7 @@ const urlRequest = useRequestURL();
 const route = useRoute();
 const router = useRouter();
 const currentPage = ref(1);
+const interval = ref<null>(null);
 
 const setPage = (page: number) => {
 	router.push({ query: { ...route.query, page: page.toString() } });
@@ -124,7 +125,7 @@ useSeoMeta({
 // Fetch Data
 updatePageFromQuery();
 
-const { data: portofolios, error, pending, refresh, execute } = await useAsyncData<any>(
+const { data: portofolios, error, pending, execute } = await useLazyAsyncData<any>(
 	"portofolio",
 	() =>
 		$fetch(`/api/portofolios`, {
@@ -137,6 +138,10 @@ const { data: portofolios, error, pending, refresh, execute } = await useAsyncDa
 		watch: [currentPage, route],
 	}
 );
+
+onMounted(() => {
+  interval.value = setInterval(() => execute(), 20000);
+});
 
 // For Pagination
 const previous = (): void => {

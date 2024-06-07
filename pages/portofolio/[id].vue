@@ -30,7 +30,7 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="data.data.length === 0"
+						v-else-if="!pending && !error && data && data.data.length === 0"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -41,7 +41,8 @@
 						/>
 					</div>
 					<div class="col-md-12" v-else>
-						<card-porto-details :data="data.data[0]" />
+            {{ data }}
+						<!-- <card-porto-details :data="data.data[0]" /> -->
 					</div>
 				</div>
 			</div>
@@ -52,13 +53,13 @@
 <script lang="ts" setup>
 import cardPortoDetails from '~/components/card-porto-details.vue';
 
-const route = useRoute();
+const { params } = useRoute();
 
 // Data
-const { data, error, pending, refresh, execute } = useAsyncData<any>(
-	"portofolio",
+const { data, error, pending } = useAsyncData<any>(
+	"portofolio-data",
 	() =>
-		$fetch(`/api/portofolios/${route.params.id}`, {
+		$fetch(`/api/portofolios/${params.id}`, {
 			method: "GET",
 		})
 );
