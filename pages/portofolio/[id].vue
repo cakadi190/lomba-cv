@@ -58,14 +58,15 @@ const { data, error, pending } = useFetch<any>(
 	{
 		method: "GET",
 		transform: (a) => a?.data[0],
+    server: true,
+    lazy: false,
 	}
 );
 
 // SEO META
-const title = computed(() => data.value?.name ?? "Portofolio Tidak Ditemukan");
+const title = computed(() => pending.value ? "Sedang memuat data" : data.value?.name ?? "Portofolio Tidak Ditemukan");
 const description = computed(
-	() =>
-    `Berikut detail proyek ${data.value?.name} yang sudah saya kerjakan dan selesaikan akhir-akhir ini.` ?? "Data tidak ditemukan"
+	() => pending.value ? "Sedang memuat data" : data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"
 );
 const image = computed(() => data.value?.image ?? "/images/meta-image.png");
 const urlRequest = useRequestURL();
