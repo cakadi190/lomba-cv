@@ -118,7 +118,7 @@
 											<div
 												class="d-flex gap-3 align-items-start align-items-md-center"
 											>
-												<Icon name="fa6-solid:person-running" size="48" />
+												<Icon name="mdi:checkbox-marked-circle-outline" size="48" />
 												<div class="content">
 													<h3>{{ org.orgName }}</h3>
 													<p class="mb-0">{{ org.desc }}</p>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
 import elkuslaSection from "~/components/partials/home/elkusla.vue";
 import HeaderHome from "~/components/partials/home/header-home.vue";
 

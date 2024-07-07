@@ -116,7 +116,7 @@ export default defineComponent({
 						class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center"
 					>
 						<nuxt-link
-							to="/"
+							to="/kontak"
 							class="btn btn-primary d-flex align-items-center gap-2"
 							v-motion
 							:initial="initialSlideFromLeftToRight"

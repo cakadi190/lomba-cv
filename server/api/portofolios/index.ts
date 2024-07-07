@@ -11,6 +11,7 @@ export default defineEventHandler(async (event) => {
     let perPage: number = parseInt(query?.perPage as string) || 12;
     const skip: number = (page - 1) * perPage || 0;
 
+    const portofolioTotal = await _portofolioModel.count();
     const portfoliosPromise = await _portofolioModel.findMany({
       skip,
       take: perPage,
@@ -43,7 +44,8 @@ export default defineEventHandler(async (event) => {
       hasPrevPage, 
       totalPage: Math.ceil(totalCount / perPage),
       page,
-      perPage
+      perPage,
+      totalData: portofolioTotal
     };
   } catch (error) {
     console.error(error);

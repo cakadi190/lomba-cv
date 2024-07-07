@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     'nuxt-swiper',
     "nuxt-svgo",
+    'dayjs-nuxt',
     '@vesp/nuxt-fontawesome',
     '@nuxtjs/color-mode',
     'nuxt-icon',
@@ -42,4 +43,6 @@ export default defineNuxtConfig({
       inject: true,
     }]
   ],
+
+  compatibilityDate: '2024-07-06',
 })

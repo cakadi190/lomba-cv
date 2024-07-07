@@ -20,7 +20,9 @@
 										class="card card-body rounded-4 p-4 text-center align-items-center"
 									>
 										<Icon name="fa6-solid:medal" size="48" />
-										<strong class="h3 mb-0 pt-3">6 Tahun</strong>
+										<strong class="h3 mb-0 pt-3"
+											>{{ countCareerStart }} Tahun</strong
+										>
 										<span>Berpengalaman</span>
 									</div>
 								</div>
@@ -32,28 +34,32 @@
 										class="card card-body rounded-4 p-4 text-center align-items-center"
 									>
 										<Icon name="fa6-solid:handshake" size="48" />
-										<strong class="h3 mb-0 pt-3">3 Tahun</strong>
+										<strong class="h3 mb-0 pt-3"
+											>{{ countCareerDev }} Tahun</strong
+										>
 										<span>Melayani</span>
 									</div>
 								</div>
 								<div class="col-md-4">
-									<div
+									<nuxt-link
+										to="/portofolio"
 										v-motion
 										:enter="enterSlideFromBottomToTop"
 										:initial="initialSlideFromBottomToTop"
-										class="card card-body rounded-4 p-4 text-center align-items-center"
+										class="card card-body rounded-4 p-4 text-center align-items-center text-decoration-none"
 									>
 										<Icon name="fa6-solid:briefcase" size="48" />
-										<strong class="h3 mb-0 pt-3">125</strong>
+										<strong class="h3 mb-0 pt-3">{{ totalProjects }}</strong>
 										<span>Proyek</span>
-									</div>
+									</nuxt-link>
 								</div>
 							</div>
 
 							<div class="mb-5 pb-5 border-bottom">
 								<div class="row gy-4">
 									<div class="col-md-5">
-										<nuxt-img preload
+										<nuxt-img
+											preload
 											src="/images/programmer.svg"
 											v-motion
 											:enter="enterSlideFromLeftToRight"
@@ -107,11 +113,28 @@
 							</div>
 						</div>
 
-            <!-- Certification -->
-            <div id="certification">
+						<!-- Certification -->
+						<div id="certification">
 							<h4>Sertifikasi Saya</h4>
-							<p class="opacity-75 mb-5">Beberapa sertifikat yang sudah dan pernah saya dapatkan.</p>
-            </div>
+							<p class="opacity-75 mb-4">
+								Beberapa sertifikat yang sudah dan pernah saya dapatkan.
+							</p>
+
+							<swiper
+								:modules="[SwiperAutoplay, SwiperEffectCreative]"
+								:slides-per-view="2"
+								:loop="true"
+                :space-between="16"
+								:autoplay="{
+									delay: 8000,
+									disableOnInteraction: true,
+								}"
+							>
+								<swiper-slide v-for="slide in 10" :key="slide">
+                  <div style="background-color: rgba(255, 255, 255, .1);" class="ratio ratio-16x9 rounded-4"></div>
+								</swiper-slide>
+							</swiper>
+						</div>
 					</div>
 					<div class="col-md-3">
 						<div
@@ -134,27 +157,29 @@
 									role="tablist"
 								>
 									<li class="nav-item" role="presentation">
-										<a
-                      href="#about-me"
-											class="nav-link py-3 w-100 text-start"
-										>
+										<a href="#about-me" class="nav-link py-3 w-100 text-start">
 											Tentang Saya
 										</a>
 									</li>
 									<li class="nav-item" role="presentation">
-										<a
-                      href="#skills"
-											class="nav-link py-3 w-100 text-start"
-										>
-                      Keahlian
+										<a href="#skills" class="nav-link py-3 w-100 text-start">
+											Keahlian
 										</a>
 									</li>
 									<li class="nav-item" role="presentation">
 										<a
-                      href="#certification"
+											href="#certification"
 											class="nav-link py-3 w-100 text-start"
 										>
-                      Sertifikasi
+											Sertifikasi
+										</a>
+									</li>
+									<li class="nav-item" role="presentation">
+										<a
+											href="javascript:void(0)"
+											class="nav-link py-3 w-100 text-start"
+										>
+											Perkakas
 										</a>
 									</li>
 								</ul>
@@ -176,6 +201,30 @@ import {
 	initialSlideFromRightToLeft,
 	enterSlideFromRightToLeft,
 } from "~/components/motion";
+import "dayjs/locale/id";
+
+const dayjs = useDayjs();
+dayjs.locale("id");
+const careerStart = ref("2015-03-17");
+const careerDev = ref("2019-05-20");
+const dateNow = dayjs();
+
+const countCareerStart = computed(() =>
+	dateNow.diff(careerStart.value, "years")
+);
+const countCareerDev = computed(() => dateNow.diff(careerDev.value, "years"));
+
+// Data Fetching from Server
+const {
+	data: totalProjects,
+	error,
+	status,
+} = useFetch<any>(`/api/portofolios`, {
+	method: "GET",
+	transform: (a) => a?.totalData,
+	server: true,
+	lazy: false,
+});
 
 const skillset = ref([
 	{ icon: "devicon:laravel", name: "Laravel" },
@@ -185,6 +234,7 @@ const skillset = ref([
 	{ icon: "devicon:dart", name: "Dart" },
 	{ icon: "devicon:kotlin", name: "Kotlin" },
 	{ icon: "devicon:express", name: "ExpressJS" },
+	{ icon: "devicon:go", name: "GoLang" },
 	{ icon: "devicon:adonisjs", name: "AdonisJS" },
 	{ icon: "devicon:vitejs", name: "ViteJS" },
 	{ icon: "devicon:mysql", name: "MySQL" },
@@ -257,13 +307,13 @@ useHead({
 		position: relative;
 		z-index: 0;
 		cursor: pointer;
-    transition: all .2s;
-    border-color: 1px solid transparent;
-    
-    &:hover {
-      transform: scale(1.05);
-      border-color: var(--bs-primary);
-    }
+		transition: all 0.2s;
+		border-color: 1px solid transparent;
+
+		&:hover {
+			transform: scale(1.05);
+			border-color: var(--bs-primary);
+		}
 	}
 }
 </style>

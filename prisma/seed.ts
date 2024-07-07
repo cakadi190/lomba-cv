@@ -9,6 +9,7 @@ import seedPortofolio from './seeders/seed_portofolio.ts';
 import seedPortofolioCategories from './seeders/seed_portofolio_categories.ts';
 import seedPortofolioCategoryLinks from './seeders/seed_portofolio_category.ts';
 import { truncateTable } from './seeders/util/truncate_tables.ts';
+import seedCoffeePlaces from './seeders/seed_coffeeplaces.ts';
 
 async function main() {
   try {
@@ -18,6 +19,7 @@ async function main() {
     await truncateTable('careers');
     await truncateTable('educations');
     await truncateTable('organizations');
+    await truncateTable('coffee_places');
 
     await seedAwards();
     console.log('\x1b[32m\u2714  Awards seeded successfully');
@@ -39,6 +41,9 @@ async function main() {
 
     await seedEducations();
     console.log('\x1b[32m\u2714  Educations seeded successfully');
+
+    await seedCoffeePlaces();
+    console.log('\x1b[32m\u2714  Coffee Places seeded successfully');
   } catch (error) {
     await prisma.$disconnect()
     console.error('\x1b[31m\u2718  Error seeding data:', error);

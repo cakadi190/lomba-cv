@@ -10,7 +10,7 @@
 		<section class="need-space pt-0">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 text-center mx-auto" v-if="pending">
+					<div class="col-md-6 text-center mx-auto" v-if="status == 'pending'">
 						<error-section
 							imgSrc="/images/errors/loading.svg"
 							imgAlt="Tidak Ditemukan"
@@ -30,7 +30,7 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="!pending && !error && !data"
+						v-else-if="!status && !error && !data"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -53,7 +53,7 @@
 const { params } = useRoute();
 
 // Data Fetching from Server
-const { data, error, pending } = useFetch<any>(
+const { data, error, status } = useFetch<any>(
 	`/api/portofolios/${params.id}`,
 	{
 		method: "GET",
@@ -64,9 +64,9 @@ const { data, error, pending } = useFetch<any>(
 );
 
 // SEO META
-const title = computed(() => pending.value ? "Sedang memuat data" : data.value?.name ?? "Portofolio Tidak Ditemukan");
+const title = computed(() => status.value == 'pending' ? "Sedang memuat data" : data.value?.name ?? "Portofolio Tidak Ditemukan");
 const description = computed(
-	() => pending.value ? "Sedang memuat data" : data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"
+	() => status.value == 'pending' ? "Sedang memuat data" : data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"
 );
 const image = computed(() => data.value?.image ?? "/images/meta-image.png");
 const urlRequest = useRequestURL();
