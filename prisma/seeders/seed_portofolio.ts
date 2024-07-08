@@ -165,6 +165,14 @@ const myPortofolio: PortfolioItem[] = [
            <p>Proyek ini bertujuan untuk meningkatkan daya tarik wisata Ngawi, menarik lebih banyak wisatawan, dan mendukung pertumbuhan ekonomi lokal melalui sektor pariwisata.</p>`,
   },
   {
+    name: "Siternak BBIB Singosari",
+    slug: "siternak",
+    image: "/images/portofolio/siternak-home.png",
+    techstack: ["devicon:php", ...jqueryBootstrap, ...htmlCssJS],
+    shortDesc: "Sistem Informasi Terintegrasi untuk BBIB Singosari yang mana proyek ini juga diinisasi berkat tugas magang di PT Humma Teknologi Indonesia yang mana dikerjakan dengan PHP Native dan juga dengan template Sneat Bootstrap 5.",
+    desc: "<p>Siternak BBIB Singosari adalah sistem informasi terintegrasi yang dirancang khusus untuk Balai Besar Inseminasi Buatan (BBIB) Singosari. Proyek ini bertujuan untuk mempermudah manajemen data terkait inseminasi buatan, termasuk pendataan ternak, jadwal inseminasi, dan pelaporan hasil. Sistem ini dibangun menggunakan teknologi PHP, jQuery, Bootstrap, serta HTML, CSS, dan JavaScript untuk tampilan yang responsif dan user-friendly.</p><p>Sistem ini menyediakan fitur-fitur utama seperti manajemen data ternak, pencatatan riwayat inseminasi, serta pembuatan laporan yang bisa diakses dengan mudah oleh para pengguna. Dengan interface yang intuitif, pengguna dapat mengakses informasi secara cepat dan efisien, sehingga proses pengambilan keputusan dapat dilakukan dengan lebih baik. Selain itu, sistem ini juga dilengkapi dengan modul keamanan yang memastikan data yang disimpan aman dan terlindungi dari akses yang tidak sah.</p><p>Proyek ini juga mencakup pelatihan bagi staf BBIB Singosari untuk memastikan mereka dapat menggunakan sistem ini dengan optimal. Dengan adanya Siternak, diharapkan proses manajemen inseminasi buatan di BBIB Singosari menjadi lebih efisien, terstruktur, dan terintegrasi, mendukung peningkatan produktivitas dan kualitas pelayanan yang diberikan oleh BBIB Singosari.</p><p>Proyek ini juga diinisasi berkat tugas magang di PT Humma Teknologi Indonesia yang mana dikerjakan dengan PHP Native dan juga dengan template Sneat Bootstrap 5.</p>"
+  },
+  {
     name: 'Landing Page Hummatech',
     slug: 'hummatech-landing-page',
     image: '/images/portofolio/hummatech-front.png',
@@ -213,7 +221,15 @@ const myPortofolio: PortfolioItem[] = [
     "desc": `<p>Proyek Humma E-Sport merupakan platform inovatif yang dirancang untuk komunitas e-sport. Menggunakan teknologi Laravel sebagai back-end dan Bootstrap untuk front-end, platform ini menawarkan pengalaman pengguna yang responsif dan dinamis. Platform ini dirancang untuk memenuhi kebutuhan berbagai pengguna, mulai dari pemain hingga penonton, dengan fitur-fitur canggih seperti streaming langsung, statistik permainan, dan forum komunitas.</p> 
              <p>Platform ini juga dilengkapi dengan sistem manajemen turnamen yang komprehensif, memungkinkan penyelenggara turnamen untuk mengatur pertandingan, mengelola pendaftaran, dan melacak hasil secara real-time. Selain itu, Humma E-Sport menawarkan profil pengguna yang dapat disesuaikan, memungkinkan pemain untuk menunjukkan prestasi mereka dan berinteraksi dengan komunitas. Dengan menggunakan teknologi terkini, platform ini memastikan kinerja yang optimal dan keamanan data yang tinggi.</p> 
              <p>Selain fitur utama tersebut, Humma E-Sport juga mengintegrasikan berbagai alat analitik untuk membantu pemain dan tim dalam menganalisis kinerja mereka. Alat ini menyediakan wawasan mendalam yang dapat digunakan untuk meningkatkan strategi permainan. Dengan desain yang intuitif dan fungsionalitas yang kuat, Humma E-Sport berupaya menjadi destinasi utama bagi para penggemar e-sport di seluruh dunia.</p>`
-  }
+  },
+  {
+    name: "Siperpus Laravel",
+    slug: "siperpus-laravel",
+    image: "/images/portofolio/siperpus-home.png",
+    techstack: [...laravelFullstackNonSPABootstrap],
+    shortDesc: "Sistem Informasi Perpustakaan Berbasis Laravel",
+    desc: "<p>Siperpus Laravel adalah sistem informasi perpustakaan berbasis web yang dikembangkan menggunakan framework Laravel. Proyek ini dirancang untuk mengelola kegiatan operasional sebuah perpustakaan secara efisien, termasuk manajemen koleksi buku, data anggota, peminjaman dan pengembalian buku, serta pelaporan aktivitas perpustakaan.</p><p>Proyek ini menggunakan teknologi Laravel sebagai basis utama untuk backend yang kuat dan efisien. Untuk tampilan frontend, digunakan kombinasi HTML, CSS, dan JavaScript dengan bantuan Bootstrap untuk memastikan antarmuka yang responsif dan mudah digunakan. Siperpus Laravel menyediakan berbagai fitur seperti pencarian buku, manajemen anggota, integrasi dengan sistem peminjaman dan pengembalian buku, serta dashboard admin untuk melihat statistik dan laporan.</p><p>Dengan fokus pada keamanan data dan performa, Siperpus Laravel juga dilengkapi dengan mekanisme otentikasi yang kuat dan manajemen izin pengguna. Hal ini memastikan bahwa akses ke informasi sensitif seperti data anggota dan transaksi perpustakaan hanya dapat dilakukan oleh pihak yang berwenang.</p>"
+  },
 ];
 
 
