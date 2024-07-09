@@ -164,9 +164,9 @@ model coffee_places {
   wifi_provider  String?
   wifi_speed     WifiSpeed @default(STRONG)
   price          CafePrice @default(CHEAP)
-  open_time      String?   // Optional, sesuaikan dengan kebutuhan
-  close_time     String?   // Optional, sesuaikan dengan kebutuhan
-  region         String?   // Optional, sesuaikan dengan kebutuhan
+  open_time      String?
+  close_time     String?
+  region         String?
   created_at     DateTime  @default(now())
   updated_at     DateTime  @default(now()) @updatedAt
 }
