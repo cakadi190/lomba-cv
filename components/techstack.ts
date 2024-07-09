@@ -3,6 +3,24 @@ const jqueryBootstrap = [
   "devicon:bootstrap",
 ];
 
+const reactjs = [
+  "devicon:react",
+  "devicon:javascript",
+]
+
+const reactts = [
+  "devicon:react",
+  "devicon:javascript",
+  "devicon:typescript",
+]
+
+const reactNative = [
+  "devicon:react",
+  "devicon:nativescript",
+  "devicon:typescript",
+  "devicon:javascript",
+];
+
 const kotlinJava = [
   "devicon:kotlin",
   "devicon:java",
@@ -21,6 +39,11 @@ const htmlCssJS = [
 
 const vuejs = [
   "devicon:vuejs",
+  "devicon:javascript",
+];
+
+const vuets = [
+  "devicon:vuejs",
   "devicon:typescript",
   "devicon:javascript",
 ];
@@ -33,6 +56,11 @@ const nuxt = [
 const tailwind = [
   "devicon:tailwindcss",
   ...htmlCssJS
+];
+
+const tailwindAlpine = [
+  ...tailwind,
+  "devicon:alpinejs",
 ];
 
 const php = [
@@ -56,16 +84,52 @@ const laravelFullstackNonSPATailwind = [
   ...tailwind
 ];
 
+const laravelFullstackSpaVueJsBootstrap = [
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...vuejs
+];
+
+const laravelFullstackSpaVueTsBootstrap = [
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...vuets
+];
+
+const laravelFullstackSpaReactJsBootstrap = [
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...reactjs
+];
+
+const laravelFullstackSpaReactTsBootstrap = [
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...reactts
+];
+
 export {
   jqueryBootstrap,
   htmlCssJS,
   vuejs,
   nuxt,
   tailwind,
+  tailwindAlpine,
   php,
   laravel,
   laravelFullstackNonSPABootstrap,
   laravelFullstackNonSPATailwind,
   flutterDart,
-  kotlinJava
+  kotlinJava,
+  laravelFullstackSpaVueJsBootstrap,
+  laravelFullstackSpaVueTsBootstrap,
+  laravelFullstackSpaReactJsBootstrap,
+  laravelFullstackSpaReactTsBootstrap,
+  reactNative,
+  reactjs,
+  reactts
 };
