@@ -170,4 +170,5 @@ model coffee_places {
   region         String?
   created_at     DateTime  @default(now())
   updated_at     DateTime  @default(now()) @updatedAt
+  recomended     Boolean?  @default(false)
 }

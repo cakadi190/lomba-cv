@@ -59,14 +59,14 @@
 						<li><nuxt-link to="/karir">Karir</nuxt-link></li>
 					</ul>
 				</div>
-
+        
 				<div class="col-lg-2 col-6">
-					<h5 class="h6">Sumber Daya</h5>
+          <h5 class="h6">Sumber Daya</h5>
 					<ul class="list-unstyled">
-						<li><a target="_blank" href="https://www.catatancakadi.com">Blog Pribadi</a></li>
+            <li><a target="_blank" href="https://www.catatancakadi.com">Blog Pribadi</a></li>
 						<li><a href="#">Referensi Ngoding</a></li>
 						<li><a href="#">Contekan Kode</a></li>
-						<li><a href="#">Tempat Ngopi</a></li>
+            <li><nuxt-link to="/sumber-daya/tempat-ngopi">Tempat Ngopi</nuxt-link></li>
 					</ul>
 				</div>
 

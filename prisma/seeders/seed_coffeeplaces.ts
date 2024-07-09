@@ -17,6 +17,7 @@ const coffeePlacesData: any = [
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
     region: 'Ngawi',
+    recomended: true,
     ...Open24Hours,
   },
   {
@@ -42,6 +43,7 @@ const coffeePlacesData: any = [
     image: null,
     wifi_provider: 'telkom',
     park_fee: 2000,
+    recomended: true,
     price: CafePrice.CHEAP,
     wifi_speed: WifiSpeed.MEDIUM,
     region: 'Ngawi',
@@ -102,6 +104,7 @@ const coffeePlacesData: any = [
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
     region: 'Madiun',
+    recomended: true,
     ...Open08To23,
   },
   {
@@ -173,6 +176,7 @@ const coffeePlacesData: any = [
     price: CafePrice.EXPENSIVE,
     wifi_speed: WifiSpeed.STRONG,
     region: 'Malang',
+    recomended: true,
     ...Open09To24,
   },
   {
@@ -186,6 +190,7 @@ const coffeePlacesData: any = [
     wifi_provider: 'telkom',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
+    recomended: true,
     region: 'Malang',
     ...Open09To02,
   },
@@ -200,6 +205,7 @@ const coffeePlacesData: any = [
     price: CafePrice.CHEAP,
     wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
+    recomended: true,
     region: 'Malang',
     ...Open24Hours,
   },
@@ -215,6 +221,7 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
     region: 'Malang',
+    recomended: true,
     ...Open24Hours,
   },
   {
@@ -243,6 +250,7 @@ const coffeePlacesData: any = [
     wifi_provider: 'telkom',
     wifi_speed: WifiSpeed.MEDIUM,
     region: 'Malang',
+    recomended: true,
     ...Open24Hours,
   },
   {
@@ -272,6 +280,7 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
     region: 'Klaten',
+    recomended: true,
     ...Open08To23,
   },
   {
