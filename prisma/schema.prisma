@@ -164,8 +164,9 @@ model coffee_places {
   wifi_provider  String?
   wifi_speed     WifiSpeed @default(STRONG)
   price          CafePrice @default(CHEAP)
-  open_time      String?
-  close_time     String?
+  park_fee       BigInt?
+  close          String?
+  open           String?
   region         String?
   created_at     DateTime  @default(now())
   updated_at     DateTime  @default(now()) @updatedAt

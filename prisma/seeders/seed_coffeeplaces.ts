@@ -1,5 +1,6 @@
 import { PrismaClient, WifiSpeed, CafePrice } from '@prisma/client';
 import { truncateTable } from './util/truncate_tables.ts';
+import { Open08To23, Open08To24, Open09To02, Open09To22, Open09To23, Open09To24, Open10To22, Open10To23, Open13To22, Open24Hours } from '../../components/time.ts';
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,22 @@ const coffeePlacesData: any = [
     park_fee: 0,
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Ngawi',
+    ...Open24Hours,
+  },
+  {
+    name: 'The Real Coffee and Eatery',
+    address: 'Dungus, Karangasri, Ngawi, Ngawi Regency, East Java 63218Jl. Raya Ngawi - Caruban No.KM 2, Nglarangan, Karangasri, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63218',
+    description: 'Tempat ngopi paling asik di pinggir kota dengan menu yang relatif murah untuk warga Kabupaten Ngawi dan tempat yang strategis di pinggiran Kota Ngawi.',
+    map_coordinate: '-7.404721230883661, 111.4615439504678',
+    map_url: 'https://maps.app.goo.gl/NSEMj2r1KzbNLPFA8',
+    image: null,
+    wifi_provider: 'telkom',
+    park_fee: 0,
+    price: CafePrice.MEDIUM,
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Ngawi',
+    ...Open10To23,
   },
   {
     name: 'Adess Pool & Adess Cafe',
@@ -27,6 +44,8 @@ const coffeePlacesData: any = [
     park_fee: 2000,
     price: CafePrice.CHEAP,
     wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Ngawi',
+    ...Open10To22,
   },
   {
     name: 'Glory Coffinery',
@@ -39,6 +58,8 @@ const coffeePlacesData: any = [
     park_fee: 2000,
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Ngawi',
+    ...Open24Hours,
   },
   {
     name: 'Portafighter #1 Ngawi',
@@ -51,6 +72,8 @@ const coffeePlacesData: any = [
     price: CafePrice.CHEAP,
     wifi_provider: 'telkom',
     wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Ngawi',
+    ...Open24Hours,
   },
   {
     name: 'THX Coffee',
@@ -63,7 +86,9 @@ const coffeePlacesData: any = [
     price: CafePrice.MEDIUM,
     wifi_provider: 'telkom',
     wifi_speed: WifiSpeed.MEDIUM,
-  },  
+    region: 'Ngawi',
+    ...Open13To22,
+  },
 
   {
     name: 'Ikio Coffee',
@@ -76,6 +101,8 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Madiun',
+    ...Open08To23,
   },
   {
     name: 'Warung Kopi Semilir',
@@ -88,7 +115,9 @@ const coffeePlacesData: any = [
     wifi_provider: 'telkom',
     price: CafePrice.CHEAP,
     wifi_speed: WifiSpeed.MEDIUM,
-  },  
+    region: 'Madiun',
+    ...Open08To24,
+  },
   {
     name: 'Balen Coffee',
     address: 'Jl. Kemiri No.19, Taman, Kec. Taman, Kota Madiun, Jawa Timur 63118',
@@ -100,6 +129,8 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Madiun',
+    ...Open09To23,
   },
   {
     name: 'Belle Coffee and Chill',
@@ -112,6 +143,8 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Madiun',
+    ...Open10To23,
   },
   {
     name: 'Green Belly Coffee and Space',
@@ -124,6 +157,8 @@ const coffeePlacesData: any = [
     wifi_provider: 'telkom',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Madiun',
+    ...Open09To23,
   },
 
   {
@@ -137,7 +172,9 @@ const coffeePlacesData: any = [
     wifi_provider: 'biznet',
     price: CafePrice.EXPENSIVE,
     wifi_speed: WifiSpeed.STRONG,
-  },  
+    region: 'Malang',
+    ...Open09To24,
+  },
   {
     name: 'Semusim Cafe',
     address: 'Jl. MT. Haryono No.110, Ketawanggede, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145',
@@ -149,6 +186,8 @@ const coffeePlacesData: any = [
     wifi_provider: 'telkom',
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Malang',
+    ...Open09To02,
   },
   {
     name: 'Studio Bakso & Kopi Studio 24 Srimaya',
@@ -161,6 +200,8 @@ const coffeePlacesData: any = [
     price: CafePrice.CHEAP,
     wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Malang',
+    ...Open24Hours,
   },
   {
     name: 'Studio Bakso & Kopi Studio 24 Suhat',
@@ -173,6 +214,8 @@ const coffeePlacesData: any = [
     price: CafePrice.MEDIUM,
     wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Malang',
+    ...Open24Hours,
   },
   {
     name: 'Warung Kopie Sarkawie',
@@ -184,9 +227,69 @@ const coffeePlacesData: any = [
     park_fee: 2000,
     price: CafePrice.MEDIUM,
     wifi_provider: 'telkom',
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Malang',
+    ...Open09To22,
+  },
+  {
+    name: 'TWCE Cafe & Eatery',
+    address: 'Sebelah cucian mobil, Jl. Saxophone, Tunggulwulung, Kota Malang, Jawa Timur 65143',
+    description: "TWCE Cafe & Eatery adalah tempat yang nyaman untuk menikmati berbagai macam makanan dan minuman di Malang. Terletak di area yang strategis, cocok untuk bertemu teman atau sekadar bersantai.",
+    map_coordinate: '-7.926177311423704, 112.60539100204018',
+    map_url: 'https://maps.app.goo.gl/7VRdnnMG3ur2HWfj7',
+    image: null,
+    park_fee: 2000,
+    price: CafePrice.MEDIUM,
+    wifi_provider: 'telkom',
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Malang',
+    ...Open24Hours,
+  },
+  {
+    name: 'Warkop Antara',
+    address: 'Jl. Saxophone, Tunggulwulung, Kec. Lowokwaru, Kota Malang, Jawa Timur 65143',
+    description: "Warkop Antara adalah tempat yang ideal untuk menikmati kopi dan suasana yang santai di Malang. Dengan harga terjangkau dan fasilitas WiFi dari Telkom, cocok untuk pekerjaan atau bersantai sepanjang hari.",
+    map_coordinate: '-7.924402295940105, 112.60341239239271',
+    map_url: 'https://maps.app.goo.gl/tQ4tDSsBQ4L8WwGn6',
+    image: null,
+    park_fee: 0,
+    price: CafePrice.CHEAP,
+    wifi_provider: 'telkom',
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: 'Malang',
+    ...Open24Hours,
+  },
+
+  {
+    name: 'SETITI Coffee Shop Klaten',
+    address: 'Jl. Pemuda No.295, Mlinjon, Tonggalan, Kec. Klaten Tengah, Kabupaten Klaten, Jawa Tengah 57412',
+    description: "SETITI Coffee Shop merupakan tempat yang cocok untuk menikmati kopi dengan suasana yang nyaman di Klaten. Disediakan WiFi dari Biznet dengan kecepatan yang kuat, tempat ini juga menawarkan berbagai pilihan makanan dan minuman.",
+    map_coordinate: '-7.713044114964349, 110.59335567416215',
+    map_url: 'https://maps.app.goo.gl/kq36wfJNWy2g8xNx6',
+    image: null,
+    park_fee: 0,
+    price: CafePrice.MEDIUM,
+    wifi_provider: 'biznet',
     wifi_speed: WifiSpeed.STRONG,
+    region: 'Klaten',
+    ...Open08To23,
+  },
+  {
+    name: 'Awor Coffee Klaten',
+    address: 'Jl. Merbabu No.5, Gayamprit, Kec. Klaten Sel., Kabupaten Klaten, Jawa Tengah 57412',
+    description: "Awor Coffee adalah tempat yang tepat untuk menikmati kopi berkualitas dan suasana yang tenang di Klaten. Dengan WiFi dari Biznet dan jam operasional dari pagi hingga malam, cocok untuk rapat santai atau pertemuan informal.",
+    map_coordinate: '-7.713044114964349, 110.59335567416215',
+    map_url: 'https://maps.app.goo.gl/kq36wfJNWy2g8xNx6',
+    image: null,
+    park_fee: 0,
+    price: CafePrice.MEDIUM,
+    wifi_provider: 'biznet',
+    wifi_speed: WifiSpeed.STRONG,
+    region: 'Klaten',
+    ...Open08To23,
   },
 ];
+
 
 async function seedCoffeePlaces() {
   await truncateTable('coffee_places');
