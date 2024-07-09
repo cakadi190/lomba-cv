@@ -231,7 +231,7 @@ const myPortofolio: PortfolioItem[] =
     "name": "Visit Ngawi 2024",
     "slug": "visit-ngawi-2024",
     "image": "/images/portofolio/visit-ngawi-front.png",
-    "techstack": [...jqueryBootstrap, 'devicon:vercel'],
+    "techstack": [...jqueryBootstrap, 'devicon:vercel', ...htmlCssJS],
     "shortDesc": "Juara #3 🏆 Fostifest UMS Surakarta 2023, Visit Ngawi 2024 adalah landing page yang dirancang untuk mempromosikan destinasi wisata di Ngawi. Halaman ini menampilkan informasi lengkap tentang tempat-tempat wisata, acara, dan aktivitas yang dapat dinikmati pengunjung di Ngawi.",
     "desc": "<p>Visit Ngawi 2024 adalah landing page yang dirancang untuk mempromosikan destinasi wisata di Ngawi. Halaman ini menampilkan informasi lengkap tentang tempat-tempat wisata, acara, dan aktivitas yang dapat dinikmati pengunjung di Ngawi.</p>\n           <p>Dikembangkan menggunakan jQuery, Bootstrap, dan Vercel, halaman ini menawarkan tampilan yang menarik dan responsif. Pengguna dapat dengan mudah menemukan informasi yang mereka butuhkan untuk merencanakan kunjungan mereka ke Ngawi.</p>\n           <p>Proyek ini bertujuan untuk meningkatkan daya tarik wisata Ngawi, menarik lebih banyak wisatawan, dan mendukung pertumbuhan ekonomi lokal melalui sektor pariwisata.</p>",
     "demoLink": "https://fostifest2023.portofolio.cakadi.id/",

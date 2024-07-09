@@ -41,6 +41,7 @@ async function seedPortofolioCategoryLinks() {
     { portfolioId: ids[18], categoryId: categories[0] },
     { portfolioId: ids[19], categoryId: categories[0] },
     { portfolioId: ids[20], categoryId: categories[0] },
+    { portfolioId: ids[21], categoryId: categories[0] },
   ];
 
   // Optionally truncate the table before seeding

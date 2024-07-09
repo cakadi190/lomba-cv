@@ -96,6 +96,44 @@
 							</div>
 						</div>
 
+						<!-- My History -->
+						<div id="history" class="pb-4 mb-4 border-bottom">
+							<h4>Sejarah Singkat</h4>
+
+							<p>
+								Perjalanan saya sebagai programmer dimulai secara tidak sengaja
+								pada pertengahan 2015 saat mengerjakan tugas PKn. Awalnya
+								berkenalan dengan
+								<a href="https://blogger.com" rel="noreferrer" target="_blank"
+									>Blogger</a
+								>, lalu beralih ke WordPress, yang memperkenalkan saya pada
+								konsep CMS yang lebih kompleks. Langkah berikutnya membawa saya
+								ke dunia hosting dan manajemen server, di mana saya mempelajari
+								panel kontrol seperti cPanel dan aspek teknis di balik sebuah
+								website.
+							</p>
+
+							<p>
+								Perjalanan ini berlanjut dengan mempelajari dasar-dasar HTML,
+								CSS, dan JavaScript untuk frontend, serta PHP dan MySQL untuk
+								backend. Saya menghadapi berbagai tantangan, dari error yang
+								membingungkan hingga konsep-konsep sulit. Seiring waktu, saya
+								mengeksplorasi teknologi modern seperti Node.js dan React,
+								memperluas pemahaman saya tentang ekosistem pengembangan web
+								fullstack.
+							</p>
+
+							<p>
+								Menjadi fullstack developer adalah perjalanan penuh liku. Ada
+								saat-saat frustrasi ketika menghadapi bug atau konfigurasi
+								server yang kompleks, namun juga ada momen membahagiakan saat
+								berhasil mengoptimalkan website atau mengimplementasikan fitur
+								challenging. Kini, setelah bertahun-tahun, saya bersyukur atas
+								perjalanan tidak disengaja ini yang telah membentuk karir dan
+								passion saya dalam dunia pengembangan web.
+							</p>
+						</div>
+
 						<!-- Skills -->
 						<div id="skills" class="pb-5 mb-5 border-bottom">
 							<h4>Keahlian Saya</h4>
@@ -124,14 +162,13 @@
 								:modules="[SwiperAutoplay, SwiperEffectCreative]"
 								:slides-per-view="2"
 								:loop="true"
-                :space-between="16"
-								:autoplay="{
-									delay: 8000,
-									disableOnInteraction: true,
-								}"
+								:space-between="16"
 							>
 								<swiper-slide v-for="slide in 10" :key="slide">
-                  <div style="background-color: rgba(255, 255, 255, .1);" class="ratio ratio-16x9 rounded-4"></div>
+									<div
+										style="background-color: rgba(255, 255, 255, 0.1)"
+										class="ratio ratio-16x9 rounded-4"
+									></div>
 								</swiper-slide>
 							</swiper>
 						</div>
@@ -159,6 +196,11 @@
 									<li class="nav-item" role="presentation">
 										<a href="#about-me" class="nav-link py-3 w-100 text-start">
 											Tentang Saya
+										</a>
+									</li>
+									<li class="nav-item" role="presentation">
+										<a href="#history" class="nav-link py-3 w-100 text-start">
+											Sejarah Singkat Saya
 										</a>
 									</li>
 									<li class="nav-item" role="presentation">

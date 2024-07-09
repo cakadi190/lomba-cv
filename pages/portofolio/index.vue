@@ -31,7 +31,9 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="!pending && !error && portofolios && portofolios.data.length === 0"
+						v-else-if="
+							!pending && !error && portofolios && portofolios.data.length === 0
+						"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -64,7 +66,10 @@
 								<Icon name="fa6-solid:chevron-left" />
 							</button>
 
-							<span>Halaman {{ portofolios.page }} dari {{ portofolios.totalPage }}</span>
+							<span
+								>Halaman {{ portofolios.page }} dari
+								{{ portofolios.totalPage }}</span
+							>
 
 							<button
 								class="btn btn-primary"
@@ -132,12 +137,14 @@ const {
 });
 
 const next = () => {
-  page.value++;
-  refresh();
+	page.value++;
+	refresh();
+  scrollToTop();
 };
 const previous = () => {
-  page.value--;
-  refresh();
+	page.value--;
+	refresh();
+  scrollToTop();
 };
 </script>
 
