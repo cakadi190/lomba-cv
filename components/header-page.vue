@@ -11,19 +11,23 @@ import {
 } from "./motion";
 
 defineProps<{
-  backTo?: string;
-}>()
+	backTo?: string;
+}>();
 </script>
 
 <template>
 	<header id="masthead">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-          <nuxt-link v-if="backTo" :to="backTo" class="btn btn-link text-decoration-none d-flex gap-2 p-0 align-items-center mb-4">
-            <Icon name="fa6-solid:chevron-left" />
-            <span>Kembali</span>
-          </nuxt-link>
+				<div class="col-xxl-6 col-lg-8">
+					<nuxt-link
+						v-if="backTo"
+						:to="backTo"
+						class="btn btn-link text-decoration-none d-flex gap-2 p-0 align-items-center mb-4"
+					>
+						<Icon name="fa6-solid:chevron-left" />
+						<span>Kembali</span>
+					</nuxt-link>
 
 					<h1
 						v-motion
@@ -41,7 +45,7 @@ defineProps<{
 						<slot name="subtitle" />
 					</h2>
 
-          <slot />
+					<slot />
 				</div>
 			</div>
 		</div>
@@ -88,7 +92,7 @@ defineProps<{
 
 	.row {
 		min-height: 40dvh;
-    padding-top: 5rem;
+		padding-top: 5rem;
 		align-items: center;
 	}
 }
