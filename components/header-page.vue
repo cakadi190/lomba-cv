@@ -40,6 +40,8 @@ defineProps<{
 					>
 						<slot name="subtitle" />
 					</h2>
+
+          <slot />
 				</div>
 			</div>
 		</div>

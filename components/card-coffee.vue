@@ -26,19 +26,33 @@ defineProps<{
 			/>
 
 			<div class="card-body p-4">
-				<div class="d-flex gap-2 mb-2 justify-content-between">
+				<div
+					class="d-flex gap-2 mb-2 align-items-center justify-content-between"
+				>
 					<h5 class="card-title mb-0">{{ data.name }}</h5>
-					<div>
-						<span
-							:style="{
-								backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
-							}"
-              v-if="data.recomended"
-							class="badge rounded-pill"
-						>
-							Direkomendasikan
-						</span>
-					</div>
+				</div>
+
+				<div class="d-flex my-2 gap-2 align-items-center">
+					<span
+						:style="{
+							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
+              fontSize: '.875rem'
+						}"
+						v-if="data.recomended"
+						class="badge fw-normal p-2 px-3 rounded-pill"
+					>
+						Direkomendasikan
+					</span>
+					<span
+						:style="{
+							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
+              fontSize: '.875rem'
+						}"
+						v-if="data.recomended"
+						class="badge fw-normal p-2 px-3 rounded-pill"
+					>
+						{{ data.region }}
+					</span>
 				</div>
 
 				<p class="card-text mb-0 text-muted">
@@ -76,26 +90,48 @@ defineProps<{
 							densities="x1 x2"
 						/>
 
-            <div class="row mt-2 g-3">
-              <div class="col-md-6">
-                <div class="card card-body">
-                  <p class="text-muted mb-2">Nama Kafe / Warkop</p>
-                  <h5 class="mb-0">{{ data.name }}</h5>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="card card-body">
-                  <p class="text-muted mb-2">Wilayah</p>
-                  <h5 class="mb-0">{{ data.region }}</h5>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="card card-body">
-                  <p class="text-muted mb-2">Alamat</p>
-                  <h5 class="mb-0">{{ data.address }}.&nbsp;&nbsp;<a :href="data.map_url" target="_blank" rel="noopener noreferrer">Arahkan Saya <Icon name="humbleicons:external-link" /></a></h5>
-                </div>
-              </div>
-            </div>
+            <p class="mt-3 mb-0">{{ data.description }}</p>
+
+						<div class="row mt-2 g-3">
+							<div class="col-md-6">
+								<div class="card card-body">
+									<p class="text-muted mb-2">Nama Kafe / Warkop</p>
+									<h5 class="mb-0">{{ data.name }}</h5>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card card-body">
+									<p class="text-muted mb-2">Wilayah</p>
+									<h5 class="mb-0">{{ data.region }}</h5>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card card-body">
+									<p class="text-muted mb-2">Jam Buka</p>
+									<h5 class="mb-0">{{ data.open }} s/d {{ data.close }}</h5>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card card-body">
+									<p class="text-muted mb-2">Biaya Parkir</p>
+									<h5 class="mb-0">{{ data.park_fee > 0 ? formatCurrency(data.park_fee) : 'Gratis' }}</h5>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="card card-body">
+									<p class="text-muted mb-2">Alamat</p>
+									<h5 class="mb-0">
+										{{ data.address }}.&nbsp;&nbsp;<a
+											:href="data.map_url"
+											target="_blank"
+											rel="noopener noreferrer"
+											>Arahkan Saya <Icon name="humbleicons:external-link"
+										/></a>
+									</h5>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

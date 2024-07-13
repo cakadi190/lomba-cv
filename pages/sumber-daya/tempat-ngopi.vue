@@ -5,6 +5,8 @@
 			<template #subtitle
 				>Berikut daftar tempat ngopi yang aku rekomendasikan.</template
 			>
+
+      <p class="text-muted mt-3"><Icon name="solar:info-square-bold" /> Dan mohon maaf, saya tidak terafiliasi terhadap salah satu kafe / warkop ini, jadi apabila ada kesalahan mohon segera hubungi saya supaya segera saya perbaharui.</p>
 		</header-page>
 
 		<section class="need-space pt-0">

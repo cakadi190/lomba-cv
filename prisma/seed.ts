@@ -54,4 +54,5 @@ async function main() {
   }
 }
 
+// Run the code
 main();

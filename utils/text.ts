@@ -34,8 +34,11 @@ export const limitLines = (text: string, limit: number): string => {
  * @param {number} limit - Batas jumlah karakter maksimum.
  * @returns {string} Teks yang dipotong.
  */
-export const truncate = (text: string, limit: number): string => {
-  return text.slice(0, limit) + (text.length > limit ? "..." : "");
+export const truncate = (str: string, limit: number, end: string = '...'): string => {
+  if (str.length <= limit) {
+    return str;
+  }
+  return str.substring(0, limit) + end;
 };
 
 /**
@@ -76,3 +79,13 @@ export const upperCase = (text: string): string => {
 export const trim = (text: string): string => {
   return text.trim();
 };
+
+/**
+ * Format a number as a currency string.
+ *
+ * @param {number} amount - The number to be formatted.
+ * @param {string} [currency='IDR'] - The currency code (e.g. 'USD', 'EUR', etc.).
+ * @param {number} [decimalPlaces=2] - The number of decimal places to display.
+ * @returns {string} The formatted currency string.
+ */
+export const formatCurrency = (a: number, c: string = 'IDR', l: string = 'id-ID', d: number = 2) => new Intl.NumberFormat(l, { style: 'currency', currency: c, minimumFractionDigits: d, maximumFractionDigits: d }).format(a);

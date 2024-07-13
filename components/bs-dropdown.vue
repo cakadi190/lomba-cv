@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, defineEmits, computed } from 'vue';
-
 const refId = ref(generateRandomString(16));
 
 const props = withDefaults(
