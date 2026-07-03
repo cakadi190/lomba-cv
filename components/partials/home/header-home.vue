@@ -95,10 +95,12 @@ export default defineComponent({
 						:initial="initialSlideFromLeftToRight"
 						:enter="enterSlideFromLeftToRight"
 					>
-						<span class="text-primary text-decoration-underline">A</span>
-						<span>mir&nbsp;</span>
-						<span>Zuh</span>
-						<span class="text-primary text-decoration-underline">di</span>
+						<div>
+							<span class="text-primary text-decoration-underline">A</span>
+							<span>mir&nbsp;</span>
+							<span>Zuh</span>
+							<span class="text-primary text-decoration-underline">di</span>
+						</div>
 						<span>Wibowo, A.Md.Kom.</span>
 					</h1>
 					<p
@@ -240,6 +242,10 @@ export default defineComponent({
 		font-size: 4rem;
 		font-weight: 600;
 		gap: .5rem;
+
+		> * {
+			display: inline-flex;
+		}
 
 		@media screen and (max-width: 1600px) {
 			font-size: 3rem;
