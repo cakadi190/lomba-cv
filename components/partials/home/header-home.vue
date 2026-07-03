@@ -239,6 +239,7 @@ export default defineComponent({
 		flex-wrap: wrap;
 		font-size: 4rem;
 		font-weight: 600;
+		gap: .5rem;
 
 		@media screen and (max-width: 1600px) {
 			font-size: 3rem;
