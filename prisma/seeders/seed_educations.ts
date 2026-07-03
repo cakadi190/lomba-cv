@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { truncateTable } from './util/truncate_tables.ts';
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma.ts';
 
 interface Education {
   name: string;

@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '~~/lib/prisma';
 
 // Fungsi helper untuk mengonversi BigInt
 const convertBigInt = (obj: any): any => {
@@ -50,7 +48,5 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     console.error(error);
     return { code: 500, message: 'Internal Server Error' };
-  } finally {
-    await prisma.$disconnect();
   }
 });

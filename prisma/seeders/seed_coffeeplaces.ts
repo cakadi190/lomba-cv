@@ -1,8 +1,7 @@
-import { PrismaClient, WifiSpeed, CafePrice } from '@prisma/client';
+import { WifiSpeed, CafePrice } from '@prisma/client';
 import { truncateTable } from './util/truncate_tables.ts';
 import { Open08To23, Open08To24, Open09To02, Open09To22, Open09To23, Open09To24, Open10To22, Open10To23, Open13To22, Open24Hours } from '../../components/time.ts';
-
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma.ts';
 
 const imagePath = (imageName: string) => `/images/coffee-shops/${imageName}.webp`;
 

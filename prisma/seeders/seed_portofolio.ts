@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma.ts';
 
 import { htmlCssJS, jqueryBootstrap, kotlinJava, laravelFullstackNonSPABootstrap, nuxt, php } from '../../components/techstack.ts';
 import { truncateTable } from './util/truncate_tables.ts';

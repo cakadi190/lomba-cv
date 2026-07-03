@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { truncateTable } from './util/truncate_tables.ts';
 import { getRandomColor } from '../../utils/colors.ts';
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma.ts';
 
 const categories = [
   { color: getRandomColor(), name: 'Website' },

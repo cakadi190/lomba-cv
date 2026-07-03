@@ -1,3 +1,5 @@
+import { defineNuxtConfig } from "nuxt/config";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -15,19 +17,20 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      failOnError: false, 
+      failOnError: false,
     },
   },
 
   modules: [
     '@vueuse/motion/nuxt',
     "@nuxt/image",
+    "@prisma/nuxt",
     'nuxt-swiper',
     "nuxt-svgo",
     'dayjs-nuxt',
     '@vesp/nuxt-fontawesome',
     '@nuxtjs/color-mode',
-    'nuxt-icon',
+    '@nuxt/icon',
     ["@nuxtjs/google-fonts", {
       families: {
         Signika: true,

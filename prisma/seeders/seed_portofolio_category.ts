@@ -1,19 +1,18 @@
-import { PrismaClient } from '@prisma/client';
 import { truncateTable } from './util/truncate_tables.ts';
-const prisma = new PrismaClient();
+import prisma from '../../lib/prisma.ts';
 
 const portoData = async () => {
   const portfolios = await prisma.portfolios.findMany({
     select: { id: true }
   });
-  return portfolios.map(portfolio => portfolio.id);
+  return portfolios.map((portfolio: { id: string }) => portfolio.id);
 };
 
 const portoCategoryData = async () => {
   const categories = await prisma.portfolio_categories.findMany({
     select: { id: true }
   });
-  return categories.map(category => category.id);
+  return categories.map((category: { id: string }) => category.id);
 };
 
 async function seedPortofolioCategoryLinks() {
@@ -53,12 +52,5 @@ async function seedPortofolioCategoryLinks() {
     });
   }
 }
-
-seedPortofolioCategoryLinks().catch(e => {
-  console.error(e);
-  process.exit(1);
-}).finally(async () => {
-  await prisma.$disconnect();
-});
 
 export default seedPortofolioCategoryLinks;

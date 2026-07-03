@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import 'dotenv/config';
+import prisma from '../lib/prisma.ts';
 
 import seedAwards from './seeders/seed_awards.ts';
 import seedOrganizations from './seeders/seed_organizations.ts';
