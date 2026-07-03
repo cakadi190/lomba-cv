@@ -99,7 +99,7 @@ export default defineComponent({
 						<span>mir&nbsp;</span>
 						<span>Zuh</span>
 						<span class="text-primary text-decoration-underline">di</span>
-						<span>&nbsp;Wibowo, A.Md.Kom.</span>
+						<span>Wibowo, A.Md.Kom.</span>
 					</h1>
 					<p
 						v-motion
@@ -107,7 +107,7 @@ export default defineComponent({
 						:enter="enterSlideFromLeftToRight"
 						class="mb-4 main-desc"
 					>
-						Seorang <strong>Fullstack Web Developer</strong> yang berbasis di
+						Seorang <strong>Software Engineer</strong> dan <strong>Wirausahawan</strong> yang berbasis di
 						Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang
 						berbau <strong>teknologi</strong>.
 					</p>
