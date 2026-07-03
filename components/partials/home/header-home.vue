@@ -13,7 +13,7 @@ useHead({
 			key: "description",
 			name: "description",
 			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Fullstack Web Developer yang suka desain dan atau semua hal yang berbau teknologi.",
+				"Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
 		},
 		{
 			key: "og:canonical",
@@ -26,7 +26,7 @@ useHead({
 			key: "og:description",
 			name: "og:description",
 			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Fullstack Web Developer yang suka desain dan atau semua hal yang berbau teknologi.",
+				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
 		},
 	],
 });
