@@ -24,7 +24,6 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/motion/nuxt',
     "@nuxt/image",
-    "@prisma/nuxt",
     'nuxt-swiper',
     "nuxt-svgo",
     'dayjs-nuxt',
