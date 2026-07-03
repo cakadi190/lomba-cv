@@ -90,7 +90,7 @@
 					</p>
 				</div>
 				<div class="col-md-6 text-center text-lg-end">
-					<p class="mb-0">Made with ❤ by Ahsana Digital Intermedia&trade;.</p>
+					<p class="mb-0">Made with ❤ in Ngawi, Indonesia.</p>
 				</div>
 			</div>
 		</div>
