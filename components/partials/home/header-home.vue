@@ -234,9 +234,9 @@ export default defineComponent({
 	}
 
 	.main-title {
-		display: flex;
+		display: inline-flex;
 		align-items: center;
-		flex-wrap: nowrap;
+		flex-wrap: wrap;
 		font-size: 4rem;
 		font-weight: 600;
 
