@@ -74,8 +74,8 @@
 										:initial="initialSlideFromRightToLeft"
 									>
 										<p>
-											Hai, saya <strong>Amir Zuhdi Wibowo</strong>, seorang
-											<strong>Fullstack Web Developer</strong> yang hobi ngulik
+											Hai, saya <strong>Amir Zuhdi Wibowo, A.Md.Kom.</strong>, seorang
+											<strong>Software Engineer</strong> dan <strong>Wirausahawan</strong> yang hobi ngulik
 											dari front-end sampai back-end. Saya senang membuat
 											aplikasi web yang nggak cuma berfungsi dengan baik tapi
 											juga enak dilihat. Dari HTML, CSS, JavaScript, sampai PHP,
