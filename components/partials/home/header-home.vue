@@ -18,10 +18,10 @@ useHead({
 		{
 			key: "og:canonical",
 			name: "canonical",
-			content: "https://www.cakadi.id",
+			content: "https://www.masadi.net",
 		},
 
-		{ key: "og:url", name: "og:url", content: "https://www.cakadi.id" },
+		{ key: "og:url", name: "og:url", content: "https://www.masadi.net" },
 		{
 			key: "og:description",
 			name: "og:description",

@@ -136,7 +136,7 @@ export default defineComponent({
 const email: Ref<string> = ref("me@cakadi.id");
 const altEmail: Ref<string> = ref("cakadi190@gmail.com");
 const phone: Ref<string> = ref("081333550746");
-const website: Ref<string> = ref("https://www.cakadi.id");
+const website: Ref<string> = ref("https://www.masadi.net");
 
 const socialMediaLinks = ref([
 	{ platform: "Facebook", url: "https://www.facebook.com/cakadi190" },
