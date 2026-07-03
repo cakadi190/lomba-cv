@@ -47,6 +47,9 @@ export default defineEventHandler(async (event) => {
     };
   } catch (error) {
     console.error(error);
-    return { code: 500, message: 'Internal Server Error' };
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+    });
   }
 });

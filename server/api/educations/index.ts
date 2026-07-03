@@ -19,6 +19,9 @@ export default defineEventHandler(async (event) => {
     return { code: 200, data: educations };
   } catch (error) {
     console.error(error);
-    return { code: 500, message: 'Internal Server Error' };
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+    });
   }
 });

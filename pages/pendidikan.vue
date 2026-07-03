@@ -246,7 +246,7 @@ const organization = ref([
 	{
 		orgName: "UKM PALS",
 		desc: "Wakil Ketua 2",
-		period: "2024 - Sekarang",
+		period: "2024 - 2025",
 	},
 	{
 		orgName: "UKM PALS",

@@ -33,7 +33,7 @@
 					<div
 						class="col-md-6 text-center mx-auto"
 						v-else-if="
-							!pending && !error && coffeeShops && coffeeShops.data.length === 0
+							!pending && !error && (!coffeeShops || !coffeeShops.data || coffeeShops.data.length === 0 || coffeeShops.code === 500)
 						"
 					>
 						<error-section
@@ -44,7 +44,7 @@
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>
 					</div>
-					<div class="col-md-12 mx-auto" v-else>
+					<div class="col-md-12 mx-auto" v-else-if="!pending && !error && coffeeShops?.data?.length > 0">
 						<div class="row">
 							<div
 								class="col-md-6 col-lg-4 mb-4"
@@ -58,20 +58,20 @@
 						<div class="d-flex justify-content-center align-items-center gap-3">
 							<button
 								class="btn btn-primary"
-								:disabled="!coffeeShops.hasPrevPage"
+								:disabled="!coffeeShops?.hasPrevPage"
 								@click="previous"
 							>
 								<Icon name="fa6-solid:chevron-left" />
 							</button>
 
 							<span
-								>Halaman {{ coffeeShops.page }} dari
-								{{ coffeeShops.totalPage }}</span
+								>Halaman {{ coffeeShops?.page }} dari
+								{{ coffeeShops?.totalPage }}</span
 							>
 
 							<button
 								class="btn btn-primary"
-								:disabled="!coffeeShops.hasNextPage"
+								:disabled="!coffeeShops?.hasNextPage"
 								@click="next"
 							>
 								<Icon name="fa6-solid:chevron-right" />

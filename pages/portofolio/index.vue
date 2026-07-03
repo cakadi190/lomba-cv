@@ -32,7 +32,7 @@
 					<div
 						class="col-md-6 text-center mx-auto"
 						v-else-if="
-							!pending && !error && portofolios && portofolios.data.length === 0
+							!pending && !error && (!portofolios || !portofolios.data || portofolios.data.length === 0 || portofolios.code === 500)
 						"
 					>
 						<error-section
@@ -60,20 +60,20 @@
 						<div class="d-flex justify-content-center align-items-center gap-3">
 							<button
 								class="btn btn-primary"
-								:disabled="!portofolios.hasPrevPage"
+								:disabled="!portofolios?.hasPrevPage"
 								@click="previous"
 							>
 								<Icon name="fa6-solid:chevron-left" />
 							</button>
 
 							<span
-								>Halaman {{ portofolios.page }} dari
-								{{ portofolios.totalPage }}</span
+								>Halaman {{ portofolios?.page }} dari
+								{{ portofolios?.totalPage }}</span
 							>
 
 							<button
 								class="btn btn-primary"
-								:disabled="!portofolios.hasNextPage"
+								:disabled="!portofolios?.hasNextPage"
 								@click="next"
 							>
 								<Icon name="fa6-solid:chevron-right" />
