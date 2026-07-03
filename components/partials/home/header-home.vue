@@ -99,7 +99,7 @@ export default defineComponent({
 						<span>mir&nbsp;</span>
 						<span>Zuh</span>
 						<span class="text-primary text-decoration-underline">di</span>
-						<span>&nbsp;Wibowo</span>
+						<span>&nbsp;Wibowo, A.Md.Kom.</span>
 					</h1>
 					<p
 						v-motion
