@@ -68,6 +68,21 @@ useSeoMeta({
 
 const careerExp = ref([
 	{
+		position: "Pemilik Bisnis",
+		company:
+			"PT Kodingin Digital Nusantara",
+		location: "Ngawi, Jawa Timur",
+		startDate: "10 Oktober 2024",
+		endDate: null, // atau gunakan null jika masih menjadi pemilik
+	},
+	{
+		position: "Guru Ekskul",
+		company: "SMK Negeri Takeran",
+		location: "Takeran, Kab. Magetan, Jawa Timur",
+		startDate: "Agustus 2025",
+		endDate: "Februari 2026", // atau gunakan null jika masih bekerja di sana
+	},
+	{
 		position: "Magang Fullstack Web Developer",
 		company: "PT Humma Teknologi Indonesia",
 		location: "Karangploso, Kab. Malang, Jawa Timur",
@@ -94,7 +109,7 @@ const careerExp = ref([
 			"Ahsana Digital Intermedia (Dulu Dikenal Sebagai Dasa Kreativa Studio)",
 		location: "Taman, Kota Madiun, Jawa Timur",
 		startDate: "Februari 2021",
-		endDate: "Sekarang", // atau gunakan null jika masih menjadi pemilik
+		endDate: "Oktober 2024", // atau gunakan null jika masih menjadi pemilik
 	},
 	{
 		position: "Frontend Web Developer",
