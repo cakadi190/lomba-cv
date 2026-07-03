@@ -290,7 +290,7 @@ const education = ref([
 		departement: "Teknik",
 		study_program: "Teknologi Informasi",
 		start: "2022-07-12",
-		end: 2026-02-15,
+		end: "2026-02-15",
 		place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
 	},
 	{
