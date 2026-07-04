@@ -27,6 +27,9 @@ export default defineEventHandler(async (event) => {
       _coffeeShopsModel.findMany({
         skip,
         take: perPage,
+        orderBy: {
+          updated_at: "desc",
+        },
       }),
       _coffeeShopsModel.count(),
     ]);

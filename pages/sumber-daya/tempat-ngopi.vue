@@ -11,8 +11,8 @@
 
 		<section class="need-space pt-0 position-relative">
 			<div class="container">
-        <div class="py-3 position-sticky bg-white border-bottom" :style="{ top: '4.5rem', zIndex: 1000 }">
-          <div class="btn-group">
+        <div class="py-3 d-flex position-sticky bg-white border-bottom" :style="{ top: '4.5rem', zIndex: 1000 }">
+          <div class="btn-group d-none d-md-none d-lg-inline-flex">
             <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Klaten</nuxt-link>
@@ -20,6 +20,10 @@
             <nuxt-link class="btn btn-outline-primary">Kota Madiun</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Malang</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Kota Semarang</nuxt-link>
+          </div>
+
+          <div class="input-group ms-auto" :style="{ width: '25%' }">
+            <input type="text" class="form-control" placeholder="Cari kafe atau lokasi" />
           </div>
         </div>
         
