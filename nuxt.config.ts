@@ -61,6 +61,7 @@ export default defineNuxtConfig({
         "@vue/devtools-core",
         "@vue/devtools-kit",
         "bootstrap",
+        "date-fns",
         "dayjs", // CJS
         "dayjs/locale/id", // CJS
         "dayjs/plugin/relativeTime", // CJS

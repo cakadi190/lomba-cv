@@ -11,6 +11,18 @@
 
 		<section class="need-space pt-0">
 			<div class="container">
+        <div class="pt-3 pb-5">
+          <div class="btn-group">
+            <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Klaten</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Yogyakarta</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Kota Madiun</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Malang</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Kota Semarang</nuxt-link>
+          </div>
+        </div>
+        
 				<div class="row">
 					<ClientOnly>
 						<div class="col-md-6 text-center mx-auto" v-if="pending">
@@ -58,7 +70,7 @@
 
 							<div class="d-flex justify-content-center align-items-center gap-3">
 								<button
-									class="btn btn-primary"
+									class="btn btn-primary btn-square"
 									type="button"
 									:disabled="!coffeeShops?.hasPrevPage"
 									@click="previous"
@@ -72,7 +84,7 @@
 								>
 
 								<button
-									class="btn btn-primary"
+									class="btn btn-primary btn-square"
 									type="button"
 									:disabled="!coffeeShops?.hasNextPage"
 									@click="next"

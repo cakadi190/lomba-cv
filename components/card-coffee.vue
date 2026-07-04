@@ -30,8 +30,9 @@ defineProps<{
 				<div class="d-flex my-2 gap-2 align-items-center">
 					<span
 						:style="{
+							color: 'rgba(var(--bs-body-rgb), .125)',
 							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
-              fontSize: '.875rem'
+              fontSize: '.875rem',
 						}"
 						v-if="data.recomended"
 						class="badge fw-normal p-2 px-3 rounded-pill"
@@ -40,6 +41,7 @@ defineProps<{
 					</span>
 					<span
 						:style="{
+							color: 'rgba(var(--bs-body-rgb), .125)',
 							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
               fontSize: '.875rem'
 						}"

@@ -40,7 +40,7 @@ const coffeePlacesData: CoffeePlace[] = [
     address:
       "Jl. Raya Ngawi - Caruban No.KM 2, Nglarangan, Karangasri, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63218",
     description:
-      "Tempat ngopi paling asik di pinggir kota dengan menu yang relatif murah untuk warga Kabupaten Ngawi dan tempat yang strategis di pinggiran Kota Ngawi.",
+      "Kafe modern di pinggiran Kota Ngawi dengan konsep semi-outdoor yang luas dan estetik. Sangat cocok untuk mengerjakan tugas atau sekadar nongkrong santai.",
     map_coordinate: "-7.407694141624345, 111.46570697169916",
     map_url: "https://maps.app.goo.gl/bDB1DoQoiiWzwu7Q6",
     image: imagePath("floe"),
@@ -49,15 +49,66 @@ const coffeePlacesData: CoffeePlace[] = [
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
     region: "Ngawi",
+    recomended: false,
+    ...Open09To23,
+  },
+  {
+    name: "Kopi Kenangan Ngawi",
+    address:
+      "Jl. Teuku Umar No.20, Sidorejo, Ketanggi, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63252",
+    description:
+      "Gerai kopi favorit di pusat Kota Ngawi yang menyajikan pilihan kopi susu kekinian. Cocok untuk dinikmati langsung atau dipesan lewat layanan pesan antar.",
+    map_coordinate: "-7.401118141102577, 111.44260554509965",
+    map_url: "https://maps.app.goo.gl/veQPetconwQxxWaT9",
+    image: imagePath("kopken-ngawi"),
+    wifi_provider: "indibiz",
+    park_fee: 2000,
+    price: CafePrice.MEDIUM,
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: "Ngawi",
     recomended: true,
-    ...Open24Hours,
+    ...Open09To23,
+  },
+  {
+    name: "Kopi Kenangan Poins Square Lebak Bulus",
+    address:
+      "Lt 3 Unit 3F 29, Jl. H. Ilyas No.168, RT.9/RW.7, Lb. Bulus, Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12440",
+    description:
+      "Gerai kopi praktis yang terletak di Poins Square Mall, Lebak Bulus. Pilihan utama para komuter untuk mendapatkan kopi susu andalan sebelum bepergian.",
+    map_coordinate: "-6.289337935146352, 106.77823728743105",
+    map_url: "https://maps.app.goo.gl/ssgT1bNwD797ShdMA",
+    image: imagePath("kopken-poins-square"),
+    wifi_provider: "indibiz",
+    park_fee: 5000,
+    price: CafePrice.MEDIUM,
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: "Kota Adm. Jakarta Selatan",
+    recomended: true,
+    ...Open09To23,
+  },
+  {
+    name: "Kopi Kenangan Madiun",
+    address:
+      "Jl. Cokroaminoto No.76C, Kejuron, Kec. Taman, Kota Madiun, Jawa Timur 63133",
+    description:
+      "Gerai kopi susu kekinian di ruko strategis Jalan Cokroaminoto. Menyediakan berbagai menu minuman manis dan kopi khas Kopi Kenangan untuk warga Madiun.",
+    map_coordinate: "-7.634867431544209, 111.51937105337524",
+    map_url: "https://maps.app.goo.gl/UTayTrLyJbqb9x167",
+    image: imagePath("kopken-madiun"),
+    wifi_provider: "indibiz",
+    park_fee: 2000,
+    price: CafePrice.MEDIUM,
+    wifi_speed: WifiSpeed.MEDIUM,
+    region: "Madiun",
+    recomended: false,
+    ...Open09To23,
   },
   {
     name: "The Real Coffee and Eatery",
     address:
       "Dungus, Karangasri, Ngawi, Ngawi Regency, East Java 63218Jl. Raya Ngawi - Caruban No.KM 2, Nglarangan, Karangasri, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63218",
     description:
-      "Tempat ngopi paling asik di pinggir kota dengan menu yang relatif murah untuk warga Kabupaten Ngawi dan tempat yang strategis di pinggiran Kota Ngawi.",
+      "Kafe dan tempat makan dengan menu bervariasi yang berlokasi strategis di Ngawi. Suasana nyaman menjadikannya tempat favorit berkumpul bersama keluarga.",
     map_coordinate: "-7.404721230883661, 111.4615439504678",
     map_url: "https://maps.app.goo.gl/NSEMj2r1KzbNLPFA8",
     image: imagePath("the-real"),
@@ -184,39 +235,6 @@ const coffeePlacesData: CoffeePlace[] = [
     ...Open09To23,
   },
   {
-    name: "Belle Coffee and Chill",
-    address:
-      "Jl. Kemiri No.22A, Kejuron, Kec. Taman, Kota Madiun, Jawa Timur 63132",
-    description:
-      "Belle Coffee and Chill menawarkan suasana yang nyaman dan santai untuk menikmati berbagai pilihan kopi. Dengan WiFi kuat dari Biznet dan bebas biaya parkir, tempat ini ideal untuk bekerja atau bersantai bersama teman-teman. Harga kopi yang ditawarkan berada di kisaran sedang.",
-    map_coordinate: "-7.6365096214267085, 111.52348108307392",
-    map_url: "https://maps.app.goo.gl/uuk5Q5zkJnKqVuoX6",
-    image: imagePath("belle"),
-    park_fee: 0,
-    wifi_provider: "biznet",
-    price: CafePrice.MEDIUM,
-    wifi_speed: WifiSpeed.STRONG,
-    region: "Madiun",
-    ...Open10To23,
-  },
-  {
-    name: "Green Belly Coffee and Space",
-    address:
-      "Jl. Kapuas No.47, Taman, Kec. Taman, Kota Madiun, Jawa Timur 63131",
-    description:
-      "Green Belly Coffee and Space menyediakan tempat yang nyaman untuk menikmati kopi dengan WiFi yang cukup baik dari Telkom. Bebas biaya parkir dan harga kopi yang terjangkau membuat tempat ini cocok untuk bekerja atau bersantai bersama teman-teman.",
-    map_coordinate: "-7.640923760960542, 111.52030283731126",
-    map_url: "https://maps.app.goo.gl/jstUskJjyoZzd2q38",
-    image: imagePath("green-belly-madiun"),
-    park_fee: 0,
-    wifi_provider: "telkom",
-    price: CafePrice.MEDIUM,
-    wifi_speed: WifiSpeed.MEDIUM,
-    region: "Madiun",
-    ...Open09To23,
-  },
-
-  {
     name: "The Weekend",
     address:
       "Jl. Tegalgondo No.221A, Wunutsari, Tegalgondo, Kec. Karang Ploso, Kabupaten Malang, Jawa Timur 65152",
@@ -238,7 +256,7 @@ const coffeePlacesData: CoffeePlace[] = [
     address:
       "Jl. MT. Haryono No.110, Ketawanggede, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145",
     description:
-      "Tempat ngopi dan workspace untuk mahasiswa POLINEMA dan Universitas Brawijaya yang harganya relatif murah di kantong mahasiswa.",
+      "Kafe populer berkonsep ruang kerja (workspace) yang luas dan nyaman untuk mahasiswa sekitar Lowokwaru. Menyediakan koneksi internet cepat dan harga bersahabat.",
     map_coordinate: "-7.947019659957446, 112.6133933353694",
     map_url: "https://maps.app.goo.gl/iQRcqcYjyTZAiDc67",
     image: imagePath("semusim"),
@@ -255,7 +273,7 @@ const coffeePlacesData: CoffeePlace[] = [
     address:
       "Jl. Balai Desa Kepuharjo, Kedawung, Ngijo, Kec. Karang Ploso, Kabupaten Malang, Jawa Timur 65152",
     description:
-      "Tempat ngopi dan workspace untuk yang kerja di daerah Karang Ploso dan sekitarnya.",
+      "Kafe ramah kerja (workspace-friendly) 24 jam di area Karang Ploso. Menyediakan tempat yang tenang dengan fasilitas internet stabil untuk bekerja seharian.",
     map_coordinate: "-7.912667124019404, 112.61938581487722",
     map_url: "https://maps.app.goo.gl/ZVRvAZateWPp72uq8",
     image: imagePath("kopstud-srimaya"),
@@ -272,8 +290,8 @@ const coffeePlacesData: CoffeePlace[] = [
     address:
       "Jl. Sigura - Gura No.33, Karangbesuki, Kec. Sukun, Kota Malang, Jawa Timur 65149",
     description:
-      "Tempat ngopi dan workspace untuk yang kerja di daerah Sigura-Gura dan sekitarnya.",
-    map_coordinate: "-7.912667124019404, 112.61938581487722",
+      "Workspace dan kedai kopi 24 jam yang terletak strategis di Sigura-Gura. Menjadi andalan mahasiswa untuk belajar kelompok atau mengerjakan tugas malam hari.",
+    map_coordinate: "-7.962534571994624, 112.61528646943033",
     map_url: "https://maps.app.goo.gl/ZVRvAZateWPp72uq8",
     image: imagePath("kopstud-sigura-gura"),
     park_fee: 0,
@@ -289,7 +307,7 @@ const coffeePlacesData: CoffeePlace[] = [
     address:
       "Jl. Soekarno Hatta, Mojolangu, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141",
     description:
-      "Tempat ngopi dan workspace untuk mahasiswa POLINEMA dan Universitas Brawijaya yang harganya relatif murah di kantong mahasiswa.",
+      "Kombinasi unik antara warung bakso lezat dan kafe 24 jam di kawasan Soekarno-Hatta. Tempat nongkrong multifungsi yang cocok untuk makan malam sekaligus begadang kerja tugas.",
     map_coordinate: "-7.94568223495749, 112.61961240771295",
     map_url: "https://maps.app.goo.gl/FbaA4hD5rUYSu3hy7",
     image: imagePath("kopstud-suhat"),

@@ -7,7 +7,7 @@ import { RouteError } from "@/exceptions/RouteError";
  * dan akan diganti oleh argumen `params` saat memanggil {@link route}.
  *
  * @example
- * ROUTES["portfolios.show"] // "/portfolios/:slug"
+ * ROUTES["portfolios.show"] // "/portofolio/:slug"
  */
 export const ROUTES = {
   home: "/",
@@ -16,8 +16,10 @@ export const ROUTES = {
   "company.about.index": "/company/about",
   "company.about.brand": "/company/brand-guidelines",
 
-  "portfolios.index": "/portfolios",
-  "portfolios.show": "/portfolios/:slug",
+  "portfolios.index": "/portofolio",
+  "portfolios.show": "/portofolio/:slug",
+
+  "resources.coffee-shops.index": "/sumber-daya/tempat-ngopi",
 
   contact: "/contact",
 } as const;
@@ -29,7 +31,13 @@ export type RouteName = keyof typeof ROUTES;
 export type RouteParamValue = string | number | boolean;
 
 /** Kumpulan parameter rute, baik untuk segmen path maupun query string. */
-export type RouteParams = Record<string, RouteParamValue>;
+export type RouteParams =
+  | Record<string, RouteParamValue | RouteParamValue[] | null | undefined>
+  | RouteParamValue
+  | Array<
+      | RouteParamValue
+      | Record<string, RouteParamValue | RouteParamValue[] | null | undefined>
+    >;
 
 /**
  * Bentuk fungsi pemanggil {@link route} — sebuah callable yang juga
@@ -139,15 +147,65 @@ export class Router {
       throw new RouteError("Nama rute tidak atau belum terdefinisi.");
     }
 
+    // Cari semua placeholder segmen dinamis (seperti :slug, :id)
+    const placeholders = uri.match(/:[A-Za-z0-9_]+/g) || [];
+    const resolvedParams: Record<string, unknown> = {};
+
+    if (Array.isArray(params)) {
+      let placeholderIdx = 0;
+      for (let i = 0; i < params.length; i++) {
+        const item = params[i];
+        // Jika elemen terakhir berupa objek, gabungkan ke parameter query
+        if (
+          i === params.length - 1 &&
+          typeof item === "object" &&
+          item !== null &&
+          !Array.isArray(item)
+        ) {
+          Object.assign(resolvedParams, item);
+        } else if (placeholderIdx < placeholders.length) {
+          const key = placeholders[placeholderIdx].slice(1);
+          resolvedParams[key] = item;
+          placeholderIdx++;
+        } else {
+          // Elemen sisa tanpa placeholder segmen yang cocok dimasukkan ke query
+          resolvedParams[String(i)] = item;
+        }
+      }
+    } else if (typeof params === "object" && params !== null) {
+      Object.assign(resolvedParams, params);
+    } else if (params !== undefined && params !== null) {
+      // Jika bernilai primitif tunggal, petakan ke segmen rute pertama
+      if (placeholders.length > 0) {
+        const key = placeholders[0].slice(1);
+        resolvedParams[key] = params;
+      } else {
+        resolvedParams["0"] = params;
+      }
+    }
+
     const query = new URLSearchParams();
 
-    for (const [key, value] of Object.entries(params)) {
+    for (const [key, value] of Object.entries(resolvedParams)) {
       const placeholder = `:${key}`;
 
       if (uri.includes(placeholder)) {
+        if (value === undefined || value === null) {
+          throw new RouteError(
+            `Parameter rute wajib "${key}" tidak terisi untuk rute "${name}".`,
+          );
+        }
         uri = uri.replace(placeholder, encodeURIComponent(String(value)));
-      } else {
-        query.append(key, String(value));
+      } else if (value !== undefined && value !== null) {
+        if (Array.isArray(value)) {
+          value.forEach((item, index) => {
+            if (item !== undefined && item !== null) {
+              query.append(`${key}[${index}]`, String(item));
+            }
+          });
+        } else {
+          query.append(key, String(value));
+        }
       }
     }
 

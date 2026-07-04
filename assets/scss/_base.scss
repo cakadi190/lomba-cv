@@ -1,0 +1,42 @@
+// Buttons
+// https://getbootstrap.com/docs/5.3/components/buttons/
+.btn {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  &.btn-block {
+    width: 100%;
+  }
+
+  &-sm {
+    gap: 0.25rem;
+  }
+
+  &-lg {
+    gap: 0.75rem;
+  }
+
+  &-square {
+    aspect-ratio: 1;
+
+    .btn {
+      &-sm {
+        min-height: 32px;
+        min-width: 32px;
+      }
+
+      & {
+        min-height: 48px;
+        min-width: 48px;
+      }
+
+      &-lg {
+        min-height: 72px;
+        min-width: 72px;
+        font-size: 1.125em;
+      }
+    }
+  }
+}
