@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 // Saat root HTML menggunakan tema gelap, sembunyikan logo terang dan tampilkan logo gelap secara instan
-:global([data-bs-theme="dark"]) {
+[data-bs-theme="dark"] {
   .logo-light {
     display: none !important;
   }
