@@ -1,7 +1,13 @@
+<script setup lang="ts">
+import { route } from '~/lib/route';
+
+</script>
+
 <template>
   <main id="auth-wrapper">
     <div id="container">
-      <app-brand link-class="offcanvas-title" height="48" />
+      <app-brand link-class="offcanvas-title" 
+          :to="route('home')" height="48" />
       <div class="card p-4 rounded-4 card-body w-100">
         <slot />
       </div>

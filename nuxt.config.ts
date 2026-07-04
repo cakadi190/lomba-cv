@@ -57,9 +57,7 @@ export default defineNuxtConfig({
     exclude: ["/admin/**"],
     autoAlternativeAliases: true,
     autoI18n: true,
-    sources: [
-      "/api/__sitemap__/urls",
-    ],
+    sources: ["/api/__sitemap__/urls"],
     autoLastmod: true,
   },
 

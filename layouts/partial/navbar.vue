@@ -12,6 +12,7 @@
 					link-class="offcanvas-title"
 					id="offcanvasLabel"
 					height="28"
+          :to="route('home')"
 				/>
 				<div class="d-flex align-items-center gap-2 ms-auto">
 					<theme-toggler />
@@ -80,6 +81,8 @@
 </template>
 
 <script lang="ts" setup>
+import { route } from '~/lib/route';
+
 defineOptions({ name: "NavbarMain" });
 
 const navbar = ref<HTMLElement | null>(null);
