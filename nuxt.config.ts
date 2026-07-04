@@ -47,5 +47,21 @@ export default defineNuxtConfig({
     ],
   ],
 
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          quietDeps: true,
+          silenceDeprecations: [
+            "import",
+            "global-builtin",
+            "color-functions",
+            "if-function",
+          ],
+        },
+      },
+    },
+  },
+
   compatibilityDate: "2024-07-06",
 });

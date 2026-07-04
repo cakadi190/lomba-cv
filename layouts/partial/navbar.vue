@@ -10,7 +10,7 @@
 				<nuxt-link to="/" class="offcanvas-title">
 					<img
 						class="site-logo"
-						src="/images/brands/logo-color-long.svg"
+						src="/images/brands/logo-color.svg"
 						height="28"
 						alt="Logo Mas Adi"
 					/>
@@ -47,7 +47,7 @@
 			<nuxt-link to="/" class="navbar-brand">
 				<img
 					class="site-logo"
-					src="/images/brands/logo-color-long.svg"
+					src="/images/brands/logo-color.svg"
 					height="32"
 					alt="Logo Mas Adi"
 				/>
