@@ -11,7 +11,7 @@
 
 		<section class="need-space pt-0 position-relative">
 			<div class="container">
-        <div class="py-3 d-flex position-sticky bg-white border-bottom" :style="{ top: '4.5rem', zIndex: 1000 }">
+        <div class="py-3 d-flex position-sticky border-bottom" :style="{ top: '4.5rem', zIndex: 1000, background: 'var(--bs-body-bg)' }">
           <div class="btn-group d-none d-md-none d-lg-inline-flex">
             <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
