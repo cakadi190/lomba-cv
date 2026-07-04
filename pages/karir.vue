@@ -43,91 +43,91 @@
 // SEO META
 const title = computed(() => "Karir Saya");
 const description = computed(
-	() =>
-		`Berikut daftar riwayat karir saya yang mana saya sudah berkarir di berbagai tempat.`,
+  () =>
+    `Berikut daftar riwayat karir saya yang mana saya sudah berkarir di berbagai tempat.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
 // Motion animation variants
 const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
 const enterSlideFromBottomToTop = {
-	opacity: 1,
-	y: 0,
-	transition: { duration: 600 },
+  opacity: 1,
+  y: 0,
+  transition: { duration: 600 },
 };
 
 const careerExp = ref([
-	{
-		position: "Pemilik Bisnis",
-		company: "PT Kodingin Digital Nusantara",
-		location: "Ngawi, Jawa Timur",
-		startDate: "10 Oktober 2024",
-		endDate: null, // atau gunakan null jika masih menjadi pemilik
-	},
-	{
-		position: "Guru Ekskul",
-		company: "SMK Negeri Takeran",
-		location: "Takeran, Kab. Magetan, Jawa Timur",
-		startDate: "Agustus 2025",
-		endDate: "Februari 2026", // atau gunakan null jika masih bekerja di sana
-	},
-	{
-		position: "Magang Fullstack Web Developer",
-		company: "PT Humma Teknologi Indonesia",
-		location: "Karangploso, Kab. Malang, Jawa Timur",
-		startDate: "Februari 2023",
-		endDate: "Sekarang", // atau gunakan null jika masih bekerja di sana
-	},
-	{
-		position: "Chief Technology Officer & Co-Founder",
-		company: "PT Buat Usaha Digital Indonesia",
-		location: "Slawi, Kab. Tegal, Jawa Tengah",
-		startDate: "Juli 2023",
-		endDate: "Desember 2023", // atau gunakan null jika masih bekerja di sana
-	},
-	{
-		position: "Junior Fullstack Web Developer",
-		company: "Asean Fintech Group Ltd.",
-		location: "Semarang Tengah, Kota Semarang, Jawa Tengah",
-		startDate: "Nov 2021",
-		endDate: "Februari 2022",
-	},
-	{
-		position: "Pemilik Bisnis",
-		company:
-			"Ahsana Digital Intermedia (Dulu Dikenal Sebagai Dasa Kreativa Studio)",
-		location: "Taman, Kota Madiun, Jawa Timur",
-		startDate: "Februari 2021",
-		endDate: "Oktober 2024", // atau gunakan null jika masih menjadi pemilik
-	},
-	{
-		position: "Frontend Web Developer",
-		company: "CV Dokternet Indonesia",
-		location: "Waru, Sidoarjo, Jawa Timur",
-		startDate: "Oktober 2021",
-		endDate: "November 2021",
-	},
-	{
-		position: "Desainer Grafis",
-		company: "Artografi Indonesia",
-		location: "Bayemtaman, Magetan, Jawa Timur",
-		startDate: "November 2020",
-		endDate: "Januari 2021",
-	},
+  {
+    position: "Pemilik Bisnis",
+    company: "PT Kodingin Digital Nusantara",
+    location: "Ngawi, Jawa Timur",
+    startDate: "10 Oktober 2024",
+    endDate: null, // atau gunakan null jika masih menjadi pemilik
+  },
+  {
+    position: "Guru Ekskul",
+    company: "SMK Negeri Takeran",
+    location: "Takeran, Kab. Magetan, Jawa Timur",
+    startDate: "Agustus 2025",
+    endDate: "Februari 2026", // atau gunakan null jika masih bekerja di sana
+  },
+  {
+    position: "Magang Fullstack Web Developer",
+    company: "PT Humma Teknologi Indonesia",
+    location: "Karangploso, Kab. Malang, Jawa Timur",
+    startDate: "Februari 2023",
+    endDate: "Sekarang", // atau gunakan null jika masih bekerja di sana
+  },
+  {
+    position: "Chief Technology Officer & Co-Founder",
+    company: "PT Buat Usaha Digital Indonesia",
+    location: "Slawi, Kab. Tegal, Jawa Tengah",
+    startDate: "Juli 2023",
+    endDate: "Desember 2023", // atau gunakan null jika masih bekerja di sana
+  },
+  {
+    position: "Junior Fullstack Web Developer",
+    company: "Asean Fintech Group Ltd.",
+    location: "Semarang Tengah, Kota Semarang, Jawa Tengah",
+    startDate: "Nov 2021",
+    endDate: "Februari 2022",
+  },
+  {
+    position: "Pemilik Bisnis",
+    company:
+      "Ahsana Digital Intermedia (Dulu Dikenal Sebagai Dasa Kreativa Studio)",
+    location: "Taman, Kota Madiun, Jawa Timur",
+    startDate: "Februari 2021",
+    endDate: "Oktober 2024", // atau gunakan null jika masih menjadi pemilik
+  },
+  {
+    position: "Frontend Web Developer",
+    company: "CV Dokternet Indonesia",
+    location: "Waru, Sidoarjo, Jawa Timur",
+    startDate: "Oktober 2021",
+    endDate: "November 2021",
+  },
+  {
+    position: "Desainer Grafis",
+    company: "Artografi Indonesia",
+    location: "Bayemtaman, Magetan, Jawa Timur",
+    startDate: "November 2020",
+    endDate: "Januari 2021",
+  },
 ]);
 </script>
 

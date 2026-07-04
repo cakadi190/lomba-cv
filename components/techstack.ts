@@ -5,10 +5,10 @@ const reactjs = ["devicon:react", "devicon:javascript"];
 const reactts = ["devicon:react", "devicon:javascript", "devicon:typescript"];
 
 const reactNative = [
-	"devicon:react",
-	"devicon:nativescript",
-	"devicon:typescript",
-	"devicon:javascript",
+  "devicon:react",
+  "devicon:nativescript",
+  "devicon:typescript",
+  "devicon:javascript",
 ];
 
 const kotlinJava = ["devicon:kotlin", "devicon:java"];
@@ -32,59 +32,59 @@ const php = ["devicon:php"];
 const laravel = ["devicon:laravel", ...php];
 
 const laravelFullstackNonSPABootstrap = [
-	...laravel,
-	...htmlCssJS,
-	...jqueryBootstrap,
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
 ];
 
 const laravelFullstackNonSPATailwind = [...laravel, ...htmlCssJS, ...tailwind];
 
 const laravelFullstackSpaVueJsBootstrap = [
-	...laravel,
-	...htmlCssJS,
-	...jqueryBootstrap,
-	...vuejs,
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...vuejs,
 ];
 
 const laravelFullstackSpaVueTsBootstrap = [
-	...laravel,
-	...htmlCssJS,
-	...jqueryBootstrap,
-	...vuets,
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...vuets,
 ];
 
 const laravelFullstackSpaReactJsBootstrap = [
-	...laravel,
-	...htmlCssJS,
-	...jqueryBootstrap,
-	...reactjs,
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...reactjs,
 ];
 
 const laravelFullstackSpaReactTsBootstrap = [
-	...laravel,
-	...htmlCssJS,
-	...jqueryBootstrap,
-	...reactts,
+  ...laravel,
+  ...htmlCssJS,
+  ...jqueryBootstrap,
+  ...reactts,
 ];
 
 export {
-	flutterDart,
-	htmlCssJS,
-	jqueryBootstrap,
-	kotlinJava,
-	laravel,
-	laravelFullstackNonSPABootstrap,
-	laravelFullstackNonSPATailwind,
-	laravelFullstackSpaReactJsBootstrap,
-	laravelFullstackSpaReactTsBootstrap,
-	laravelFullstackSpaVueJsBootstrap,
-	laravelFullstackSpaVueTsBootstrap,
-	nuxt,
-	php,
-	reactjs,
-	reactNative,
-	reactts,
-	tailwind,
-	tailwindAlpine,
-	vuejs,
+  flutterDart,
+  htmlCssJS,
+  jqueryBootstrap,
+  kotlinJava,
+  laravel,
+  laravelFullstackNonSPABootstrap,
+  laravelFullstackNonSPATailwind,
+  laravelFullstackSpaReactJsBootstrap,
+  laravelFullstackSpaReactTsBootstrap,
+  laravelFullstackSpaVueJsBootstrap,
+  laravelFullstackSpaVueTsBootstrap,
+  nuxt,
+  php,
+  reactjs,
+  reactNative,
+  reactts,
+  tailwind,
+  tailwindAlpine,
+  vuejs,
 };

@@ -78,16 +78,16 @@ defineOptions({ name: "FormContact" });
 
 const selectedValue = ref("");
 const options = ref<Option[]>([
-	{ value: "connecting", label: "Izin Berkoneksi" },
-	{
-		value: "services",
-		label: "Layanan",
-		rightLabel: "Masih belum tersedia",
-		disabled: true,
-	},
-	{ value: "project-collabs", label: "Kolaborasi Proyek" },
-	{ value: "general", label: "Ingin Bertanya Hal Umum" },
-	{ value: "others", label: "Hal Lainnya" },
+  { value: "connecting", label: "Izin Berkoneksi" },
+  {
+    value: "services",
+    label: "Layanan",
+    rightLabel: "Masih belum tersedia",
+    disabled: true,
+  },
+  { value: "project-collabs", label: "Kolaborasi Proyek" },
+  { value: "general", label: "Ingin Bertanya Hal Umum" },
+  { value: "others", label: "Hal Lainnya" },
 ]);
 </script>
 

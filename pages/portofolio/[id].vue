@@ -54,37 +54,37 @@ const { params } = useRoute();
 
 // Data Fetching from Server
 const { data, error, status } = useFetch<any>(`/api/portofolios/${params.id}`, {
-	method: "GET",
-	transform: (a) => a?.data[0],
-	server: true,
-	lazy: false,
+  method: "GET",
+  transform: (a) => a?.data[0],
+  server: true,
+  lazy: false,
 });
 
 // SEO META
 const title = computed(() =>
-	status.value === "pending"
-		? "Sedang memuat data"
-		: (data.value?.name ?? "Portofolio Tidak Ditemukan"),
+  status.value === "pending"
+    ? "Sedang memuat data"
+    : (data.value?.name ?? "Portofolio Tidak Ditemukan"),
 );
 const description = computed(() =>
-	status.value === "pending"
-		? "Sedang memuat data"
-		: (data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"),
+  status.value === "pending"
+    ? "Sedang memuat data"
+    : (data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"),
 );
 const image = computed(() => data.value?.image ?? "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 </script>
 

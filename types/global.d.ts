@@ -2,9 +2,9 @@
 export {};
 
 declare global {
-	interface Window {
-		$: JQueryStatic;
-		jQuery: JQueryStatic;
-		bootstrap: typeof import("bootstrap");
-	}
+  interface Window {
+    $: JQueryStatic;
+    jQuery: JQueryStatic;
+    bootstrap: typeof import("bootstrap");
+  }
 }

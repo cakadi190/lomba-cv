@@ -1,55 +1,55 @@
 <script lang="ts" setup>
 import {
-	enterSlideFromLeftToRight,
-	enterSlideFromRightToLeft,
-	initialSlideFromLeftToRight,
-	initialSlideFromRightToLeft,
+  enterSlideFromLeftToRight,
+  enterSlideFromRightToLeft,
+  initialSlideFromLeftToRight,
+  initialSlideFromRightToLeft,
 } from "../../motion";
 
 defineOptions({ name: "HeaderHome" });
 
 useHead({
-	title: "Beranda",
-	meta: [
-		{
-			key: "description",
-			name: "description",
-			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-		},
-		{
-			key: "og:canonical",
-			name: "canonical",
-			content: "https://www.masadi.net",
-		},
+  title: "Beranda",
+  meta: [
+    {
+      key: "description",
+      name: "description",
+      content:
+        "Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+    },
+    {
+      key: "og:canonical",
+      name: "canonical",
+      content: "https://www.masadi.net",
+    },
 
-		{ key: "og:url", name: "og:url", content: "https://www.masadi.net" },
-		{
-			key: "og:description",
-			name: "og:description",
-			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-		},
-	],
+    { key: "og:url", name: "og:url", content: "https://www.masadi.net" },
+    {
+      key: "og:description",
+      name: "og:description",
+      content:
+        "Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+    },
+  ],
 });
 
 type TechStackItem = {
-	icon?: string;
-	name?: string;
-	type?: "separator";
+  icon?: string;
+  name?: string;
+  type?: "separator";
 };
 
 const techStack = ref<TechStackItem[]>([
-	{ icon: "devicon:laravel", name: "Laravel" },
-	{ icon: "devicon:vuejs", name: "VueJS" },
-	{ icon: "devicon:bootstrap", name: "Bootstrap" },
-	{ icon: "devicon:nuxtjs", name: "NuxtJS" },
-	{ icon: "devicon:nextjs", name: "NextJS" },
-	{ icon: "devicon:docker", name: "Docker" },
-	{ type: "separator" },
-	{ icon: "devicon:vscode", name: "Visual Studio Code" },
-	{ icon: "devicon:figma", name: "Figma" },
-	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
+  { icon: "devicon:laravel", name: "Laravel" },
+  { icon: "devicon:vuejs", name: "VueJS" },
+  { icon: "devicon:bootstrap", name: "Bootstrap" },
+  { icon: "devicon:nuxtjs", name: "NuxtJS" },
+  { icon: "devicon:nextjs", name: "NextJS" },
+  { icon: "devicon:docker", name: "Docker" },
+  { type: "separator" },
+  { icon: "devicon:vscode", name: "Visual Studio Code" },
+  { icon: "devicon:figma", name: "Figma" },
+  { icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
 </script>
 

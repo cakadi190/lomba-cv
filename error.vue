@@ -11,13 +11,13 @@
 
 <script setup>
 defineProps({
-	error: {
-		type: Object,
-		required: true,
-	},
+  error: {
+    type: Object,
+    required: true,
+  },
 });
 
 definePageMeta({
-	layout: "default",
+  layout: "default",
 });
 </script>

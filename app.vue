@@ -19,59 +19,59 @@ body {
 
 <script lang="ts" setup>
 useHead({
-	titleTemplate: (titleChunk: any) => {
-		return titleChunk ? `${titleChunk} • Cak Adi` : "Cak Adi";
-	},
+  titleTemplate: (titleChunk: any) => {
+    return titleChunk ? `${titleChunk} • Cak Adi` : "Cak Adi";
+  },
 });
 
 const colorMode = useColorMode();
 const theme = ref("light");
 
 const applyTheme = (themes: string) => {
-	document.documentElement.setAttribute("data-bs-theme", themes);
-	theme.value = themes;
+  document.documentElement.setAttribute("data-bs-theme", themes);
+  theme.value = themes;
 };
 
 const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-	applyTheme(e.matches ? "dark" : "light");
+  applyTheme(e.matches ? "dark" : "light");
 };
 
 onMounted(() => {
-	const mediamode = localStorage.getItem("mediamode");
-	const colorModePreference = colorMode.preference;
+  const mediamode = localStorage.getItem("mediamode");
+  const colorModePreference = colorMode.preference;
 
-	if (colorModePreference === "system") {
-		const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  if (colorModePreference === "system") {
+    const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-		if (mediamode === "dark" || mediamode === "light") {
-			applyTheme(mediamode);
-		} else {
-			applyTheme(systemThemeQuery.matches ? "dark" : "light");
-			systemThemeQuery.addEventListener("change", handleSystemThemeChange);
-		}
+    if (mediamode === "dark" || mediamode === "light") {
+      applyTheme(mediamode);
+    } else {
+      applyTheme(systemThemeQuery.matches ? "dark" : "light");
+      systemThemeQuery.addEventListener("change", handleSystemThemeChange);
+    }
 
-		return () => {
-			systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
-		};
-	} else {
-		applyTheme(colorModePreference);
-	}
+    return () => {
+      systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  } else {
+    applyTheme(colorModePreference);
+  }
 });
 
 const initTooltipAndPopover = () => {
-	var tooltipTriggerList = [].slice.call(
-		document.querySelectorAll('[data-bs-toggle="tooltip"]'),
-	);
-	var _tooltipList = tooltipTriggerList.map(
-		(tooltipTriggerEl) => new window.bootstrap.Tooltip(tooltipTriggerEl),
-	);
+  var tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+  );
+  var _tooltipList = tooltipTriggerList.map(
+    (tooltipTriggerEl) => new window.bootstrap.Tooltip(tooltipTriggerEl),
+  );
 
-	var popoverTriggerList = [].slice.call(
-		document.querySelectorAll('[data-bs-toggle="popover"]'),
-	);
-	var _popoverList = popoverTriggerList.map(
-		(popoverTriggerEl) => new window.bootstrap.Popover(popoverTriggerEl),
-	);
+  var popoverTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="popover"]'),
+  );
+  var _popoverList = popoverTriggerList.map(
+    (popoverTriggerEl) => new window.bootstrap.Popover(popoverTriggerEl),
+  );
 };
 
 onMounted(initTooltipAndPopover);
@@ -80,10 +80,10 @@ onUpdated(initTooltipAndPopover);
 const route = useRoute();
 
 watch(
-	() => route.fullPath,
-	() => {
-		initTooltipAndPopover();
-	},
+  () => route.fullPath,
+  () => {
+    initTooltipAndPopover();
+  },
 );
 </script>
 

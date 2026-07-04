@@ -1,6 +1,6 @@
 <script lang="ts">
 export default defineComponent({
-	name: "PageHeader",
+  name: "PageHeader",
 });
 </script>
 

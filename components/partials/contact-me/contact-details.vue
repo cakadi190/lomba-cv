@@ -137,11 +137,11 @@ const phone: Ref<string> = ref("081333550746");
 const website: Ref<string> = ref("https://www.masadi.net");
 
 const socialMediaLinks = ref([
-	{ platform: "Facebook", url: "https://www.facebook.com/cakadi190" },
-	{ platform: "Instagram", url: "https://www.instagram.com/cakadi.id/" },
-	{ platform: "Twitter", url: "https://twitter.com/cakadi190" },
-	{ platform: "Youtube", url: "https://youtube.com/@catatancakadi" },
-	{ platform: "LinkedIn", url: "https://linkedin.com/in/cakadi190" },
+  { platform: "Facebook", url: "https://www.facebook.com/cakadi190" },
+  { platform: "Instagram", url: "https://www.instagram.com/cakadi.id/" },
+  { platform: "Twitter", url: "https://twitter.com/cakadi190" },
+  { platform: "Youtube", url: "https://youtube.com/@catatancakadi" },
+  { platform: "LinkedIn", url: "https://linkedin.com/in/cakadi190" },
 ]);
 </script>
 

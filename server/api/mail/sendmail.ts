@@ -55,18 +55,18 @@
 // }
 
 export default defineEventHandler(async (_event) => {
-	// try {
-	//   const formData = await readFormData(event);
-	//   buildEmail(formData);
-	//   return {
-	//     message: "Success!",
-	//     code: 200,
-	//   };
-	// } catch (error) {
-	//   console.error(error);
-	//   return {
-	//     code: 500,
-	//     message: "Internal Server Error",
-	//   };
-	// }
+  // try {
+  //   const formData = await readFormData(event);
+  //   buildEmail(formData);
+  //   return {
+  //     message: "Success!",
+  //     code: 200,
+  //   };
+  // } catch (error) {
+  //   console.error(error);
+  //   return {
+  //     code: 500,
+  //     message: "Internal Server Error",
+  //   };
+  // }
 });

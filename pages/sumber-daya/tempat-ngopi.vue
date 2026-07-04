@@ -89,59 +89,59 @@ const urlRequest = useRequestURL();
 const route = useRoute();
 
 const page = computed({
-	get() {
-		return Number(route.query.page?.toString()) || 1;
-	},
-	set(newPage: number) {
-		navigateTo({
-			query: {
-				page: newPage,
-			},
-		});
-	},
+  get() {
+    return Number(route.query.page?.toString()) || 1;
+  },
+  set(newPage: number) {
+    navigateTo({
+      query: {
+        page: newPage,
+      },
+    });
+  },
 });
 
 // SEO META
 const title = computed(() => `Daftar Tempat Ngopi`);
 const description = computed(
-	() => `Berikut daftar tempat ngopi yang saya rekomendasikan.`,
+  () => `Berikut daftar tempat ngopi yang saya rekomendasikan.`,
 );
 const image = computed(() => "/images/meta-image.png");
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
 // Fetch Data
 const {
-	data: coffeeShops,
-	pending,
-	error,
-	refresh,
+  data: coffeeShops,
+  pending,
+  error,
+  refresh,
 } = await useFetch<any>(() => `/api/coffee-shops?page=${page.value}`, {
-	method: "GET",
-	lazy: true,
-	server: false,
+  method: "GET",
+  lazy: true,
+  server: false,
 });
 
 const next = () => {
-	page.value++;
-	refresh();
-	scrollToTop();
+  page.value++;
+  refresh();
+  scrollToTop();
 };
 const previous = () => {
-	page.value--;
-	refresh();
-	scrollToTop();
+  page.value--;
+  refresh();
+  scrollToTop();
 };
 </script>
 

@@ -88,78 +88,78 @@ const colorMode = useColorMode();
 const theme = ref("light");
 
 const navbarMenu = ref([
-	{ name: "Beranda", link: "/" },
-	{ name: "Portofolio", link: "/portofolio" },
-	{ name: "Tentang Saya", link: "/tentang/saya" },
-	{ name: "Pendidikan & Organisasi", link: "/pendidikan" },
-	{ name: "Penghargaan", link: "/penghargaan" },
-	{ name: "Karir", link: "/karir" },
-	{ name: "Kontak Saya", link: "/kontak" },
+  { name: "Beranda", link: "/" },
+  { name: "Portofolio", link: "/portofolio" },
+  { name: "Tentang Saya", link: "/tentang/saya" },
+  { name: "Pendidikan & Organisasi", link: "/pendidikan" },
+  { name: "Penghargaan", link: "/penghargaan" },
+  { name: "Karir", link: "/karir" },
+  { name: "Kontak Saya", link: "/kontak" },
 ]);
 
 const closingOffcanvas = () => {
-	const btnClose = document.querySelector("#offcanvas .btn-close");
-	if (btnClose instanceof HTMLElement) {
-		btnClose.click();
-	}
+  const btnClose = document.querySelector("#offcanvas .btn-close");
+  if (btnClose instanceof HTMLElement) {
+    btnClose.click();
+  }
 };
 
 const applyTheme = (themes: string) => {
-	const logos = document.getElementsByClassName("site-logo");
+  const logos = document.getElementsByClassName("site-logo");
 
-	Array.from(logos).forEach((logoElement: Element) => {
-		if (logoElement) {
-			logoElement.setAttribute(
-				"src",
-				`/images/brands/logo-${themes === "light" ? "color" : "white"}-long.svg`,
-			);
-		}
-	});
+  Array.from(logos).forEach((logoElement: Element) => {
+    if (logoElement) {
+      logoElement.setAttribute(
+        "src",
+        `/images/brands/logo-${themes === "light" ? "color" : "white"}-long.svg`,
+      );
+    }
+  });
 
-	theme.value = themes;
+  theme.value = themes;
 };
 
 const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-	applyTheme(e.matches ? "dark" : "light");
+  applyTheme(e.matches ? "dark" : "light");
 };
 
 onMounted(() => {
-	if (colorMode.preference === "system") {
-		const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-		applyTheme(systemThemeQuery.matches ? "dark" : "light");
-		systemThemeQuery.addEventListener("change", handleSystemThemeChange);
+  if (colorMode.preference === "system") {
+    const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    applyTheme(systemThemeQuery.matches ? "dark" : "light");
+    systemThemeQuery.addEventListener("change", handleSystemThemeChange);
 
-		return () => {
-			systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
-		};
-	} else {
-		applyTheme(colorMode.preference);
-	}
+    return () => {
+      systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  } else {
+    applyTheme(colorMode.preference);
+  }
 });
 
 const handleScroll = () => {
-	if (window.scrollY >= 50) {
-		navbar.value?.classList.add("body-bg-rgb");
-		navbar.value?.classList.add("border-bottom");
-		navbar.value?.style.setProperty("--bs-bg-opacity", "0.85");
-		navbar.value?.style.setProperty("backdrop-filter", "blur(1rem)");
-	} else {
-		navbar.value?.classList.remove("body-bg-rgb");
-		navbar.value?.classList.remove("border-bottom");
-		navbar.value?.style.removeProperty("--bs-bg-opacity");
-		navbar.value?.style.removeProperty("backdrop-filter");
-	}
+  if (window.scrollY >= 50) {
+    navbar.value?.classList.add("body-bg-rgb");
+    navbar.value?.classList.add("border-bottom");
+    navbar.value?.style.setProperty("--bs-bg-opacity", "0.85");
+    navbar.value?.style.setProperty("backdrop-filter", "blur(1rem)");
+  } else {
+    navbar.value?.classList.remove("body-bg-rgb");
+    navbar.value?.classList.remove("border-bottom");
+    navbar.value?.style.removeProperty("--bs-bg-opacity");
+    navbar.value?.style.removeProperty("backdrop-filter");
+  }
 };
 
 onMounted(() => {
-	handleScroll();
+  handleScroll();
 
-	navbar.value = document.querySelector(".navbar");
-	window.addEventListener("scroll", handleScroll);
+  navbar.value = document.querySelector(".navbar");
+  window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-	window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("scroll", handleScroll);
 });
 </script>
 

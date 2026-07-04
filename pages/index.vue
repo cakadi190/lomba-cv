@@ -2,23 +2,23 @@
 // SEO META
 const title = computed(() => "Beranda");
 const description = computed(
-	() =>
-		`Seorang Fullstack Web Developer yang berbasis di Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang berbau teknologi.`,
+  () =>
+    `Seorang Fullstack Web Developer yang berbasis di Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang berbau teknologi.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 </script>
 

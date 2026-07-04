@@ -191,161 +191,161 @@
 
 <script lang="ts" setup>
 import {
-	enterSlideFromBottomToTop,
-	enterSlideFromLeftToRight,
-	initialSlideFromBottomToTop,
-	initialSlideFromLeftToRight,
+  enterSlideFromBottomToTop,
+  enterSlideFromLeftToRight,
+  initialSlideFromBottomToTop,
+  initialSlideFromLeftToRight,
 } from "~/components/motion";
 
 // SEO META
 const title = computed(() => "Pendidikan dan Organisasi");
 const description = computed(
-	() =>
-		`Daftar riwayat pendidikan saya, yang mana saya tampilkan daftar tempat saya bersekolah dan menempuh pendidikan. Serta saya telah mengikuti kegiatan apa saja.`,
+  () =>
+    `Daftar riwayat pendidikan saya, yang mana saya tampilkan daftar tempat saya bersekolah dan menempuh pendidikan. Serta saya telah mengikuti kegiatan apa saja.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
 // The Data
 const dateConverter = (date: string): string => {
-	const $dateInstance = new Date(date);
-	const $date = $dateInstance?.getDate();
-	const $month = $dateInstance?.getMonth();
-	const $year = $dateInstance?.getFullYear();
+  const $dateInstance = new Date(date);
+  const $date = $dateInstance?.getDate();
+  const $month = $dateInstance?.getMonth();
+  const $year = $dateInstance?.getFullYear();
 
-	const monthName = [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"Mei",
-		"Jun",
-		"Jul",
-		"Ags",
-		"Sep",
-		"Okt",
-		"Nov",
-		"Des",
-	];
+  const monthName = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mei",
+    "Jun",
+    "Jul",
+    "Ags",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Des",
+  ];
 
-	return `${$date} ${monthName[$month]} ${$year}`;
+  return `${$date} ${monthName[$month]} ${$year}`;
 };
 
 const organization = ref([
-	{
-		orgName: "UKM PALS",
-		desc: "Wakil Ketua 2",
-		period: "2024 - 2025",
-	},
-	{
-		orgName: "UKM PALS",
-		desc: "Divisi Kominfo",
-		period: "2023 - 2024",
-	},
-	{
-		orgName: "Dewan Kerja Daerah Jawa Timur",
-		desc: "Panitia Sangga Kerja Divisi Humas dan Publikasi",
-		period: "2022 - 2023",
-	},
-	{
-		orgName: "Humas Dewan Kerja Nasional",
-		desc: "Divisi Website",
-		period: "2022 - 2023",
-	},
-	{
-		orgName: "Winscout SMASA Ngawi",
-		desc: "Bidang Bimbingan Dan Pengembangan (HUMAS dan Publikasi)",
-		period: "2021 - 2022",
-	},
-	{
-		orgName: "Artesis SMASA NGAWI",
-		desc: "Bidang Humas dan Teknologi Informasi dan Publikasi",
-		period: "2021 - 2022",
-	},
-	{
-		orgName: "Dewan Penggalang SMP Negeri 1 Padas",
-		desc: "Divisi Perlengkapan dan Persiapan Kegiatan",
-		period: "2016 - 2017",
-	},
+  {
+    orgName: "UKM PALS",
+    desc: "Wakil Ketua 2",
+    period: "2024 - 2025",
+  },
+  {
+    orgName: "UKM PALS",
+    desc: "Divisi Kominfo",
+    period: "2023 - 2024",
+  },
+  {
+    orgName: "Dewan Kerja Daerah Jawa Timur",
+    desc: "Panitia Sangga Kerja Divisi Humas dan Publikasi",
+    period: "2022 - 2023",
+  },
+  {
+    orgName: "Humas Dewan Kerja Nasional",
+    desc: "Divisi Website",
+    period: "2022 - 2023",
+  },
+  {
+    orgName: "Winscout SMASA Ngawi",
+    desc: "Bidang Bimbingan Dan Pengembangan (HUMAS dan Publikasi)",
+    period: "2021 - 2022",
+  },
+  {
+    orgName: "Artesis SMASA NGAWI",
+    desc: "Bidang Humas dan Teknologi Informasi dan Publikasi",
+    period: "2021 - 2022",
+  },
+  {
+    orgName: "Dewan Penggalang SMP Negeri 1 Padas",
+    desc: "Divisi Perlengkapan dan Persiapan Kegiatan",
+    period: "2016 - 2017",
+  },
 ]);
 
 const education = ref([
-	{
-		name: "Politeknik Negeri Madiun",
-		logo: "/images/education/pnm.png",
-		web: "https://www.pnm.ac.id",
-		level: "university",
-		grade: "Diploma 3 (D3)",
-		departement: "Teknik",
-		study_program: "Teknologi Informasi",
-		start: "2022-07-12",
-		end: "2026-02-15",
-		place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
-	},
-	{
-		name: "SMA Negeri 1 Ngawi",
-		logo: "/images/education/smasa.png",
-		web: "https://www.sman1ngawi.sch.id",
-		level: "shs",
-		grade: null,
-		departement: "Matematika dan IPA",
-		study_program: null,
-		start: "2018-07-12",
-		end: "2021-03-17",
-		place:
-			"Jl. Ahmad Yani No.45, Wareng, Beran, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63216",
-	},
-	{
-		name: "SMP Negeri 1 Padas",
-		logo: null,
-		web: null,
-		level: "jhs",
-		grade: null,
-		departement: null,
-		study_program: null,
-		start: "2015-07-12",
-		end: "2018-03-17",
-		place:
-			"Jl. Raya Padas-Ngawi, Padas I, Padas, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
-	},
-	{
-		name: "SD Negeri Munggut 1",
-		logo: null,
-		web: null,
-		level: "es",
-		grade: null,
-		departement: null,
-		study_program: null,
-		start: "2009-07-12",
-		end: "2015-06-17",
-		place:
-			"Jl. A. Yani No.35, Munggut, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
-	},
-	{
-		name: "TPQ Al-Falahiyyah",
-		logo: null,
-		web: null,
-		level: "kg",
-		grade: null,
-		departement: null,
-		study_program: null,
-		start: "2007-05-21",
-		end: "2009-03-17",
-		place: "Tangerang, Banten",
-	},
+  {
+    name: "Politeknik Negeri Madiun",
+    logo: "/images/education/pnm.png",
+    web: "https://www.pnm.ac.id",
+    level: "university",
+    grade: "Diploma 3 (D3)",
+    departement: "Teknik",
+    study_program: "Teknologi Informasi",
+    start: "2022-07-12",
+    end: "2026-02-15",
+    place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
+  },
+  {
+    name: "SMA Negeri 1 Ngawi",
+    logo: "/images/education/smasa.png",
+    web: "https://www.sman1ngawi.sch.id",
+    level: "shs",
+    grade: null,
+    departement: "Matematika dan IPA",
+    study_program: null,
+    start: "2018-07-12",
+    end: "2021-03-17",
+    place:
+      "Jl. Ahmad Yani No.45, Wareng, Beran, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63216",
+  },
+  {
+    name: "SMP Negeri 1 Padas",
+    logo: null,
+    web: null,
+    level: "jhs",
+    grade: null,
+    departement: null,
+    study_program: null,
+    start: "2015-07-12",
+    end: "2018-03-17",
+    place:
+      "Jl. Raya Padas-Ngawi, Padas I, Padas, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+  },
+  {
+    name: "SD Negeri Munggut 1",
+    logo: null,
+    web: null,
+    level: "es",
+    grade: null,
+    departement: null,
+    study_program: null,
+    start: "2009-07-12",
+    end: "2015-06-17",
+    place:
+      "Jl. A. Yani No.35, Munggut, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+  },
+  {
+    name: "TPQ Al-Falahiyyah",
+    logo: null,
+    web: null,
+    level: "kg",
+    grade: null,
+    departement: null,
+    study_program: null,
+    start: "2007-05-21",
+    end: "2009-03-17",
+    place: "Tangerang, Banten",
+  },
 ]);
 </script>
 

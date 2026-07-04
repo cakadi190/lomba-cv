@@ -12,13 +12,13 @@ const databaseType = process.env.DATABASE_TYPE;
  * @function
  */
 const disableForeignKeys = async () => {
-	if (databaseType === "postgresql") {
-		await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL DEFERRED;");
-	} else if (databaseType === "mysql") {
-		await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 0;");
-	} else if (databaseType === "sqlite") {
-		await prisma.$executeRawUnsafe("PRAGMA foreign_keys = OFF;");
-	}
+  if (databaseType === "postgresql") {
+    await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL DEFERRED;");
+  } else if (databaseType === "mysql") {
+    await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 0;");
+  } else if (databaseType === "sqlite") {
+    await prisma.$executeRawUnsafe("PRAGMA foreign_keys = OFF;");
+  }
 };
 
 /**
@@ -29,13 +29,13 @@ const disableForeignKeys = async () => {
  * @function
  */
 const enableForeignKeys = async () => {
-	if (databaseType === "postgresql") {
-		await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL IMMEDIATE;");
-	} else if (databaseType === "mysql") {
-		await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 1;");
-	} else if (databaseType === "sqlite") {
-		await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON;");
-	}
+  if (databaseType === "postgresql") {
+    await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL IMMEDIATE;");
+  } else if (databaseType === "mysql") {
+    await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 1;");
+  } else if (databaseType === "sqlite") {
+    await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON;");
+  }
 };
 
 /**
@@ -48,16 +48,16 @@ const enableForeignKeys = async () => {
  * @throws Will throw an error if the table does not exist or cannot be truncated.
  */
 export const truncateTable = async (tableName: TableName): Promise<void> => {
-	const models = Object.keys(prisma) as TableName[];
+  const models = Object.keys(prisma) as TableName[];
 
-	if (!models.includes(tableName)) {
-		throw new Error(
-			`Table ${tableName as string} does not exist or cannot be truncated.`,
-		);
-	}
+  if (!models.includes(tableName)) {
+    throw new Error(
+      `Table ${tableName as string} does not exist or cannot be truncated.`,
+    );
+  }
 
-	await disableForeignKeys();
-	// biome-ignore lint/suspicious/noExplicitAny: dynamic client model invocation
-	await (prisma[tableName] as any).deleteMany({});
-	await enableForeignKeys();
+  await disableForeignKeys();
+  // biome-ignore lint/suspicious/noExplicitAny: dynamic client model invocation
+  await (prisma[tableName] as any).deleteMany({});
+  await enableForeignKeys();
 };

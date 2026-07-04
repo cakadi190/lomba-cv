@@ -1,36 +1,36 @@
 {
-	// https://nuxt.com/docs/guide/concepts/typescript
-	"compilerOptions": {
-		"target": "ES2019",
-		"module": "ES2022",
-		"strict": true,
-		"moduleResolution": "Bundler",
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"allowImportingTsExtensions": true,
-		"strictNullChecks": false,
-		"forceConsistentCasingInFileNames": true,
-		"outDir": "./dist",
-		"types": ["node"]
-	},
-	"extends": "./.nuxt/tsconfig.json",
-	"include": [
-		"prisma/**/*.ts",
-		".nuxt",
-		".",
-		"./.nuxt/nuxt.d.ts",
-		"...config/nuxt.*",
-		"./**/*",
-		"./../../www-nod/runtime",
-		"./node_modules/@nuxt/image/runtime",
-		"./node_modules/nuxt-swiper/runtime",
-		"./node_modules/nuxt-svgo/runtime",
-		"./node_modules/@vesp/nuxt-fontawesome/runtime",
-		"./node_modules/@nuxtjs/color-mode/runtime",
-		"./node_modules/nuxt-icon/runtime",
-		"./node_modules/@nuxtjs/google-fonts/runtime",
-		"./node_modules/@nuxt/devtools/runtime",
-		"./node_modules/@nuxt/telemetry/runtime"
-	],
-	"exclude": ["node_modules"]
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ES2022",
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "types": ["node"]
+  },
+  "extends": "./.nuxt/tsconfig.json",
+  "include": [
+    "prisma/**/*.ts",
+    ".nuxt",
+    ".",
+    "./.nuxt/nuxt.d.ts",
+    "...config/nuxt.*",
+    "./**/*",
+    "./../../www-nod/runtime",
+    "./node_modules/@nuxt/image/runtime",
+    "./node_modules/nuxt-swiper/runtime",
+    "./node_modules/nuxt-svgo/runtime",
+    "./node_modules/@vesp/nuxt-fontawesome/runtime",
+    "./node_modules/@nuxtjs/color-mode/runtime",
+    "./node_modules/nuxt-icon/runtime",
+    "./node_modules/@nuxtjs/google-fonts/runtime",
+    "./node_modules/@nuxt/devtools/runtime",
+    "./node_modules/@nuxt/telemetry/runtime"
+  ],
+  "exclude": ["node_modules"]
 }

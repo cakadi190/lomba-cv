@@ -5,10 +5,10 @@
  * @returns {string} Teks yang dipotong.
  */
 export const limitWords = (text: string, limit: number): string => {
-	return (
-		text.split(" ").slice(0, limit).join(" ") +
-		(text.split(" ").length > limit ? "..." : "")
-	);
+  return (
+    text.split(" ").slice(0, limit).join(" ") +
+    (text.split(" ").length > limit ? "..." : "")
+  );
 };
 
 /**
@@ -18,7 +18,7 @@ export const limitWords = (text: string, limit: number): string => {
  * @returns {string} Teks yang dipotong.
  */
 export const limitChars = (text: string, limit: number): string => {
-	return text.slice(0, limit) + (text.length > limit ? "..." : "");
+  return text.slice(0, limit) + (text.length > limit ? "..." : "");
 };
 
 /**
@@ -28,10 +28,10 @@ export const limitChars = (text: string, limit: number): string => {
  * @returns {string} Teks yang dipotong.
  */
 export const limitLines = (text: string, limit: number): string => {
-	return (
-		text.split("\n").slice(0, limit).join("\n") +
-		(text.split("\n").length > limit ? "..." : "")
-	);
+  return (
+    text.split("\n").slice(0, limit).join("\n") +
+    (text.split("\n").length > limit ? "..." : "")
+  );
 };
 
 /**
@@ -41,14 +41,14 @@ export const limitLines = (text: string, limit: number): string => {
  * @returns {string} Teks yang dipotong.
  */
 export const truncate = (
-	str: string,
-	limit: number,
-	end: string = "...",
+  str: string,
+  limit: number,
+  end: string = "...",
 ): string => {
-	if (str.length <= limit) {
-		return str;
-	}
-	return str.substring(0, limit) + end;
+  if (str.length <= limit) {
+    return str;
+  }
+  return str.substring(0, limit) + end;
 };
 
 /**
@@ -57,8 +57,8 @@ export const truncate = (
  * @returns {string} Teks dengan huruf pertama yang diubah menjadi huruf besar.
  */
 export const capitalize = (text: string): string => {
-	if (text.length === 0) return text;
-	return text.charAt(0).toUpperCase() + text.slice(1);
+  if (text.length === 0) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
 };
 
 /**
@@ -67,8 +67,8 @@ export const capitalize = (text: string): string => {
  * @returns {string} Teks dengan semua huruf menjadi huruf kecil.
  */
 export const lowerCase = (text: string): string => {
-	if (text.length === 0) return text;
-	return text.toLowerCase();
+  if (text.length === 0) return text;
+  return text.toLowerCase();
 };
 
 /**
@@ -77,8 +77,8 @@ export const lowerCase = (text: string): string => {
  * @returns {string} Teks dengan semua huruf menjadi huruf besar.
  */
 export const upperCase = (text: string): string => {
-	if (text.length === 0) return text;
-	return text.toUpperCase();
+  if (text.length === 0) return text;
+  return text.toUpperCase();
 };
 
 /**
@@ -87,7 +87,7 @@ export const upperCase = (text: string): string => {
  * @returns {string} Teks tanpa spasi kosong di awal dan akhir.
  */
 export const trim = (text: string): string => {
-	return text.trim();
+  return text.trim();
 };
 
 /**
@@ -99,14 +99,14 @@ export const trim = (text: string): string => {
  * @returns {string} The formatted currency string.
  */
 export const formatCurrency = (
-	a: number,
-	c: string = "IDR",
-	l: string = "id-ID",
-	d: number = 2,
+  a: number,
+  c: string = "IDR",
+  l: string = "id-ID",
+  d: number = 2,
 ) =>
-	new Intl.NumberFormat(l, {
-		style: "currency",
-		currency: c,
-		minimumFractionDigits: d,
-		maximumFractionDigits: d,
-	}).format(a);
+  new Intl.NumberFormat(l, {
+    style: "currency",
+    currency: c,
+    minimumFractionDigits: d,
+    maximumFractionDigits: d,
+  }).format(a);

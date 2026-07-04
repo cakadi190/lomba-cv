@@ -66,113 +66,113 @@
 <script lang="ts" setup>
 import { differenceInDays } from "date-fns";
 import {
-	enterSlideFromBottomToTop,
-	initialSlideFromBottomToTop,
+  enterSlideFromBottomToTop,
+  initialSlideFromBottomToTop,
 } from "~/components/motion";
 
 // SEO META
 const title = computed(() => "Penghargaan");
 const description = computed(
-	() => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`,
+  () => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-	title,
-	ogTitle: title,
-	ogImage: image,
-	twitterImage: image,
-	twitterCard: "summary_large_image",
-	twitterTitle: title,
-	description,
-	ogDescription: description,
-	twitterDescription: description,
-	ogUrl: urlRequest.href,
+  title,
+  ogTitle: title,
+  ogImage: image,
+  twitterImage: image,
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogUrl: urlRequest.href,
 });
 
 // Rank Data
 const isAwardNew = computed(() => {
-	const now = new Date();
-	return awardsAndCertifications.value.map((award) => {
-		if (!award.date) return false;
-		const awardDate = new Date(award?.date as Date);
-		const daysDifference = differenceInDays(now, awardDate);
-		return daysDifference <= 30;
-	});
+  const now = new Date();
+  return awardsAndCertifications.value.map((award) => {
+    if (!award.date) return false;
+    const awardDate = new Date(award?.date as Date);
+    const daysDifference = differenceInDays(now, awardDate);
+    return daysDifference <= 30;
+  });
 });
 
 const rankColor = ref(["first", "second", "third"]);
 
 const awardsAndCertifications = ref([
-	{
-		event:
-			"Maroon Day - Universitas Teknologi Digital Indonesia (d/h STMIK AKAKOM Yogyakarta)",
-		award: "Web Design Competition - 3rd Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2024,
-		rank: 3,
-		date: "2024-05-25",
-	},
-	{
-		event: "NIFC - Universitas Muhammadiyah Riau",
-		award: "Web Design Competition - 5th Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2024,
-		rank: 5,
-		date: "2024-05-22",
-	},
-	{
-		event: "Fostifest - Universitas Muhammadiyah Surakarta",
-		award: "Web Design Competition - 3rd Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2023,
-		rank: 3,
-		date: "2023-10-29",
-	},
-	{
-		event: "BSDMP Kominfo Surabaya",
-		award: "Junior Web Developer Certification - Graduated (National)",
-		icon: "mdi:certificate",
-		year: 2023,
-	},
-	{
-		event: "ByTesFest - Universitas Sebelas Maret",
-		award: "Web Design Competition - 4th Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2022,
-		rank: 4,
-	},
-	{
-		event: "IntechFest - Politeknik Negeri Bali",
-		award: "Web Design Competition - 1st Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2021,
-		rank: 1,
-		date: "2021-10-03",
-	},
-	{
-		event: "Deptics - Universitas PGRI Madiun",
-		award: "Web Design Competition - 1st Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2021,
-		rank: 1,
-		date: "2020-03-20",
-	},
-	{
-		event: "ByTesFest - Universitas Sebelas Maret",
-		award: "Web Design Competition - 1st Place (National)",
-		icon: "fa6-solid:trophy",
-		year: 2020,
-		rank: 1,
-	},
-	{
-		event: "LDP 2020 - OSIS SMA Negeri 1 Ponorogo",
-		award: "Lomba Desain Poster 2020 - 3rd Place (East Java Regional)",
-		icon: "fa6-solid:trophy",
-		year: 2020,
-		rank: 3,
-	},
+  {
+    event:
+      "Maroon Day - Universitas Teknologi Digital Indonesia (d/h STMIK AKAKOM Yogyakarta)",
+    award: "Web Design Competition - 3rd Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2024,
+    rank: 3,
+    date: "2024-05-25",
+  },
+  {
+    event: "NIFC - Universitas Muhammadiyah Riau",
+    award: "Web Design Competition - 5th Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2024,
+    rank: 5,
+    date: "2024-05-22",
+  },
+  {
+    event: "Fostifest - Universitas Muhammadiyah Surakarta",
+    award: "Web Design Competition - 3rd Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2023,
+    rank: 3,
+    date: "2023-10-29",
+  },
+  {
+    event: "BSDMP Kominfo Surabaya",
+    award: "Junior Web Developer Certification - Graduated (National)",
+    icon: "mdi:certificate",
+    year: 2023,
+  },
+  {
+    event: "ByTesFest - Universitas Sebelas Maret",
+    award: "Web Design Competition - 4th Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2022,
+    rank: 4,
+  },
+  {
+    event: "IntechFest - Politeknik Negeri Bali",
+    award: "Web Design Competition - 1st Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2021,
+    rank: 1,
+    date: "2021-10-03",
+  },
+  {
+    event: "Deptics - Universitas PGRI Madiun",
+    award: "Web Design Competition - 1st Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2021,
+    rank: 1,
+    date: "2020-03-20",
+  },
+  {
+    event: "ByTesFest - Universitas Sebelas Maret",
+    award: "Web Design Competition - 1st Place (National)",
+    icon: "fa6-solid:trophy",
+    year: 2020,
+    rank: 1,
+  },
+  {
+    event: "LDP 2020 - OSIS SMA Negeri 1 Ponorogo",
+    award: "Lomba Desain Poster 2020 - 3rd Place (East Java Regional)",
+    icon: "fa6-solid:trophy",
+    year: 2020,
+    rank: 3,
+  },
 ]);
 </script>
 

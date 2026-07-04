@@ -8,28 +8,28 @@
 
 <script lang="ts">
 export default defineComponent({
-	name: "ErrorSection",
-	props: {
-		imgSrc: {
-			type: String,
-			required: true,
-		},
-		imgAlt: {
-			type: String,
-			required: true,
-		},
-		imgHeight: {
-			type: [String, Number] as PropType<string | number>,
-			required: true,
-		},
-		title: {
-			type: String,
-			required: true,
-		},
-		text: {
-			type: String,
-			required: true,
-		},
-	},
+  name: "ErrorSection",
+  props: {
+    imgSrc: {
+      type: String,
+      required: true,
+    },
+    imgAlt: {
+      type: String,
+      required: true,
+    },
+    imgHeight: {
+      type: [String, Number] as PropType<string | number>,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>

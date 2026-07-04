@@ -34,44 +34,44 @@ defineOptions({ name: "BsDropdown" });
 const refId = ref(generateRandomString(16));
 
 const props = withDefaults(
-	defineProps<{
-		modelValue: string;
-		options: Option[];
-		size?: "sm" | "md" | "lg" | "xl";
-		placeholder?: string;
-		variant?:
-			| "primary"
-			| "secondary"
-			| "success"
-			| "danger"
-			| "warning"
-			| "info"
-			| "light"
-			| "dark"
-			| "link";
-	}>(),
-	{
-		size: "md",
-		placeholder: "Pilih opsi dibawah ini.",
-		variant: "link",
-	},
+  defineProps<{
+    modelValue: string;
+    options: Option[];
+    size?: "sm" | "md" | "lg" | "xl";
+    placeholder?: string;
+    variant?:
+      | "primary"
+      | "secondary"
+      | "success"
+      | "danger"
+      | "warning"
+      | "info"
+      | "light"
+      | "dark"
+      | "link";
+  }>(),
+  {
+    size: "md",
+    placeholder: "Pilih opsi dibawah ini.",
+    variant: "link",
+  },
 );
 
 const emit = defineEmits(["update:modelValue"]);
 
 const selectedLabel = computed(() => {
-	const selectedOption = props.options.find(
-		(option) => option.value === props.modelValue,
-	);
-	return selectedOption ? selectedOption.label : props.placeholder;
+  const selectedOption = props.options.find(
+    (option) => option.value === props.modelValue,
+  );
+  return selectedOption ? selectedOption.label : props.placeholder;
 });
 
 function selectOption(option: Option) {
-	emit("update:modelValue", option.value);
+  emit("update:modelValue", option.value);
 }
 
 function isSelected(option: Option): boolean {
-	return option.value === props.modelValue;
+  return option.value === props.modelValue;
 }
 </script>
 

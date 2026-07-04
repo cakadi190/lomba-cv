@@ -245,7 +245,7 @@ const careerDev = ref("2019-05-20");
 const dateNow = dayjs();
 
 const countCareerStart = computed(() =>
-	dateNow.diff(careerStart.value, "years"),
+  dateNow.diff(careerStart.value, "years"),
 );
 const countCareerDev = computed(() => dateNow.diff(careerDev.value, "years"));
 
@@ -255,75 +255,75 @@ const SwiperEffectCreative = EffectCreative;
 // Motion animation variants
 const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
 const enterSlideFromBottomToTop = {
-	opacity: 1,
-	y: 0,
-	transition: { duration: 600 },
+  opacity: 1,
+  y: 0,
+  transition: { duration: 600 },
 };
 
 const initialSlideFromLeftToRight = { opacity: 0, x: -40 };
 const enterSlideFromLeftToRight = {
-	opacity: 1,
-	x: 0,
-	transition: { duration: 600 },
+  opacity: 1,
+  x: 0,
+  transition: { duration: 600 },
 };
 
 const initialSlideFromRightToLeft = { opacity: 0, x: 40 };
 const enterSlideFromRightToLeft = {
-	opacity: 1,
-	x: 0,
-	transition: { duration: 600 },
+  opacity: 1,
+  x: 0,
+  transition: { duration: 600 },
 };
 
 // Data Fetching from Server
 const {
-	data: totalProjects,
-	error,
-	status,
+  data: totalProjects,
+  error,
+  status,
 } = useFetch<any>(`/api/portofolios`, {
-	method: "GET",
-	transform: (a) => a?.totalData,
-	server: true,
-	lazy: false,
+  method: "GET",
+  transform: (a) => a?.totalData,
+  server: true,
+  lazy: false,
 });
 
 const skillset = ref([
-	{ icon: "devicon:laravel", name: "Laravel" },
-	{ icon: "devicon:nodejs", name: "NodeJS" },
-	{ icon: "devicon:python", name: "Python" },
-	{ icon: "devicon:java", name: "Java" },
-	{ icon: "devicon:dart", name: "Dart" },
-	{ icon: "devicon:kotlin", name: "Kotlin" },
-	{ icon: "devicon:express", name: "ExpressJS" },
-	{ icon: "devicon:go", name: "GoLang" },
-	{ icon: "devicon:adonisjs", name: "AdonisJS" },
-	{ icon: "devicon:vitejs", name: "ViteJS" },
-	{ icon: "devicon:mysql", name: "MySQL" },
-	{ icon: "devicon:mariadb", name: "MariaDB" },
-	{ icon: "devicon:mongodb", name: "MongoDB" },
-	{ icon: "devicon:sqlite", name: "SQLite" },
-	{ icon: "devicon:flutter", name: "Flutter" },
-	{ icon: "devicon:vercel", name: "Vercel" },
-	{ icon: "devicon:php", name: "PHP" },
-	{ icon: "devicon:html5", name: "HTML" },
-	{ icon: "devicon:css3", name: "CSS" },
-	{ icon: "devicon:javascript", name: "Javascript" },
-	{ icon: "devicon:vuejs", name: "VueJS" },
-	{ icon: "devicon:bootstrap", name: "Bootstrap" },
-	{ icon: "devicon:tailwindcss", name: "TailwindCSS" },
-	{ icon: "devicon:angular", name: "AngularJS" },
-	{ icon: "devicon:jquery", name: "jQuery" },
-	{ icon: "devicon:typescript", name: "Typescript" },
-	{ icon: "devicon:git", name: "Git" },
-	{ icon: "devicon:figma", name: "Figma" },
-	{ icon: "logos:adobe-illustrator", name: "Adobe Illustrator" },
-	{ icon: "devicon:canva", name: "Canva" },
-	{ icon: "logos:adobe-photoshop", name: "Adobe Photoshop" },
-	{ icon: "logos:visual-studio-code", name: "Visual Studio Code" },
-	{ icon: "file-icons:coreldraw", name: "CorelDraw" },
+  { icon: "devicon:laravel", name: "Laravel" },
+  { icon: "devicon:nodejs", name: "NodeJS" },
+  { icon: "devicon:python", name: "Python" },
+  { icon: "devicon:java", name: "Java" },
+  { icon: "devicon:dart", name: "Dart" },
+  { icon: "devicon:kotlin", name: "Kotlin" },
+  { icon: "devicon:express", name: "ExpressJS" },
+  { icon: "devicon:go", name: "GoLang" },
+  { icon: "devicon:adonisjs", name: "AdonisJS" },
+  { icon: "devicon:vitejs", name: "ViteJS" },
+  { icon: "devicon:mysql", name: "MySQL" },
+  { icon: "devicon:mariadb", name: "MariaDB" },
+  { icon: "devicon:mongodb", name: "MongoDB" },
+  { icon: "devicon:sqlite", name: "SQLite" },
+  { icon: "devicon:flutter", name: "Flutter" },
+  { icon: "devicon:vercel", name: "Vercel" },
+  { icon: "devicon:php", name: "PHP" },
+  { icon: "devicon:html5", name: "HTML" },
+  { icon: "devicon:css3", name: "CSS" },
+  { icon: "devicon:javascript", name: "Javascript" },
+  { icon: "devicon:vuejs", name: "VueJS" },
+  { icon: "devicon:bootstrap", name: "Bootstrap" },
+  { icon: "devicon:tailwindcss", name: "TailwindCSS" },
+  { icon: "devicon:angular", name: "AngularJS" },
+  { icon: "devicon:jquery", name: "jQuery" },
+  { icon: "devicon:typescript", name: "Typescript" },
+  { icon: "devicon:git", name: "Git" },
+  { icon: "devicon:figma", name: "Figma" },
+  { icon: "logos:adobe-illustrator", name: "Adobe Illustrator" },
+  { icon: "devicon:canva", name: "Canva" },
+  { icon: "logos:adobe-photoshop", name: "Adobe Photoshop" },
+  { icon: "logos:visual-studio-code", name: "Visual Studio Code" },
+  { icon: "file-icons:coreldraw", name: "CorelDraw" },
 ]);
 
 useHead({
-	title: "Tentang Saya",
+  title: "Tentang Saya",
 });
 </script>
 
