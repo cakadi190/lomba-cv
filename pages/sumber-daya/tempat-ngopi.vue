@@ -16,7 +16,7 @@
             <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Klaten</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Yogyakarta</nuxt-link>
+            <nuxt-link class="btn btn-outline-primary">Kota Yogyakarta</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Kota Madiun</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Malang</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Kota Semarang</nuxt-link>
