@@ -49,6 +49,28 @@ export default defineNuxtConfig({
     "nuxt-skew-protection",
   ],
 
+  image: {
+    inject: true,
+    quality: 80,
+    format: ["webp", "avif"],
+    screens: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      "2xl": 1536,
+    },
+    domains: ["cakadi.eu.org", "cdn.cakadi.eu.org", "images.unsplash.com"],
+    densities: [1, 2, 3],
+    alias: {
+      cdn: "cdn.cakadi.eu.org",
+      unsplash: "https://images.unsplash.com",
+    },
+    cloudflare: {
+      baseURL: "https://cdn.cakadi.eu.org",
+    },
+  },
+
   site: {
     url: "https://v3.masadi.net",
   },
