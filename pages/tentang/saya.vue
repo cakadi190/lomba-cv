@@ -49,7 +49,7 @@
 										class="card card-body rounded-4 p-4 text-center align-items-center text-decoration-none"
 									>
 										<Icon name="fa6-solid:briefcase" size="48" />
-										<strong class="h3 mb-0 pt-3">{{ totalProjects }}</strong>
+										<strong class="h3 mb-0 pt-3">{{ totalProjects ?? 0 }}</strong>
 										<span>Proyek</span>
 									</nuxt-link>
 								</div>
