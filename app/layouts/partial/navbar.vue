@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { route } from '~/lib/route';
+import { route } from '~~/lib/route';
 
 defineOptions({ name: "NavbarMain" });
 

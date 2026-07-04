@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { route } from '~/lib/route';
-
+import { route } from '~~/lib/route';
 </script>
 
 <template>
