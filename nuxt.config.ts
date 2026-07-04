@@ -54,6 +54,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
+    hostname: "https://v3.masadi.net",
     exclude: ["/admin/**"],
     autoAlternativeAliases: true,
     autoI18n: true,

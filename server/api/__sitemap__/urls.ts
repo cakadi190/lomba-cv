@@ -42,6 +42,7 @@ export default defineSitemapEventHandler(async () => {
     return {
       loc: route("portfolios.show", portfolio.slug),
       lastmod: portfolio.updated_at,
+      gzip: true,
       images: images.length > 0 ? images : undefined,
     };
   });
