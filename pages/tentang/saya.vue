@@ -158,19 +158,21 @@
 								Beberapa sertifikat yang sudah dan pernah saya dapatkan.
 							</p>
 
-							<swiper
-								:modules="[SwiperAutoplay, SwiperEffectCreative]"
-								:slides-per-view="2"
-								:loop="true"
-								:space-between="16"
-							>
-								<swiper-slide v-for="slide in 10" :key="slide">
-									<div
-										style="background-color: rgba(255, 255, 255, 0.1)"
-										class="ratio ratio-16x9 rounded-4"
-									></div>
-								</swiper-slide>
-							</swiper>
+							<ClientOnly>
+								<swiper-container
+									:modules="[SwiperAutoplay, SwiperEffectCreative]"
+									:slides-per-view="2"
+									:loop="true"
+									:space-between="16"
+								>
+									<swiper-slide v-for="slide in 10" :key="slide">
+										<div
+											style="background-color: rgba(255, 255, 255, 0.1)"
+											class="ratio ratio-16x9 rounded-4"
+										></div>
+									</swiper-slide>
+								</swiper-container>
+							</ClientOnly>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -257,21 +259,21 @@ const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
 const enterSlideFromBottomToTop = {
   opacity: 1,
   y: 0,
-  transition: { duration: 600 },
+  transition: { duration: 0.6 },
 };
 
 const initialSlideFromLeftToRight = { opacity: 0, x: -40 };
 const enterSlideFromLeftToRight = {
   opacity: 1,
   x: 0,
-  transition: { duration: 600 },
+  transition: { duration: 0.6 },
 };
 
 const initialSlideFromRightToLeft = { opacity: 0, x: 40 };
 const enterSlideFromRightToLeft = {
   opacity: 1,
   x: 0,
-  transition: { duration: 600 },
+  transition: { duration: 0.6 },
 };
 
 // Data Fetching from Server
@@ -304,6 +306,7 @@ const skillset = ref([
   { icon: "devicon:flutter", name: "Flutter" },
   { icon: "devicon:vercel", name: "Vercel" },
   { icon: "devicon:php", name: "PHP" },
+  { icon: "devicon:go", name: "Golang" },
   { icon: "devicon:html5", name: "HTML" },
   { icon: "devicon:css3", name: "CSS" },
   { icon: "devicon:javascript", name: "Javascript" },

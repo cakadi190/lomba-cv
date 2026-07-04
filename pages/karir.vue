@@ -67,7 +67,7 @@ const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
 const enterSlideFromBottomToTop = {
   opacity: 1,
   y: 0,
-  transition: { duration: 600 },
+  transition: { duration: 0.6 },
 };
 
 const careerExp = ref([
