@@ -3,6 +3,9 @@ import prisma from "~~/lib/prisma";
 // biome-ignore lint/suspicious/noExplicitAny: helper to convert BigInt in dynamic objects
 const convertBigInt = (obj: any): any => {
   if (typeof obj !== "object" || obj === null) return obj;
+  if (Array.isArray(obj)) {
+    return obj.map((item) => convertBigInt(item));
+  }
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
       key,
