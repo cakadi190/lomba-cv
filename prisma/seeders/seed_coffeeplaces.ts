@@ -10,9 +10,9 @@ import {
   Open10To23,
   Open13To22,
   Open24Hours,
-} from "../../components/time.ts";
-import prisma from "../../lib/prisma.ts";
-import { truncateTable } from "./util/truncate_tables.ts";
+} from "../../app/components/time.js";
+import prisma from "../../lib/prisma.js";
+import { truncateTable } from "./util/truncate_tables.js";
 
 const imagePath = (imageName: string) =>
   `/images/coffee-shops/${imageName}.webp`;

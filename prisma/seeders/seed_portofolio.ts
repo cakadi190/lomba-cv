@@ -5,9 +5,9 @@ import {
   laravelFullstackNonSPABootstrap,
   nuxt,
   php,
-} from "../../components/techstack.ts";
-import prisma from "../../lib/prisma.ts";
-import { truncateTable } from "./util/truncate_tables.ts";
+} from "../../app/components/techstack.js";
+import prisma from "../../lib/prisma.js";
+import { truncateTable } from "./util/truncate_tables.js";
 
 interface PortfolioItem {
   name: string;

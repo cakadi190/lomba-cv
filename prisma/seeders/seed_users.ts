@@ -1,6 +1,6 @@
-import prisma from "../../lib/prisma.ts";
-import { hashPassword } from "../../server/utils/auth.ts";
-import { truncateTable } from "./util/truncate_tables.ts";
+import prisma from "../../lib/prisma.js";
+import { hashPassword } from "../../server/utils/auth.js";
+import { truncateTable } from "./util/truncate_tables.js";
 
 async function seedUsers() {
   await truncateTable("user");

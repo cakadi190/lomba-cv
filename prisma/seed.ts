@@ -1,16 +1,16 @@
 import "dotenv/config";
-import prisma from "../lib/prisma.ts";
+import prisma from "../lib/prisma.js";
 
-import seedAwards from "./seeders/seed_awards.ts";
-import seedCareers from "./seeders/seed_careers.ts";
-import seedCoffeePlaces from "./seeders/seed_coffeeplaces.ts";
-import seedEducations from "./seeders/seed_educations.ts";
-import seedOrganizations from "./seeders/seed_organizations.ts";
-import seedPortofolio from "./seeders/seed_portofolio.ts";
-import seedPortofolioCategories from "./seeders/seed_portofolio_categories.ts";
-import seedPortofolioCategoryLinks from "./seeders/seed_portofolio_category.ts";
-import seedUsers from "./seeders/seed_users.ts";
-import { truncateTable } from "./seeders/util/truncate_tables.ts";
+import seedAwards from "./seeders/seed_awards.js";
+import seedCareers from "./seeders/seed_careers.js";
+import seedCoffeePlaces from "./seeders/seed_coffeeplaces.js";
+import seedEducations from "./seeders/seed_educations.js";
+import seedOrganizations from "./seeders/seed_organizations.js";
+import seedPortofolio from "./seeders/seed_portofolio.js";
+import seedPortofolioCategories from "./seeders/seed_portofolio_categories.js";
+import seedPortofolioCategoryLinks from "./seeders/seed_portofolio_category.js";
+import seedUsers from "./seeders/seed_users.js";
+import { truncateTable } from "./seeders/util/truncate_tables.js";
 
 async function main() {
   try {

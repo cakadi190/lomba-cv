@@ -1,5 +1,5 @@
 import type { PrismaClient } from "@prisma/client";
-import prisma from "../../../lib/prisma.ts";
+import prisma from "../../../lib/prisma.js";
 
 type TableName = keyof PrismaClient;
 const databaseType = process.env.DATABASE_TYPE;

@@ -1,5 +1,5 @@
-import prisma from "../../lib/prisma.ts";
-import { truncateTable } from "./util/truncate_tables.ts";
+import prisma from "../../lib/prisma.js";
+import { truncateTable } from "./util/truncate_tables.js";
 
 interface Education {
   name: string;
