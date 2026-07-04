@@ -55,6 +55,7 @@ defineProps<{
 <style scoped lang="scss">
 #masthead {
 	position: relative;
+	overflow: hidden;
 
 	&::before {
 		content: "";

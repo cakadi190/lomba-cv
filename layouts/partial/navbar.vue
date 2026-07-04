@@ -80,6 +80,8 @@
 </template>
 
 <script lang="ts" setup>
+defineOptions({ name: "NavbarMain" });
+
 const navbar = ref<HTMLElement | null>(null);
 
 const colorMode = useColorMode();
@@ -109,7 +111,7 @@ const applyTheme = (themes: string) => {
 		if (logoElement) {
 			logoElement.setAttribute(
 				"src",
-				`/images/brands/logo-${themes === "light" ? "color" : "white"}-long.svg`
+				`/images/brands/logo-${themes === "light" ? "color" : "white"}-long.svg`,
 			);
 		}
 	});
@@ -158,12 +160,6 @@ onMounted(() => {
 
 onUnmounted(() => {
 	window.removeEventListener("scroll", handleScroll);
-});
-</script>
-
-<script lang="ts">
-export default defineComponent({
-	name: "NavbarMain",
 });
 </script>
 

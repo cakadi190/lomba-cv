@@ -27,12 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-</script>
-
-<script lang="ts">
-export default defineComponent({
-	name: "ElukslaSection",
-});
+defineOptions({ name: "ElukslaSection" });
 </script>
 
 <style lang="scss" scoped>

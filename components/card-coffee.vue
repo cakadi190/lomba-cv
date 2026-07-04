@@ -1,9 +1,4 @@
 <script lang="ts" setup>
-import {
-	initialSlideFromBottomToTop,
-	enterSlideFromBottomToTop,
-} from "./motion";
-
 defineProps<{
 	data: any;
 }>();

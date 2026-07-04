@@ -74,7 +74,7 @@
 </template>
 
 <script lang="ts" setup>
-import bsDropdown from "~/components/bs-dropdown.vue";
+defineOptions({ name: "FormContact" });
 
 const selectedValue = ref("");
 const options = ref<Option[]>([
@@ -89,12 +89,6 @@ const options = ref<Option[]>([
 	{ value: "general", label: "Ingin Bertanya Hal Umum" },
 	{ value: "others", label: "Hal Lainnya" },
 ]);
-</script>
-
-<script lang="ts">
-export default defineComponent({
-	name: "FormContact",
-});
 </script>
 
 <style scoped lang="scss">

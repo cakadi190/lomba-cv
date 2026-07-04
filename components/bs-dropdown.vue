@@ -29,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({ name: "BsDropdown" });
+
 const refId = ref(generateRandomString(16));
 
 const props = withDefaults(
@@ -52,14 +54,14 @@ const props = withDefaults(
 		size: "md",
 		placeholder: "Pilih opsi dibawah ini.",
 		variant: "link",
-	}
+	},
 );
 
 const emit = defineEmits(["update:modelValue"]);
 
 const selectedLabel = computed(() => {
 	const selectedOption = props.options.find(
-		(option) => option.value === props.modelValue
+		(option) => option.value === props.modelValue,
 	);
 	return selectedOption ? selectedOption.label : props.placeholder;
 });
@@ -71,12 +73,6 @@ function selectOption(option: Option) {
 function isSelected(option: Option): boolean {
 	return option.value === props.modelValue;
 }
-</script>
-
-<script lang="ts">
-export default defineComponent({
-	name: "BsDropdown",
-});
 </script>
 
 <style lang="scss" scoped>

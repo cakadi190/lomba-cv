@@ -104,7 +104,7 @@ const page = computed({
 // SEO META
 const title = computed(() => `Daftar Tempat Ngopi`);
 const description = computed(
-	() => `Berikut daftar tempat ngopi yang saya rekomendasikan.`
+	() => `Berikut daftar tempat ngopi yang saya rekomendasikan.`,
 );
 const image = computed(() => "/images/meta-image.png");
 

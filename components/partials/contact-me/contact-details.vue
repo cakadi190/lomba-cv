@@ -126,13 +126,11 @@
 	</section>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-	name: "ContactDetails",
-});
-</script>
-
 <script lang="ts" setup>
+import { convertToWhatsAppLink } from "~/utils/strings";
+
+defineOptions({ name: "ContactDetails" });
+
 const email: Ref<string> = ref("me@cakadi.id");
 const altEmail: Ref<string> = ref("cakadi190@gmail.com");
 const phone: Ref<string> = ref("081333550746");

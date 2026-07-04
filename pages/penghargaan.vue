@@ -64,31 +64,31 @@
 </template>
 
 <script lang="ts" setup>
+import { differenceInDays } from "date-fns";
 import {
 	initialSlideFromBottomToTop,
 	enterSlideFromBottomToTop,
 } from "~/components/motion";
-import { differenceInDays } from "date-fns";
 
 // SEO META
 const title = computed(() => "Penghargaan");
 const description = computed(
-  () => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`
+	() => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+	title,
+	ogTitle: title,
+	ogImage: image,
+	twitterImage: image,
+	twitterCard: "summary_large_image",
+	twitterTitle: title,
+	description,
+	ogDescription: description,
+	twitterDescription: description,
+	ogUrl: urlRequest.href,
 });
 
 // Rank Data

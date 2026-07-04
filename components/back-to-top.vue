@@ -12,27 +12,28 @@
 </template>
 
 <script lang="ts" setup>
+defineOptions({ name: "BackToTop" });
+
 const showButton = ref(false);
 
 const checkScroll = () => {
-  showButton.value = window.scrollY > 50;
+	showButton.value = window.scrollY > 50;
+};
+
+const scrollToTop = () => {
+	window.scrollTo({
+		top: 0,
+		behavior: "smooth",
+	});
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', checkScroll);
+	window.addEventListener("scroll", checkScroll);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkScroll);
+	window.removeEventListener("scroll", checkScroll);
 });
-</script>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'BackToTop'
-})
 </script>
 
 <style lang="scss">

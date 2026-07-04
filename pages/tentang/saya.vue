@@ -235,15 +235,8 @@
 </template>
 
 <script lang="ts" setup>
-import {
-	initialSlideFromBottomToTop,
-	enterSlideFromBottomToTop,
-	initialSlideFromLeftToRight,
-	enterSlideFromLeftToRight,
-	initialSlideFromRightToLeft,
-	enterSlideFromRightToLeft,
-} from "~/components/motion";
 import "dayjs/locale/id";
+import { Autoplay, EffectCreative } from "swiper/modules";
 
 const dayjs = useDayjs();
 dayjs.locale("id");
@@ -252,9 +245,34 @@ const careerDev = ref("2019-05-20");
 const dateNow = dayjs();
 
 const countCareerStart = computed(() =>
-	dateNow.diff(careerStart.value, "years")
+	dateNow.diff(careerStart.value, "years"),
 );
 const countCareerDev = computed(() => dateNow.diff(careerDev.value, "years"));
+
+const SwiperAutoplay = Autoplay;
+const SwiperEffectCreative = EffectCreative;
+
+// Motion animation variants
+const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
+const enterSlideFromBottomToTop = {
+	opacity: 1,
+	y: 0,
+	transition: { duration: 600 },
+};
+
+const initialSlideFromLeftToRight = { opacity: 0, x: -40 };
+const enterSlideFromLeftToRight = {
+	opacity: 1,
+	x: 0,
+	transition: { duration: 600 },
+};
+
+const initialSlideFromRightToLeft = { opacity: 0, x: 40 };
+const enterSlideFromRightToLeft = {
+	opacity: 1,
+	x: 0,
+	transition: { duration: 600 },
+};
 
 // Data Fetching from Server
 const {

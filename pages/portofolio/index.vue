@@ -107,7 +107,7 @@ const page = computed({
 const title = computed(() => `Daftar Portofolio`);
 const description = computed(
 	() =>
-		`Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.`
+		`Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.`,
 );
 const image = computed(() => "/images/meta-image.png");
 
@@ -136,15 +136,15 @@ const {
 	server: false,
 });
 
-const next = () => {
+const _next = () => {
 	page.value++;
 	refresh();
-  scrollToTop();
+	scrollToTop();
 };
-const previous = () => {
+const _previous = () => {
 	page.value--;
 	refresh();
-  scrollToTop();
+	scrollToTop();
 };
 </script>
 

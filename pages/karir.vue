@@ -40,37 +40,40 @@
 </template>
 
 <script lang="ts" setup>
-import {
-	initialSlideFromBottomToTop,
-	enterSlideFromBottomToTop,
-} from "~/components/motion";
-
 // SEO META
 const title = computed(() => "Karir Saya");
 const description = computed(
-  () => `Berikut daftar riwayat karir saya yang mana saya sudah berkarir di berbagai tempat.`
+	() =>
+		`Berikut daftar riwayat karir saya yang mana saya sudah berkarir di berbagai tempat.`,
 );
 const image = computed(() => "/images/meta-image.png");
 const urlRequest = useRequestURL();
 
 useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+	title,
+	ogTitle: title,
+	ogImage: image,
+	twitterImage: image,
+	twitterCard: "summary_large_image",
+	twitterTitle: title,
+	description,
+	ogDescription: description,
+	twitterDescription: description,
+	ogUrl: urlRequest.href,
 });
+
+// Motion animation variants
+const initialSlideFromBottomToTop = { opacity: 0, y: 40 };
+const enterSlideFromBottomToTop = {
+	opacity: 1,
+	y: 0,
+	transition: { duration: 600 },
+};
 
 const careerExp = ref([
 	{
 		position: "Pemilik Bisnis",
-		company:
-			"PT Kodingin Digital Nusantara",
+		company: "PT Kodingin Digital Nusantara",
 		location: "Ngawi, Jawa Timur",
 		startDate: "10 Oktober 2024",
 		endDate: null, // atau gunakan null jika masih menjadi pemilik

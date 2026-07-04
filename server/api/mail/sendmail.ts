@@ -24,7 +24,7 @@
 //     'general': 'Ingin Bertanya Hal Umum',
 //     'others': 'Lainnya',
 //   }
-  
+
 //   return `
 //     <h1>Halo Cak!</h1>
 
@@ -54,21 +54,19 @@
 //   });
 // }
 
-export default defineEventHandler(async (event) => {
-  // try {
-  //   const formData = await readFormData(event);
-
-  //   buildEmail(formData);
-
-  //   return {
-  //     message: "Success!",
-  //     code: 200,
-  //   };
-  // } catch (error) {
-  //   console.error(error);
-  //   return {
-  //     code: 500,
-  //     message: "Internal Server Error",
-  //   };
-  // }
-})
+export default defineEventHandler(async (_event) => {
+	// try {
+	//   const formData = await readFormData(event);
+	//   buildEmail(formData);
+	//   return {
+	//     message: "Success!",
+	//     code: 200,
+	//   };
+	// } catch (error) {
+	//   console.error(error);
+	//   return {
+	//     code: 500,
+	//     message: "Internal Server Error",
+	//   };
+	// }
+});

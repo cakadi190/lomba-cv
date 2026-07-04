@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import {
-	initialSlideFromLeftToRight,
 	enterSlideFromLeftToRight,
-	initialSlideFromRightToLeft,
 	enterSlideFromRightToLeft,
+	initialSlideFromLeftToRight,
+	initialSlideFromRightToLeft,
 } from "../../motion";
+
+defineOptions({ name: "HeaderHome" });
 
 useHead({
 	title: "Beranda",
@@ -49,12 +51,6 @@ const techStack = ref<TechStackItem[]>([
 	{ icon: "devicon:figma", name: "Figma" },
 	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
-</script>
-
-<script lang="ts">
-export default defineComponent({
-	name: "HeaderHome",
-});
 </script>
 
 <template>
@@ -193,6 +189,9 @@ export default defineComponent({
 }
 
 #masthead {
+	position: relative;
+	overflow: hidden;
+	
 	&::before {
 		content: "";
 		position: absolute;
