@@ -45,7 +45,17 @@ export default defineNuxtConfig({
         inject: true,
       },
     ],
+    "@nuxtjs/sitemap",
+    "nuxt-skew-protection",
   ],
+
+  site: {
+    url: "https://v3.masadi.net",
+  },
+
+  sitemap: {
+    exclude: ["/admin/**"],
+  },
 
   colorMode: {
     preference: "system",
@@ -56,6 +66,9 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    build: {
+      chunkSizeWarningLimit: 2000,
+    },
     optimizeDeps: {
       include: [
         "@vue/devtools-core",

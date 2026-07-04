@@ -160,7 +160,7 @@ const coffeePlacesData: CoffeePlace[] = [
       "Portafighter #1 Ngawi adalah tempat yang cocok untuk para pecinta kopi. Dengan akses WiFi yang memadai dan lokasi yang strategis, kafe ini menawarkan pengalaman ngopi yang menyenangkan tanpa biaya parkir.",
     map_coordinate: "-7.408397476493666, 111.4421515691249",
     map_url: "https://maps.app.goo.gl/DuK2vPBqSJawYTni7",
-    image: imagePath("porta#1"),
+    image: imagePath("porta-1"),
     park_fee: 0,
     price: CafePrice.CHEAP,
     wifi_provider: "telkom",
