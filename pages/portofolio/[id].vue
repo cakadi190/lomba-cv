@@ -30,7 +30,7 @@
 					</div>
 					<div
 						class="col-md-6 text-center mx-auto"
-						v-else-if="status !== 'pending' && !error && !data"
+						v-else-if="!error && !data"
 					>
 						<error-section
 							imgSrc="/images/errors/404.svg"
@@ -40,7 +40,7 @@
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>
 					</div>
-					<div class="col-md-12" v-else-if="status !== 'pending' && data">
+					<div class="col-md-12" v-else-if="data">
 						<card-porto-details :data="data" />
 					</div>
 				</div>

@@ -66,8 +66,8 @@
 <script lang="ts" setup>
 import { differenceInDays } from "date-fns";
 import {
-	initialSlideFromBottomToTop,
 	enterSlideFromBottomToTop,
+	initialSlideFromBottomToTop,
 } from "~/components/motion";
 
 // SEO META

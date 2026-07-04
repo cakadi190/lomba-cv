@@ -47,7 +47,8 @@
 			"linter": {
 				"rules": {
 					"correctness": {
-						"noUnusedVariables": "off"
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
 					},
 					"style": {
 						"useVueMultiWordComponentNames": "off"

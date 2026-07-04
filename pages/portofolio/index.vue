@@ -136,12 +136,12 @@ const {
 	server: false,
 });
 
-const _next = () => {
+const next = () => {
 	page.value++;
 	refresh();
 	scrollToTop();
 };
-const _previous = () => {
+const previous = () => {
 	page.value--;
 	refresh();
 	scrollToTop();

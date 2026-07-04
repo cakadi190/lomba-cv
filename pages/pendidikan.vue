@@ -191,10 +191,10 @@
 
 <script lang="ts" setup>
 import {
-	initialSlideFromLeftToRight,
+	enterSlideFromBottomToTop,
 	enterSlideFromLeftToRight,
 	initialSlideFromBottomToTop,
-	enterSlideFromBottomToTop,
+	initialSlideFromLeftToRight,
 } from "~/components/motion";
 
 // SEO META
