@@ -11,77 +11,91 @@
 		<section class="need-space pt-0">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 text-center mx-auto" v-if="pending">
-						<error-section
-							img-src="/images/errors/loading.svg"
-							img-alt="Tidak Ditemukan"
-							img-height="250"
-							title="Tunggu Sebentar"
-							text="Sistem sedang memuat konten dari peladen"
-						/>
-					</div>
-					<div class="col-md-6 text-center mx-auto" v-else-if="error">
-						<error-section
-							img-src="/images/errors/404.svg"
-							img-alt="Tidak Ditemukan"
-							img-height="250"
-							title="Ups, Terjadi kesalahan"
-							text="Saat ini kami sedang memperbaiki kesalahan ini"
-						/>
-					</div>
-					<div
-						class="col-md-6 text-center mx-auto"
-						v-else-if="
-							!pending && !error && (!portofolios?.data || portofolios.data.length === 0 || portofolios.code === 500)
-						"
-					>
-						<error-section
-							img-src="/images/errors/404.svg"
-							img-alt="Tidak Ditemukan"
-							img-height="250"
-							title="Ups, Terjadi kesalahan"
-							text="Saat ini kami sedang memperbaiki kesalahan ini"
-						/>
-					</div>
-					<div
-						class="col-md-12 mx-auto"
-						v-else-if="!pending && !error && portofolios?.data?.length > 0"
-					>
-						<div class="row">
-							<div
-								class="col-md-6 col-lg-4 mb-4"
-								v-for="(item, index) in portofolios.data"
-								:key="index"
-							>
-								<card-porto :data="item" />
+					<ClientOnly>
+						<div class="col-md-6 text-center mx-auto" v-if="pending">
+							<error-section
+								img-src="/images/errors/loading.svg"
+								img-alt="Tidak Ditemukan"
+								img-height="250"
+								title="Tunggu Sebentar"
+								text="Sistem sedang memuat konten dari peladen"
+							/>
+						</div>
+						<div class="col-md-6 text-center mx-auto" v-else-if="error">
+							<error-section
+								img-src="/images/errors/404.svg"
+								img-alt="Tidak Ditemukan"
+								img-height="250"
+								title="Ups, Terjadi kesalahan"
+								text="Saat ini kami sedang memperbaiki kesalahan ini"
+							/>
+						</div>
+						<div
+							class="col-md-6 text-center mx-auto"
+							v-else-if="
+								!pending && !error && (!portofolios?.data || portofolios.data.length === 0 || portofolios.code === 500)
+							"
+						>
+							<error-section
+								img-src="/images/errors/404.svg"
+								img-alt="Tidak Ditemukan"
+								img-height="250"
+								title="Ups, Terjadi kesalahan"
+								text="Saat ini kami sedang memperbaiki kesalahan ini"
+							/>
+						</div>
+						<div
+							class="col-md-12 mx-auto"
+							v-else-if="!pending && !error && portofolios?.data?.length > 0"
+						>
+							<div class="row">
+								<div
+									class="col-md-6 col-lg-4 mb-4"
+									v-for="(item, index) in portofolios.data"
+									:key="index"
+								>
+									<card-porto :data="item" />
+								</div>
+							</div>
+
+							<div class="d-flex justify-content-center align-items-center gap-3">
+								<button
+									class="btn btn-primary"
+									type="button"
+									:disabled="!portofolios?.hasPrevPage"
+									@click="previous"
+								>
+									<Icon name="fa6-solid:chevron-left" />
+								</button>
+
+								<span
+									>Halaman {{ portofolios?.page }} dari
+									{{ portofolios?.totalPage }}</span
+								>
+
+								<button
+									class="btn btn-primary"
+									type="button"
+									:disabled="!portofolios?.hasNextPage"
+									@click="next"
+								>
+									<Icon name="fa6-solid:chevron-right" />
+								</button>
 							</div>
 						</div>
 
-						<div class="d-flex justify-content-center align-items-center gap-3">
-							<button
-								class="btn btn-primary"
-								type="button"
-								:disabled="!portofolios?.hasPrevPage"
-								@click="previous"
-							>
-								<Icon name="fa6-solid:chevron-left" />
-							</button>
-
-							<span
-								>Halaman {{ portofolios?.page }} dari
-								{{ portofolios?.totalPage }}</span
-							>
-
-							<button
-								class="btn btn-primary"
-								type="button"
-								:disabled="!portofolios?.hasNextPage"
-								@click="next"
-							>
-								<Icon name="fa6-solid:chevron-right" />
-							</button>
-						</div>
-					</div>
+						<template #fallback>
+							<div class="col-md-6 text-center mx-auto">
+								<error-section
+									img-src="/images/errors/loading.svg"
+									img-alt="Tidak Ditemukan"
+									img-height="250"
+									title="Tunggu Sebentar"
+									text="Sistem sedang memuat konten dari peladen"
+								/>
+							</div>
+						</template>
+					</ClientOnly>
 				</div>
 			</div>
 		</section>
