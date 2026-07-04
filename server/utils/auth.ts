@@ -79,6 +79,9 @@ export function verifyToken(token: string): Record<string, unknown> | null {
   if (parts.length !== 3) return null;
 
   const [encodedHeader, encodedPayload, signature] = parts;
+  if (!encodedHeader || !encodedPayload || !signature) {
+    return null;
+  }
 
   const hmac = crypto.createHmac("sha256", JWT_SECRET);
   hmac.update(`${encodedHeader}.${encodedPayload}`);
