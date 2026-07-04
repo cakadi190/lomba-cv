@@ -111,7 +111,7 @@ export async function getAuthenticatedUser(event: H3Event) {
   if (!token) return null;
 
   const decoded = verifyToken(token);
-  if (!decoded?.userId) return null;
+  if (typeof decoded?.userId !== "string") return null;
 
   const user = await prisma.user.findUnique({
     where: { id: decoded.userId },

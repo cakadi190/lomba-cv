@@ -19,6 +19,7 @@
     ".nuxt",
     ".",
     "./.nuxt/nuxt.d.ts",
+    "./.nuxt/nuxt.node.d.ts",
     "...config/nuxt.*",
     "./**/*",
     "./../../www-nod/runtime",
