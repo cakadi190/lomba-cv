@@ -35,6 +35,7 @@
         "@fortawesome/free-brands-svg-icons": "^7.3.0",
         "@fortawesome/free-regular-svg-icons": "^7.3.0",
         "@fortawesome/free-solid-svg-icons": "^7.3.0",
+        "@iconify-json/solar": "^1.2.5",
         "@nuxt/icon": "^2.3.1",
         "@prisma/client": "^7.8.0",
         "@types/bootstrap": "^5.2.11",
@@ -225,6 +226,8 @@
     "@fortawesome/free-solid-svg-icons": ["@fortawesome/free-solid-svg-icons@7.3.0", "", { "dependencies": { "@fortawesome/fontawesome-common-types": "7.3.0" } }, "sha512-YxI/CuwWeI3nPIoYU//vkDS+3ige/67DPZ6XwMATpYEFESzO9L8zfJOKllGRgIlpT/uebrZCcvAzp3peD7GmTw=="],
 
     "@hono/node-server": ["@hono/node-server@1.19.11", "", { "peerDependencies": { "hono": "^4" } }, "sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g=="],
+
+    "@iconify-json/solar": ["@iconify-json/solar@1.2.5", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-WMAiNwchU8zhfrySww6KQBRIBbsQ6SvgIu2yA+CHGyMima/0KQwT5MXogrZPJGoQF+1Ye3Qj6K+1CiyNn3YkoA=="],
 
     "@iconify/collections": ["@iconify/collections@1.0.705", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-JyUTM5/vqZfnUwtM18kh3nUB82A8QYHDLQj5zEZAvgR3hFdZvDhlH0LEdqOYKHWMTNW5l16EiiY2kstuw/EiTQ=="],
 

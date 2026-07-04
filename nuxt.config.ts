@@ -62,11 +62,13 @@ export default defineNuxtConfig({
         "@vue/devtools-kit",
         "bootstrap",
         "dayjs", // CJS
+        "dayjs/locale/id", // CJS
         "dayjs/plugin/relativeTime", // CJS
         "dayjs/plugin/updateLocale", // CJS
         "dayjs/plugin/utc", // CJS
         "jquery",
         "swiper/element/bundle",
+        "swiper/modules",
       ],
     },
     css: {
