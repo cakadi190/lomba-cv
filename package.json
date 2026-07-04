@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "seed": "node --loader ts-node/esm prisma/seed.ts",
+    "seed": "tsx prisma/seed.ts",
     "format": "biome format --write .",
     "lint": "biome check ."
   },
