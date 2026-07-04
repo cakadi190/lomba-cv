@@ -9,9 +9,9 @@
       <p class="text-muted mt-3"><Icon name="solar:info-square-bold" /> Dan mohon maaf, saya tidak terafiliasi terhadap salah satu kafe / warkop ini, jadi apabila ada kesalahan mohon segera hubungi saya supaya segera saya perbaharui.</p>
 		</header-page>
 
-		<section class="need-space pt-0">
+		<section class="need-space pt-0 position-relative">
 			<div class="container">
-        <div class="pt-3 pb-5">
+        <div class="py-3 position-sticky bg-white border-bottom" :style="{ top: '4.5rem', zIndex: 1000 }">
           <div class="btn-group">
             <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
             <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
@@ -23,7 +23,7 @@
           </div>
         </div>
         
-				<div class="row">
+				<div class="row pt-5">
 					<ClientOnly>
 						<div class="col-md-6 text-center mx-auto" v-if="pending">
 							<error-section

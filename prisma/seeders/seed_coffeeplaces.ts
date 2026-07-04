@@ -82,7 +82,7 @@ const coffeePlacesData: CoffeePlace[] = [
     park_fee: 5000,
     price: CafePrice.MEDIUM,
     wifi_speed: WifiSpeed.MEDIUM,
-    region: "Kota Adm. Jakarta Selatan",
+    region: "Jakarta Selatan",
     recomended: true,
     ...Open09To23,
   },
