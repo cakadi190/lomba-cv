@@ -106,7 +106,7 @@ const handleScroll = () => {
   if (window.scrollY >= 50) {
     navbar.value?.classList.add("body-bg-rgb");
     navbar.value?.classList.add("border-bottom");
-    navbar.value?.style.setProperty("--bs-bg-opacity", "0.95");
+    navbar.value?.style.setProperty("--bs-bg-opacity", "1");
     navbar.value?.style.setProperty("backdrop-filter", "blur(1rem)");
   } else {
     navbar.value?.classList.remove("body-bg-rgb");

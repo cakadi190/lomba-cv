@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
         skip,
         take: perPage,
         orderBy: {
-          updated_at: "desc",
+          updated_at: "asc",
         },
       }),
       _coffeeShopsModel.count(),

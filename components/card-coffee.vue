@@ -12,13 +12,14 @@ defineProps<{
 			:data-bs-target="`#${data.id}`"
 			class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100"
 		>
-			<nuxt-img
-				preload
-				:src="data.image ?? '/images/coffee-default.webp'"
-				class="rounded-3 card-img-top"
-				:alt="data.name"
-				densities="x1 x2"
-			/>
+      <div class="rounded-3 card-img-top">
+        <nuxt-img
+          preload
+          :src="data.image ?? '/images/coffee-default.webp'"
+          :alt="data.name"
+          densities="x1 x2"
+        />
+      </div>
 
 			<div class="card-body p-4">
 				<div
@@ -152,5 +153,15 @@ export default defineComponent({
 		transform: scale(1.025);
 		border-color: var(--bs-primary);
 	}
+
+  .card-img-top {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
 }
 </style>
