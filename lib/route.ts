@@ -1,4 +1,4 @@
-import { RouteError } from "@/exceptions/RouteError";
+import { RouteError } from "../exceptions/RouteError";
 
 /**
  * Pemetaan terpusat nama rute aplikasi ke pola URL-nya.

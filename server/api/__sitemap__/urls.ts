@@ -1,5 +1,5 @@
-import { route } from "~/lib/route";
-import prisma from "~~/lib/prisma";
+import prisma from "../../../lib/prisma";
+import { route } from "../../../lib/route";
 
 export default defineSitemapEventHandler(async () => {
   const portfolios = await prisma.portfolio.findMany({
