@@ -42,7 +42,7 @@ defineProps<{
 						v-motion
 						:enter="enterSlideFromLeftToRight"
 						:initial="initialSlideFromLeftToRight"
-						class="h4 opacity-75 lh-base mb-0"
+						class="h4 opacity-75 fw-normal lh-base mb-0"
 					>
 						<slot name="subtitle" />
 					</h2>

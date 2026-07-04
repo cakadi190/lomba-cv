@@ -10,6 +10,9 @@ import { route } from '~~/lib/route';
       <div class="card p-4 rounded-4 card-body w-100">
         <slot />
       </div>
+      <div class="mx-auto d-flex justify-content-center pt-2">
+        <theme-toggler />
+      </div>
     </div>
   </main>
 </template>

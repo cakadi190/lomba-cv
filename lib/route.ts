@@ -25,7 +25,7 @@ export const ROUTES = {
 
   "resources.coffee-shops.index": "/sumber-daya/tempat-ngopi",
 
-  contact: "/contact",
+  contact: "/kontak",
 } as const;
 
 /** Gabungan seluruh nama rute yang valid pada {@link ROUTES}. */

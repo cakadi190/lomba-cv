@@ -1,5 +1,10 @@
 <template>
-  <div></div>
+  <div>
+    <div class="text-center">
+      <h1>Selamat Datang</h1>
+      <p class="text-muted mb-0">Silakan masuk ke panel admin</p>
+    </div>
+  </div>
   <!-- <div>
     <div class="text-center mb-4">
       <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3" style="width: 56px; height: 56px;">
