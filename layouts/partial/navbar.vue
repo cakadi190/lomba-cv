@@ -91,6 +91,7 @@ const navbarMenu = ref([
   { name: "Pendidikan & Organisasi", link: "/pendidikan" },
   { name: "Penghargaan", link: "/penghargaan" },
   { name: "Karir", link: "/karir" },
+  { name: "Artikel", link: "/blog" },
   { name: "Kontak Saya", link: "/kontak" },
 ]);
 
