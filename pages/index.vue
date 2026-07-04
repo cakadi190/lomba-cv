@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import elkuslaSection from "~/components/partials/home/elkusla.vue";
+import HeaderHome from "~/components/partials/home/header-home.vue";
+
 // SEO META
 const title = computed(() => "Beranda");
 const description = computed(

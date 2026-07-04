@@ -43,6 +43,8 @@
 </template>
 
 <script lang="ts" setup>
+import contactDetails from "./contact-details.vue";
+import formContact from "./form.vue";
 </script>
 
 <script lang="ts">

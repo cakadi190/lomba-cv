@@ -58,6 +58,13 @@
             "noExplicitAny": "off"
           }
         }
+      },
+      "assist": {
+        "actions": {
+          "source": {
+            "organizeImports": "off"
+          }
+        }
       }
     }
   ]

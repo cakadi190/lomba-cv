@@ -28,7 +28,7 @@
 						<input
 							type="text"
 							class="form-control"
-							placeholder="Mis: Cak Adi"
+							placeholder="Mis: Mas Adi"
 						/>
 					</div>
 				</div>

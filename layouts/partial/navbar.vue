@@ -12,7 +12,7 @@
 						class="site-logo"
 						src="/images/brands/logo-color-long.svg"
 						height="28"
-						alt="Logo Cak Adi"
+						alt="Logo Mas Adi"
 					/>
 				</nuxt-link>
 				<button
@@ -49,7 +49,7 @@
 					class="site-logo"
 					src="/images/brands/logo-color-long.svg"
 					height="32"
-					alt="Logo Cak Adi"
+					alt="Logo Mas Adi"
 				/>
 			</nuxt-link>
 			<button

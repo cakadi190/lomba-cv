@@ -10,6 +10,8 @@
 </template>
 
 <script lang="ts" setup>
+import contactMeComponent from "~/components/partials/contact-me/main.vue";
+
 // SEO META
 const title = computed(() => "Hubungi Saya");
 const description = computed(

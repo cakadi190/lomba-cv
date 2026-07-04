@@ -20,7 +20,7 @@ body {
 <script lang="ts" setup>
 useHead({
   titleTemplate: (titleChunk: any) => {
-    return titleChunk ? `${titleChunk} • Cak Adi` : "Cak Adi";
+    return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
   },
 });
 

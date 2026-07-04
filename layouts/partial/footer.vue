@@ -11,35 +11,35 @@
 					</p>
 					<div class="d-flex gap-3 mt-4">
 						<a
-							aria-label="Cak Adi's Facebook"
+							aria-label="Mas Adi's Facebook"
 							class="duration-200 transition-all"
 							href="https://www.facebook.com/cakadi190"
 						>
 							<Icon size="20" name="fa6-brands:facebook" />
 						</a>
 						<a
-							aria-label="Cak Adi's Twitter"
+							aria-label="Mas Adi's Twitter"
 							class="duration-200 transition-all"
 							href="https://www.twitter.com/cakadi190"
 						>
 							<Icon size="20" name="fa6-brands:twitter" />
 						</a>
 						<a
-							aria-label="Cak Adi's Figma"
+							aria-label="Mas Adi's Figma"
 							class="duration-200 transition-all"
 							href="https://www.figma.com/@cakadi190"
 						>
 							<Icon size="20" name="fa6-brands:figma" />
 						</a>
 						<a
-							aria-label="Cak Adi's Instagram"
+							aria-label="Mas Adi's Instagram"
 							class="duration-200 transition-all"
 							href="https://www.instagram.com/cakadi190"
 						>
 							<Icon size="20" name="fa6-brands:instagram" />
 						</a>
 						<a
-							aria-label="Cak Adi's Linkedin"
+							aria-label="Mas Adi's Linkedin"
 							class="duration-200 transition-all"
 							href="https://www.linkedin.com/in/cakadi190"
 						>
@@ -86,7 +86,7 @@
 			<div class="row">
 				<div class="col-md-6 text-center text-lg-start">
 					<p class="mb-0">
-						Hak cipta &copy; 2024 Cak Adi.
+						Hak cipta &copy; 2024 Mas Adi.
 					</p>
 				</div>
 				<div class="col-md-6 text-center text-lg-end">

@@ -169,7 +169,7 @@ const techStack = ref<TechStackItem[]>([
 						:initial="initialSlideFromRightToLeft"
 						:enter="enterSlideFromRightToLeft"
 						src="/images/fotoku.min.png"
-						alt="Cak Adi"
+						alt="Mas Adi"
 						class="w-100"
 					/>
 				</div>

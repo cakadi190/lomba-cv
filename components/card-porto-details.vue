@@ -4,7 +4,7 @@
       preload
 			:src="data?.image"
 			class="w-100 rounded-4 border overflow-hidden"
-			alt="Cak Adi Website"
+			alt="Mas Adi Website"
 		/>
 
 		<div

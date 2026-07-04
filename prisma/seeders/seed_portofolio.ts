@@ -143,7 +143,7 @@ const myPortofolio: PortfolioItem[] = [
     private: false,
   },
   {
-    name: "Personal Website Cak Adi",
+    name: "Personal Website Mas Adi",
     slug: "cakadi-web",
     image: "/images/portofolio/cakadi-home.png",
     techstack: [
@@ -153,8 +153,8 @@ const myPortofolio: PortfolioItem[] = [
       "devicon:vercel",
     ],
     shortDesc:
-      "Juara 🏆 #3 Maroon Day UTDI 2024. Situs pribadi untuk Cak Adi yang dirancang untuk menampilkan informasi tentang Cak Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Cak Adi berbagi pengalaman dan karya-karyanya.",
-    desc: "<p>Personal Website Cak Adi adalah situs pribadi yang dirancang untuk menampilkan informasi tentang Cak Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Cak Adi berbagi pengalaman dan karya-karyanya.</p>\n           <p>Dikembangkan dengan jQuery, Bootstrap, Nuxt, Supabase, dan Vercel, situs ini menawarkan tampilan yang modern dan responsif. Pengguna dapat dengan mudah menavigasi melalui berbagai bagian situs untuk mengetahui lebih banyak tentang Cak Adi.</p>\n           <p>Proyek ini bertujuan untuk memperkuat kehadiran online Cak Adi, memudahkan orang lain menemukan dan berinteraksi dengan Cak Adi, serta menampilkan karya-karya terbaiknya dalam satu platform.</p>",
+      "Juara 🏆 #3 Maroon Day UTDI 2024. Situs pribadi untuk Mas Adi yang dirancang untuk menampilkan informasi tentang Mas Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Mas Adi berbagi pengalaman dan karya-karyanya.",
+    desc: "<p>Personal Website Mas Adi adalah situs pribadi yang dirancang untuk menampilkan informasi tentang Mas Adi, termasuk portofolio, blog, dan kontak. Situs ini berfungsi sebagai platform untuk Mas Adi berbagi pengalaman dan karya-karyanya.</p>\n           <p>Dikembangkan dengan jQuery, Bootstrap, Nuxt, Supabase, dan Vercel, situs ini menawarkan tampilan yang modern dan responsif. Pengguna dapat dengan mudah menavigasi melalui berbagai bagian situs untuk mengetahui lebih banyak tentang Mas Adi.</p>\n           <p>Proyek ini bertujuan untuk memperkuat kehadiran online Mas Adi, memudahkan orang lain menemukan dan berinteraksi dengan Mas Adi, serta menampilkan karya-karya terbaiknya dalam satu platform.</p>",
     demoLink: null,
     sourceCode: null,
     private: false,
