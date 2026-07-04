@@ -12,9 +12,13 @@ import { RouteError } from "../exceptions/RouteError";
 export const ROUTES = {
   home: "/",
 
-  "company.index": "/company",
-  "company.about.index": "/company/about",
-  "company.about.brand": "/company/brand-guidelines",
+  "blog.index": "/blog",
+  "blog.show": "/blog/:slug",
+
+  "about.me": "/tentang/saya",
+  "about.education": "/pendidikan",
+  "about.achievement": "/penghargaan",
+  "about.career": "/karir",
 
   "portfolios.index": "/portofolio",
   "portfolios.show": "/portofolio/:slug",

@@ -88,14 +88,14 @@ defineOptions({ name: "NavbarMain" });
 const navbar = ref<HTMLElement | null>(null);
 
 const navbarMenu = ref([
-  { name: "Beranda", link: "/" },
-  { name: "Portofolio", link: "/portofolio" },
-  { name: "Tentang Saya", link: "/tentang/saya" },
-  { name: "Pendidikan & Organisasi", link: "/pendidikan" },
-  { name: "Penghargaan", link: "/penghargaan" },
-  { name: "Karir", link: "/karir" },
-  { name: "Artikel", link: "/blog" },
-  { name: "Kontak Saya", link: "/kontak" },
+  { name: "Beranda", link: route("home") },
+  { name: "Portofolio", link: route('portfolios.index') },
+  { name: "Tentang Saya", link: route('about.me') },
+  { name: "Pendidikan & Organisasi", link: route("about.education") },
+  { name: "Penghargaan", link: route("about.achievement") },
+  { name: "Karir", link: route("about.career") },
+  { name: "Artikel", link: route("blog.index") },
+  { name: "Kontak Saya", link: route("contact") },
 ]);
 
 const closingOffcanvas = () => {

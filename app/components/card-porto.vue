@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { route } from '~~/lib/route';
+
 defineProps<{
   data: any;
 }>();
@@ -7,14 +9,14 @@ defineProps<{
 <template>
 	<div class="wrapper">
 		<nuxt-link
-			:to="`/portofolio/${data.slug}`"
+			:to="route('portfolios.show', { slug: data.slug })"
 			class="card h-100 overflow-hidden rounded-4"
 		>
 			<nuxt-img preload
 				:src="data.image"
 				class="rounded-3 card-img-top"
 				:alt="data.name"
-				densities="x1 x2"
+				densities="x1 x2 x3"
 			/>
 
 			<div class="card-body p-4">
