@@ -1,7 +1,10 @@
 <template>
   <main id="auth-wrapper">
     <div id="container">
-      <slot />
+      <app-brand link-class="offcanvas-title" height="48" />
+      <div class="card p-4 rounded-4 card-body w-100">
+        <slot />
+      </div>
     </div>
   </main>
 </template>
@@ -27,6 +30,11 @@
   }
 
   #container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
     z-index: 2;
     width: calc(100% * (1/4));
     margin-block: auto;

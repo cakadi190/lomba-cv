@@ -193,24 +193,23 @@
 									:enter="enterSlideFromBottomToTop"
 									:initial="initialSlideFromBottomToTop"
 									id="myTab"
-									role="tablist"
 								>
-									<li class="nav-item" role="presentation">
+									<li class="nav-item">
 										<a href="#about-me" class="nav-link py-3 w-100 text-start">
 											Tentang Saya
 										</a>
 									</li>
-									<li class="nav-item" role="presentation">
+									<li class="nav-item">
 										<a href="#history" class="nav-link py-3 w-100 text-start">
 											Sejarah Singkat Saya
 										</a>
 									</li>
-									<li class="nav-item" role="presentation">
+									<li class="nav-item">
 										<a href="#skills" class="nav-link py-3 w-100 text-start">
 											Keahlian
 										</a>
 									</li>
-									<li class="nav-item" role="presentation">
+									<li class="nav-item">
 										<a
 											href="#certification"
 											class="nav-link py-3 w-100 text-start"
@@ -218,13 +217,13 @@
 											Sertifikasi
 										</a>
 									</li>
-									<li class="nav-item" role="presentation">
-										<a
-											href="javascript:void(0)"
+									<li class="nav-item">
+										<nuxt-link
+											to="/tentang/skill"
 											class="nav-link py-3 w-100 text-start"
 										>
 											Perkakas
-										</a>
+										</nuxt-link>
 									</li>
 								</ul>
 							</div>

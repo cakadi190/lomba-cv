@@ -4,36 +4,38 @@
 			class="offcanvas offcanvas-start"
 			tabindex="-1"
 			id="offcanvas"
+			role="dialog"
 			aria-labelledby="offcanvasLabel"
 		>
-			<div class="offcanvas-header">
-				<nuxt-link to="/" class="offcanvas-title">
-					<img
-						class="site-logo"
-						src="/images/brands/logo-color.svg"
-						height="28"
-						alt="Logo Mas Adi"
-					/>
-				</nuxt-link>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="offcanvas"
-					aria-label="Close"
-				></button>
+			<div class="offcanvas-header align-items-center">
+				<app-brand
+					link-class="offcanvas-title"
+					id="offcanvasLabel"
+					height="28"
+				/>
+				<div class="d-flex align-items-center gap-2 ms-auto">
+					<theme-toggler />
+					<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="offcanvas"
+						aria-label="Close"
+					></button>
+				</div>
 			</div>
 			<div class="offcanvas-body">
 				<ul class="navbar-nav gap-2 justify-content-end flex-grow-1">
 					<li
 						class="nav-item"
-						@click="closingOffcanvas"
 						v-for="(item, index) in navbarMenu"
 						:key="index"
 					>
+						<!-- biome-ignore lint/a11y/noStaticElementInteractions: nuxt-link compiles to a semantic interactive link -->
 						<nuxt-link
 							:class="item.link === $route.path ? 'active' : ''"
 							class="nav-link"
 							:to="item.link"
+							@click="closingOffcanvas"
 							>{{ item.name }}</nuxt-link
 						>
 					</li>
@@ -44,27 +46,25 @@
 
 	<nav class="navbar navbar-expand-lg fixed-top navbar-light py-3">
 		<div class="container">
-			<nuxt-link to="/" class="navbar-brand">
-				<img
-					class="site-logo"
-					src="/images/brands/logo-color.svg"
-					height="32"
-					alt="Logo Mas Adi"
-				/>
-			</nuxt-link>
-			<button
-				class="navbar-toggler p-0 border-0"
-				type="button"
-				data-bs-toggle="offcanvas"
-				data-bs-target="#offcanvas"
-				aria-controls="offcanvas"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<app-brand link-class="navbar-brand" height="32" />
+			
+			<div class="d-flex align-items-center gap-2 order-lg-last">
+				<theme-toggler />
+				<button
+					class="navbar-toggler p-0 border-0"
+					type="button"
+					data-bs-toggle="offcanvas"
+					data-bs-target="#offcanvas"
+					aria-controls="offcanvas"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+
 			<div class="collapse navbar-collapse" id="navbarMain">
-				<ul class="navbar-nav gap-2 justify-content-end flex-grow-1">
+				<ul class="navbar-nav gap-2 justify-content-end flex-grow-1 me-3">
 					<li class="nav-item" v-for="(item, index) in navbarMenu" :key="index">
 						<nuxt-link
 							:class="item.link === $route.path ? 'active' : ''"
@@ -84,9 +84,6 @@ defineOptions({ name: "NavbarMain" });
 
 const navbar = ref<HTMLElement | null>(null);
 
-const colorMode = useColorMode();
-const theme = ref("light");
-
 const navbarMenu = ref([
   { name: "Beranda", link: "/" },
   { name: "Portofolio", link: "/portofolio" },
@@ -103,39 +100,6 @@ const closingOffcanvas = () => {
     btnClose.click();
   }
 };
-
-const applyTheme = (themes: string) => {
-  const logos = document.getElementsByClassName("site-logo");
-
-  Array.from(logos).forEach((logoElement: Element) => {
-    if (logoElement) {
-      logoElement.setAttribute(
-        "src",
-        `/images/brands/logo-${themes === "light" ? "color" : "white"}.svg`,
-      );
-    }
-  });
-
-  theme.value = themes;
-};
-
-const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-  applyTheme(e.matches ? "dark" : "light");
-};
-
-onMounted(() => {
-  if (colorMode.preference === "system") {
-    const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    applyTheme(systemThemeQuery.matches ? "dark" : "light");
-    systemThemeQuery.addEventListener("change", handleSystemThemeChange);
-
-    return () => {
-      systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
-    };
-  } else {
-    applyTheme(colorMode.preference);
-  }
-});
 
 const handleScroll = () => {
   if (window.scrollY >= 50) {

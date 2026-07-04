@@ -18,70 +18,61 @@ body {
 </style>
 
 <script lang="ts" setup>
+import { computed, nextTick } from "vue";
+
+const colorMode = useColorMode();
+
 useHead({
   titleTemplate: (titleChunk: any) => {
     return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
   },
-});
-
-const colorMode = useColorMode();
-const theme = ref("light");
-
-const applyTheme = (themes: string) => {
-  document.documentElement.setAttribute("data-bs-theme", themes);
-  theme.value = themes;
-};
-
-const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-  applyTheme(e.matches ? "dark" : "light");
-};
-
-onMounted(() => {
-  const mediamode = localStorage.getItem("mediamode");
-  const colorModePreference = colorMode.preference;
-
-  if (colorModePreference === "system") {
-    const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    if (mediamode === "dark" || mediamode === "light") {
-      applyTheme(mediamode);
-    } else {
-      applyTheme(systemThemeQuery.matches ? "dark" : "light");
-      systemThemeQuery.addEventListener("change", handleSystemThemeChange);
-    }
-
-    return () => {
-      systemThemeQuery.removeEventListener("change", handleSystemThemeChange);
-    };
-  } else {
-    applyTheme(colorModePreference);
-  }
+  htmlAttrs: {
+    "data-bs-theme": computed(() => colorMode.value),
+  },
 });
 
 const initTooltipAndPopover = () => {
-  var tooltipTriggerList = [].slice.call(
+  if (typeof window === "undefined" || !window.bootstrap) {
+    return;
+  }
+
+  // Clean up any stale tooltips from the DOM to avoid orphaned elements
+  const orphanedTooltips = document.querySelectorAll(".tooltip");
+  for (const el of Array.from(orphanedTooltips)) {
+    el.remove();
+  }
+
+  const tooltipTriggerList = Array.from(
     document.querySelectorAll('[data-bs-toggle="tooltip"]'),
   );
-  var _tooltipList = tooltipTriggerList.map(
-    (tooltipTriggerEl) => new window.bootstrap.Tooltip(tooltipTriggerEl),
-  );
+  for (const el of tooltipTriggerList) {
+    const existing = window.bootstrap.Tooltip.getInstance(el);
+    if (existing) {
+      existing.dispose();
+    }
+    new window.bootstrap.Tooltip(el);
+  }
 
-  var popoverTriggerList = [].slice.call(
+  const popoverTriggerList = Array.from(
     document.querySelectorAll('[data-bs-toggle="popover"]'),
   );
-  var _popoverList = popoverTriggerList.map(
-    (popoverTriggerEl) => new window.bootstrap.Popover(popoverTriggerEl),
-  );
+  for (const el of popoverTriggerList) {
+    const existing = window.bootstrap.Popover.getInstance(el);
+    if (existing) {
+      existing.dispose();
+    }
+    new window.bootstrap.Popover(el);
+  }
 };
 
 onMounted(initTooltipAndPopover);
-onUpdated(initTooltipAndPopover);
 
 const route = useRoute();
 
 watch(
   () => route.fullPath,
-  () => {
+  async () => {
+    await nextTick();
     initTooltipAndPopover();
   },
 );

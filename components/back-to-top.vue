@@ -2,6 +2,7 @@
   <div>
     <!-- Tombol Back to Top -->
     <button 
+      type="button"
       @click="scrollToTop"
       :class="showButton ? '' : 'hidden'"
       class="btn btn-primary d-flex align-items-center gap-2 back-to-top"

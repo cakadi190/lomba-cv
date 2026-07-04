@@ -29,6 +29,7 @@ defineProps<{
 						<span>Kembali</span>
 					</nuxt-link>
 
+					<!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
 					<h1
 						v-motion
 						:enter="enterSlideFromLeftToRight"
@@ -36,6 +37,7 @@ defineProps<{
 					>
 						<slot name="title" />
 					</h1>
+					<!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
 					<h2
 						v-motion
 						:enter="enterSlideFromLeftToRight"

@@ -6,11 +6,11 @@ defineProps<{
 
 <template>
 	<div class="wrapper">
-		<a
-			href="javascript:void(0)"
+		<button
+			type="button"
 			data-bs-toggle="modal"
 			:data-bs-target="`#${data.id}`"
-			class="card h-100 overflow-hidden rounded-4"
+			class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100"
 		>
 			<nuxt-img
 				preload
@@ -54,7 +54,7 @@ defineProps<{
 					{{ truncate(data.description, 100) }}
 				</p>
 			</div>
-		</a>
+		</button>
 	</div>
 
 	<teleport to="body">
@@ -62,13 +62,14 @@ defineProps<{
 			class="modal fade"
 			:id="data.id"
 			tabindex="-1"
-			aria-labelledby="exampleModalLabel"
+			role="dialog"
+			:aria-labelledby="`label-${data.id}`"
 			aria-hidden="true"
 		>
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">{{ data.name }}</h5>
+						<h5 class="modal-title" :id="`label-${data.id}`">{{ data.name }}</h5>
 						<button
 							type="button"
 							class="btn-close"

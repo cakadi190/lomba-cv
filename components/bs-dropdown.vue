@@ -13,16 +13,16 @@
 		</button>
 		<ul class="dropdown-menu w-100" :aria-labelledby="`select-menu-${refId}`">
 			<li v-for="option in options" :key="option.value">
-				<a
+				<button
 					class="dropdown-item d-flex gap-3 justify-content-between"
 					:class="{ disabled: option.disabled ?? false, active: isSelected(option) }"
 					:disabled="option.disabled ?? false"
-					href="#"
-					@click.prevent="selectOption(option)"
+					type="button"
+					@click="selectOption(option)"
 				>
 					<span>{{ option.label }}</span>
 					<span v-if="option.rightLabel">{{ option.rightLabel }}</span>
-				</a>
+				</button>
 			</li>
 		</ul>
 	</div>

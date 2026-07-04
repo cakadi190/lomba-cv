@@ -10,20 +10,20 @@
 		<section class="need-space pt-0">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 text-center mx-auto" v-if="status == 'pending'">
+					<div class="col-md-6 text-center mx-auto" v-if="status === 'pending'">
 						<error-section
-							imgSrc="/images/errors/loading.svg"
-							imgAlt="Tidak Ditemukan"
-							imgHeight="250"
+							img-src="/images/errors/loading.svg"
+							img-alt="Tidak Ditemukan"
+							img-height="250"
 							title="Tunggu Sebentar"
 							text="Sistem sedang memuat konten dari peladen"
 						/>
 					</div>
 					<div class="col-md-6 text-center mx-auto" v-else-if="error">
 						<error-section
-							imgSrc="/images/errors/404.svg"
-							imgAlt="Tidak Ditemukan"
-							imgHeight="250"
+							img-src="/images/errors/404.svg"
+							img-alt="Tidak Ditemukan"
+							img-height="250"
 							title="Ups, Terjadi kesalahan"
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>
@@ -33,9 +33,9 @@
 						v-else-if="!error && !data"
 					>
 						<error-section
-							imgSrc="/images/errors/404.svg"
-							imgAlt="Tidak Ditemukan"
-							imgHeight="250"
+							img-src="/images/errors/404.svg"
+							img-alt="Tidak Ditemukan"
+							img-height="250"
 							title="Ups, Terjadi kesalahan"
 							text="Saat ini kami sedang memperbaiki kesalahan ini"
 						/>

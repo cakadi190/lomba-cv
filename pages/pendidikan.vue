@@ -143,7 +143,7 @@
 							</div>
 							<div class="card-body">
 								<!-- Tab panes Title -->
-								<ul
+								<div
 									class="nav nav-pills flex-column align-items-stretch"
 									v-motion
 									:enter="enterSlideFromBottomToTop"
@@ -151,7 +151,7 @@
 									id="myTab"
 									role="tablist"
 								>
-									<li class="nav-item" role="presentation">
+									<div class="nav-item" role="presentation">
 										<button
 											class="nav-link py-3 w-100 text-start active"
 											id="education-tab"
@@ -164,8 +164,8 @@
 										>
 											Riwayat Pendidikan
 										</button>
-									</li>
-									<li class="nav-item" role="presentation">
+									</div>
+									<div class="nav-item" role="presentation">
 										<button
 											class="nav-link py-3 w-100 text-start"
 											id="organization-tab"
@@ -178,8 +178,8 @@
 										>
 											Riwayat Organisasi dan Kepanitiaan
 										</button>
-									</li>
-								</ul>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

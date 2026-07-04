@@ -103,24 +103,23 @@
 						<ul
 							class="nav nav-pills flex-column align-items-stretch"
 							id="myTab"
-							role="tablist"
 						>
-							<li class="nav-item" role="presentation">
+							<li class="nav-item">
 								<a href="#description" class="nav-link py-3 w-100 text-start">
 									Deskripsi Proyek
 								</a>
 							</li>
-							<li class="nav-item" role="presentation">
+							<li class="nav-item">
 								<a href="#techstack" class="nav-link py-3 w-100 text-start">
 									Dibangun Dengan
 								</a>
 							</li>
-							<li class="nav-item" role="presentation">
+							<li class="nav-item">
 								<a href="#gallery" class="nav-link py-3 w-100 text-start">
 									Galeri
 								</a>
 							</li>
-							<li class="nav-item" role="presentation">
+							<li class="nav-item">
 								<a href="#rating" class="nav-link py-3 w-100 text-start">
 									Penilaian
 								</a>

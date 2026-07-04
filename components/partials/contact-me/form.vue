@@ -20,12 +20,13 @@
 			lebih dari 5x, karena bisa membebani <em>server</em>!
 		</p>
 
-		<form @submit.prevent class="pt-1">
+		<form @submit.prevent="() => {}" class="pt-1">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="mb-3">
-						<label for="" class="input-label">Nama Lengkapmu</label>
+						<label for="fullName" class="input-label">Nama Lengkapmu</label>
 						<input
+							id="fullName"
 							type="text"
 							class="form-control"
 							placeholder="Mis: Mas Adi"
@@ -34,10 +35,11 @@
 				</div>
 				<div class="col-md-6">
 					<div class="mb-3">
-						<label for="" class="input-label"
+						<label for="contactEmail" class="input-label"
 							>Surat Elektronik (atau <em>E-Mail</em>)</label
 						>
 						<input
+							id="contactEmail"
 							type="text"
 							class="form-control"
 							placeholder="Mis: cakadi@email.com"
@@ -47,13 +49,14 @@
 			</div>
 
 			<div class="mb-3">
-				<label class="input-label">Ada Perlu Apa?</label>
+				<span class="input-label d-block">Ada Perlu Apa?</span>
 				<bs-dropdown v-model="selectedValue" :options="options" />
 			</div>
 
 			<div class="mb-3">
-				<label for="" class="input-label">Pesan Anda</label>
+				<label for="messageText" class="input-label">Pesan Anda</label>
 				<textarea
+					id="messageText"
 					class="form-control"
 					rows="4"
 					placeholder="Tuliskan pesan anda disini&hellip;"

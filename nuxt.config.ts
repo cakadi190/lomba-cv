@@ -47,6 +47,14 @@ export default defineNuxtConfig({
     ],
   ],
 
+  colorMode: {
+    preference: "system",
+    fallback: "light",
+    attribute: "data-bs-theme",
+    classSuffix: "",
+    storageKey: "nuxt-color-mode",
+  },
+
   vite: {
     optimizeDeps: {
       include: [

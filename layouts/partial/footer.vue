@@ -64,8 +64,14 @@
           <h5 class="h6">Sumber Daya</h5>
 					<ul class="list-unstyled">
             <li><a target="_blank" href="https://www.catatancakadi.com">Blog Pribadi</a></li>
-						<li><a href="#">Referensi Ngoding</a></li>
-						<li><a href="#">Contekan Kode</a></li>
+						<li>
+							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
+							<a href="#">Referensi Ngoding</a>
+						</li>
+						<li>
+							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
+							<a href="#">Contekan Kode</a>
+						</li>
             <li><nuxt-link to="/sumber-daya/tempat-ngopi">Tempat Ngopi</nuxt-link></li>
 					</ul>
 				</div>
@@ -73,10 +79,19 @@
 				<div class="col-md-2">
 					<h5 class="h6">Tautan Lain-lain</h5>
 					<ul class="list-unstyled">
-						<li><a href="#">Tentang Situs</a></li>
-						<li><a href="#">Kredit</a></li>
-						<li><a href="#">Donasi di trakteer.id</a></li>
-						<li><a href="#">Donasi di ko-fi.com</a></li>
+						<li><nuxt-link to="/tentang/situs">Tentang Situs</nuxt-link></li>
+						<li>
+							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
+							<a href="#">Kredit</a>
+						</li>
+						<li>
+							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
+							<a href="#">Donasi di trakteer.id</a>
+						</li>
+						<li>
+							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
+							<a href="#">Donasi di ko-fi.com</a>
+						</li>
 					</ul>
 				</div>
 			</div>

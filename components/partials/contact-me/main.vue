@@ -16,19 +16,18 @@
 							<ul
 								class="nav nav-pills flex-column align-items-stretch"
 								id="myTab"
-								role="tablist"
 							>
-								<li class="nav-item" role="presentation">
+								<li class="nav-item">
 									<a href="#information" class="nav-link py-3 w-100 text-start">
 										Informasi Kontak
 									</a>
 								</li>
-								<li class="nav-item" role="presentation">
+								<li class="nav-item">
 									<a href="#socmed" class="nav-link py-3 w-100 text-start">
 										Sosial Media
 									</a>
 								</li>
-								<li class="nav-item" role="presentation">
+								<li class="nav-item">
 									<a href="#form-contact" class="nav-link py-3 w-100 text-start">
 										Formulir Kontak
 									</a>
