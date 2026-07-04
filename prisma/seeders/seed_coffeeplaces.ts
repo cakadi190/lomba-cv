@@ -387,10 +387,10 @@ const coffeePlacesData: CoffeePlace[] = [
 ];
 
 async function seedCoffeePlaces() {
-  await truncateTable("coffee_places");
+  await truncateTable("coffeePlace");
 
   for (const place of coffeePlacesData) {
-    await prisma.coffee_places.create({
+    await prisma.coffeePlace.create({
       data: place,
     });
   }

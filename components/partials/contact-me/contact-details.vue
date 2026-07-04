@@ -133,15 +133,16 @@ defineOptions({ name: "ContactDetails" });
 
 const email: Ref<string> = ref("me@cakadi.id");
 const altEmail: Ref<string> = ref("cakadi190@gmail.com");
-const phone: Ref<string> = ref("081333550746");
+const phone: Ref<string> = ref("081234771365");
 const website: Ref<string> = ref("https://www.masadi.net");
 
 const socialMediaLinks = ref([
   { platform: "Facebook", url: "https://www.facebook.com/cakadi190" },
-  { platform: "Instagram", url: "https://www.instagram.com/cakadi.id/" },
-  { platform: "Twitter", url: "https://twitter.com/cakadi190" },
+  { platform: "Instagram", url: "https://www.instagram.com/masadi.dev/" },
+  { platform: "Twitter", url: "https://x.com/cakadi190" },
   { platform: "Youtube", url: "https://youtube.com/@catatancakadi" },
   { platform: "LinkedIn", url: "https://linkedin.com/in/cakadi190" },
+  { platform: "TikTok", url: "https://tiktok.com/@cakadi190" },
 ]);
 </script>
 

@@ -111,7 +111,7 @@ const applyTheme = (themes: string) => {
     if (logoElement) {
       logoElement.setAttribute(
         "src",
-        `/images/brands/logo-${themes === "light" ? "color" : "white"}-long.svg`,
+        `/images/brands/logo-${themes === "light" ? "color" : "white"}.svg`,
       );
     }
   });
@@ -162,6 +162,3 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 </script>
-
-<style>
-</style>

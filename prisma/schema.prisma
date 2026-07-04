@@ -12,8 +12,20 @@ datasource db {
   provider = "postgresql"
 }
 
+// # For User / Auth # //
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("users")
+}
+
 // # For Education # //
-model educations {
+model Education {
   id           String    @id @default(uuid())
   name         String
   logo         String?
@@ -27,20 +39,24 @@ model educations {
   place        String
   created_at   DateTime  @default(now())
   updated_at   DateTime  @default(now()) @updatedAt
+
+  @@map("educations")
 }
 
 // # For Organization EXP # //
-model organizations {
+model Organization {
   id         String   @id @default(uuid())
   orgName    String
   desc       String?
   period     String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
+
+  @@map("organizations")
 }
 
 // # For Career EXP # //
-model careers {
+model Career {
   id         String          @id @default(uuid())
   position   String
   company    String
@@ -50,40 +66,46 @@ model careers {
   portfolios PortfolioLink[]
   created_at DateTime        @default(now())
   updated_at DateTime        @default(now()) @updatedAt
+
+  @@map("careers")
 }
 
 // # For Portfolio # //
-model portfolios {
-  id               String                @id @default(uuid())
+model Portfolio {
+  id               String                  @id @default(uuid())
   name             String
-  slug             String                @unique
+  slug             String                  @unique
   image            String
   techstack        Json
   shortDesc        String?
   desc             String?
   demoLink         String?
   sourceCode       String?
-  private          Boolean               @default(false)
-  categories       PortfolioCategory[]
+  private          Boolean                 @default(false)
+  categories       PortfolioCategoryLink[]
   careerExperience PortfolioLink[]
-  ratings          portfolio_ratings[]
-  galleries        portfolio_galleries[]
-  created_at       DateTime              @default(now())
-  updated_at       DateTime              @default(now()) @updatedAt
+  ratings          PortfolioRating[]
+  galleries        PortfolioGallery[]
+  created_at       DateTime                @default(now())
+  updated_at       DateTime                @default(now()) @updatedAt
+
+  @@map("portfolios")
 }
 
 // # For Portfolio Categories # //
-model portfolio_categories {
-  id         String              @id @default(uuid())
+model PortfolioCategory {
+  id         String                  @id @default(uuid())
   name       String
   color      String?
-  portfolios PortfolioCategory[]
-  created_at DateTime            @default(now())
-  updated_at DateTime            @default(now()) @updatedAt
+  portfolios PortfolioCategoryLink[]
+  created_at DateTime                @default(now())
+  updated_at DateTime                @default(now()) @updatedAt
+
+  @@map("portfolio_categories")
 }
 
 // # For Award EXP # //
-model awards {
+model Award {
   id         String    @id @default(uuid())
   event      String
   award      String
@@ -93,49 +115,59 @@ model awards {
   date       DateTime?
   created_at DateTime  @default(now())
   updated_at DateTime  @default(now()) @updatedAt
+
+  @@map("awards")
 }
 
 // Relation Models
 model PortfolioLink {
-  id          String      @id @default(uuid())
-  portfolio   portfolios? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  id          String     @id @default(uuid())
+  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String?
-  career      careers?    @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  career      Career?    @relation(fields: [careerId], references: [id], onDelete: Cascade)
   careerId    String?
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @default(now()) @updatedAt
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @default(now()) @updatedAt
+
+  @@map("PortfolioLink")
 }
 
-model PortfolioCategory {
-  id          String                @id @default(uuid())
-  portfolio   portfolios?           @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+model PortfolioCategoryLink {
+  id          String             @id @default(uuid())
+  portfolio   Portfolio?         @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String?
-  category    portfolio_categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category    PortfolioCategory? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId  String?
-  created_at  DateTime              @default(now())
-  updated_at  DateTime              @default(now()) @updatedAt
+  created_at  DateTime           @default(now())
+  updated_at  DateTime           @default(now()) @updatedAt
+
+  @@map("PortfolioCategory")
 }
 
 // # For Portfolio Ratings # //
-model portfolio_ratings {
-  id          String     @id @default(uuid())
+model PortfolioRating {
+  id          String    @id @default(uuid())
   rating      Int
   comment     String?
-  portfolio   portfolios @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @default(now()) @updatedAt
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+
+  @@map("portfolio_ratings")
 }
 
 // # For Portfolio Galleries # //
-model portfolio_galleries {
-  id          String     @id @default(uuid())
+model PortfolioGallery {
+  id          String    @id @default(uuid())
   imageUrl    String
   description String?
-  portfolio   portfolios @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String
-  created_at  DateTime   @default(now())
-  updated_at  DateTime   @default(now()) @updatedAt
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+
+  @@map("portfolio_galleries")
 }
 
 enum WifiSpeed {
@@ -151,7 +183,7 @@ enum CafePrice {
 }
 
 // # For Coffee Places # //
-model coffee_places {
+model CoffeePlace {
   id             String    @id @default(uuid())
   name           String
   address        String
@@ -169,4 +201,6 @@ model coffee_places {
   created_at     DateTime  @default(now())
   updated_at     DateTime  @default(now()) @updatedAt
   recomended     Boolean?  @default(false)
+
+  @@map("coffee_places")
 }

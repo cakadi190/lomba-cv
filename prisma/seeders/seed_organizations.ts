@@ -3,12 +3,12 @@ import { truncateTable } from "./util/truncate_tables.ts";
 
 const organizationData = [
   {
-    orgName: "UKM PALS",
+    orgName: "UKM Polytehnic Association of Language Study (PALS)",
     desc: "Wakil Ketua 2",
     period: "2024 - Sekarang",
   },
   {
-    orgName: "UKM PALS",
+    orgName: "UKM Polytehnic Association of Language Study (PALS)",
     desc: "Divisi Kominfo",
     period: "2023 - 2024",
   },
@@ -40,10 +40,10 @@ const organizationData = [
 ];
 
 async function seedOrganizations() {
-  truncateTable("educations");
+  await truncateTable("organization");
 
   for (const organization of organizationData) {
-    await prisma.organizations.create({
+    await prisma.organization.create({
       data: organization,
     });
   }

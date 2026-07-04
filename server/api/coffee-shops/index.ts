@@ -14,7 +14,7 @@ const convertBigInt = (obj: any): any => {
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
-    const _coffeeShopsModel = prisma.coffee_places;
+    const _coffeeShopsModel = prisma.coffeePlace;
 
     const page = Number(query?.page) || 1;
     const perPage = Number(query?.perPage) || 12;

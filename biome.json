@@ -67,5 +67,16 @@
         }
       }
     }
-  ]
+  ],
+  "html": {
+    "experimentalFullSupportEnabled": true
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    }
+  }
 }

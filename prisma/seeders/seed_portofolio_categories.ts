@@ -10,10 +10,10 @@ const categories = [
 ];
 
 async function seedPortofolioCategories() {
-  truncateTable("portfolio_categories");
+  await truncateTable("portfolioCategory");
 
   for (const category of categories) {
-    await prisma.portfolio_categories.create({
+    await prisma.portfolioCategory.create({
       data: category,
     });
   }

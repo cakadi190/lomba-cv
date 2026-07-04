@@ -48,6 +48,19 @@ export default defineNuxtConfig({
   ],
 
   vite: {
+    optimizeDeps: {
+      include: [
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "bootstrap",
+        "dayjs", // CJS
+        "dayjs/plugin/relativeTime", // CJS
+        "dayjs/plugin/updateLocale", // CJS
+        "dayjs/plugin/utc", // CJS
+        "jquery",
+        "swiper/element/bundle",
+      ],
+    },
     css: {
       preprocessorOptions: {
         scss: {

@@ -9,17 +9,23 @@ import seedOrganizations from "./seeders/seed_organizations.ts";
 import seedPortofolio from "./seeders/seed_portofolio.ts";
 import seedPortofolioCategories from "./seeders/seed_portofolio_categories.ts";
 import seedPortofolioCategoryLinks from "./seeders/seed_portofolio_category.ts";
+import seedUsers from "./seeders/seed_users.ts";
 import { truncateTable } from "./seeders/util/truncate_tables.ts";
 
 async function main() {
   try {
-    await truncateTable("awards");
-    await truncateTable("portfolios");
-    await truncateTable("portfolio_categories");
-    await truncateTable("careers");
-    await truncateTable("educations");
-    await truncateTable("organizations");
-    await truncateTable("coffee_places");
+    await truncateTable("award");
+    await truncateTable("portfolio");
+    await truncateTable("portfolioCategory");
+    await truncateTable("portfolioCategoryLink");
+    await truncateTable("career");
+    await truncateTable("education");
+    await truncateTable("organization");
+    await truncateTable("coffeePlace");
+    await truncateTable("user");
+
+    await seedUsers();
+    console.log("\x1b[32m\u2714  Users seeded successfully");
 
     await seedAwards();
     console.log("\x1b[32m\u2714  Awards seeded successfully");

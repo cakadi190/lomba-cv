@@ -246,12 +246,12 @@ const dateConverter = (date: string): string => {
 
 const organization = ref([
   {
-    orgName: "UKM PALS",
+    orgName: "UKM Polytehnic Association of Language Study (PALS)",
     desc: "Wakil Ketua 2",
     period: "2024 - 2025",
   },
   {
-    orgName: "UKM PALS",
+    orgName: "UKM Polytehnic Association of Language Study (PALS)",
     desc: "Divisi Kominfo",
     period: "2023 - 2024",
   },

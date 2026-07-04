@@ -78,10 +78,10 @@ const awardData = [
 ];
 
 async function seedAwards() {
-  truncateTable("awards");
+  await truncateTable("award");
 
   for (const award of awardData) {
-    await prisma.awards.create({
+    await prisma.award.create({
       data: award,
     });
   }

@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const perPage: number = parseInt(query?.perPage as string, 10) || 3;
     const skip: number = (page - 1) * perPage || 0;
 
-    const educations = await prisma.educations.findMany({
+    const educations = await prisma.education.findMany({
       skip,
       take: perPage,
       orderBy: {

@@ -304,10 +304,10 @@ const myPortofolio: PortfolioItem[] = [
 ];
 
 async function seedPortofolio() {
-  truncateTable("portfolios");
+  await truncateTable("portfolio");
 
   for (const item of myPortofolio) {
-    await prisma.portfolios.create({
+    await prisma.portfolio.create({
       data: {
         name: item.name,
         slug: item.slug,

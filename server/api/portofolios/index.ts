@@ -3,7 +3,7 @@ import prisma from "~~/lib/prisma";
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
-    const _portofolioModel = prisma.portfolios;
+    const _portofolioModel = prisma.portfolio;
 
     const page: number = parseInt(query?.page as string, 10) || 1;
     const perPage: number = parseInt(query?.perPage as string, 10) || 12;

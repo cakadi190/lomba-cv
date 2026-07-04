@@ -3,7 +3,7 @@ import prisma from "~~/lib/prisma";
 export default defineEventHandler(async (event) => {
   try {
     const slug = getRouterParam(event, "slug");
-    const portfolios = await prisma.portfolios.findMany({
+    const portfolios = await prisma.portfolio.findMany({
       where: { slug },
     });
 

@@ -3,7 +3,7 @@ import prisma from "~~/lib/prisma";
 export default defineEventHandler(async (event) => {
   try {
     const id = getRouterParam(event, "id");
-    const educations = await prisma.educations.findMany({
+    const educations = await prisma.education.findMany({
       where: { id },
     });
 
