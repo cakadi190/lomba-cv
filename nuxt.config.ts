@@ -55,6 +55,12 @@ export default defineNuxtConfig({
 
   sitemap: {
     exclude: ["/admin/**"],
+    autoAlternativeAliases: true,
+    autoI18n: true,
+    sources: [
+      "/api/__sitemap__/urls",
+    ],
+    autoLastmod: true,
   },
 
   colorMode: {
