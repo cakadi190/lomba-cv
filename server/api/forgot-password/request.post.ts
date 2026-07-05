@@ -86,7 +86,7 @@ export default defineEventHandler(async (event) => {
 
     // Send reset email
     await Mail.to(email)
-      .subject("Atur Ulang Kata Sandi Akun Lomba CV Anda")
+      .subject("Atur Ulang Kata Sandi Akun Catatan Mas Adi Anda")
       .template("forgot-password", {
         "Nama Pengguna": user.name,
         ResetUrl: resetUrl,
