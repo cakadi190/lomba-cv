@@ -162,7 +162,7 @@
 </template>
 
 <script lang="ts" setup>
-const urlRequest = useRequestURL();
+import { usePageSeo } from "~~/lib/seo";
 const route = useRoute();
 
 const filterPlace = computed(() => route.query.city ?? null);
@@ -232,23 +232,9 @@ const selectCity = (city: string | null) => {
 };
 
 // SEO META
-const title = computed(() => `Daftar Tempat Ngopi`);
-const description = computed(
-  () => `Berikut daftar tempat ngopi yang saya rekomendasikan.`,
-);
-const image = computed(() => "/images/meta-image.png");
-
-useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+usePageSeo({
+  title: "Daftar Tempat Ngopi",
+  description: "Berikut daftar tempat ngopi yang saya rekomendasikan.",
 });
 
 // Fetch Regions

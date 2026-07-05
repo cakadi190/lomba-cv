@@ -11,26 +11,12 @@
 
 <script lang="ts" setup>
 import contactMeComponent from "~/components/partials/contact-me/main.vue";
+import { usePageSeo } from "~~/lib/seo";
 
 // SEO META
-const title = computed(() => "Hubungi Saya");
-const description = computed(
-  () =>
-    `Berikut kontak yang dapat dihubungi apabila anda tertarik dengan skill saya maupun ingin bekerjasama dengan saya.`,
-);
-const image = computed(() => "/images/meta-image.png");
-const urlRequest = useRequestURL();
-
-useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+usePageSeo({
+  title: "Hubungi Saya",
+  description:
+    "Berikut kontak yang dapat dihubungi apabila anda tertarik dengan skill saya maupun ingin bekerjasama dengan saya.",
 });
 </script>

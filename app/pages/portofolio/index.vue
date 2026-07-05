@@ -103,7 +103,8 @@
 </template>
 
 <script lang="ts" setup>
-const urlRequest = useRequestURL();
+import { usePageSeo } from "~~/lib/seo";
+
 const route = useRoute();
 
 const page = computed({
@@ -120,24 +121,10 @@ const page = computed({
 });
 
 // SEO META
-const title = computed(() => `Daftar Portofolio`);
-const description = computed(
-  () =>
-    `Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.`,
-);
-const image = computed(() => "/images/meta-image.png");
-
-useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+usePageSeo({
+  title: "Daftar Portofolio",
+  description:
+    "Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.",
 });
 
 // Fetch Data

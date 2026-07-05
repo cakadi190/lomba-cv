@@ -85,11 +85,13 @@
 import { ref } from "vue";
 import authLogin from "~/composables/auth/login";
 
+import { usePageSeo } from "~~/lib/seo";
+
 definePageMeta({
   layout: "auth",
 });
 
-useSeoMeta({
+usePageSeo({
   title: "Masuk",
   description: "Masuk ke panel admin",
 });

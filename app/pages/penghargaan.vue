@@ -70,25 +70,12 @@ import {
   initialSlideFromBottomToTop,
 } from "~/components/motion";
 
-// SEO META
-const title = computed(() => "Penghargaan");
-const description = computed(
-  () => `Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.`,
-);
-const image = computed(() => "/images/meta-image.png");
-const urlRequest = useRequestURL();
+import { usePageSeo } from "~~/lib/seo";
 
-useSeoMeta({
-  title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+// SEO META
+usePageSeo({
+  title: "Penghargaan",
+  description: "Berikut beberapa daftar penghargaan yang sudah saya raih dan capai.",
 });
 
 // Rank Data

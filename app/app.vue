@@ -18,16 +18,11 @@ body {
 </style>
 
 <script lang="ts" setup>
-import { computed, nextTick } from "vue";
-
-const colorMode = useColorMode();
+import { nextTick } from "vue";
 
 useHead({
   titleTemplate: (titleChunk: any) => {
     return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
-  },
-  htmlAttrs: {
-    "data-bs-theme": computed(() => colorMode.value),
   },
 });
 

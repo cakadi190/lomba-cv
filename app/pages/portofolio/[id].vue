@@ -60,6 +60,8 @@ const { data, error, status } = useFetch<any>(`/api/portofolios/${params.id}`, {
   lazy: false,
 });
 
+import { usePageSeo } from "~~/lib/seo";
+
 // SEO META
 const title = computed(() =>
   status.value === "pending"
@@ -72,19 +74,11 @@ const description = computed(() =>
     : (data.value?.shortDesc ?? "Portofolio Tidak Ditemukan"),
 );
 const image = computed(() => data.value?.image ?? "/images/meta-image.png");
-const urlRequest = useRequestURL();
 
-useSeoMeta({
+usePageSeo({
   title,
-  ogTitle: title,
-  ogImage: image,
-  twitterImage: image,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
   description,
-  ogDescription: description,
-  twitterDescription: description,
-  ogUrl: urlRequest.href,
+  image,
 });
 </script>
 
