@@ -60,7 +60,7 @@
 
 							<div class="d-flex justify-content-center align-items-center gap-3">
 								<button
-									class="btn btn-primary"
+									class="btn btn-square btn-primary"
 									type="button"
 									:disabled="!portofolios?.hasPrevPage"
 									@click="previous"
@@ -74,7 +74,7 @@
 								>
 
 								<button
-									class="btn btn-primary"
+									class="btn btn-square btn-primary"
 									type="button"
 									:disabled="!portofolios?.hasNextPage"
 									@click="next"
