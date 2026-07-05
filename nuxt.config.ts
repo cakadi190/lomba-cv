@@ -23,6 +23,13 @@ export default defineNuxtConfig({
       fromAddress: process.env.MAIL_FROM_ADDRESS || "hello@example.com",
       fromName: process.env.MAIL_FROM_NAME || "Lomba CV",
     },
+    turnstile: {
+      secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY || "",
+    },
+  },
+
+  turnstile: {
+    siteKey: process.env.NUXT_TURNSTILE_SITE_KEY || "",
   },
 
   routeRules: {
@@ -70,6 +77,7 @@ export default defineNuxtConfig({
     ],
     "@nuxtjs/sitemap",
     "nuxt-skew-protection",
+    "@nuxtjs/turnstile",
   ],
 
   image: {

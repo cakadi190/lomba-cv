@@ -44,6 +44,10 @@
           <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
         </div>
 
+        <div class="mb-3">
+          <NuxtTurnstile v-model="token" />
+        </div>
+
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-lg btn-primary" :disabled="loading">
             <span v-if="!loading">Masuk</span>
@@ -73,6 +77,7 @@ usePageSeo({
 const email = ref("");
 const password = ref("");
 const remember = ref(false);
+const token = ref<string | null>(null);
 
 const { processing: loading, error, errors, post } = useLogin();
 
