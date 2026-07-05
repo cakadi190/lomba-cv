@@ -1,7 +1,6 @@
 import { loginSchema } from "~~/app/composables/auth/useLogin";
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
-import { setAuthCookie, signToken, verifyPassword } from "~~/server/utils/auth";
+import { Auth } from "~~/server/lib/facades/auth";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -29,41 +28,24 @@ export default defineEventHandler(async (event) => {
     const { email, password, remember } = validationResult.data;
     const isRemembered = !!remember;
 
-    // Find user in database
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const auth = Auth.guard(event);
+    const loginSuccess = await auth.attempt({ email, password }, isRemembered);
 
+    if (!loginSuccess) {
+      logger.warn({ email }, "Percobaan login gagal: Kredensial salah");
+      throw createError({
+        statusCode: 401,
+        statusMessage: "Kredensial salah.",
+      });
+    }
+
+    const user = await auth.user();
     if (!user) {
-      logger.warn({ email }, "Percobaan login gagal: User tidak ditemukan");
       throw createError({
-        statusCode: 401,
-        statusMessage: "Kredensial salah.",
+        statusCode: 500,
+        statusMessage: "Internal Server Error",
       });
     }
-
-    // Verify password
-    const isPasswordValid = verifyPassword(password, user.password);
-    if (!isPasswordValid) {
-      logger.warn(
-        { email, userId: user.id },
-        "Percobaan login gagal: Password salah",
-      );
-      throw createError({
-        statusCode: 401,
-        statusMessage: "Kredensial salah.",
-      });
-    }
-
-    // Sign JWT token
-    const expiresInSeconds = isRemembered ? 30 * 24 * 60 * 60 : 24 * 60 * 60;
-    const token = signToken(
-      { userId: user.id, email: user.email },
-      expiresInSeconds,
-    );
-
-    // Set cookie
-    setAuthCookie(event, token, isRemembered);
 
     logger.info({ userId: user.id, email: user.email }, "User berhasil login");
 

@@ -1,9 +1,9 @@
 import { logger } from "~~/lib/pino";
-import { deleteAuthCookie } from "~~/server/utils/auth";
+import { Auth } from "~~/server/lib/facades/auth";
 
 export default defineEventHandler((event) => {
   try {
-    deleteAuthCookie(event);
+    Auth.guard(event).logout();
 
     logger.info("User berhasil logout");
 

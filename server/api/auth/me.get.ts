@@ -1,9 +1,9 @@
 import { logger } from "~~/lib/pino";
-import { getAuthenticatedUser } from "~~/server/utils/auth";
+import { Auth } from "~~/server/lib/facades/auth";
 
 export default defineEventHandler(async (event) => {
   try {
-    const user = await getAuthenticatedUser(event);
+    const user = await Auth.guard(event).user();
 
     if (!user) {
       throw createError({
