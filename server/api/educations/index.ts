@@ -5,9 +5,12 @@ export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
 
-    const page: number = parseInt(query?.page as string, 10) || 1;
-    const perPage: number = parseInt(query?.perPage as string, 10) || 3;
-    const skip: number = (page - 1) * perPage || 0;
+    const page = Math.max(1, parseInt(query?.page as string, 10) || 1);
+    const perPage = Math.min(
+      100,
+      Math.max(1, parseInt(query?.perPage as string, 10) || 3),
+    );
+    const skip = (page - 1) * perPage || 0;
 
     const educations = await prisma.education.findMany({
       skip,

@@ -2,24 +2,52 @@ import crypto from "node:crypto";
 import { deleteCookie, type H3Event, parseCookies, setCookie } from "h3";
 import prisma from "~~/lib/prisma";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || "super-secret-key-fallback-lomba-cv-2026";
+let JWT_SECRET: string;
+const rawSecret = process.env.JWT_SECRET;
+if (rawSecret) {
+  JWT_SECRET = rawSecret;
+} else {
+  if (process.env.NODE_ENV === "production") {
+    console.warn(
+      "WARNING: JWT_SECRET environment variable is not set. Generating a random secret for session signing to secure the application.",
+    );
+    JWT_SECRET = crypto.randomBytes(32).toString("hex");
+  } else {
+    JWT_SECRET = "default-super-secret-key-fallback-lomba-cv-2026";
+  }
+}
 
 // Hashing Utilities
 export function hashPassword(password: string): string {
   const salt = crypto.randomBytes(16).toString("hex");
+  const iterations = 210000; // OWASP recommendation for PBKDF2-HMAC-SHA512
   const hash = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .pbkdf2Sync(password, salt, iterations, 64, "sha512")
     .toString("hex");
-  return `${salt}:${hash}`;
+  return `${salt}:${iterations}:${hash}`;
 }
 
 export function verifyPassword(password: string, storedHash: string): boolean {
-  const [salt, originalHash] = storedHash.split(":");
-  if (!salt || !originalHash) return false;
+  const parts = storedHash.split(":");
+  let salt: string | undefined;
+  let originalHash: string | undefined;
+  let iterations = 1000; // Default iteration count for legacy hashes
+
+  if (parts.length === 3) {
+    salt = parts[0];
+    iterations = parseInt(parts[1] || "", 10);
+    originalHash = parts[2];
+  } else if (parts.length === 2) {
+    salt = parts[0];
+    originalHash = parts[1];
+  } else {
+    return false;
+  }
+
+  if (!salt || !originalHash || Number.isNaN(iterations)) return false;
 
   const hash = crypto
-    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .pbkdf2Sync(password, salt, iterations, 64, "sha512")
     .toString("hex");
 
   // Timing-safe comparison to prevent timing attacks
@@ -91,7 +119,14 @@ export function verifyToken(token: string): Record<string, unknown> | null {
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
 
-  if (signature !== expectedSignature) {
+  const signatureBuf = Buffer.from(signature);
+  const expectedSignatureBuf = Buffer.from(expectedSignature);
+
+  if (signatureBuf.length !== expectedSignatureBuf.length) {
+    return null;
+  }
+
+  if (!crypto.timingSafeEqual(signatureBuf, expectedSignatureBuf)) {
     return null;
   }
 

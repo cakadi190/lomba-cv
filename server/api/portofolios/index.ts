@@ -6,12 +6,14 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const _portofolioModel = prisma.portfolio;
 
-    const page: number = parseInt(query?.page as string, 10) || 1;
-    const perPage: number = parseInt(query?.perPage as string, 10) || 12;
-    const skip: number = (page - 1) * perPage || 0;
+    const page = Math.max(1, parseInt(query?.page as string, 10) || 1);
+    const perPage = Math.min(
+      100,
+      Math.max(1, parseInt(query?.perPage as string, 10) || 12),
+    );
+    const skip = (page - 1) * perPage || 0;
 
-    const portofolioTotal = await _portofolioModel.count();
-    const portfoliosPromise = await _portofolioModel.findMany({
+    const portfoliosPromise = _portofolioModel.findMany({
       skip,
       take: perPage,
       include: {
@@ -26,7 +28,7 @@ export default defineEventHandler(async (event) => {
       },
     });
 
-    const totalCountPromise = await _portofolioModel.count();
+    const totalCountPromise = _portofolioModel.count();
 
     const [portfolios, totalCount] = await Promise.all([
       portfoliosPromise,
@@ -44,7 +46,7 @@ export default defineEventHandler(async (event) => {
       totalPage: Math.ceil(totalCount / perPage),
       page,
       perPage,
-      totalData: portofolioTotal,
+      totalData: totalCount,
     };
   } catch (error) {
     logger.error(

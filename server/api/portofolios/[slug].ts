@@ -4,16 +4,27 @@ import prisma from "~~/lib/prisma";
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
   try {
-    const portfolios = await prisma.portfolio.findMany({
+    const portfolio = await prisma.portfolio.findUnique({
       where: { slug },
     });
 
-    if (!portfolios || portfolios.length === 0) {
-      return { code: 404, message: "Educations not found" };
+    if (!portfolio) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Portfolio not found",
+      });
     }
 
-    return { code: 200, data: portfolios };
+    return { code: 200, data: portfolio };
   } catch (error) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "statusCode" in error &&
+      error.statusCode === 404
+    ) {
+      throw error;
+    }
     logger.error(
       { err: error, slug },
       "Terjadi kesalahan saat mengambil data portofolio berdasarkan slug",

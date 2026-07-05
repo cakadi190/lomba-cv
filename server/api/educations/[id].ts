@@ -4,16 +4,27 @@ import prisma from "~~/lib/prisma";
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   try {
-    const educations = await prisma.education.findMany({
+    const education = await prisma.education.findUnique({
       where: { id },
     });
 
-    if (!educations || educations.length === 0) {
-      return { code: 404, message: "Educations not found" };
+    if (!education) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: "Education not found",
+      });
     }
 
-    return { code: 200, data: educations };
+    return { code: 200, data: education };
   } catch (error) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "statusCode" in error &&
+      error.statusCode === 404
+    ) {
+      throw error;
+    }
     logger.error(
       { err: error, id },
       "Terjadi kesalahan saat mengambil data education berdasarkan ID",

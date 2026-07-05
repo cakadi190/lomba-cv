@@ -21,8 +21,8 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
     const _coffeeShopsModel = prisma.coffeePlace;
 
-    const page = Number(query?.page) || 1;
-    const perPage = Number(query?.perPage) || 12;
+    const page = Math.max(1, Number(query?.page) || 1);
+    const perPage = Math.min(100, Math.max(1, Number(query?.perPage) || 12));
     const skip = (page - 1) * perPage;
 
     const city = query?.city ? String(query.city) : undefined;

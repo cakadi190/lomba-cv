@@ -55,7 +55,7 @@ const { params } = useRoute();
 // Data Fetching from Server
 const { data, error, status } = useFetch<any>(`/api/portofolios/${params.id}`, {
   method: "GET",
-  transform: (a) => a?.data[0],
+  transform: (a) => a?.data,
   server: true,
   lazy: false,
 });
