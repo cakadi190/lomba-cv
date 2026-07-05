@@ -1,3 +1,4 @@
+import { logger } from "~~/lib/pino";
 import { getAuthenticatedUser } from "~~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
@@ -24,7 +25,10 @@ export default defineEventHandler(async (event) => {
     ) {
       throw error;
     }
-    console.error(error);
+    logger.error(
+      { err: error },
+      "Terjadi kesalahan pada proses check session (me)",
+    );
     throw createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",

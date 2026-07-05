@@ -1,8 +1,9 @@
+import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 
 export default defineEventHandler(async (event) => {
+  const slug = getRouterParam(event, "slug");
   try {
-    const slug = getRouterParam(event, "slug");
     const portfolios = await prisma.portfolio.findMany({
       where: { slug },
     });
@@ -13,7 +14,10 @@ export default defineEventHandler(async (event) => {
 
     return { code: 200, data: portfolios };
   } catch (error) {
-    console.error(error);
+    logger.error(
+      { err: error, slug },
+      "Terjadi kesalahan saat mengambil data portofolio berdasarkan slug",
+    );
     throw createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",

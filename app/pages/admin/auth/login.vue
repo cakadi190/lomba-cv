@@ -68,8 +68,13 @@
         </div>
 
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary">Masuk</button>
-          <nuxt-link to="/" class="btn btn-outline-primary">Kembali</nuxt-link>
+          <button type="submit" class="btn btn-lg btn-primary" :disabled="loading">
+            <span v-if="!loading">Masuk</span>
+            <span v-if="loading" class="spinner-border" role="status" aria-hidden="true">
+              <span class="visually-hidden">Loading...</span>
+            </span>
+          </button>
+          <nuxt-link to="/" class="btn btn-outline-primary" :class="{ 'disabled': loading }">Kembali</nuxt-link>
         </div>
       </form>
     </div>

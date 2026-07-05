@@ -1,3 +1,4 @@
+import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 
 // biome-ignore lint/suspicious/noExplicitAny: helper to convert BigInt in dynamic objects
@@ -52,7 +53,10 @@ export default defineEventHandler(async (event) => {
       totalData: totalCount,
     };
   } catch (error) {
-    console.error(error);
+    logger.error(
+      { err: error },
+      "Terjadi kesalahan saat mengambil data coffee shops",
+    );
     throw createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",

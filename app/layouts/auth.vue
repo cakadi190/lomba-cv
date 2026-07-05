@@ -10,8 +10,11 @@ import { route } from '~~/lib/route';
       <div class="card p-4 rounded-4 card-body w-100">
         <slot />
       </div>
-      <div class="mx-auto d-flex justify-content-center pt-2">
-        <theme-toggler />
+      <div class="mx-auto d-flex flex-column justify-content-center pt-2">
+        <div class="mb-2 text-center">&copy; 2024 Catatan Cak Adi</div>
+        <div class="mx-auto">
+          <theme-toggler />
+        </div>
       </div>
     </div>
   </main>

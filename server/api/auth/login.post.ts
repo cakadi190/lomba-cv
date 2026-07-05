@@ -1,4 +1,5 @@
 import { loginSchema } from "~~/app/composables/auth/login";
+import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 import { setAuthCookie, signToken, verifyPassword } from "~~/server/utils/auth";
 
@@ -15,6 +16,7 @@ export default defineEventHandler(async (event) => {
           formattedErrors[path] = issue.message;
         }
       }
+      logger.warn({ errors: formattedErrors }, "Validasi login gagal");
       throw createError({
         statusCode: 400,
         statusMessage: "Validasi gagal. Silakan periksa input Anda.",
@@ -33,18 +35,23 @@ export default defineEventHandler(async (event) => {
     });
 
     if (!user) {
+      logger.warn({ email }, "Percobaan login gagal: User tidak ditemukan");
       throw createError({
         statusCode: 401,
-        statusMessage: "Kredensial salah atau terjadi gangguan server.",
+        statusMessage: "Kredensial salah.",
       });
     }
 
     // Verify password
     const isPasswordValid = verifyPassword(password, user.password);
     if (!isPasswordValid) {
+      logger.warn(
+        { email, userId: user.id },
+        "Percobaan login gagal: Password salah",
+      );
       throw createError({
         statusCode: 401,
-        statusMessage: "Kredensial salah atau terjadi gangguan server.",
+        statusMessage: "Kredensial salah.",
       });
     }
 
@@ -58,6 +65,8 @@ export default defineEventHandler(async (event) => {
     // Set cookie
     setAuthCookie(event, token, isRemembered);
 
+    logger.info({ userId: user.id, email: user.email }, "User berhasil login");
+
     return {
       code: 200,
       message: "Logged in successfully",
@@ -68,7 +77,7 @@ export default defineEventHandler(async (event) => {
       },
     };
   } catch (error) {
-    console.error(error);
+    logger.error({ err: error }, "Terjadi kesalahan pada proses login");
     if (error && typeof error === "object" && "statusCode" in error) {
       throw error;
     }

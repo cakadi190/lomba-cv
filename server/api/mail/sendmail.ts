@@ -1,6 +1,7 @@
 // import nodemailer from 'nodemailer';
 // import dotenv from 'dotenv';
 // import hbs from 'nodemailer-express-handlebars';
+// import { logger } from "~~/lib/pino";
 
 // dotenv.config();
 
@@ -63,7 +64,7 @@ export default defineEventHandler(async (_event) => {
   //     code: 200,
   //   };
   // } catch (error) {
-  //   console.error(error);
+  //   logger.error({ err: error }, "Terjadi kesalahan saat mengirim email");
   //   return {
   //     code: 500,
   //     message: "Internal Server Error",

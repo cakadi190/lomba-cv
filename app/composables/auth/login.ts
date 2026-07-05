@@ -82,10 +82,17 @@ export default function authLogin(): AuthLoginInterface {
         data?: { statusMessage?: string; errors?: ValidationErrors };
       };
       const statusCode = fetchError.status || fetchError.statusCode || 500;
-      const statusMessage =
-        fetchError.data?.statusMessage ||
-        fetchError.message ||
-        "Kredensial salah atau terjadi gangguan server.";
+      let statusMessage = "";
+
+      if (statusCode === 401) {
+        statusMessage = fetchError.data?.statusMessage || "Kredensial salah.";
+      } else if (statusCode === 400) {
+        statusMessage =
+          fetchError.data?.statusMessage ||
+          "Validasi gagal. Silakan periksa input Anda.";
+      } else {
+        statusMessage = "Terjadi gangguan server.";
+      }
 
       error.value = {
         message: statusMessage,

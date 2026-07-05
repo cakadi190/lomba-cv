@@ -1,3 +1,4 @@
+import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 
 export default defineEventHandler(async (event) => {
@@ -18,7 +19,10 @@ export default defineEventHandler(async (event) => {
 
     return { code: 200, data: educations };
   } catch (error) {
-    console.error(error);
+    logger.error(
+      { err: error },
+      "Terjadi kesalahan saat mengambil data educations",
+    );
     throw createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",
