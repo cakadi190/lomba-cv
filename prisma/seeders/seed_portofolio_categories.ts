@@ -1,5 +1,5 @@
-import prisma from "../../lib/prisma.js";
 import { getRandomColor } from "../../app/utils/colors.js";
+import prisma from "../../lib/prisma.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 const categories = [

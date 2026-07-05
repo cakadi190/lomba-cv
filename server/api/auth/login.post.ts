@@ -1,18 +1,31 @@
+import { loginSchema } from "~~/app/composables/auth/login";
 import prisma from "~~/lib/prisma";
-import { signToken, verifyPassword } from "~~/server/utils/auth";
+import { setAuthCookie, signToken, verifyPassword } from "~~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const { email, password } = body;
 
-    // Validate request body
-    if (!email || !password) {
+    const validationResult = loginSchema.safeParse(body);
+    if (!validationResult.success) {
+      const formattedErrors: Record<string, string> = {};
+      for (const issue of validationResult.error.issues) {
+        const path = issue.path[0] as string;
+        if (!formattedErrors[path]) {
+          formattedErrors[path] = issue.message;
+        }
+      }
       throw createError({
         statusCode: 400,
-        statusMessage: "Email and password are required",
+        statusMessage: "Validasi gagal. Silakan periksa input Anda.",
+        data: {
+          errors: formattedErrors,
+        },
       });
     }
+
+    const { email, password, remember } = validationResult.data;
+    const isRemembered = !!remember;
 
     // Find user in database
     const user = await prisma.user.findUnique({
@@ -22,7 +35,7 @@ export default defineEventHandler(async (event) => {
     if (!user) {
       throw createError({
         statusCode: 401,
-        statusMessage: "Invalid credentials",
+        statusMessage: "Kredensial salah atau terjadi gangguan server.",
       });
     }
 
@@ -31,21 +44,19 @@ export default defineEventHandler(async (event) => {
     if (!isPasswordValid) {
       throw createError({
         statusCode: 401,
-        statusMessage: "Invalid credentials",
+        statusMessage: "Kredensial salah atau terjadi gangguan server.",
       });
     }
 
     // Sign JWT token
-    const token = signToken({ userId: user.id, email: user.email });
+    const expiresInSeconds = isRemembered ? 30 * 24 * 60 * 60 : 24 * 60 * 60;
+    const token = signToken(
+      { userId: user.id, email: user.email },
+      expiresInSeconds,
+    );
 
     // Set cookie
-    setCookie(event, "auth_token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60, // 7 days
-      path: "/",
-    });
+    setAuthCookie(event, token, isRemembered);
 
     return {
       code: 200,

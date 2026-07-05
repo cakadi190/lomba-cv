@@ -1,8 +1,8 @@
+import { deleteAuthCookie } from "~~/server/utils/auth";
+
 export default defineEventHandler((event) => {
   try {
-    deleteCookie(event, "auth_token", {
-      path: "/",
-    });
+    deleteAuthCookie(event);
 
     return {
       code: 200,

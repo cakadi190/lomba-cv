@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import type { H3Event } from "h3";
+import { deleteCookie, type H3Event, parseCookies, setCookie } from "h3";
 import prisma from "~~/lib/prisma";
 
 const JWT_SECRET =
@@ -127,4 +127,26 @@ export async function getAuthenticatedUser(event: H3Event) {
   });
 
   return user;
+}
+
+// Cookie Auth Helpers
+export function setAuthCookie(
+  event: H3Event,
+  token: string,
+  remember: boolean = false,
+) {
+  const maxAge = remember ? 30 * 24 * 60 * 60 : undefined; // 30 days or session cookie
+  setCookie(event, "auth_token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge,
+    path: "/",
+  });
+}
+
+export function deleteAuthCookie(event: H3Event) {
+  deleteCookie(event, "auth_token", {
+    path: "/",
+  });
 }
