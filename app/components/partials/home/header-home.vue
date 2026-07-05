@@ -1,56 +1,56 @@
 <script lang="ts" setup>
 import {
-  enterSlideFromLeftToRight,
-  enterSlideFromRightToLeft,
-  initialSlideFromLeftToRight,
-  initialSlideFromRightToLeft,
+	enterSlideFromLeftToRight,
+	enterSlideFromRightToLeft,
+	initialSlideFromLeftToRight,
+	initialSlideFromRightToLeft,
 } from "../../motion";
 import { route } from "~~/lib/route";
 
 defineOptions({ name: "HeaderHome" });
 
 useHead({
-  title: "Beranda",
-  meta: [
-    {
-      key: "description",
-      name: "description",
-      content:
-        "Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-    },
-    {
-      key: "og:canonical",
-      name: "canonical",
-      content: "https://www.masadi.net",
-    },
+	title: "Beranda",
+	meta: [
+		{
+			key: "description",
+			name: "description",
+			content:
+				"Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+		},
+		{
+			key: "og:canonical",
+			name: "canonical",
+			content: "https://www.masadi.net",
+		},
 
-    { key: "og:url", name: "og:url", content: "https://www.masadi.net" },
-    {
-      key: "og:description",
-      name: "og:description",
-      content:
-        "Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-    },
-  ],
+		{ key: "og:url", name: "og:url", content: "https://www.masadi.net" },
+		{
+			key: "og:description",
+			name: "og:description",
+			content:
+				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+		},
+	],
 });
 
 type TechStackItem = {
-  icon?: string;
-  name?: string;
-  type?: "separator";
+	icon?: string;
+	name?: string;
+	type?: "separator";
 };
 
 const techStack = ref<TechStackItem[]>([
-  { icon: "devicon:laravel", name: "Laravel" },
-  { icon: "devicon:vuejs", name: "VueJS" },
-  { icon: "devicon:bootstrap", name: "Bootstrap" },
-  { icon: "devicon:nuxtjs", name: "NuxtJS" },
-  { icon: "devicon:nextjs", name: "NextJS" },
-  { icon: "devicon:docker", name: "Docker" },
-  { type: "separator" },
-  { icon: "devicon:vscode", name: "Visual Studio Code" },
-  { icon: "devicon:figma", name: "Figma" },
-  { icon: "devicon:ubuntu", name: "Linux Ubuntu" },
+	{ icon: "devicon:laravel", name: "Laravel" },
+	{ icon: "devicon:vuejs", name: "VueJS" },
+	{ icon: "devicon:bootstrap", name: "Bootstrap" },
+	{ icon: "devicon:nuxtjs", name: "NuxtJS" },
+	{ icon: "devicon:nextjs", name: "NextJS" },
+	{ icon: "devicon:docker", name: "Docker" },
+	{ type: "separator" },
+	{ icon: "devicon:vscode", name: "Visual Studio Code" },
+	{ icon: "devicon:figma", name: "Figma" },
+	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
 </script>
 
@@ -59,39 +59,22 @@ const techStack = ref<TechStackItem[]>([
 		<div class="container">
 			<div class="row gy-4">
 				<div class="col-md-7 text-center text-lg-start">
-					<div
-						v-motion
-						:initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight"
-						class="breaking-news"
-					>
+					<div v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight"
+						class="breaking-news">
 						Website ini mendapatkan penghargaan 🏆
-						<a
-							href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2"
-							target="_blank"
-							>#3 Kompetisi Desain Website Personal CV Maroon Day HIMAFORKA
+						<a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi
+							Desain Website Personal CV Maroon Day HIMAFORKA
 							Universitas Teknologi Digital Indonesia<span
-								class="d-none d-xl-none d-xxl-inline-block"
-								>&nbsp;(d/h STMIK AKAKOM Yogyakarta)</span
-							></a
-						>
+								class="d-none d-xl-none d-xxl-inline-block">&nbsp;(d/h STMIK AKAKOM
+								Yogyakarta)</span></a>
 						tahun 2024.
 					</div>
 
-					<h2
-						class="h4"
-						v-motion
-						:initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight"
-					>
+					<h2 class="h4" v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
 						Halo rek! 👋 Perkenalkan, Namaku...
 					</h2>
-					<h1
-						class="main-title justify-content-center justify-content-lg-start"
-						v-motion
-						:initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight"
-					>
+					<h1 class="main-title justify-content-center justify-content-lg-start" v-motion
+						:initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
 						<div>
 							<span class="text-primary text-decoration-underline">A</span>
 							<span>mir&nbsp;</span>
@@ -100,64 +83,38 @@ const techStack = ref<TechStackItem[]>([
 						</div>
 						<span>Wibowo, A.Md.Kom.</span>
 					</h1>
-					<p
-						v-motion
-						:initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight"
-						class="mb-4 main-desc"
-					>
+					<p v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight"
+						class="mb-4 main-desc">
 						Seorang <strong>Software Engineer</strong> dan <strong>Wirausahawan</strong> yang berbasis di
 						Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang
 						berbau <strong>teknologi</strong>.
 					</p>
 
-					<div
-						class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center"
-					>
-						<nuxt-link
-							:to="route('contact')"
-							class="btn btn-primary d-flex align-items-center gap-2"
-							v-motion
-							:initial="initialSlideFromLeftToRight"
-							:enter="enterSlideFromLeftToRight"
-						>
+					<div class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center">
+						<nuxt-link :to="route('contact')" class="btn btn-primary d-flex align-items-center gap-2"
+							v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
 							<Icon name="fa6-solid:phone" />
 							<span>Hubungi Saya</span>
 						</nuxt-link>
 
-						<nuxt-link
-							to="https://s.id/cvnyaCakAdi"
-							class="btn btn-outline-primary d-flex align-items-center gap-2"
-							v-motion
-							:initial="initialSlideFromLeftToRight"
-							:enter="enterSlideFromLeftToRight"
-						>
+						<nuxt-link to="https://s.id/cvnyaCakAdi"
+							class="btn btn-outline-primary d-flex align-items-center gap-2" v-motion
+							:initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
 							<Icon name="fa6-solid:file-pdf" />
 							<span>Resume</span>
 						</nuxt-link>
 					</div>
 
-					<div
-						class="d-flex pt-4 flex-column gap-2"
-						v-motion
-						:initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight"
-					>
+					<div class="d-flex pt-4 flex-column gap-2" v-motion :initial="initialSlideFromLeftToRight"
+						:enter="enterSlideFromLeftToRight">
 						<h5 class="text-center text-lg-start">
 							<em>Tech Stack</em> Andalan Saya
 						</h5>
 
-						<div
-							class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3"
-						>
-							<span
-								class="tech-stack"
-								data-bs-toggle="tooltip"
-								data-bs-placement="top"
+						<div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+							<span class="tech-stack" data-bs-toggle="tooltip" data-bs-placement="top"
 								v-bind="item.name ? { 'data-bs-title': item.name } : {}"
-								v-for="(item, index) in techStack"
-								:key="index"
-							>
+								v-for="(item, index) in techStack" :key="index">
 								<div class="vr h-100" v-if="item.type === 'separator'"></div>
 								<Icon v-else :name="item.icon" size="32" />
 							</span>
@@ -165,16 +122,9 @@ const techStack = ref<TechStackItem[]>([
 					</div>
 				</div>
 				<div class="col-md-5">
-					<nuxt-img preload
-						v-motion
-						:initial="initialSlideFromRightToLeft"
-						:enter="enterSlideFromRightToLeft"
-						src="/images/fotoku.min.png"
-						alt="Mas Adi"
-            :placeholder="4500"
-            densities="1x 2x 3x"
-						class="w-100"
-					/>
+					<nuxt-img preload v-motion :initial="initialSlideFromRightToLeft" :enter="enterSlideFromRightToLeft"
+						src="/images/fotoku.min.png" alt="Mas Adi" :placeholder="4500" densities="1x 2x 3x"
+						class="w-100" />
 				</div>
 			</div>
 		</div>
@@ -194,7 +144,7 @@ const techStack = ref<TechStackItem[]>([
 #masthead {
 	position: relative;
 	overflow: hidden;
-	
+
 	&::before {
 		content: "";
 		position: absolute;
@@ -221,11 +171,9 @@ const techStack = ref<TechStackItem[]>([
 		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
 
 		[data-bs-theme="dark"] & {
-			background: linear-gradient(
-				to top,
-				rgb(var(--bs-body-bg-rgb)),
-				rgba(var(--bs-body-bg-rgb), 0.125)
-			);
+			background: linear-gradient(to top,
+					rgb(var(--bs-body-bg-rgb)),
+					rgba(var(--bs-body-bg-rgb), 0.125));
 		}
 	}
 
@@ -245,7 +193,7 @@ const techStack = ref<TechStackItem[]>([
 		font-weight: 600;
 		gap: .5rem;
 
-		> * {
+		>* {
 			display: inline-flex;
 		}
 
