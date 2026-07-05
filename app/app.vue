@@ -1,9 +1,9 @@
 <template>
-	<nuxt-loading-indicator />
+  <nuxt-loading-indicator />
 
-	<nuxt-layout>
-		<nuxt-page />
-	</nuxt-layout>
+  <nuxt-layout>
+    <nuxt-page />
+  </nuxt-layout>
 </template>
 
 <style lang="scss">
@@ -19,11 +19,114 @@ body {
 
 <script lang="ts" setup>
 import { nextTick } from "vue";
+import { url } from "~~/lib/url";
 
 useHead({
   titleTemplate: (titleChunk: any) => {
     return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
   },
+  link: [
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "57x57",
+      href: url("apple-touch-icon-57x57.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "114x114",
+      href: url("apple-touch-icon-114x114.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "72x72",
+      href: url("apple-touch-icon-72x72.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "144x144",
+      href: url("apple-touch-icon-144x144.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "60x60",
+      href: url("apple-touch-icon-60x60.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "120x120",
+      href: url("apple-touch-icon-120x120.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "76x76",
+      href: url("apple-touch-icon-76x76.png"),
+    },
+    {
+      rel: "apple-touch-icon-precomposed" as any,
+      sizes: "152x152",
+      href: url("apple-touch-icon-152x152.png"),
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "196x196",
+      href: url("favicon-196x196.png"),
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "96x96",
+      href: url("favicon-96x96.png"),
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      href: url("favicon-32x32.png"),
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      href: url("favicon-16x16.png"),
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "128x128",
+      href: url("favicon-128.png"),
+    },
+  ],
+  meta: [
+    {
+      name: "application-name",
+      content: "Catatan Mas Adi",
+    },
+    {
+      name: "msapplication-TileColor",
+      content: "#FFFFFF",
+    },
+    {
+      name: "msapplication-TileImage",
+      content: url("mstile-144x144.png"),
+    },
+    {
+      name: "msapplication-square70x70logo",
+      content: url("mstile-70x70.png"),
+    },
+    {
+      name: "msapplication-square150x150logo",
+      content: url("mstile-150x150.png"),
+    },
+    {
+      name: "msapplication-wide310x150logo",
+      content: url("mstile-310x150.png"),
+    },
+    {
+      name: "msapplication-square310x310logo",
+      content: url("mstile-310x310.png"),
+    },
+  ],
 });
 
 const initTooltipAndPopover = () => {
@@ -77,13 +180,16 @@ watch(
 .bg-body {
   background-color: var(--bs-body-bg) !important;
 }
+
 .bg-body-rgb {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity, 1)) !important;
 }
+
 .color-body {
   background-color: var(--bs-color-bg) !important;
 }
+
 .color-body-rgb {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-color-bg-rgb), var(--bs-color-opacity, 1)) !important;

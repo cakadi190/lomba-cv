@@ -11,6 +11,10 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    baseUrl: process.env.APP_URL ?? "http://localhost:3000",
+  },
+
   routeRules: {
     "/portofolio/**": { prerender: false },
 

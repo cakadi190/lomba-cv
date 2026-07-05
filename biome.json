@@ -66,6 +66,23 @@
           }
         }
       }
+    },
+    {
+      "includes": ["lib/mailer/template/bases/**/*.html"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useHtmlLang": "off",
+            "useValidAnchor": "off"
+          },
+          "correctness": {
+            "noUnknownProperty": "off"
+          },
+          "complexity": {
+            "noImportantStyles": "off"
+          }
+        }
+      }
     }
   ],
   "html": {

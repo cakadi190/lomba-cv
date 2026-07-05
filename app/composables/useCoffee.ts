@@ -1,5 +1,6 @@
 import { type MaybeRefOrGetter, toValue } from "vue";
 import { route } from "~~/lib/route";
+import type { PaginatedResponse } from "./usePortfolio";
 
 export interface CoffeeShop {
   id: string | number;
@@ -10,16 +11,6 @@ export interface CoffeeShop {
 export interface RegionResponse {
   data: string[];
   [key: string]: unknown;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  page: number;
-  totalPage: number;
-  totalData: number;
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
-  code?: number;
 }
 
 export function useCoffeeRegions() {
