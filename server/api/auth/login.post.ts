@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
     const validationResult = loginSchema.safeParse(body);
+
     if (!validationResult.success) {
       const formattedErrors: Record<string, string> = {};
       for (const issue of validationResult.error.issues) {
@@ -17,7 +18,7 @@ export default defineEventHandler(async (event) => {
       }
       logger.warn({ errors: formattedErrors }, "Validasi login gagal");
       throw createError({
-        statusCode: 400,
+        statusCode: 422,
         statusMessage: "Validasi gagal. Silakan periksa input Anda.",
         data: {
           errors: formattedErrors,
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
         "Validasi Turnstile gagal",
       );
       throw createError({
-        statusCode: 400,
+        statusCode: 422,
         statusMessage: "Validasi gagal. Silakan periksa input Anda.",
         data: {
           errors: {

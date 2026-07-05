@@ -20,9 +20,7 @@
               placeholder="admin@example.com" aria-describedby="email-addon" autocomplete="username" required
               :disabled="loading" />
           </div>
-          <span v-if="errors.email" class="invalid-feedback d-block" role="alert">
-            <strong>{{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}</strong>
-          </span>
+          <error-validation name="email" />
         </div>
 
         <div class="mb-3 form-group">
@@ -35,17 +33,14 @@
               :class="{ 'is-invalid': errors.password }" placeholder="Kata Sandi Anda" aria-describedby="password-addon"
               autocomplete="current-password" required :disabled="loading" />
           </div>
-          <span v-if="errors.password" class="invalid-feedback d-block" role="alert">
-            <strong>{{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}</strong>
-          </span>
+          <error-validation name="password" />
         </div>
 
         <div class="mb-3 form-check">
-          <input id="remember" type="checkbox" v-model="remember" class="form-check-input" :class="{ 'is-invalid': errors.remember }" :disabled="loading" />
+          <input id="remember" type="checkbox" v-model="remember" class="form-check-input"
+            :class="{ 'is-invalid': errors.remember }" :disabled="loading" />
           <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
-          <span v-if="errors.remember" class="invalid-feedback d-block" role="alert">
-            <strong>{{ Array.isArray(errors.remember) ? errors.remember[0] : errors.remember }}</strong>
-          </span>
+          <error-validation name="remember" />
         </div>
 
         <div
@@ -53,11 +48,9 @@
           :class="{ 'border-danger': errors.token }">
           <strong class="d-flex me-auto">Verifikasi Anti-Bot</strong>
           <client-only>
-            <NuxtTurnstile v-model="token" />
+            <NuxtTurnstile ref="turnstile" v-model="token" />
           </client-only>
-          <span v-if="errors.token" class="invalid-feedback d-block text-center" role="alert">
-            <strong>{{ Array.isArray(errors.token) ? errors.token[0] : errors.token }}</strong>
-          </span>
+          <error-validation name="token" class="text-center" />
         </div>
 
         <div class="d-grid gap-2">
@@ -76,7 +69,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, provide } from "vue";
 import { useLogin } from "~/composables/auth/useLogin";
 import { route } from "~~/lib/route";
 import { usePageSeo } from "~~/lib/seo";
@@ -90,13 +83,14 @@ const email = ref("");
 const password = ref("");
 const remember = ref(false);
 const token = ref<string | null>(null);
-
-console.log({ email, password, remember, token })
+const turnstile = ref();
 
 const { processing: loading, error, errors, post } = useLogin();
+provide("errors", errors);
 
 async function handleLogin() {
   try {
+    turnstile.value?.reset();
     await post({
       email: email.value,
       password: password.value,
@@ -107,7 +101,8 @@ async function handleLogin() {
     // Redirect to admin dashboard
     navigateTo(route("admin.index"));
   } catch (err) {
-    // Error is handled reactively by the composable
+    // Reset Turnstile token on validation/login error
+    token.value = null;
   }
 }
 </script>

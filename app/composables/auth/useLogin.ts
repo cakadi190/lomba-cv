@@ -78,7 +78,7 @@ export function useLogin(): AuthLoginInterface {
 
       if (statusCode === 401) {
         statusMessage = fetchError.data?.statusMessage || "Kredensial salah.";
-      } else if (statusCode === 400) {
+      } else if (statusCode === 400 || statusCode === 422) {
         statusMessage =
           fetchError.data?.statusMessage ||
           "Validasi gagal. Silakan periksa input Anda.";
