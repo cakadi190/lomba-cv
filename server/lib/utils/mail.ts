@@ -1,5 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
 import handlebars from "handlebars";
 import nodemailer from "nodemailer";
 import { logger } from "~~/lib/pino";
@@ -88,31 +86,30 @@ function escapeRegExp(string: string): string {
 
 /**
  * Compiles and renders the email template.
- * First reads the file, applies square bracket placeholder replacements, and then compiles via Handlebars.
+ * First reads the template from Nitro storage, applies square bracket placeholder replacements, and then compiles via Handlebars.
  */
-export function renderTemplate(
+export async function renderTemplate(
   templateName: string,
   context: Record<string, unknown>,
-): string {
+): Promise<string> {
   const fileName = templateName.endsWith(".html")
     ? templateName
     : `${templateName}.html`;
 
-  // Try lib/mailer/template/bases first, fallback to lib/mailer/template
-  let templatePath = path.join(
-    process.cwd(),
-    "lib/mailer/template/bases",
-    fileName,
-  );
-  if (!fs.existsSync(templatePath)) {
-    templatePath = path.join(process.cwd(), "lib/mailer/template", fileName);
+  const storage = useStorage("assets:templates");
+  let htmlContent: string | null = null;
+
+  // Try bases first, fallback to root
+  const baseKey = `bases/${fileName}`;
+  if (await storage.hasItem(baseKey)) {
+    htmlContent = (await storage.getItem(baseKey)) as string;
+  } else if (await storage.hasItem(fileName)) {
+    htmlContent = (await storage.getItem(fileName)) as string;
   }
 
-  if (!fs.existsSync(templatePath)) {
+  if (htmlContent === null) {
     throw new Error(`Email template not found: ${templateName}`);
   }
-
-  let htmlContent = fs.readFileSync(templatePath, "utf8");
 
   // Replace [Bracketed Placeholders] dynamically from context key-values
   for (const [key, value] of Object.entries(context)) {
@@ -146,7 +143,7 @@ export function renderTemplate(
 export async function sendMail(merged: MailMessage): Promise<unknown> {
   // Compile template if set
   if (merged.template) {
-    merged.html = renderTemplate(merged.template, merged.context || {});
+    merged.html = await renderTemplate(merged.template, merged.context || {});
   }
 
   const config = useRuntimeConfig();

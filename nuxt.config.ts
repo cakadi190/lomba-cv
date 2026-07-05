@@ -54,11 +54,12 @@ export default defineNuxtConfig({
       failOnError: false,
       ignore: ["/_ipx", "/_ipx/**"],
     },
-    vercel: {
-      functions: {
-        includeFiles: ["lib/mailer/template/**"],
+    serverAssets: [
+      {
+        baseName: "templates",
+        dir: "./lib/mailer/template",
       },
-    },
+    ],
   },
 
   modules: [
