@@ -1,32 +1,37 @@
 import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
+import { Cache } from "~~/server/lib/facades/cache";
 
 export default defineEventHandler(async (_event) => {
   try {
     const _coffeeShopsModel = prisma.coffeePlace;
 
-    // Ambil region unik dari database yang tidak null dan tidak kosong
-    const coffeePlaces = await _coffeeShopsModel.findMany({
-      where: {
-        AND: [{ region: { not: null } }, { region: { not: "" } }],
-      },
-      select: {
-        region: true,
-      },
-      distinct: ["region"],
-      orderBy: {
-        region: "asc",
-      },
+    const cacheKey = "coffee_shops:regions";
+
+    return await Cache.remember(cacheKey, 3600, async () => {
+      // Ambil region unik dari database yang tidak null dan tidak kosong
+      const coffeePlaces = await _coffeeShopsModel.findMany({
+        where: {
+          AND: [{ region: { not: null } }, { region: { not: "" } }],
+        },
+        select: {
+          region: true,
+        },
+        distinct: ["region"],
+        orderBy: {
+          region: "asc",
+        },
+      });
+
+      const regions = coffeePlaces
+        .map((item) => item.region)
+        .filter((region): region is string => !!region);
+
+      return {
+        code: 200,
+        data: regions,
+      };
     });
-
-    const regions = coffeePlaces
-      .map((item) => item.region)
-      .filter((region): region is string => !!region);
-
-    return {
-      code: 200,
-      data: regions,
-    };
   } catch (error) {
     logger.error(
       { err: error },

@@ -1,6 +1,7 @@
 import type { Prisma } from "@prisma/client";
 import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
+import { Cache } from "~~/server/lib/facades/cache";
 
 // biome-ignore lint/suspicious/noExplicitAny: helper to convert BigInt in dynamic objects
 const convertBigInt = (obj: any): any => {
@@ -44,35 +45,39 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    const [coffeeShops, totalCount] = await Promise.all([
-      _coffeeShopsModel.findMany({
-        where,
-        skip,
-        take: perPage,
-        orderBy: [{ recomended: "desc" }, { updated_at: "asc" }],
-      }),
-      _coffeeShopsModel.count({
-        where,
-      }),
-    ]);
+    const cacheKey = `coffee_shops:list:page:${page}:perPage:${perPage}:city:${city || "all"}:search:${search || "all"}`;
 
-    // Konversi BigInt ke string
-    const serializedCoffeeShops = convertBigInt(coffeeShops);
+    return await Cache.remember(cacheKey, 3600, async () => {
+      const [coffeeShops, totalCount] = await Promise.all([
+        _coffeeShopsModel.findMany({
+          where,
+          skip,
+          take: perPage,
+          orderBy: [{ recomended: "desc" }, { updated_at: "asc" }],
+        }),
+        _coffeeShopsModel.count({
+          where,
+        }),
+      ]);
 
-    const totalPages = Math.ceil(totalCount / perPage);
-    const hasNextPage = page < totalPages;
-    const hasPrevPage = page > 1;
+      // Konversi BigInt ke string
+      const serializedCoffeeShops = convertBigInt(coffeeShops);
 
-    return {
-      code: 200,
-      data: serializedCoffeeShops,
-      hasNextPage,
-      hasPrevPage,
-      totalPage: totalPages,
-      page,
-      perPage,
-      totalData: totalCount,
-    };
+      const totalPages = Math.ceil(totalCount / perPage);
+      const hasNextPage = page < totalPages;
+      const hasPrevPage = page > 1;
+
+      return {
+        code: 200,
+        data: serializedCoffeeShops,
+        hasNextPage,
+        hasPrevPage,
+        totalPage: totalPages,
+        page,
+        perPage,
+        totalData: totalCount,
+      };
+    });
   } catch (error) {
     logger.error(
       { err: error },
