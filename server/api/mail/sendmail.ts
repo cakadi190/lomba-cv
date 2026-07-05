@@ -1,73 +1,73 @@
-// import nodemailer from 'nodemailer';
-// import dotenv from 'dotenv';
-// import hbs from 'nodemailer-express-handlebars';
-// import { logger } from "~~/lib/pino";
+import { logger } from "~~/lib/pino";
+import { Mail } from "~~/server/lib/facades/mail";
 
-// dotenv.config();
+export default defineEventHandler(async (event) => {
+  try {
+    let name = "Guest";
+    let email = "guest@example.com";
+    let purpose = "general";
+    let message = "";
 
-// const transporter = nodemailer.createTransport({
-//   host: process.env.MAIL_HOST,
-//   port: Number(process.env.MAIL_PORT),
-//   secure: process.env.MAIL_PORT === '465',
-//   auth: {
-//     user: process.env.MAIL_USERNAME,
-//     pass: process.env.MAIL_PASSWORD,
-//   },
-// });
+    const contentType = getHeader(event, "content-type") || "";
+    if (contentType.includes("multipart/form-data")) {
+      const formData = await readFormData(event);
+      name = (formData.get("name") ||
+        formData.get("fullName") ||
+        "Guest") as string;
+      email = (formData.get("email") ||
+        formData.get("contactEmail") ||
+        "guest@example.com") as string;
+      purpose = (formData.get("purpose") || "general") as string;
+      message = (formData.get("message") ||
+        formData.get("messageText") ||
+        "") as string;
+    } else {
+      const body = await readBody(event);
+      if (body) {
+        name = body.name || body.fullName || "Guest";
+        email = body.email || body.contactEmail || "guest@example.com";
+        purpose = body.purpose || "general";
+        message = body.message || body.messageText || "";
+      }
+    }
 
-// transporter.use('compile', hbs())
+    const purposes: Record<string, string> = {
+      "project-collabs": "Kolaborasi Proyek",
+      connecting: "Kerjasama",
+      services: "Layanan",
+      general: "Ingin Bertanya Hal Umum",
+      others: "Lainnya",
+    };
 
-// function buildTemplate(formData: any) {
-//   const purposes: any = {
-//     'project-collabs': 'Kolaborasi Proyek',
-//     'connecting': 'Kerjasama',
-//     'services': 'Layanan',
-//     'general': 'Ingin Bertanya Hal Umum',
-//     'others': 'Lainnya',
-//   }
+    const resolvedPurpose = purposes[purpose] || "Tidak diketahui";
 
-//   return `
-//     <h1>Halo Cak!</h1>
+    // Use Laravel-style chainable Mail Facade to send email
+    await Mail.to(["cakadi190@gmail.com", "catatancakadi@gmail.com"])
+      .subject("Ada Pesan Baru Nih")
+      .template("email-info", {
+        nama_perusahaan_anda: "Cak Adi CV Portofolio",
+        nama_pengguna: name,
+        nomor_notifikasi: `#MSG-${Date.now().toString().slice(-6)}`,
+        tanggal: new Date().toLocaleDateString("id-ID", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }),
+        kategori_informasi: resolvedPurpose,
+        pesan: message,
+        email_pengirim: email,
+      })
+      .send();
 
-//     <p>Kali ini kamu ada pesan dari seseorang yang tidak dikenal yang mana sebagai berikut pesannya.</p>
-
-//     <p><strong>Nama</strong>: ${formData.get('name')}</p>
-//     <p><strong>Email</strong>: ${formData.get('email')}</p>
-//     <p><strong>Purpose</strong>: ${purposes[formData.get('purpose')] ? purposes[formData.get('purpose')] : 'Tidak diketahui'}</p>
-
-//     <p>${formData.get('message')}</p>
-//   `;
-// }
-
-// function buildEmail(formData: any) {
-//   transporter.sendMail({
-//     from: `"${process.env.MAIL_FROM_NAME}" <${process.env.MAIL_FROM_ADDRESS}>`,
-//     to: ["cakadi190@gmail.com", "catatancakadi@gmail.com"],
-//     subject: "Ada Pesan Baru Nih",
-//     text: "Hello world?",
-//     html: buildTemplate(formData),
-//     priority: "high",
-//   }, (error, info) => {
-//     if (error) {
-//       throw new Error("Cannot send! " + info.messageId);
-//     }
-//     console.log('Message sent: %s', info.messageId);
-//   });
-// }
-
-export default defineEventHandler(async (_event) => {
-  // try {
-  //   const formData = await readFormData(event);
-  //   buildEmail(formData);
-  //   return {
-  //     message: "Success!",
-  //     code: 200,
-  //   };
-  // } catch (error) {
-  //   logger.error({ err: error }, "Terjadi kesalahan saat mengirim email");
-  //   return {
-  //     code: 500,
-  //     message: "Internal Server Error",
-  //   };
-  // }
+    return {
+      message: "Success!",
+      code: 200,
+    };
+  } catch (error) {
+    logger.error({ err: error }, "Terjadi kesalahan saat mengirim email");
+    return {
+      code: 500,
+      message: "Internal Server Error",
+    };
+  }
 });
