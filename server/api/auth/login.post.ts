@@ -1,4 +1,4 @@
-import { loginSchema } from "~~/app/composables/auth/login";
+import { loginSchema } from "~~/app/composables/auth/useLogin";
 import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 import { setAuthCookie, signToken, verifyPassword } from "~~/server/utils/auth";
