@@ -6,97 +6,92 @@ export default defineComponent({
 
 <script setup lang="ts">
 import {
-	initialSlideFromLeftToRight,
-	enterSlideFromLeftToRight,
+  initialSlideFromLeftToRight,
+  enterSlideFromLeftToRight,
 } from "./motion";
 
 defineProps<{
-	backTo?: string;
+  backTo?: string;
 }>();
 </script>
 
 <template>
-	<header id="masthead">
-		<div class="container">
-			<div class="row">
-				<div class="col-xxl-6 col-lg-8">
-					<nuxt-link
-						v-if="backTo"
-						:to="backTo"
-						class="btn btn-link text-decoration-none d-flex gap-2 p-0 align-items-center mb-4"
-					>
-						<Icon name="fa6-solid:chevron-left" />
-						<span>Kembali</span>
-					</nuxt-link>
+  <header id="masthead">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-6 col-lg-8">
+          <nuxt-link v-motion :enter="enterSlideFromLeftToRight" :initial="initialSlideFromLeftToRight" v-if="backTo"
+            :to="backTo" class="btn btn-link btn-navigation" :delay="100">
+            <Icon name="fa6-solid:chevron-left" />
+            <span>Kembali</span>
+          </nuxt-link>
 
-					<!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
-					<h1
-						v-motion
-						:enter="enterSlideFromLeftToRight"
-						:initial="initialSlideFromLeftToRight"
-					>
-						<slot name="title" />
-					</h1>
-					<!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
-					<h2
-						v-motion
-						:enter="enterSlideFromLeftToRight"
-						:initial="initialSlideFromLeftToRight"
-						class="h4 opacity-75 fw-normal lh-base mb-0"
-					>
-						<slot name="subtitle" />
-					</h2>
+          <!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
+          <h1 v-motion :enter="enterSlideFromLeftToRight" :initial="initialSlideFromLeftToRight"
+            :delay="backTo ? 200 : 100">
+            <slot name="title" />
+          </h1>
+          <!-- biome-ignore lint/a11y/useHeadingContent: slot content is populated by parent -->
+          <h2 v-motion :enter="enterSlideFromLeftToRight" :initial="initialSlideFromLeftToRight"
+            :delay="backTo ? 300 : 200" class="h4 opacity-75 fw-normal lh-base mb-0">
+            <slot name="subtitle" />
+          </h2>
 
-					<slot />
-				</div>
-			</div>
-		</div>
-	</header>
+          <slot />
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <style scoped lang="scss">
 #masthead {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -2;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(226 232 240 / 0.8)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(226 232 240 / 0.8)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 
-		[data-bs-theme="dark"] & {
-			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / .1)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-		}
-	}
+    [data-bs-theme="dark"] & {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / .1)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+    }
+  }
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -1;
-		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
 
-		[data-bs-theme="dark"] & {
-			background: linear-gradient(
-				to top,
-				rgb(var(--bs-body-bg-rgb)),
-				rgba(var(--bs-body-bg-rgb), 0.125)
-			);
-		}
-	}
+    [data-bs-theme="dark"] & {
+      background: linear-gradient(to top,
+          rgb(var(--bs-body-bg-rgb)),
+          rgba(var(--bs-body-bg-rgb), 0.125));
+    }
+  }
 
-	.row {
-		min-height: 40dvh;
-		padding-top: 5rem;
-		align-items: center;
-	}
+  .row {
+    min-height: 40dvh;
+    padding-top: 5rem;
+    align-items: center;
+  }
+
+  .btn-navigation {
+    width: fit-content;
+    text-decoration: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
 }
 </style>
