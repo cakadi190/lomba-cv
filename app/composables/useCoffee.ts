@@ -23,13 +23,13 @@ export function useCoffeeRegions() {
 export function useCoffeeShops(params: {
   page: MaybeRefOrGetter<number>;
   city: MaybeRefOrGetter<unknown>;
-  placeName: MaybeRefOrGetter<unknown>;
+  search: MaybeRefOrGetter<unknown>;
 }) {
   return useFetch<PaginatedResponse<CoffeeShop>>(
     () => {
       const pageVal = toValue(params.page);
       const cityVal = toValue(params.city);
-      const placeNameVal = toValue(params.placeName);
+      const searchVal = toValue(params.search);
 
       const queryParams: Record<
         string,
@@ -49,16 +49,14 @@ export function useCoffeeShops(params: {
         }
       }
 
-      if (placeNameVal) {
-        const nameStr = Array.isArray(placeNameVal)
-          ? placeNameVal[0]
-          : placeNameVal;
+      if (searchVal) {
+        const nameStr = Array.isArray(searchVal) ? searchVal[0] : searchVal;
         if (
           typeof nameStr === "string" ||
           typeof nameStr === "number" ||
           typeof nameStr === "boolean"
         ) {
-          queryParams.placeName = nameStr;
+          queryParams.search = nameStr;
         }
       }
 

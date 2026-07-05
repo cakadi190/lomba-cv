@@ -122,7 +122,7 @@ const page = computed({
   },
 });
 
-const searchQuery = ref((currentRoute.query.placeName as string) || "");
+const searchQuery = ref((currentRoute.query.search as string) || "");
 let debounceTimeout: NodeJS.Timeout | null = null;
 
 watch(searchQuery, (newVal) => {
@@ -132,14 +132,14 @@ watch(searchQuery, (newVal) => {
       query: {
         ...currentRoute.query,
         page: 1,
-        placeName: newVal || undefined,
+        search: newVal || undefined,
       },
     });
   }, 500);
 });
 
 watch(
-  () => currentRoute.query.placeName,
+  () => currentRoute.query.search,
   (newVal) => {
     if (searchQuery.value !== (newVal || "")) {
       searchQuery.value = (newVal as string) || "";
@@ -153,7 +153,7 @@ const handleSearch = () => {
     query: {
       ...currentRoute.query,
       page: 1,
-      placeName: searchQuery.value || undefined,
+      search: searchQuery.value || undefined,
     },
   });
 };
@@ -190,7 +190,7 @@ const {
 } = await useCoffeeShops({
   page: () => page.value,
   city: () => filterPlace.value,
-  placeName: () => currentRoute.query.placeName,
+  search: () => currentRoute.query.search,
 });
 
 const next = () => {

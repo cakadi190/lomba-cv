@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     const skip = (page - 1) * perPage;
 
     const city = query?.city ? String(query.city) : undefined;
-    const placeName = query?.placeName ? String(query.placeName) : undefined;
+    const search = query?.search ? String(query.search) : undefined;
 
     const where: Prisma.CoffeePlaceWhereInput = {};
 
@@ -37,9 +37,9 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    if (placeName) {
+    if (search) {
       where.name = {
-        contains: placeName,
+        contains: search,
         mode: "insensitive",
       };
     }
