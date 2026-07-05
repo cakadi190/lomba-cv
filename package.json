@@ -9,6 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "seed": "tsx prisma/seed.ts",
+    "key:generate": "tsx server/scripts/key.ts generate",
+    "key:show": "tsx server/scripts/key.ts show",
+    "key:status": "tsx server/scripts/key.ts status",
     "format": "biome format --write .",
     "lint": "biome check ."
   },

@@ -1,26 +1,8 @@
 import crypto from "node:crypto";
-import { deleteCookie, type H3Event, parseCookies, setCookie } from "h3";
+import type { H3Event } from "h3";
 import prisma from "~~/lib/prisma";
-
-/**
- * The secret key used for signing and verifying JWT authentication tokens.
- * Initialized immediately using an IIFE. It will prioritize the process env `JWT_SECRET`,
- * generate a random cryptographically secure key in production if not present,
- * or fall back to a default key in development.
- */
-const JWT_SECRET: string = (() => {
-  const rawSecret = process.env.JWT_SECRET;
-  if (rawSecret) {
-    return rawSecret;
-  }
-  if (process.env.NODE_ENV === "production") {
-    console.warn(
-      "WARNING: JWT_SECRET environment variable is not set. Generating a random secret for session signing to secure the application.",
-    );
-    return crypto.randomBytes(32).toString("hex");
-  }
-  return "default-super-secret-key-fallback-lomba-cv-2026";
-})();
+import { getAppKeys } from "./keys";
+import { Cookie } from "../facades/cookie";
 
 /**
  * Hash a password using PBKDF2 with a dynamic salt and SHA-512.
@@ -126,7 +108,8 @@ export function signToken(
   const encodedHeader = base64urlEncode(JSON.stringify(header));
   const encodedPayload = base64urlEncode(JSON.stringify(expPayload));
 
-  const hmac = crypto.createHmac("sha256", JWT_SECRET);
+  const { key } = getAppKeys();
+  const hmac = crypto.createHmac("sha256", key);
   hmac.update(`${encodedHeader}.${encodedPayload}`);
   const signature = hmac
     .digest("base64")
@@ -152,22 +135,32 @@ export function verifyToken(token: string): Record<string, unknown> | null {
     return null;
   }
 
-  const hmac = crypto.createHmac("sha256", JWT_SECRET);
-  hmac.update(`${encodedHeader}.${encodedPayload}`);
-  const expectedSignature = hmac
-    .digest("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+  const { key, previous } = getAppKeys();
+  const allKeys = [key, ...previous];
+  let signatureValid = false;
 
-  const signatureBuf = Buffer.from(signature);
-  const expectedSignatureBuf = Buffer.from(expectedSignature);
+  for (const currentKey of allKeys) {
+    const hmac = crypto.createHmac("sha256", currentKey);
+    hmac.update(`${encodedHeader}.${encodedPayload}`);
+    const expectedSignature = hmac
+      .digest("base64")
+      .replace(/=/g, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
 
-  if (signatureBuf.length !== expectedSignatureBuf.length) {
-    return null;
+    const signatureBuf = Buffer.from(signature);
+    const expectedSignatureBuf = Buffer.from(expectedSignature);
+
+    if (
+      signatureBuf.length === expectedSignatureBuf.length &&
+      crypto.timingSafeEqual(signatureBuf, expectedSignatureBuf)
+    ) {
+      signatureValid = true;
+      break;
+    }
   }
 
-  if (!crypto.timingSafeEqual(signatureBuf, expectedSignatureBuf)) {
+  if (!signatureValid) {
     return null;
   }
 
@@ -189,8 +182,7 @@ export function verifyToken(token: string): Record<string, unknown> | null {
  * @returns The user object from the database, or null if unauthenticated.
  */
 export async function getAuthenticatedUser(event: H3Event) {
-  const cookies = parseCookies(event);
-  const token = cookies.auth_token;
+  const token = Cookie.get(event, "auth_token") as string | null;
 
   if (!token) return null;
 
@@ -223,12 +215,8 @@ export function setAuthCookie(
   remember: boolean = false,
 ) {
   const maxAge = remember ? 30 * 24 * 60 * 60 : undefined; // 30 days or session cookie
-  setCookie(event, "auth_token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+  Cookie.set(event, "auth_token", token, {
     maxAge,
-    path: "/",
   });
 }
 
@@ -238,7 +226,5 @@ export function setAuthCookie(
  * @param event - The H3 HTTP event.
  */
 export function deleteAuthCookie(event: H3Event) {
-  deleteCookie(event, "auth_token", {
-    path: "/",
-  });
+  Cookie.forget(event, "auth_token");
 }
