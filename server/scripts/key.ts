@@ -129,6 +129,16 @@ function handleStatus(): void {
   }
 }
 
+/**
+ * Handles the 'rotate-fix' command.
+ */
+function handleRotateFix(): void {
+  let env = readEnv();
+  env = setEnvVar(env, "APP_PREVIOUS_KEY", "");
+  writeEnv(env);
+  console.log("✅ Previous application key (APP_PREVIOUS_KEY) cleared successfully.");
+}
+
 const command = process.argv[2];
 
 switch (command) {
@@ -141,7 +151,10 @@ switch (command) {
   case "status":
     handleStatus();
     break;
+  case "rotate-fix":
+    handleRotateFix();
+    break;
   default:
-    console.log("Usage: tsx server/scripts/key.ts [generate [--rotate] | show | status]");
+    console.log("Usage: tsx server/scripts/key.ts [generate [--rotate] | show | status | rotate-fix]");
     process.exit(1);
 }
