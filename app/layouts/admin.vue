@@ -14,7 +14,7 @@ const user = computed(() => profileRes.value?.data);
 
 watchEffect(() => {
   if (error.value || (profileRes.value && !profileRes.value.data)) {
-    navigateTo(route("admin.auth.login"));
+    navigateTo(route("auth.login"));
   }
 });
 </script>

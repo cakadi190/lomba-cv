@@ -36,11 +36,16 @@
           <error-validation name="password" />
         </div>
 
-        <div class="mb-3 form-check">
-          <input id="remember" type="checkbox" v-model="remember" class="form-check-input"
-            :class="{ 'is-invalid': errors.remember }" :disabled="loading" />
-          <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
-          <error-validation name="remember" />
+        <div class="mb-3 d-flex justify-content-between align-items-center">
+          <div class="form-check">
+            <input id="remember" type="checkbox" v-model="remember" class="form-check-input"
+              :class="{ 'is-invalid': errors.remember }" :disabled="loading" />
+            <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
+            <error-validation name="remember" />
+          </div>
+          <div>
+            <nuxt-link :to="route('auth.forgot-password')" class="small text-decoration-none" :class="{ 'disabled': loading }">Lupa Kata Sandi?</nuxt-link>
+          </div>
         </div>
 
         <div

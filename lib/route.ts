@@ -31,9 +31,14 @@ export const ROUTES = {
   services: "/layanan",
 
   "admin.index": "/admin",
-  "admin.auth.login": "/admin/auth/login",
+  "auth.login": "/auth/login",
+  "auth.forgot-password": "/forgot-password",
+  "auth.forgot-password.change": "/forgot-password/change",
 
   // API Routes
+  "api.forgot-password.request": "/api/forgot-password/request",
+  "api.forgot-password.change": "/api/forgot-password/change",
+  "api.forgot-password.user-info": "/api/forgot-password/user",
   "api.auth.login": "/api/auth/login",
   "api.auth.logout": "/api/auth/logout",
   "api.auth.me": "/api/auth/me",

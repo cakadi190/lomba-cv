@@ -41,7 +41,8 @@ export default defineNuxtConfig({
   routeRules: {
     "/portofolio/**": { prerender: false },
 
-    "/admin/auth/**": { appLayout: "auth" },
+    "/auth/**": { appLayout: "auth" },
+    "/forgot-password/**": { appLayout: "auth" },
     "/admin/**": { appLayout: "admin" },
   },
 
