@@ -4,20 +4,24 @@
     <nuxt-img
       class="site-logo logo-light"
       src="/images/brands/logo-color.svg"
-      :height="height"
+      :height="elementHeight"
       alt="Logo Mas Adi"
+      :placeholder="[elementWidth, elementHeight]"
     />
     <!-- Logo Putih untuk Mode Gelap -->
     <nuxt-img
       class="site-logo logo-dark"
       src="/images/brands/logo-white.svg"
-      :height="height"
+      :height="elementHeight"
       alt="Logo Mas Adi"
+      :placeholder="[elementWidth, elementHeight]"
     />
   </nuxt-link>
 </template>
 
 <script lang="ts" setup>
+import { toPx } from '~~/lib/number';
+
 interface Props {
   to?: string;
   linkClass?: string;
@@ -29,6 +33,12 @@ const props = withDefaults(defineProps<Props>(), {
   linkClass: "",
   height: 32,
 });
+
+const elementWidth = computed(() => {
+  return Math.round((300 / 65) * toPx(String(props.height)));
+});
+
+const elementHeight = computed(() => toPx(String(props.height)));
 </script>
 
 <style lang="scss" scoped>
