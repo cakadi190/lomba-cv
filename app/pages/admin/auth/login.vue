@@ -20,9 +20,9 @@
               placeholder="admin@example.com" aria-describedby="email-addon" autocomplete="username" required
               :disabled="loading" />
           </div>
-          <div v-if="errors.email" class="text-danger small mt-1">
-            {{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}
-          </div>
+          <span v-if="errors.email" class="invalid-feedback d-block" role="alert">
+            <strong>{{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}</strong>
+          </span>
         </div>
 
         <div class="mb-3 form-group">
@@ -35,22 +35,29 @@
               :class="{ 'is-invalid': errors.password }" placeholder="Kata Sandi Anda" aria-describedby="password-addon"
               autocomplete="current-password" required :disabled="loading" />
           </div>
-          <div v-if="errors.password" class="text-danger small mt-1">
-            {{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}
-          </div>
+          <span v-if="errors.password" class="invalid-feedback d-block" role="alert">
+            <strong>{{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}</strong>
+          </span>
         </div>
 
         <div class="mb-3 form-check">
-          <input id="remember" type="checkbox" v-model="remember" class="form-check-input" :disabled="loading" />
+          <input id="remember" type="checkbox" v-model="remember" class="form-check-input" :class="{ 'is-invalid': errors.remember }" :disabled="loading" />
           <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
+          <span v-if="errors.remember" class="invalid-feedback d-block" role="alert">
+            <strong>{{ Array.isArray(errors.remember) ? errors.remember[0] : errors.remember }}</strong>
+          </span>
         </div>
 
         <div
-          class="mb-3 gap-3 d-flex flex-column justify-content-center align-items-center px-3 py-2 rounded border bg-body-tertiary">
+          class="mb-3 gap-3 d-flex flex-column justify-content-center align-items-center px-3 py-2 rounded border bg-body-tertiary"
+          :class="{ 'border-danger': errors.token }">
           <strong class="d-flex me-auto">Verifikasi Anti-Bot</strong>
           <client-only>
             <NuxtTurnstile v-model="token" />
           </client-only>
+          <span v-if="errors.token" class="invalid-feedback d-block text-center" role="alert">
+            <strong>{{ Array.isArray(errors.token) ? errors.token[0] : errors.token }}</strong>
+          </span>
         </div>
 
         <div class="d-grid gap-2">
@@ -83,6 +90,8 @@ const email = ref("");
 const password = ref("");
 const remember = ref(false);
 const token = ref<string | null>(null);
+
+console.log({ email, password, remember, token })
 
 const { processing: loading, error, errors, post } = useLogin();
 
