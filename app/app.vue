@@ -1,9 +1,9 @@
 <template>
-  <nuxt-loading-indicator />
+  <NuxtLoadingIndicator />
 
-  <nuxt-layout>
-    <nuxt-page />
-  </nuxt-layout>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style lang="scss">

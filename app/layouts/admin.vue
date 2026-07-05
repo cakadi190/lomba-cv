@@ -1,5 +1,7 @@
 <template>
-  <div v-if="user"></div>
+  <div v-if="user">
+    <slot />
+  </div>
 </template>
 
 <script lang="ts" setup>
