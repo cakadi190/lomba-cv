@@ -5,6 +5,7 @@ import {
   initialSlideFromLeftToRight,
   initialSlideFromRightToLeft,
 } from "../../motion";
+import { route } from "~~/lib/route";
 
 defineOptions({ name: "HeaderHome" });
 
@@ -114,7 +115,7 @@ const techStack = ref<TechStackItem[]>([
 						class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center"
 					>
 						<nuxt-link
-							to="/kontak"
+							:to="route('contact')"
 							class="btn btn-primary d-flex align-items-center gap-2"
 							v-motion
 							:initial="initialSlideFromLeftToRight"

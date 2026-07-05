@@ -1,6 +1,6 @@
 <template>
 	<div id="project-detail">
-		<header-page back-to="/portofolio">
+		<header-page :back-to="route('portfolios.index')">
 			<template #title>Detail Proyek</template>
 			<template #subtitle
 				>Berikut saya tampilkan detail proyek yang saya kerjakan ini.</template
@@ -50,10 +50,13 @@
 </template>
 
 <script lang="ts" setup>
+import { route } from "~~/lib/route";
 const { params } = useRoute();
 
 // Data Fetching from Server
-const { data, error, status } = useFetch<any>(`/api/portofolios/${params.id}`, {
+const { data, error, status } = useFetch<any>(
+  route("api.portfolios.show", { slug: params.id as string }),
+  {
   method: "GET",
   transform: (a) => a?.data,
   server: true,

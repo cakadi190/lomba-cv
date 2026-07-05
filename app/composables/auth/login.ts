@@ -1,5 +1,6 @@
 import { type Ref, ref } from "vue";
 import { z } from "zod";
+import { route } from "~~/lib/route";
 
 interface ValidationErrors {
   [field: string]: string | string[];
@@ -68,7 +69,7 @@ export default function authLogin(): AuthLoginInterface {
     }
 
     try {
-      const response = await $fetch("/api/auth/login", {
+      const response = await $fetch(route("api.auth.login"), {
         method: "POST",
         body: payload,
       });

@@ -74,7 +74,7 @@
               <span class="visually-hidden">Loading...</span>
             </span>
           </button>
-          <nuxt-link to="/" class="btn btn-outline-primary" :class="{ 'disabled': loading }">Kembali</nuxt-link>
+          <nuxt-link :to="route('home')" class="btn btn-outline-primary" :class="{ 'disabled': loading }">Kembali</nuxt-link>
         </div>
       </form>
     </div>
@@ -84,6 +84,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import authLogin from "~/composables/auth/login";
+import { route } from "~~/lib/route";
 
 import { usePageSeo } from "~~/lib/seo";
 
@@ -111,7 +112,7 @@ async function handleLogin() {
     });
 
     // Redirect to admin dashboard
-    navigateTo("/admin");
+    navigateTo(route("admin.index"));
   } catch (err) {
     // Error is handled reactively by the composable
   }

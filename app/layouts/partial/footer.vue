@@ -51,12 +51,12 @@
 				<div class="col-lg-2 col-6">
 					<h5 class="h6">Ke(-rjaan/gabut)-an Saya</h5>
 					<ul class="list-unstyled">
-						<li><nuxt-link to="/pendidikan">Pendidikan</nuxt-link></li>
-						<li><nuxt-link to="/penghargaan">Penghargaan</nuxt-link></li>
-						<li><nuxt-link to="/tentang/skill">Skill & Perkakas</nuxt-link></li>
-						<li><nuxt-link to="/layanan">Layanan</nuxt-link></li>
-						<li><nuxt-link to="/portofolio">Portofolio Saya</nuxt-link></li>
-						<li><nuxt-link to="/karir">Karir</nuxt-link></li>
+						<li><nuxt-link :to="route('about.education')">Pendidikan</nuxt-link></li>
+						<li><nuxt-link :to="route('about.achievement')">Penghargaan</nuxt-link></li>
+						<li><nuxt-link :to="route('about.skills')">Skill & Perkakas</nuxt-link></li>
+						<li><nuxt-link :to="route('services')">Layanan</nuxt-link></li>
+						<li><nuxt-link :to="route('portfolios.index')">Portofolio Saya</nuxt-link></li>
+						<li><nuxt-link :to="route('about.career')">Karir</nuxt-link></li>
 					</ul>
 				</div>
         
@@ -72,14 +72,14 @@
 							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
 							<a href="#">Contekan Kode</a>
 						</li>
-            <li><nuxt-link to="/sumber-daya/tempat-ngopi">Tempat Ngopi</nuxt-link></li>
+            <li><nuxt-link :to="route('resources.coffee-shops.index')">Tempat Ngopi</nuxt-link></li>
 					</ul>
 				</div>
 
 				<div class="col-md-2">
 					<h5 class="h6">Tautan Lain-lain</h5>
 					<ul class="list-unstyled">
-						<li><nuxt-link to="/tentang/situs">Tentang Situs</nuxt-link></li>
+						<li><nuxt-link :to="route('about.site')">Tentang Situs</nuxt-link></li>
 						<li>
 							<!-- biome-ignore lint/a11y/useValidAnchor: placeholder link -->
 							<a href="#">Kredit</a>
@@ -113,6 +113,7 @@
 </template>
 
 <script lang="ts" setup>
+import { route } from "~~/lib/route";
 </script>
 
 <script lang="ts">

@@ -4,12 +4,14 @@
       <h1 class="display-1">{{ error.statusCode }}</h1>
       <p class="lead">{{ error.message }}</p>
 
-      <nuxt-link to="/" class="btn btn-primary">Kembali</nuxt-link>
+      <nuxt-link :to="route('home')" class="btn btn-primary">Kembali</nuxt-link>
     </div>
   </div>
 </template>
 
 <script setup>
+import { route } from "~~/lib/route";
+
 defineProps({
   error: {
     type: Object,

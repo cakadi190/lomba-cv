@@ -1,3 +1,31 @@
+// =============================================================================
+// Global overrides
+// =============================================================================
+
+// Next.js route transitions tidak kompatibel dengan scroll-behavior: smooth
+// bawaan Bootstrap; data-scroll-behavior="smooth" di <html> dipakai sebagai
+// pengganti.
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+
+// Forms
+// https://getbootstrap.com/docs/5.3/forms/overview/
+.form-group label {
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  &:focus {
+    border-color: $primary;
+  }
+}
+
 // Buttons
 // https://getbootstrap.com/docs/5.3/components/buttons/
 .btn {
@@ -37,6 +65,29 @@
         min-width: 72px;
         font-size: 1.125em;
       }
+    }
+  }
+}
+
+// =============================================================================
+// Background & text utilities
+// =============================================================================
+.bg {
+  &-body {
+    background-color: var(--bs-body-bg) !important;
+
+    &-rgb {
+      background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
+    }
+  }
+}
+
+.color {
+  &-body {
+    color: var(--bs-body-color) !important;
+
+    &-rgb {
+      color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
     }
   }
 }

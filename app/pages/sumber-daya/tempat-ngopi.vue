@@ -103,6 +103,7 @@
 </template>
 
 <script lang="ts" setup>
+import { route as routeHelper } from "~~/lib/route";
 import { usePageSeo } from "~~/lib/seo";
 const route = useRoute();
 
@@ -179,10 +180,13 @@ usePageSeo({
 });
 
 // Fetch Regions
-const { data: regions } = await useFetch<any>("/api/coffee-shops/region", {
-  method: "GET",
-  server: false,
-});
+const { data: regions } = await useFetch<any>(
+  routeHelper("api.coffee-shops.region"),
+  {
+    method: "GET",
+    server: false,
+  },
+);
 
 // Fetch Data
 const {
@@ -191,24 +195,25 @@ const {
   error,
   refresh,
 } = await useFetch<any>(() => {
-  const queryParams = new URLSearchParams();
-  queryParams.append("page", page.value.toString());
+  const queryParams: Record<string, any> = {
+    page: page.value,
+  };
   if (filterPlace.value) {
     const cityValue = Array.isArray(filterPlace.value)
       ? filterPlace.value[0]
       : filterPlace.value;
     if (cityValue) {
-      queryParams.append("city", cityValue);
+      queryParams.city = cityValue;
     }
   }
   const nameValue = route.query.placeName;
   if (nameValue) {
     const nameStr = Array.isArray(nameValue) ? nameValue[0] : nameValue;
     if (nameStr) {
-      queryParams.append("placeName", nameStr);
+      queryParams.placeName = nameStr;
     }
   }
-  return `/api/coffee-shops?${queryParams.toString()}`;
+  return routeHelper("api.coffee-shops.index", queryParams);
 }, {
   method: "GET",
   lazy: true,

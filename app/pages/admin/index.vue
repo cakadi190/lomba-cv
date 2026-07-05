@@ -124,26 +124,27 @@
 
 <script lang="ts" setup>
 import { computed, watchEffect } from "vue";
+import { route } from "~~/lib/route";
 
 definePageMeta({
   layout: false,
 });
 
-const { data: profileRes, error } = await useFetch<any>("/api/auth/me");
+const { data: profileRes, error } = await useFetch<any>(route("api.auth.me"));
 const user = computed(() => profileRes.value?.data);
 
 watchEffect(() => {
   if (error.value || (profileRes.value && !profileRes.value.data)) {
-    navigateTo("/admin/auth/login");
+    navigateTo(route("admin.auth.login"));
   }
 });
 
 async function handleLogout() {
   try {
-    await $fetch("/api/auth/logout", {
+    await $fetch(route("api.auth.logout"), {
       method: "POST",
     });
-    navigateTo("/admin/auth/login");
+    navigateTo(route("admin.auth.login"));
   } catch (err) {
     console.error("Gagal logout:", err);
   }

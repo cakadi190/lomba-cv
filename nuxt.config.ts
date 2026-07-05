@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { route } from "./lib/route";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -85,7 +86,7 @@ export default defineNuxtConfig({
     exclude: ["/admin/**"],
     autoAlternativeAliases: true,
     autoI18n: true,
-    sources: ["/api/__sitemap__/urls"],
+    sources: [route("api.sitemap.urls")],
     autoLastmod: true,
   },
 

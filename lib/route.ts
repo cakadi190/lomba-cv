@@ -19,6 +19,8 @@ export const ROUTES = {
   "about.education": "/pendidikan",
   "about.achievement": "/penghargaan",
   "about.career": "/karir",
+  "about.site": "/tentang/situs",
+  "about.skills": "/tentang/skill",
 
   "portfolios.index": "/portofolio",
   "portfolios.show": "/portofolio/:slug",
@@ -26,6 +28,23 @@ export const ROUTES = {
   "resources.coffee-shops.index": "/sumber-daya/tempat-ngopi",
 
   contact: "/kontak",
+  services: "/layanan",
+
+  "admin.index": "/admin",
+  "admin.auth.login": "/admin/auth/login",
+
+  // API Routes
+  "api.auth.login": "/api/auth/login",
+  "api.auth.logout": "/api/auth/logout",
+  "api.auth.me": "/api/auth/me",
+  "api.coffee-shops.index": "/api/coffee-shops",
+  "api.coffee-shops.region": "/api/coffee-shops/region",
+  "api.educations.index": "/api/educations",
+  "api.educations.show": "/api/educations/:id",
+  "api.mail.send": "/api/mail/sendmail",
+  "api.portfolios.index": "/api/portofolios",
+  "api.portfolios.show": "/api/portofolios/:slug",
+  "api.sitemap.urls": "/api/__sitemap__/urls",
 } as const;
 
 /** Gabungan seluruh nama rute yang valid pada {@link ROUTES}. */

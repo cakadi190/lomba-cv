@@ -29,7 +29,7 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <nuxt-link to="/portofolio" v-motion :enter="enterSlideFromBottomToTop"
+                  <nuxt-link :to="route('portfolios.index')" v-motion :enter="enterSlideFromBottomToTop"
                     :initial="initialSlideFromBottomToTop"
                     class="card card-body rounded-4 p-4 text-center align-items-center text-decoration-none">
                     <Icon name="fa6-solid:briefcase" size="48" />
@@ -169,7 +169,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <nuxt-link to="/tentang/skill" class="nav-link py-3 w-100 text-start">
+                    <nuxt-link :to="route('about.skills')" class="nav-link py-3 w-100 text-start">
                       Perkakas
                     </nuxt-link>
                   </li>
@@ -184,6 +184,7 @@
 </template>
 
 <script lang="ts" setup>
+import { route } from "~~/lib/route";
 import "dayjs/locale/id";
 import { Autoplay, EffectCreative } from "swiper/modules";
 
@@ -228,7 +229,7 @@ const {
   data: totalProjects,
   error,
   status,
-} = useFetch<any>(`/api/portofolios`, {
+} = useFetch<any>(route("api.portfolios.index"), {
   method: "GET",
   transform: (a) => a?.totalData,
   server: true,
