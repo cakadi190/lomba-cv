@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      crawlLinks: true,
+      crawlLinks: false,
       failOnError: false,
       ignore: ["/_ipx", "/_ipx/**"],
     },
@@ -131,6 +131,8 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  sourcemap: false,
 
   future: {
     compatibilityVersion: 4,
