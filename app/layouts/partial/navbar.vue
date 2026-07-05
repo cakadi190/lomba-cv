@@ -36,7 +36,7 @@
         <ul class="navbar-nav gap-2 justify-content-end flex-grow-1 me-3">
           <li class="nav-item" v-for="(item, index) in navbarMenu" :key="index">
             <nuxt-link :class="item.link === $route.path ? 'active' : ''" class="nav-link" :to="item.link">{{ item.name
-              }}</nuxt-link>
+            }}</nuxt-link>
           </li>
         </ul>
       </div>
@@ -58,7 +58,7 @@ const navbarMenu = ref([
   { name: "Pendidikan & Organisasi", link: route("about.education") },
   { name: "Penghargaan", link: route("about.achievement") },
   { name: "Karir", link: route("about.career") },
-  { name: "Artikel", link: route("blog.index") },
+  { name: "Blog", link: route("blog.index") },
   { name: "Kontak Saya", link: route("contact") },
 ]);
 
