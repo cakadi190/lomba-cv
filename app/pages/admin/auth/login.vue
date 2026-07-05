@@ -83,7 +83,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import authLogin from "~/composables/auth/login";
+import { useLogin } from "~/composables/auth/useLogin";
 import { route } from "~~/lib/route";
 
 import { usePageSeo } from "~~/lib/seo";
@@ -101,7 +101,7 @@ const email = ref("");
 const password = ref("");
 const remember = ref(false);
 
-const { processing: loading, error, errors, post } = authLogin();
+const { processing: loading, error, errors, post } = useLogin();
 
 async function handleLogin() {
   try {

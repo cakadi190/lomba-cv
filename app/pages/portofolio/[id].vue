@@ -54,14 +54,7 @@ import { route } from "~~/lib/route";
 const { params } = useRoute();
 
 // Data Fetching from Server
-const { data, error, status } = useFetch<any>(
-  route("api.portfolios.show", { slug: params.id as string }),
-  {
-  method: "GET",
-  transform: (a) => a?.data,
-  server: true,
-  lazy: false,
-});
+const { data, error, status } = usePortfolioDetails(() => params.id as string);
 
 import { usePageSeo } from "~~/lib/seo";
 

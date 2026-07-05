@@ -130,7 +130,8 @@ definePageMeta({
   layout: false,
 });
 
-const { data: profileRes, error } = await useFetch<any>(route("api.auth.me"));
+const { profileFetch, logout } = useAuth();
+const { data: profileRes, error } = await profileFetch;
 const user = computed(() => profileRes.value?.data);
 
 watchEffect(() => {
@@ -141,9 +142,7 @@ watchEffect(() => {
 
 async function handleLogout() {
   try {
-    await $fetch(route("api.auth.logout"), {
-      method: "POST",
-    });
+    await logout();
     navigateTo(route("admin.auth.login"));
   } catch (err) {
     console.error("Gagal logout:", err);

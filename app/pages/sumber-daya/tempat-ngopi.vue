@@ -103,7 +103,6 @@
 </template>
 
 <script lang="ts" setup>
-import { route as routeHelper } from "~~/lib/route";
 import { usePageSeo } from "~~/lib/seo";
 const currentRoute = useRoute();
 
@@ -180,13 +179,7 @@ usePageSeo({
 });
 
 // Fetch Regions
-const { data: regions } = await useFetch<any>(
-  routeHelper("api.coffee-shops.region"),
-  {
-    method: "GET",
-    server: false,
-  },
-);
+const { data: regions } = await useCoffeeRegions();
 
 // Fetch Data
 const {
@@ -194,30 +187,10 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<any>(() => {
-  const queryParams: Record<string, any> = {
-    page: page.value,
-  };
-  if (filterPlace.value) {
-    const cityValue = Array.isArray(filterPlace.value)
-      ? filterPlace.value[0]
-      : filterPlace.value;
-    if (cityValue) {
-      queryParams.city = cityValue;
-    }
-  }
-  const nameValue = currentRoute.query.placeName;
-  if (nameValue) {
-    const nameStr = Array.isArray(nameValue) ? nameValue[0] : nameValue;
-    if (nameStr) {
-      queryParams.placeName = nameStr;
-    }
-  }
-  return routeHelper("api.coffee-shops.index", queryParams);
-}, {
-  method: "GET",
-  lazy: true,
-  server: false,
+} = await useCoffeeShops({
+  page: () => page.value,
+  city: () => filterPlace.value,
+  placeName: () => currentRoute.query.placeName,
 });
 
 const next = () => {

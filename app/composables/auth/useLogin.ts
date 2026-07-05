@@ -30,7 +30,7 @@ export const loginSchema = z.object({
   remember: z.boolean().optional(),
 });
 
-export default function authLogin(): AuthLoginInterface {
+export function useLogin(): AuthLoginInterface {
   const processing = ref(false);
   const errors = ref<ValidationErrors>({});
   const error = ref<RequestError | null>(null);
@@ -118,3 +118,5 @@ export default function authLogin(): AuthLoginInterface {
     reset,
   };
 }
+
+export default useLogin;

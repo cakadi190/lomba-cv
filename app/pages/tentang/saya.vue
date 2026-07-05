@@ -229,12 +229,7 @@ const {
   data: totalProjects,
   error,
   status,
-} = useFetch<any>(route("api.portfolios.index"), {
-  method: "GET",
-  transform: (a) => a?.totalData,
-  server: true,
-  lazy: false,
-});
+} = usePortfolioTotalCount();
 
 const skillset = ref([
   { icon: "devicon:laravel", name: "Laravel" },

@@ -62,7 +62,6 @@
 
 <script lang="ts" setup>
 import { usePageSeo } from "~~/lib/seo";
-import { route as router } from "~~/lib/route";
 
 const currentRoute = useRoute();
 
@@ -92,11 +91,7 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<any>(() => router("api.portfolios.index", { page: page.value }), {
-  method: "GET",
-  lazy: true,
-  server: false,
-});
+} = await usePortfoliosList(page);
 
 const next = () => {
   page.value++;
