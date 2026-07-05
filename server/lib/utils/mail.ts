@@ -33,22 +33,35 @@ let transporter: nodemailer.Transporter | null = null;
  * If MAIL_MAILER is 'log' or SMTP credentials are not set, returns null (indicates logging fallback).
  */
 export function getTransporter(): nodemailer.Transporter | null {
-  const mailer = process.env.MAIL_MAILER || "smtp";
+  const config = useRuntimeConfig();
+  const mailConfig = config.mail || {};
+  const mailer = mailConfig.mailer || "smtp";
+  const host = mailConfig.host;
 
-  if (mailer === "log" || !process.env.MAIL_HOST) {
+  if (mailer === "log" || !host) {
     return null;
   }
 
+  const isNullOrEmpty = (val: unknown) =>
+    !val || val === "null" || val === "undefined";
+
   if (!transporter) {
+    const authUser = mailConfig.username;
+    const authPass = mailConfig.password;
+
     transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: Number(process.env.MAIL_PORT || 587),
+      host: host,
+      port: Number(mailConfig.port || 587),
       secure:
-        process.env.MAIL_SECURE === "true" || process.env.MAIL_PORT === "465",
-      auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
-      },
+        mailConfig.encryption === "ssl" ||
+        mailConfig.encryption === "tls" ||
+        Number(mailConfig.port) === 465,
+      auth: isNullOrEmpty(authUser)
+        ? undefined
+        : {
+            user: String(authUser),
+            pass: isNullOrEmpty(authPass) ? "" : String(authPass),
+          },
     });
   }
 
@@ -125,8 +138,11 @@ export async function sendMail(merged: MailMessage): Promise<unknown> {
     merged.html = renderTemplate(merged.template, merged.context || {});
   }
 
-  const fromAddress = process.env.MAIL_FROM_ADDRESS || "no-reply@example.com";
-  const fromName = process.env.MAIL_FROM_NAME || "Mail";
+  const config = useRuntimeConfig();
+  const mailConfig = config.mail || {};
+
+  const fromAddress = mailConfig.fromAddress || "no-reply@example.com";
+  const fromName = mailConfig.fromName || "Mail";
   const defaultFrom = `"${fromName}" <${fromAddress}>`;
 
   let fromVal = merged.from || defaultFrom;

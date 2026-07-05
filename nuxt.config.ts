@@ -13,6 +13,16 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     baseUrl: process.env.APP_URL ?? "http://localhost:3000",
+    mail: {
+      mailer: process.env.MAIL_MAILER || "smtp",
+      host: process.env.MAIL_HOST || "127.0.0.1",
+      port: Number(process.env.MAIL_PORT || 2525),
+      username: process.env.MAIL_USERNAME || "",
+      password: process.env.MAIL_PASSWORD || "",
+      encryption: process.env.MAIL_ENCRYPTION || "",
+      fromAddress: process.env.MAIL_FROM_ADDRESS || "hello@example.com",
+      fromName: process.env.MAIL_FROM_NAME || "Lomba CV",
+    },
   },
 
   routeRules: {
