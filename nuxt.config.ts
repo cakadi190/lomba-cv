@@ -12,7 +12,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    baseUrl: process.env.APP_URL ?? "http://localhost:3000",
+    public: {
+      baseUrl: process.env.APP_URL ?? "http://localhost:3000",
+    },
     mail: {
       mailer: process.env.MAIL_MAILER || "smtp",
       host: process.env.MAIL_HOST || "127.0.0.1",
@@ -92,7 +94,7 @@ export default defineNuxtConfig({
       "2xl": 1536,
     },
     domains: ["cakadi.eu.org", "cdn.cakadi.eu.org", "images.unsplash.com"],
-    densities: [1, 2, 3],
+    densities: [1, 2],
     alias: {
       cdn: "cdn.cakadi.eu.org",
       unsplash: "https://images.unsplash.com",

@@ -17,7 +17,8 @@
               <Icon name="heroicons-outline:mail" class="w-3 h-3" />
             </span>
             <input id="email" type="email" v-model="email" class="form-control" :class="{ 'is-invalid': errors.email }"
-              placeholder="admin@example.com" aria-describedby="email-addon" required :disabled="loading" />
+              placeholder="admin@example.com" aria-describedby="email-addon" autocomplete="username" required
+              :disabled="loading" />
           </div>
           <div v-if="errors.email" class="text-danger small mt-1">
             {{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}
@@ -32,7 +33,7 @@
             </span>
             <input id="password" type="password" v-model="password" class="form-control"
               :class="{ 'is-invalid': errors.password }" placeholder="Kata Sandi Anda" aria-describedby="password-addon"
-              required :disabled="loading" />
+              autocomplete="current-password" required :disabled="loading" />
           </div>
           <div v-if="errors.password" class="text-danger small mt-1">
             {{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}
@@ -44,8 +45,12 @@
           <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
         </div>
 
-        <div class="mb-3">
-          <NuxtTurnstile v-model="token" />
+        <div
+          class="mb-3 gap-3 d-flex flex-column justify-content-center align-items-center px-3 py-2 rounded border bg-body-tertiary">
+          <strong class="d-flex me-auto">Verifikasi Anti-Bot</strong>
+          <client-only>
+            <NuxtTurnstile v-model="token" />
+          </client-only>
         </div>
 
         <div class="d-grid gap-2">
@@ -87,6 +92,7 @@ async function handleLogin() {
       email: email.value,
       password: password.value,
       remember: remember.value,
+      token: token.value
     });
 
     // Redirect to admin dashboard

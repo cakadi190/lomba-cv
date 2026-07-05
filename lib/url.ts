@@ -20,8 +20,7 @@ export const url = (
   let baseUrl = "";
   try {
     const config = useRuntimeConfig();
-    baseUrl =
-      (config.public?.baseUrl as string) || (config.baseUrl as string) || "";
+    baseUrl = (config.public?.baseUrl as string) || "";
   } catch {
     // Silently ignore if called outside of Nuxt context
   }
