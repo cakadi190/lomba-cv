@@ -26,31 +26,18 @@ defineProps<{
 				<div
 					class="d-flex gap-2 mb-2 align-items-center justify-content-between"
 				>
-					<h5 class="card-title mb-0">{{ data.name }}</h5>
+					<h5 class="card-title mb-0">
+            <span class="me-2">{{ data.name }}</span>
+            <span v-if="data.recomended"><Icon class="text-warning" name="fa7-solid:thumbs-up" /></span>
+          </h5>
 				</div>
 
-				<div class="d-flex my-2 gap-2 align-items-center">
-					<span
-						:style="{
-							color: 'rgba(var(--bs-body-rgb), .125)',
-							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
-              fontSize: '.875rem',
-						}"
-						v-if="data.recomended"
-						class="badge fw-normal p-2 px-3 rounded-pill"
-					>
-						Direkomendasikan
-					</span>
-					<span
-						:style="{
-							color: 'rgba(var(--bs-body-rgb), .125)',
-							backgroundColor: 'rgba(var(--bs-body-color-rgb), .125)',
-              fontSize: '.875rem'
-						}"
-						v-if="data.recomended"
-						class="badge fw-normal p-2 px-3 rounded-pill"
-					>
+				<div class="metadata">
+					<span>
 						{{ data.region }}
+					</span>
+					<span>
+						{{ data.open }} s/d {{ data.close }}
 					</span>
 				</div>
 
@@ -82,13 +69,15 @@ defineProps<{
 						></button>
 					</div>
 					<div class="modal-body">
-						<nuxt-img
-							preload
-							:src="data.image ?? '/images/coffee-default.webp'"
-							class="rounded-3 w-100 border"
-							:alt="data.name"
-							densities="x1 x2"
-						/>
+						<div class="thumbnail">
+              <nuxt-img
+                preload
+                :src="data.image ?? '/images/coffee-default.webp'"
+                class="rounded-3 w-100 border"
+                :alt="data.name"
+                densities="x1 x2"
+              />
+            </div>
 
             <p class="mt-3 mb-0">{{ data.description }}</p>
 
@@ -163,6 +152,30 @@ export default defineComponent({
       width: 100%;
       object-fit: cover;
     }
+  }
+}
+
+.thumbnail {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 1rem;
+
+  > img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.metadata {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin-bottom: .5rem;
+  opacity: .75;
+
+  > span:not(:last-child)::after {
+    content: '•';
+    margin-left: .5rem;
   }
 }
 </style>
