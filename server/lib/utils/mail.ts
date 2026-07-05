@@ -1,5 +1,5 @@
-import handlebars from "handlebars";
 import nodemailer from "nodemailer";
+import { renderEmailComponent } from "#imports";
 import { logger } from "~~/lib/pino";
 
 interface MailConfig {
@@ -78,64 +78,45 @@ export function getTransporter(): nodemailer.Transporter | null {
 }
 
 /**
- * Escapes regex special characters.
- */
-function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-/**
- * Compiles and renders the email template.
- * First reads the template from Nitro storage, applies square bracket placeholder replacements, and then compiles via Handlebars.
+ * Compiles and renders the email template using Nuxt Email Renderer.
  */
 export async function renderTemplate(
   templateName: string,
   context: Record<string, unknown>,
 ): Promise<string> {
-  const fileName = templateName.endsWith(".html")
-    ? templateName
-    : `${templateName}.html`;
+  // Extract file/component base name and map to PascalCase (e.g., "forgot-password" -> "ForgotPassword")
+  const baseName = templateName.split("/").pop() || templateName;
+  const cleanName = baseName.replace(/\.html$/, "");
+  const componentName = cleanName
+    .split(/[_-]/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
 
-  const storage = useStorage("assets:server");
-  let htmlContent: string | null = null;
-
-  // Try bases first, fallback to root
-  const baseKey = `templates/bases/${fileName}`;
-  const rootKey = `templates/${fileName}`;
-  if (await storage.hasItem(baseKey)) {
-    htmlContent = (await storage.getItem(baseKey)) as string;
-  } else if (await storage.hasItem(rootKey)) {
-    htmlContent = (await storage.getItem(rootKey)) as string;
-  }
-
-  if (htmlContent === null) {
-    throw new Error(`Email template not found: ${templateName}`);
-  }
-
-  // Replace [Bracketed Placeholders] dynamically from context key-values
+  // Normalize context keys to camelCase props
+  const props: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(context)) {
-    // 1. Exact match, e.g., key: "Nama Pengguna" -> replace "[Nama Pengguna]"
-    const exactPlaceholder = `[${key}]`;
-    htmlContent = htmlContent.replace(
-      new RegExp(escapeRegExp(exactPlaceholder), "g"),
-      String(value),
-    );
-
-    // 2. Snake/Kebab to Title case match, e.g., key: "nama_pengguna" -> "Nama Pengguna" -> replace "[Nama Pengguna]"
-    const formattedKey = key
-      .split(/[_-]/)
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-    const formattedPlaceholder = `[${formattedKey}]`;
-    htmlContent = htmlContent.replace(
-      new RegExp(escapeRegExp(formattedPlaceholder), "g"),
-      String(value),
-    );
+    const camelKey = key
+      .replace(/[-_\s]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ""))
+      .replace(/^(.)/, (c) => c.toLowerCase());
+    props[camelKey] = value;
   }
 
-  // Compile Handlebars variables (e.g. {{ variableName }})
-  const compiled = handlebars.compile(htmlContent);
-  return compiled(context);
+  // Render template to HTML string
+  try {
+    const rendered = await (
+      renderEmailComponent as (
+        name: string,
+        props: Record<string, unknown>,
+      ) => Promise<string | { html: string }>
+    )(componentName, props);
+    return typeof rendered === "string" ? rendered : rendered.html;
+  } catch (error) {
+    logger.error(
+      { err: error, templateName, componentName },
+      "Failed to render email component",
+    );
+    throw error;
+  }
 }
 
 /**

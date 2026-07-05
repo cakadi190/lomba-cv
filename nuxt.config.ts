@@ -85,6 +85,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "nuxt-skew-protection",
     "@nuxtjs/turnstile",
+    "nuxt-email-renderer",
   ],
 
   image: {
