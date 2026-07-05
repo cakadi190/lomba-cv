@@ -24,15 +24,29 @@ export default defineEventHandler(async (event) => {
     const perPage = Number(query?.perPage) || 12;
     const skip = (page - 1) * perPage;
 
+    const city = query?.city ? String(query.city) : undefined;
+
+    const where = city
+      ? {
+          region: {
+            equals: city,
+            mode: "insensitive" as const,
+          },
+        }
+      : {};
+
     const [coffeeShops, totalCount] = await Promise.all([
       _coffeeShopsModel.findMany({
+        where,
         skip,
         take: perPage,
         orderBy: {
           updated_at: "asc",
         },
       }),
-      _coffeeShopsModel.count(),
+      _coffeeShopsModel.count({
+        where,
+      }),
     ]);
 
     // Konversi BigInt ke string

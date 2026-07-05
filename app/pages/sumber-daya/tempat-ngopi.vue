@@ -12,14 +12,31 @@
 		<section class="need-space pt-0 position-relative">
 			<div class="container">
         <div class="py-3 d-flex position-sticky border-bottom" :style="{ top: '4.5rem', zIndex: 1000, background: 'var(--bs-body-bg)' }">
-          <div class="btn-group d-none d-md-none d-lg-inline-flex">
-            <nuxt-link class="btn btn-primary">Rekomendasi</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Jakarta Selatan</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Klaten</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Kota Yogyakarta</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Kota Madiun</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Malang</nuxt-link>
-            <nuxt-link class="btn btn-outline-primary">Kota Semarang</nuxt-link>
+          <div class="dropdown d-inline-block">
+            <button :class="filterPlace ? 'btn-primary' : 'btn-outline-primary'" class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ filterPlace ?? "Pilih Kota" }}
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  @click="selectCity(null)"
+                >
+                  Semua Kota
+                </button>
+              </li>
+              <li v-for="region in regions?.data" :key="region">
+                <button
+                  class="dropdown-item"
+                  :class="{ active: filterPlace === region }"
+                  type="button"
+                  @click="selectCity(region)"
+                >
+                  {{ region }}
+                </button>
+              </li>
+            </ul>
           </div>
 
           <div class="input-group ms-auto" :style="{ width: '25%' }">
@@ -120,6 +137,8 @@
 const urlRequest = useRequestURL();
 const route = useRoute();
 
+const filterPlace = computed(() => route.query.city ?? null);
+
 const page = computed({
   get() {
     return Number(route.query.page?.toString()) || 1;
@@ -127,11 +146,22 @@ const page = computed({
   set(newPage: number) {
     navigateTo({
       query: {
+        ...route.query,
         page: newPage,
       },
     });
   },
 });
+
+const selectCity = (city: string | null) => {
+  navigateTo({
+    query: {
+      ...route.query,
+      page: 1,
+      city: city || undefined,
+    },
+  });
+};
 
 // SEO META
 const title = computed(() => `Daftar Tempat Ngopi`);
@@ -153,13 +183,31 @@ useSeoMeta({
   ogUrl: urlRequest.href,
 });
 
+// Fetch Regions
+const { data: regions } = await useFetch<any>("/api/coffee-shops/region", {
+  method: "GET",
+  server: false,
+});
+
 // Fetch Data
 const {
   data: coffeeShops,
   pending,
   error,
   refresh,
-} = await useFetch<any>(() => `/api/coffee-shops?page=${page.value}`, {
+} = await useFetch<any>(() => {
+  const queryParams = new URLSearchParams();
+  queryParams.append("page", page.value.toString());
+  if (filterPlace.value) {
+    const cityValue = Array.isArray(filterPlace.value)
+      ? filterPlace.value[0]
+      : filterPlace.value;
+    if (cityValue) {
+      queryParams.append("city", cityValue);
+    }
+  }
+  return `/api/coffee-shops?${queryParams.toString()}`;
+}, {
   method: "GET",
   lazy: true,
   server: false,
