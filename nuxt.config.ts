@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       failOnError: false,
+      ignore: ["/_ipx", "/_ipx/**"],
     },
   },
 
@@ -37,7 +38,7 @@ export default defineNuxtConfig({
           Merriweather: true,
         },
         download: true,
-        base64: true,
+        base64: false,
         display: "swap",
         preload: true,
         useStylesheet: true,
@@ -90,6 +91,10 @@ export default defineNuxtConfig({
     attribute: "data-bs-theme",
     classSuffix: "",
     storageKey: "nuxt-color-mode",
+  },
+
+  icon: {
+    serverBundle: "remote",
   },
 
   vite: {
