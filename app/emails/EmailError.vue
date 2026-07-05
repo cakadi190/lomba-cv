@@ -3,11 +3,11 @@
     <EHead>
       <EFont font-family="Signika" fallback-font-family="Arial" :web-font="{
         url: 'https://static.cakadi.eu.org/fonts/signika/static/Signika-Bold.ttf',
-        format: 'woff2'
+        format: 'truetype'
       }" :font-weight="700" font-style="normal" />
       <EFont font-family="Signika" fallback-font-family="Arial" :web-font="{
         url: 'https://static.cakadi.eu.org/fonts/signika/static/Signika-Regular.ttf',
-        format: 'woff2'
+        format: 'truetype'
       }" :font-weight="400" font-style="normal" />
       <EStyle>
         body, table, td, a, strong, b, p, span, div, h1, h2, h3, a[href] {
