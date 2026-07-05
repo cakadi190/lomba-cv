@@ -37,6 +37,7 @@
 															:src="
 																item.logo ?? '/images/education/default.png'
 															"
+                              :placeholder="15"
 															:alt="item.logo ? item.name : 'KEMENDIKBUD'"
 															class="w-100 ratio ratio-1x1"
 														/>

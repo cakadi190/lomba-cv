@@ -16,6 +16,7 @@ defineProps<{
 				:src="data.image"
 				class="rounded-3 card-img-top"
 				:alt="data.name"
+				:placeholder="[16, 9]"
 				densities="x1 x2 x3"
 			/>
 
