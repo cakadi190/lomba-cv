@@ -3,11 +3,15 @@ import { defineNuxtConfig } from "nuxt/config";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
-    enabled: true,
+    enabled: process.env.NODE_ENV === "development",
 
     timeline: {
-      enabled: true,
+      enabled: process.env.NODE_ENV === "development",
     },
+  },
+
+  routeRules: {
+    "/portofolio/**": { prerender: false },
   },
 
   css: ["~/assets/scss/app.scss"],
@@ -37,7 +41,7 @@ export default defineNuxtConfig({
           "Fira Code": true,
           Merriweather: true,
         },
-        download: true,
+        download: false,
         base64: false,
         display: "swap",
         preload: true,
