@@ -13,6 +13,9 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/portofolio/**": { prerender: false },
+
+    "/admin/auth/**": { appLayout: "auth" },
+    "/admin/**": { appLayout: "admin" },
   },
 
   css: ["~/assets/scss/app.scss"],

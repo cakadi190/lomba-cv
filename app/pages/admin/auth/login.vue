@@ -16,17 +16,8 @@
             <span class="input-group-text" id="email-addon">
               <Icon name="heroicons-outline:mail" class="w-3 h-3" />
             </span>
-            <input 
-              id="email" 
-              type="email" 
-              v-model="email" 
-              class="form-control"
-              :class="{ 'is-invalid': errors.email }"
-              placeholder="admin@example.com" 
-              aria-describedby="email-addon"
-              required 
-              :disabled="loading"
-            />
+            <input id="email" type="email" v-model="email" class="form-control" :class="{ 'is-invalid': errors.email }"
+              placeholder="admin@example.com" aria-describedby="email-addon" required :disabled="loading" />
           </div>
           <div v-if="errors.email" class="text-danger small mt-1">
             {{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}
@@ -39,17 +30,9 @@
             <span class="input-group-text" id="password-addon">
               <Icon name="heroicons-outline:lock-closed" class="w-3 h-3" />
             </span>
-            <input 
-              id="password" 
-              type="password" 
-              v-model="password" 
-              class="form-control"
-              :class="{ 'is-invalid': errors.password }"
-              placeholder="Kata Sandi Anda" 
-              aria-describedby="password-addon"
-              required 
-              :disabled="loading"
-            />
+            <input id="password" type="password" v-model="password" class="form-control"
+              :class="{ 'is-invalid': errors.password }" placeholder="Kata Sandi Anda" aria-describedby="password-addon"
+              required :disabled="loading" />
           </div>
           <div v-if="errors.password" class="text-danger small mt-1">
             {{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}
@@ -57,13 +40,7 @@
         </div>
 
         <div class="mb-3 form-check">
-          <input 
-            id="remember" 
-            type="checkbox" 
-            v-model="remember" 
-            class="form-check-input"
-            :disabled="loading"
-          />
+          <input id="remember" type="checkbox" v-model="remember" class="form-check-input" :disabled="loading" />
           <label class="form-check-label ms-1" for="remember">Ingat Saya</label>
         </div>
 
@@ -74,7 +51,8 @@
               <span class="visually-hidden">Loading...</span>
             </span>
           </button>
-          <nuxt-link :to="route('home')" class="btn btn-outline-primary" :class="{ 'disabled': loading }">Kembali</nuxt-link>
+          <nuxt-link :to="route('home')" class="btn btn-outline-primary"
+            :class="{ 'disabled': loading }">Kembali</nuxt-link>
         </div>
       </form>
     </div>
@@ -85,12 +63,7 @@
 import { ref } from "vue";
 import { useLogin } from "~/composables/auth/useLogin";
 import { route } from "~~/lib/route";
-
 import { usePageSeo } from "~~/lib/seo";
-
-definePageMeta({
-  layout: "auth",
-});
 
 usePageSeo({
   title: "Masuk",
