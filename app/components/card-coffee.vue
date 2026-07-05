@@ -18,6 +18,7 @@ defineProps<{
           :src="data.image ?? '/images/coffee-default.webp'"
           :alt="data.name"
           densities="x1 x2"
+          :placeholder="[16, 9]"
         />
       </div>
 
