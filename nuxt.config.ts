@@ -106,7 +106,13 @@ export default defineNuxtConfig({
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         onwarn(warning, warn) {
-          if (warning.code === "INVALID_ANNOTATION") return;
+          if (
+            warning.code === "INVALID_ANNOTATION" ||
+            warning.code === "PLUGIN_TIMINGS" ||
+            warning.code === "CSS_IMPORT_ORDER"
+          ) {
+            return;
+          }
           warn(warning);
         },
       },
