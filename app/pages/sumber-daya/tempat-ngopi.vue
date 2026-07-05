@@ -105,25 +105,25 @@
 <script lang="ts" setup>
 import { route as routeHelper } from "~~/lib/route";
 import { usePageSeo } from "~~/lib/seo";
-const route = useRoute();
+const currentRoute = useRoute();
 
-const filterPlace = computed(() => route.query.city ?? null);
+const filterPlace = computed(() => currentRoute.query.city ?? null);
 
 const page = computed({
   get() {
-    return Number(route.query.page?.toString()) || 1;
+    return Number(currentRoute.query.page?.toString()) || 1;
   },
   set(newPage: number) {
     navigateTo({
       query: {
-        ...route.query,
+        ...currentRoute.query,
         page: newPage,
       },
     });
   },
 });
 
-const searchQuery = ref((route.query.placeName as string) || "");
+const searchQuery = ref((currentRoute.query.placeName as string) || "");
 let debounceTimeout: NodeJS.Timeout | null = null;
 
 watch(searchQuery, (newVal) => {
@@ -131,7 +131,7 @@ watch(searchQuery, (newVal) => {
   debounceTimeout = setTimeout(() => {
     navigateTo({
       query: {
-        ...route.query,
+        ...currentRoute.query,
         page: 1,
         placeName: newVal || undefined,
       },
@@ -140,7 +140,7 @@ watch(searchQuery, (newVal) => {
 });
 
 watch(
-  () => route.query.placeName,
+  () => currentRoute.query.placeName,
   (newVal) => {
     if (searchQuery.value !== (newVal || "")) {
       searchQuery.value = (newVal as string) || "";
@@ -152,7 +152,7 @@ const handleSearch = () => {
   if (debounceTimeout) clearTimeout(debounceTimeout);
   navigateTo({
     query: {
-      ...route.query,
+      ...currentRoute.query,
       page: 1,
       placeName: searchQuery.value || undefined,
     },
@@ -166,7 +166,7 @@ onBeforeUnmount(() => {
 const selectCity = (city: string | null) => {
   navigateTo({
     query: {
-      ...route.query,
+      ...currentRoute.query,
       page: 1,
       city: city || undefined,
     },
@@ -206,7 +206,7 @@ const {
       queryParams.city = cityValue;
     }
   }
-  const nameValue = route.query.placeName;
+  const nameValue = currentRoute.query.placeName;
   if (nameValue) {
     const nameStr = Array.isArray(nameValue) ? nameValue[0] : nameValue;
     if (nameStr) {
