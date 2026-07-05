@@ -5,150 +5,123 @@ defineProps<{
 </script>
 
 <template>
-	<div class="wrapper">
-		<button
-			type="button"
-			data-bs-toggle="modal"
-			:data-bs-target="`#${data.id}`"
-			class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100"
-		>
+  <div class="wrapper">
+    <button type="button" data-bs-toggle="modal" :data-bs-target="`#${data.id}`"
+      class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100">
       <div class="rounded-3 card-img-top">
-        <nuxt-img
-          preload
-          :src="data.image ?? '/images/coffee-default.webp'"
-          :alt="data.name"
-          densities="x1 x2"
-          :placeholder="[16, 9]"
-        />
+        <nuxt-img preload :src="data.image ?? '/images/coffee-default.webp'" :alt="data.name" densities="x1 x2"
+          :placeholder="[16, 9]" />
       </div>
 
-			<div class="card-body p-4">
-				<div
-					class="d-flex gap-2 mb-2 align-items-center justify-content-between"
-				>
-					<h5 class="card-title mb-0">
+      <div class="card-body p-4">
+        <div class="d-flex gap-2 mb-2 align-items-center justify-content-between">
+          <h5 class="card-title mb-0">
             <span class="me-2">{{ data.name }}</span>
-            <span v-if="data.recomended"><Icon class="text-warning" name="fa7-solid:thumbs-up" /></span>
+            <span v-if="data.recomended">
+              <Icon class="text-warning" name="fa7-solid:thumbs-up" />
+            </span>
           </h5>
-				</div>
+        </div>
 
-				<div class="metadata">
-					<span>
-						{{ data.region }}
-					</span>
-					<span>
-						{{ data.open }} s/d {{ data.close }}
-					</span>
-				</div>
+        <div class="metadata">
+          <span>
+            {{ data.region }}
+          </span>
+          <span>
+            {{ data.open }} s/d {{ data.close }}
+          </span>
+        </div>
 
-				<p class="card-text mb-0 text-muted">
-					{{ truncate(data.description, 100) }}
-				</p>
-			</div>
-		</button>
-	</div>
+        <p class="card-text mb-0 text-muted">
+          {{ truncate(data.description, 100) }}
+        </p>
+      </div>
+    </button>
+  </div>
 
-	<teleport to="body">
-		<div
-			class="modal fade"
-			:id="data.id"
-			tabindex="-1"
-			role="dialog"
-			:aria-labelledby="`label-${data.id}`"
-			aria-hidden="true"
-		>
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" :id="`label-${data.id}`">{{ data.name }}</h5>
-						<button
-							type="button"
-							class="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-						></button>
-					</div>
-					<div class="modal-body">
-						<div class="thumbnail">
-              <nuxt-img
-                preload
-                :src="data.image ?? '/images/coffee-default.webp'"
-                class="rounded-3 w-100 border"
-                :alt="data.name"
-                densities="x1 x2"
-              />
+  <teleport to="body">
+    <div class="modal fade" :id="data.id" tabindex="-1" role="dialog" :aria-labelledby="`label-${data.id}`"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" :id="`label-${data.id}`">{{ data.name }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="thumbnail">
+              <nuxt-img preload :src="data.image ?? '/images/coffee-default.webp'" class="rounded-3 w-100 border"
+                :alt="data.name" densities="x1 x2" />
             </div>
 
             <p class="mt-3 mb-0">{{ data.description }}</p>
 
-						<div class="row mt-2 g-3">
-							<div class="col-md-6">
-								<div class="card card-body">
-									<p class="text-muted mb-2">Nama Kafe / Warkop</p>
-									<h5 class="mb-0">{{ data.name }}</h5>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card card-body">
-									<p class="text-muted mb-2">Wilayah</p>
-									<h5 class="mb-0">{{ data.region }}</h5>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card card-body">
-									<p class="text-muted mb-2">Jam Buka</p>
-									<h5 class="mb-0">{{ data.open }} s/d {{ data.close }}</h5>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card card-body">
-									<p class="text-muted mb-2">Biaya Parkir</p>
-									<h5 class="mb-0">{{ data.park_fee > 0 ? formatCurrency(data.park_fee) : 'Gratis' }}</h5>
-								</div>
-							</div>
+            <div class="row mt-2 g-3">
+              <div class="col-md-6">
+                <div class="card card-body">
+                  <p class="text-muted mb-2">Nama Kafe / Warkop</p>
+                  <h5 class="mb-0">{{ data.name }}</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card card-body">
+                  <p class="text-muted mb-2">Wilayah</p>
+                  <h5 class="mb-0">{{ data.region }}</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card card-body">
+                  <p class="text-muted mb-2">Jam Buka</p>
+                  <h5 class="mb-0">{{ data.open }} s/d {{ data.close }}</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card card-body">
+                  <p class="text-muted mb-2">Biaya Parkir</p>
+                  <h5 class="mb-0">{{ data.park_fee > 0 ? formatCurrency(data.park_fee) : 'Gratis' }}</h5>
+                </div>
+              </div>
 
-							<div class="col-md-12">
-								<div class="card card-body">
-									<p class="text-muted mb-2">Alamat</p>
-									<h5 class="mb-0">
-										{{ data.address }}.&nbsp;&nbsp;<a
-											:href="data.map_url"
-											target="_blank"
-											rel="noopener noreferrer"
-											>Arahkan Saya <Icon name="humbleicons:external-link"
-										/></a>
-									</h5>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</teleport>
+              <div class="col-md-12">
+                <div class="card card-body">
+                  <p class="text-muted mb-2">Alamat</p>
+                  <h5 class="mb-0">
+                    {{ data.address }}.&nbsp;&nbsp;<a :href="data.map_url" target="_blank"
+                      rel="noopener noreferrer">Arahkan Saya
+                      <Icon name="humbleicons:external-link" />
+                    </a>
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </teleport>
 </template>
 
 <script lang="ts">
 export default defineComponent({
-	name: "CardCoffee",
+  name: "CardCoffee",
 });
 </script>
 
 <style lang="scss" scoped>
-.wrapper > .card {
-	text-decoration: none;
-	transition: all 0.2s ease-in-out;
+.wrapper>.card {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
 
-	&:hover {
-		transform: scale(1.025);
-		border-color: var(--bs-primary);
-	}
+  &:hover {
+    transform: scale(1.025);
+    border-color: var(--bs-primary);
+  }
 
   .card-img-top {
     aspect-ratio: 16 / 9;
     overflow: hidden;
 
-    > img {
+    >img {
       width: 100%;
       object-fit: cover;
     }
@@ -160,7 +133,7 @@ export default defineComponent({
   overflow: hidden;
   border-radius: 1rem;
 
-  > img {
+  >img {
     width: 100%;
     object-fit: cover;
   }
@@ -173,7 +146,7 @@ export default defineComponent({
   margin-bottom: .5rem;
   opacity: .75;
 
-  > span:not(:last-child)::after {
+  >span:not(:last-child)::after {
     content: '•';
     margin-left: .5rem;
   }

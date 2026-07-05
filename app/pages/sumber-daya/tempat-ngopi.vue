@@ -40,7 +40,21 @@
           </div>
 
           <div class="input-group ms-auto" :style="{ width: '25%' }">
-            <input type="text" class="form-control" placeholder="Cari kafe atau lokasi" />
+            <input
+              v-model="searchQuery"
+              type="text"
+              class="form-control"
+              placeholder="Cari kafe atau lokasi"
+              @keyup.enter="handleSearch"
+            />
+            <button
+              class="btn btn-primary"
+              type="button"
+              aria-label="Cari"
+              @click="handleSearch"
+            >
+              <Icon name="solar:magnifer-bold" />
+            </button>
           </div>
         </div>
         
@@ -67,15 +81,29 @@
 						<div
 							class="col-md-6 text-center mx-auto"
 							v-else-if="
-								!pending && !error && (!coffeeShops?.data || coffeeShops.data.length === 0 || coffeeShops.code === 500)
+								!pending && !error && coffeeShops?.code === 500
+							"
+						>
+							<error-section
+								img-src="/images/errors/404.svg"
+								img-alt="Terjadi Kesalahan"
+								img-height="250"
+								title="Ups, Terjadi kesalahan"
+								text="Saat ini kami sedang memperbaiki kesalahan ini"
+							/>
+						</div>
+						<div
+							class="col-md-6 text-center mx-auto"
+							v-else-if="
+								!pending && !error && (!coffeeShops?.data || coffeeShops.data.length === 0)
 							"
 						>
 							<error-section
 								img-src="/images/errors/404.svg"
 								img-alt="Tidak Ditemukan"
 								img-height="250"
-								title="Ups, Terjadi kesalahan"
-								text="Saat ini kami sedang memperbaiki kesalahan ini"
+								title="Tempat Ngopi Tidak Ditemukan"
+								text="Kami tidak dapat menemukan tempat ngopi dengan kriteria tersebut."
 							/>
 						</div>
 						<div class="col-md-12 mx-auto" v-else-if="!pending && !error && coffeeShops?.data?.length > 0">
@@ -153,6 +181,46 @@ const page = computed({
   },
 });
 
+const searchQuery = ref((route.query.placeName as string) || "");
+let debounceTimeout: NodeJS.Timeout | null = null;
+
+watch(searchQuery, (newVal) => {
+  if (debounceTimeout) clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    navigateTo({
+      query: {
+        ...route.query,
+        page: 1,
+        placeName: newVal || undefined,
+      },
+    });
+  }, 500);
+});
+
+watch(
+  () => route.query.placeName,
+  (newVal) => {
+    if (searchQuery.value !== (newVal || "")) {
+      searchQuery.value = (newVal as string) || "";
+    }
+  },
+);
+
+const handleSearch = () => {
+  if (debounceTimeout) clearTimeout(debounceTimeout);
+  navigateTo({
+    query: {
+      ...route.query,
+      page: 1,
+      placeName: searchQuery.value || undefined,
+    },
+  });
+};
+
+onBeforeUnmount(() => {
+  if (debounceTimeout) clearTimeout(debounceTimeout);
+});
+
 const selectCity = (city: string | null) => {
   navigateTo({
     query: {
@@ -204,6 +272,13 @@ const {
       : filterPlace.value;
     if (cityValue) {
       queryParams.append("city", cityValue);
+    }
+  }
+  const nameValue = route.query.placeName;
+  if (nameValue) {
+    const nameStr = Array.isArray(nameValue) ? nameValue[0] : nameValue;
+    if (nameStr) {
+      queryParams.append("placeName", nameStr);
     }
   }
   return `/api/coffee-shops?${queryParams.toString()}`;

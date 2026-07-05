@@ -1,3 +1,4 @@
+import type { Prisma } from "@prisma/client";
 import { logger } from "~~/lib/pino";
 import prisma from "~~/lib/prisma";
 
@@ -25,24 +26,30 @@ export default defineEventHandler(async (event) => {
     const skip = (page - 1) * perPage;
 
     const city = query?.city ? String(query.city) : undefined;
+    const placeName = query?.placeName ? String(query.placeName) : undefined;
 
-    const where = city
-      ? {
-          region: {
-            equals: city,
-            mode: "insensitive" as const,
-          },
-        }
-      : {};
+    const where: Prisma.CoffeePlaceWhereInput = {};
+
+    if (city) {
+      where.region = {
+        equals: city,
+        mode: "insensitive",
+      };
+    }
+
+    if (placeName) {
+      where.name = {
+        contains: placeName,
+        mode: "insensitive",
+      };
+    }
 
     const [coffeeShops, totalCount] = await Promise.all([
       _coffeeShopsModel.findMany({
         where,
         skip,
         take: perPage,
-        orderBy: {
-          updated_at: "asc",
-        },
+        orderBy: [{ recomended: "desc" }, { updated_at: "asc" }],
       }),
       _coffeeShopsModel.count({
         where,
