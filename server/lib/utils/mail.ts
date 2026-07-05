@@ -4,6 +4,17 @@ import handlebars from "handlebars";
 import nodemailer from "nodemailer";
 import { logger } from "~~/lib/pino";
 
+interface MailConfig {
+  mailer?: string;
+  host?: string;
+  port?: number;
+  username?: string;
+  password?: string;
+  encryption?: string;
+  fromAddress?: string;
+  fromName?: string;
+}
+
 export interface MailAttachment {
   filename: string;
   content?: string | Buffer | import("node:stream").Readable;
@@ -34,7 +45,7 @@ let transporter: nodemailer.Transporter | null = null;
  */
 export function getTransporter(): nodemailer.Transporter | null {
   const config = useRuntimeConfig();
-  const mailConfig = config.mail || {};
+  const mailConfig = (config.mail as MailConfig) || {};
   const mailer = mailConfig.mailer || "smtp";
   const host = mailConfig.host;
 
@@ -139,7 +150,7 @@ export async function sendMail(merged: MailMessage): Promise<unknown> {
   }
 
   const config = useRuntimeConfig();
-  const mailConfig = config.mail || {};
+  const mailConfig = (config.mail as MailConfig) || {};
 
   const fromAddress = mailConfig.fromAddress || "no-reply@example.com";
   const fromName = mailConfig.fromName || "Mail";

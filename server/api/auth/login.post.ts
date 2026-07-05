@@ -1,5 +1,5 @@
-import { loginSchema } from "~~/app/composables/auth/useLogin";
 import { logger } from "~~/lib/pino";
+import { loginSchema } from "~~/lib/zod/schemas/login";
 import { Auth } from "~~/server/lib/facades/auth";
 
 export default defineEventHandler(async (event) => {
@@ -25,8 +25,25 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const { email, password, remember } = validationResult.data;
+    const { email, password, remember, token } = validationResult.data;
     const isRemembered = !!remember;
+
+    const verification = await verifyTurnstileToken(token, event);
+    if (!verification.success) {
+      logger.warn(
+        { email, errorCodes: verification["error-codes"] },
+        "Validasi Turnstile gagal",
+      );
+      throw createError({
+        statusCode: 400,
+        statusMessage: "Validasi gagal. Silakan periksa input Anda.",
+        data: {
+          errors: {
+            token: "Verifikasi anti-bot gagal. Silakan coba lagi.",
+          },
+        },
+      });
+    }
 
     const auth = Auth.guard(event);
     const loginSuccess = await auth.attempt({ email, password }, isRemembered);

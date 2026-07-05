@@ -1,6 +1,6 @@
 import { type Ref, ref } from "vue";
-import { z } from "zod";
 import { route } from "~~/lib/route";
+import { loginSchema } from "~~/lib/zod/schemas/login";
 
 interface ValidationErrors {
   [field: string]: string | string[];
@@ -20,22 +20,6 @@ interface AuthLoginInterface {
   post: (payload: Record<string, unknown>) => Promise<unknown>;
   reset: () => void;
 }
-
-export const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, "Email wajib diisi")
-    .pipe(z.email({ message: "Format email tidak valid" })),
-  password: z.string().min(6, "Kata sandi minimal 6 karakter"),
-  remember: z.boolean().optional(),
-  token: z.string().refine(async (value) => {
-    if (!value || value.length < 1) {
-      return "Token wajib diisi!";
-    }
-
-    return await verifyTurnstileToken(value);
-  }),
-});
 
 export function useLogin(): AuthLoginInterface {
   const processing = ref(false);
