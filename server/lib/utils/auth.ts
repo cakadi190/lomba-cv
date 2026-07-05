@@ -1,8 +1,8 @@
 import crypto from "node:crypto";
 import type { H3Event } from "h3";
 import prisma from "~~/lib/prisma";
-import { getAppKeys } from "./keys";
 import { Cookie } from "../facades/cookie";
+import { getAppKeys } from "./keys";
 
 /**
  * Hash a password using PBKDF2 with a dynamic salt and SHA-512.

@@ -1,6 +1,6 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import crypto from "node:crypto";
 
 const envPath = path.resolve(process.cwd(), ".env");
 
@@ -30,7 +30,9 @@ function setEnvVar(content: string, key: string, value: string): string {
     return content.replace(regex, `${key}=${value}`);
   }
   // Append if not found
-  return content.endsWith("\n") ? `${content}${key}=${value}\n` : `${content}\n${key}=${value}\n`;
+  return content.endsWith("\n")
+    ? `${content}${key}=${value}\n`
+    : `${content}\n${key}=${value}\n`;
 }
 
 /**
@@ -66,7 +68,9 @@ function handleGenerate(): void {
 
   if (shouldRotate && oldKey) {
     env = setEnvVar(env, "APP_PREVIOUS_KEY", oldKey);
-    console.log(`🔄 Key rotation enabled: Shifting current primary key to APP_PREVIOUS_KEY.`);
+    console.log(
+      `🔄 Key rotation enabled: Shifting current primary key to APP_PREVIOUS_KEY.`,
+    );
   }
 
   env = setEnvVar(env, "APP_KEY", newKey);
@@ -102,7 +106,7 @@ function handleStatus(): void {
   } else {
     console.log("Status: ✅ SET");
     console.log(`Primary Key: ${key}`);
-    
+
     // Check decrypted length
     let rawLength = key.length;
     if (key.startsWith("base64:")) {
@@ -117,7 +121,9 @@ function handleStatus(): void {
     if (rawLength === 32) {
       console.log("Key Security: ✅ SECURE (256-bit)");
     } else {
-      console.log("Key Security: ⚠️  INSECURE (Should be exactly 32 bytes for AES-256)");
+      console.log(
+        "Key Security: ⚠️  INSECURE (Should be exactly 32 bytes for AES-256)",
+      );
     }
   }
 
@@ -136,7 +142,9 @@ function handleRotateFix(): void {
   let env = readEnv();
   env = setEnvVar(env, "APP_PREVIOUS_KEY", "");
   writeEnv(env);
-  console.log("✅ Previous application key (APP_PREVIOUS_KEY) cleared successfully.");
+  console.log(
+    "✅ Previous application key (APP_PREVIOUS_KEY) cleared successfully.",
+  );
 }
 
 const command = process.argv[2];
@@ -155,6 +163,8 @@ switch (command) {
     handleRotateFix();
     break;
   default:
-    console.log("Usage: tsx server/scripts/key.ts [generate [--rotate] | show | status | rotate-fix]");
+    console.log(
+      "Usage: tsx server/scripts/key.ts [generate [--rotate] | show | status | rotate-fix]",
+    );
     process.exit(1);
 }

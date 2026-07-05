@@ -42,6 +42,6 @@ export const Crypt = {
    */
   decryptString(payloadStr: string): string {
     return CryptUtil.decryptString(payloadStr);
-  }
+  },
 };
 export { DecryptException } from "~~/server/lib/utils/crypt";

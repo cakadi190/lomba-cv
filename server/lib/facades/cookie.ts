@@ -32,9 +32,10 @@ export const Cookie = {
     options: CookieOptions = {},
   ): void {
     const shouldEncrypt = options.encrypt !== false;
-    const stringValue = typeof value === "object" ? JSON.stringify(value) : String(value);
+    const stringValue =
+      typeof value === "object" ? JSON.stringify(value) : String(value);
     const finalValue = shouldEncrypt ? Crypt.encrypt(stringValue) : stringValue;
-    
+
     const { encrypt, ...h3Options } = options;
     setCookie(event, name, finalValue, {
       path: "/",
@@ -76,11 +77,11 @@ export const Cookie = {
     if (!rawValue) {
       return null;
     }
-    
+
     if (!decrypt) {
       return rawValue;
     }
-    
+
     try {
       const decrypted = Crypt.decrypt(rawValue);
       // Attempt to parse if it is JSON serialized, otherwise return as string
@@ -120,10 +121,14 @@ export const Cookie = {
    * @param name - The cookie name.
    * @param options - Additional options (must match domain/path used when set).
    */
-  forget(event: H3Event, name: string, options: Omit<CookieOptions, "encrypt"> = {}): void {
+  forget(
+    event: H3Event,
+    name: string,
+    options: Omit<CookieOptions, "encrypt"> = {},
+  ): void {
     deleteCookie(event, name, {
       path: "/",
       ...options,
     });
-  }
+  },
 };

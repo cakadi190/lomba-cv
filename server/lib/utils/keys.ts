@@ -14,7 +14,7 @@ function parseKey(keyStr: string): Buffer {
   } else {
     keyBuf = Buffer.from(keyStr, "utf-8");
   }
-  
+
   if (keyBuf.length !== 32) {
     keyBuf = crypto.createHash("sha256").update(keyBuf).digest();
   }
@@ -28,7 +28,7 @@ function parseKey(keyStr: string): Buffer {
  */
 export function getAppKeys(): { key: Buffer; previous: Buffer[] } {
   let appKeyRaw = process.env.APP_KEY || process.env.JWT_SECRET;
-  
+
   if (!appKeyRaw) {
     if (process.env.NODE_ENV === "production") {
       if (!generatedKey) {

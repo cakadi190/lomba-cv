@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     turnstile: {
       secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY || "",
     },
+    redis: {
+      url: process.env.REDIS_URL || "",
+    },
   },
 
   turnstile: {
