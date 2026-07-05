@@ -68,7 +68,7 @@
       }
     },
     {
-      "includes": ["lib/mailer/template/**/*.html"],
+      "includes": ["server/assets/templates/**/*.html"],
       "linter": {
         "rules": {
           "a11y": {

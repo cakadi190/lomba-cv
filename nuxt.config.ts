@@ -54,12 +54,6 @@ export default defineNuxtConfig({
       failOnError: false,
       ignore: ["/_ipx", "/_ipx/**"],
     },
-    serverAssets: [
-      {
-        baseName: "templates",
-        dir: "./lib/mailer/template",
-      },
-    ],
   },
 
   modules: [

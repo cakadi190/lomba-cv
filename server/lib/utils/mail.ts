@@ -96,15 +96,16 @@ export async function renderTemplate(
     ? templateName
     : `${templateName}.html`;
 
-  const storage = useStorage("assets:templates");
+  const storage = useStorage("assets:server");
   let htmlContent: string | null = null;
 
   // Try bases first, fallback to root
-  const baseKey = `bases/${fileName}`;
+  const baseKey = `templates/bases/${fileName}`;
+  const rootKey = `templates/${fileName}`;
   if (await storage.hasItem(baseKey)) {
     htmlContent = (await storage.getItem(baseKey)) as string;
-  } else if (await storage.hasItem(fileName)) {
-    htmlContent = (await storage.getItem(fileName)) as string;
+  } else if (await storage.hasItem(rootKey)) {
+    htmlContent = (await storage.getItem(rootKey)) as string;
   }
 
   if (htmlContent === null) {
