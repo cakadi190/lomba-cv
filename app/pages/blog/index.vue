@@ -17,5 +17,6 @@ usePageSeo({
   description:
     "Kumpulan artikel Mas Adi tentang pengembangan web, teknologi, desain, dan pengalaman membangun produk digital.",
   keyword: ["artikel teknologi", "pengembangan web", "desain web", "Mas Adi"],
+  schemaType: "CollectionPage",
 });
 </script>

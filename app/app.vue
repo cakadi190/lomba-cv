@@ -103,7 +103,7 @@ useHead({
   meta: [
     {
       name: "author",
-      content: "Adi Candra",
+      content: "Amir Zuhdi Wibowo",
     },
     {
       name: "theme-color",

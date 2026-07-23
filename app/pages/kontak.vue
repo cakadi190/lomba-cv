@@ -18,5 +18,6 @@ usePageSeo({
   title: "Hubungi Saya",
   description:
     "Berikut kontak yang dapat dihubungi apabila anda tertarik dengan skill saya maupun ingin bekerjasama dengan saya.",
+  schemaType: "ContactPage",
 });
 </script>

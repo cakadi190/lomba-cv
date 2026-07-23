@@ -83,6 +83,7 @@ usePageSeo({
   title: "Daftar Portofolio",
   description:
     "Berikut daftar portofolio yang sudah saya kerjakan dan selesaikan akhir-akhir ini.",
+  schemaType: "CollectionPage",
 });
 
 // Fetch Data

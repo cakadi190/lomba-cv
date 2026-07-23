@@ -176,6 +176,7 @@ const selectCity = (city: string | null) => {
 usePageSeo({
   title: "Daftar Tempat Ngopi",
   description: "Berikut daftar tempat ngopi yang saya rekomendasikan.",
+  schemaType: "CollectionPage",
 });
 
 // Fetch Regions

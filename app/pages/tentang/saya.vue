@@ -273,9 +273,14 @@ const skillset = ref([
 usePageSeo({
   title: "Tentang Saya",
   description:
-    "Kenali Adi Candra, fullstack web developer asal Ngawi, beserta pengalaman, perjalanan karir, dan teknologi yang dikuasainya.",
+    "Kenali Amir Zuhdi Wibowo, fullstack web developer asal Ngawi, beserta pengalaman, perjalanan karir, dan teknologi yang dikuasainya.",
   type: "profile",
-  keyword: ["Adi Candra", "Mas Adi", "fullstack web developer Ngawi"],
+  schemaType: "ProfilePage",
+  keyword: [
+    "Amir Zuhdi Wibowo",
+    "Mas Adi",
+    "fullstack web developer Ngawi",
+  ],
 });
 </script>
 

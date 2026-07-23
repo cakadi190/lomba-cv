@@ -25,6 +25,12 @@ export type SeoMetadata = {
     | "video.other"
     | "payment.link";
   canonical?: string | Ref<string> | ComputedRef<string> | (() => string);
+  schemaType?:
+    | "WebPage"
+    | "ProfilePage"
+    | "CollectionPage"
+    | "ContactPage"
+    | "CreativeWork";
   noindex?: boolean;
   nofollow?: boolean;
 };
@@ -70,6 +76,94 @@ export function usePageSeo(metadata: SeoMetadata) {
     canonicalUrl.hash = "";
     canonicalUrl.search = "";
     return canonicalUrl.toString();
+  });
+
+  const structuredData = computed(() => {
+    if (metadata.noindex) return undefined;
+
+    const pageTitle = unref(title);
+    const pageDescription = description ? unref(description) : undefined;
+    const pageUrl = canonical.value;
+    const personId = `${siteUrl}/#person`;
+    const websiteId = `${siteUrl}/#website`;
+    const pageId = `${pageUrl}#webpage`;
+    const pathSegments = new URL(pageUrl).pathname.split("/").filter(Boolean);
+    const breadcrumbItems = [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Beranda",
+        item: `${siteUrl}/`,
+      },
+      ...pathSegments.map((segment, index) => ({
+        "@type": "ListItem",
+        position: index + 2,
+        name:
+          index === pathSegments.length - 1
+            ? pageTitle
+            : segment
+                .split("-")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" "),
+        item: new URL(
+          `/${pathSegments.slice(0, index + 1).join("/")}`,
+          siteUrl,
+        ).toString(),
+      })),
+    ];
+
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": personId,
+          name: "Amir Zuhdi Wibowo",
+          alternateName: "Mas Adi",
+          url: `${siteUrl}/tentang/saya`,
+          image: {
+            "@type": "ImageObject",
+            url: new URL("/images/fotoku.min.png", siteUrl).toString(),
+          },
+          jobTitle: "Fullstack Web Developer",
+          sameAs: [
+            "https://www.facebook.com/cakadi190",
+            "https://www.instagram.com/cakadi190",
+            "https://www.linkedin.com/in/cakadi190",
+            "https://www.twitter.com/cakadi190",
+          ],
+        },
+        {
+          "@type": "WebSite",
+          "@id": websiteId,
+          url: `${siteUrl}/`,
+          name: "Mas Adi",
+          alternateName: "Catatan Mas Adi",
+          inLanguage: "id-ID",
+          publisher: { "@id": personId },
+        },
+        {
+          "@type": metadata.schemaType || "WebPage",
+          "@id": pageId,
+          url: pageUrl,
+          name: pageTitle,
+          description: pageDescription,
+          image: image.value,
+          inLanguage: "id-ID",
+          isPartOf: { "@id": websiteId },
+          author: { "@id": personId },
+          ...(metadata.schemaType === "ProfilePage"
+            ? { mainEntity: { "@id": personId } }
+            : {}),
+          breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${pageUrl}#breadcrumb`,
+          itemListElement: breadcrumbItems,
+        },
+      ],
+    };
   });
 
   const keywords = computed(() => {
@@ -126,6 +220,14 @@ export function usePageSeo(metadata: SeoMetadata) {
         href: canonical,
       },
     ],
+    script: structuredData.value
+      ? [
+          {
+            type: "application/ld+json",
+            innerHTML: computed(() => JSON.stringify(structuredData.value)),
+          },
+        ]
+      : [],
   });
 }
 

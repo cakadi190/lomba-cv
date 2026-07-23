@@ -75,6 +75,7 @@ usePageSeo({
   title,
   description,
   image,
+  schemaType: "CreativeWork",
 });
 </script>
 
