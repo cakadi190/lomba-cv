@@ -61,6 +61,8 @@ import { usePageSeo } from "~~/lib/seo";
 usePageSeo({
   title: "Lupa Kata Sandi",
   description: "Minta tautan untuk mengatur ulang kata sandi",
+  noindex: true,
+  nofollow: true,
 });
 
 const email = ref("");

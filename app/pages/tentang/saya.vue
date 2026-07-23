@@ -185,6 +185,7 @@
 
 <script lang="ts" setup>
 import { route } from "~~/lib/route";
+import { usePageSeo } from "~~/lib/seo";
 import "dayjs/locale/id";
 import { Autoplay, EffectCreative } from "swiper/modules";
 
@@ -269,8 +270,12 @@ const skillset = ref([
   { icon: "file-icons:coreldraw", name: "CorelDraw" },
 ]);
 
-useHead({
+usePageSeo({
   title: "Tentang Saya",
+  description:
+    "Kenali Adi Candra, fullstack web developer asal Ngawi, beserta pengalaman, perjalanan karir, dan teknologi yang dikuasainya.",
+  type: "profile",
+  keyword: ["Adi Candra", "Mas Adi", "fullstack web developer Ngawi"],
 });
 </script>
 

@@ -22,6 +22,9 @@ import { nextTick } from "vue";
 import { url } from "~~/lib/url";
 
 useHead({
+  htmlAttrs: {
+    lang: "id",
+  },
   titleTemplate: (titleChunk: any) => {
     return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
   },
@@ -98,6 +101,14 @@ useHead({
     },
   ],
   meta: [
+    {
+      name: "author",
+      content: "Adi Candra",
+    },
+    {
+      name: "theme-color",
+      content: "#ffffff",
+    },
     {
       name: "application-name",
       content: "Catatan Mas Adi",

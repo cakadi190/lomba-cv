@@ -82,6 +82,8 @@ import { usePageSeo } from "~~/lib/seo";
 usePageSeo({
   title: "Masuk",
   description: "Masuk ke panel admin",
+  noindex: true,
+  nofollow: true,
 });
 
 const email = ref("");

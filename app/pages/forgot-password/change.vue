@@ -87,6 +87,8 @@ import { usePageSeo } from "~~/lib/seo";
 usePageSeo({
   title: "Atur Ulang Kata Sandi",
   description: "Ubah kata sandi akun Anda",
+  noindex: true,
+  nofollow: true,
 });
 
 const routeInstance = useRoute();

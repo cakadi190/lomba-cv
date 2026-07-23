@@ -56,9 +56,9 @@ export default defineNuxtConfig({
     },
     vercel: {
       functions: {
-        runtime: "bun1.x"
-      }
-    }
+        runtime: "bun1.x",
+      },
+    },
   },
 
   modules: [
@@ -121,7 +121,7 @@ export default defineNuxtConfig({
 
   sitemap: {
     hostname: "https://v3.masadi.net",
-    exclude: ["/admin/**"],
+    exclude: ["/admin/**", "/auth/**", "/forgot-password/**"],
     autoAlternativeAliases: true,
     autoI18n: true,
     sources: [route("api.sitemap.urls")],

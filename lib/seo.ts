@@ -24,12 +24,21 @@ export type SeoMetadata = {
     | "video.tv_show"
     | "video.other"
     | "payment.link";
-  canonical?: string;
+  canonical?: string | Ref<string> | ComputedRef<string> | (() => string);
   noindex?: boolean;
   nofollow?: boolean;
 };
 
 export function usePageSeo(metadata: SeoMetadata) {
+  const config = useRuntimeConfig();
+  const requestUrl = useRequestURL();
+  const configuredUrl = String(config.public.baseUrl || "");
+  const siteUrl = (
+    configuredUrl && !configuredUrl.includes("localhost")
+      ? configuredUrl
+      : requestUrl.origin
+  ).replace(/\/+$/, "");
+
   const resolveValue = <T>(
     val: T | Ref<T> | ComputedRef<T> | (() => T),
   ): Ref<T> | ComputedRef<T> | T => {
@@ -47,8 +56,21 @@ export function usePageSeo(metadata: SeoMetadata) {
     ? resolveValue(metadata.description)
     : undefined;
 
-  const rawImage = metadata.image || "/images/meta-image.png";
-  const image = resolveValue(rawImage);
+  const rawImage = resolveValue(metadata.image || "/images/meta-image.png");
+  const image = computed(() => {
+    const value = unref(rawImage);
+    return new URL(value, `${siteUrl}/`).toString();
+  });
+
+  const canonical = computed(() => {
+    const value = metadata.canonical
+      ? unref(resolveValue(metadata.canonical))
+      : requestUrl.pathname;
+    const canonicalUrl = new URL(value, `${siteUrl}/`);
+    canonicalUrl.hash = "";
+    canonicalUrl.search = "";
+    return canonicalUrl.toString();
+  });
 
   const keywords = computed(() => {
     const rawKeywords =
@@ -65,10 +87,9 @@ export function usePageSeo(metadata: SeoMetadata) {
     const parts = [];
     if (metadata.noindex) parts.push("noindex");
     if (metadata.nofollow) parts.push("nofollow");
-    return parts.length > 0 ? parts.join(", ") : undefined;
+    if (parts.length > 0) return parts.join(", ");
+    return "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
   });
-
-  const urlRequest = useRequestURL();
 
   useSeoMeta({
     title,
@@ -80,8 +101,11 @@ export function usePageSeo(metadata: SeoMetadata) {
     ogImage: image,
     twitterImage: image,
     twitterCard: "summary_large_image",
-    ogUrl: computed(() => urlRequest.href),
+    ogUrl: canonical,
     ogType: metadata.type || "website",
+    ogSiteName: "Mas Adi",
+    ogLocale: "id_ID",
+    twitterCreator: "@cakadi190",
   });
 
   // Use useHead for non-og/twitter meta elements like keywords, robots, canonical link
@@ -96,14 +120,12 @@ export function usePageSeo(metadata: SeoMetadata) {
         content: robots,
       },
     ],
-    link: metadata.canonical
-      ? [
-          {
-            rel: "canonical",
-            href: metadata.canonical,
-          },
-        ]
-      : [],
+    link: [
+      {
+        rel: "canonical",
+        href: canonical,
+      },
+    ],
   });
 }
 
