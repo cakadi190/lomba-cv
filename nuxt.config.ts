@@ -87,6 +87,7 @@ export default defineNuxtConfig({
         inject: true,
       },
     ],
+    "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "nuxt-skew-protection",
     "@nuxtjs/turnstile",
@@ -116,11 +117,16 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: "https://v3.masadi.net",
+    url: "https://www.masadi.net",
+  },
+
+  robots: {
+    allow: "/",
+    sitemap: "https://www.masadi.net/sitemap.xml",
   },
 
   sitemap: {
-    hostname: "https://v3.masadi.net",
+    hostname: "https://www.masadi.net",
     exclude: ["/admin/**", "/auth/**", "/forgot-password/**"],
     autoAlternativeAliases: true,
     autoI18n: true,
