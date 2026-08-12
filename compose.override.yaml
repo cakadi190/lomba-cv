@@ -1,0 +1,42 @@
+# Development overrides. Compose loads this automatically on top of
+# compose.yaml, so plain `docker compose up -d` runs the Nuxt dev server with
+# the working tree mounted live. Production builds must opt out explicitly:
+#
+#   docker compose -f compose.yaml up -d --build
+#
+services:
+  app:
+    build:
+      target: dev
+    # A dev container that dies should stay dead and show its error, not loop.
+    restart: "no"
+    # Nuxt dev exits promptly on SIGTERM, so don't sit through the default 10s
+    # grace period on every recreate.
+    stop_grace_period: 2s
+    environment:
+      NODE_ENV: development
+    # Bind IPv4 loopback explicitly. The default `3001:3000` also publishes on
+    # [::]:3001, but this kernel can't forward IPv6 into the bridge — docker-proxy
+    # accepts and then resets. Browsers try ::1 first for `localhost` and treat
+    # that reset as a real (empty) response instead of falling back to 127.0.0.1.
+    # With nothing on ::1, the connection is refused and the fallback works.
+    ports: !override
+      - "127.0.0.1:${APP_PORT:-3001}:3000"
+    volumes:
+      # The working tree is the source of truth; edits hot-reload.
+      - .:/app
+      # Named volumes shadow the bind mount for directories that must stay
+      # container-local: node_modules holds Linux-native binaries (the host
+      # tree may not be), and .nuxt/.output are build state the host doesn't
+      # need. node_modules is seeded from the image's `dependencies` layer.
+      - node_modules:/app/node_modules
+      - nuxt_cache:/app/.nuxt
+      - nuxt_output:/app/.output
+    # Keeps Nuxt's dev output readable and Ctrl-C responsive under `up`.
+    stdin_open: true
+    tty: true
+
+volumes:
+  node_modules:
+  nuxt_cache:
+  nuxt_output:

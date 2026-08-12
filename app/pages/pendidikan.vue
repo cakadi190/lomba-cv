@@ -84,16 +84,37 @@
 																}}
 															</span>
 														</div>
-														<p class="card-text">{{ item.place }}</p>
+														<p class="card-text mb-2">{{ item.place }}</p>
+														<div
+															v-if="item.academic_score"
+															class="d-flex gap-2 align-items-center mb-2"
+														>
+															<Icon name="fa6-solid:graduation-cap" />
+															<div class="card-text mb-0">
+																{{ item.academic_score.label }}:
+																<span class="fw-bold">{{ Number(item.academic_score.value).toFixed(2) }}</span> / {{ Number(item.academic_score.scale).toFixed(2) }}
+															</div>
+														</div>
 														<div class="d-flex gap-2 align-items-center mb-0">
 															<Icon name="fa6-solid:clock" />
-															<div class="card-text mb-0">
-																{{ dateConverter(item.start) }} s/d
-																{{
-																	item.end
-																		? dateConverter(item.end)
-																		: "Sekarang"
-																}}
+															<div class="card-text mb-0 d-inline-flex align-items-center gap-2">
+																<span>
+																	{{ dateConverter(item.start) }} s/d
+																	{{
+																		item.end
+																			? dateConverter(item.end)
+																			: "Sekarang"
+																	}}
+																</span>
+																<span
+																	v-if="getStudyInfo(item)?.lateSemesters"
+																	class="text-warning cursor-pointer ms-1 d-inline-flex align-items-center"
+																	data-bs-toggle="tooltip"
+																	data-bs-placement="top"
+																	:data-bs-title="`Terlambat ${getStudyInfo(item)?.lateSemesters} Semester (Masa Studi: ${getStudyInfo(item)?.durationText})`"
+																>
+																	<Icon name="fa6-solid:triangle-exclamation" />
+																</span>
 															</div>
 														</div>
 													</div>
@@ -207,6 +228,20 @@ usePageSeo({
     "Daftar riwayat pendidikan saya, yang mana saya tampilkan daftar tempat saya bersekolah dan menempuh pendidikan. Serta saya telah mengikuti kegiatan apa saja.",
 });
 
+onMounted(() => {
+  if (import.meta.client && (window as any).bootstrap) {
+    const tooltipTriggerList = Array.from(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+    );
+    for (const el of tooltipTriggerList) {
+      const existing = (window as any).bootstrap.Tooltip.getInstance(el);
+      if (!existing) {
+        new (window as any).bootstrap.Tooltip(el);
+      }
+    }
+  }
+});
+
 // The Data
 const dateConverter = (date: string): string => {
   const $dateInstance = new Date(date);
@@ -230,6 +265,58 @@ const dateConverter = (date: string): string => {
   ];
 
   return `${$date} ${monthName[$month]} ${$year}`;
+};
+
+interface StudyInfo {
+  durationText: string;
+  lateSemesters: number;
+}
+
+const getStudyInfo = (item: EducationItem): StudyInfo | null => {
+  if (!item.start) return null;
+
+  const start = new Date(item.start);
+  const end = item.end ? new Date(item.end) : new Date();
+
+  const diffYears = end.getFullYear() - start.getFullYear();
+  const diffMonths = end.getMonth() - start.getMonth();
+  let totalMonths = diffYears * 12 + diffMonths;
+  if (end.getDate() < start.getDate()) {
+    totalMonths -= 1;
+  }
+  totalMonths = Math.max(1, totalMonths);
+
+  const totalSemesters = Math.max(1, Math.round(totalMonths / 6));
+
+  let durationText = "";
+  if (totalSemesters === 1) {
+    durationText = "6 bulan";
+  } else if (totalSemesters % 2 === 0) {
+    durationText = `${totalSemesters / 2} tahun`;
+  } else {
+    durationText = `${(totalSemesters / 2).toFixed(1)} tahun`;
+  }
+
+  let standardSemesters = 6;
+  if (item.level === "es") {
+    standardSemesters = 12;
+  } else if (item.level === "kg") {
+    standardSemesters = 4;
+  } else if (item.grade?.includes("D3") || (item.level === "university" && !item.grade?.includes("S1"))) {
+    standardSemesters = 6;
+  } else if (item.grade?.includes("S1")) {
+    standardSemesters = 8;
+  } else if (item.level === "shs" || item.level === "jhs") {
+    standardSemesters = 6;
+  }
+
+  const lateSemesters =
+    totalSemesters > standardSemesters ? totalSemesters - standardSemesters : 0;
+
+  return {
+    durationText,
+    lateSemesters,
+  };
 };
 
 const organization = ref([
@@ -270,7 +357,28 @@ const organization = ref([
   },
 ]);
 
-const education = ref([
+interface AcademicScore {
+  type: string;
+  label: string;
+  value: number;
+  scale: number;
+}
+
+interface EducationItem {
+  name: string;
+  logo: string | null;
+  web: string | null;
+  level: string;
+  grade: string | null;
+  departement: string | null;
+  study_program: string | null;
+  start: string;
+  end: string | null;
+  place: string;
+  academic_score?: AcademicScore | null;
+}
+
+const education = ref<EducationItem[]>([
   {
     name: "Politeknik Negeri Madiun",
     logo: "/images/education/pnm.png",
@@ -282,6 +390,12 @@ const education = ref([
     start: "2022-07-12",
     end: "2026-02-15",
     place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
+    academic_score: {
+      type: "gpa",
+      label: "IPK",
+      value: 3.34,
+      scale: 4.00,
+    },
   },
   {
     name: "SMA Negeri 1 Ngawi",
@@ -295,6 +409,12 @@ const education = ref([
     end: "2021-03-17",
     place:
       "Jl. Ahmad Yani No.45, Wareng, Beran, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63216",
+    academic_score: {
+      type: "school_exam",
+      label: "Nilai Ujian Sekolah",
+      value: 80.25,
+      scale: 100,
+    },
   },
   {
     name: "SMP Negeri 1 Padas",
@@ -308,6 +428,7 @@ const education = ref([
     end: "2018-03-17",
     place:
       "Jl. Raya Padas-Ngawi, Padas I, Padas, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+    academic_score: null,
   },
   {
     name: "SD Negeri Munggut 1",
@@ -321,6 +442,7 @@ const education = ref([
     end: "2015-06-17",
     place:
       "Jl. A. Yani No.35, Munggut, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+    academic_score: null,
   },
   {
     name: "TPQ Al-Falahiyyah",
@@ -333,6 +455,7 @@ const education = ref([
     start: "2007-05-21",
     end: "2009-03-17",
     place: "Tangerang, Banten",
+    academic_score: null,
   },
 ]);
 </script>

@@ -1,42 +1,32 @@
 <template>
-	<div id="career-page">
-		<header-page>
-			<template #title>Karir</template>
-			<template #subtitle
-				>Biar gak dikira pengangguran sama orang lain.</template
-			>
-		</header-page>
+  <div id="career-page">
+    <header-page>
+      <template #title>Karir</template>
+      <template #subtitle>Biar gak dikira pengangguran sama orang lain.</template>
+    </header-page>
 
-		<section class="need-space pt-0">
-			<div class="container">
-				<ul class="list-group list-group-flush">
-					<li
-						class="list-group-item py-4"
-						v-for="exp in careerExp"
-						:key="exp.company"
-						v-motion
-						:enter="enterSlideFromBottomToTop"
-						:initial="initialSlideFromBottomToTop"
-					>
-						<div class="d-flex gap-4">
-							<div class="text-center align-items-start align-items-lg-center">
-								<Icon name="fa6-solid:briefcase" size="48" />
-							</div>
-							<div class="content">
-								<h5 class="mb-1">{{ exp.position }}</h5>
-								<small class="text-muted"
-									>{{ exp.company }} | {{ exp.location }}</small
-								>
-								<p class="mb-0">
-									{{ exp.startDate }} - {{ exp.endDate || "Sekarang" }}
-								</p>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</section>
-	</div>
+    <section class="need-space pt-0">
+      <div class="container">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item py-4" v-for="exp in careerExp" :key="exp.company" v-motion
+            :enter="enterSlideFromBottomToTop" :initial="initialSlideFromBottomToTop">
+            <div class="d-flex gap-4">
+              <div class="text-center align-items-start align-items-lg-center">
+                <Icon name="fa6-solid:briefcase" size="48" />
+              </div>
+              <div class="content">
+                <h5 class="mb-1">{{ exp.position }}</h5>
+                <small class="text-muted">{{ exp.company }} | {{ exp.location }}</small>
+                <p class="mb-0">
+                  {{ exp.startDate }} - {{ exp.endDate || "Sekarang" }}
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -59,6 +49,13 @@ const enterSlideFromBottomToTop = {
 
 const careerExp = ref([
   {
+    position: "Kepala Bidang Teknologi (Chief Technology Officer)",
+    company: "PT Hello Consulting Indonesia",
+    location: "Kebayoran Lama, Kota Adm. Jakarta Selatan, DKI Jakarta",
+    startDate: "12 Januari 2026",
+    endDate: null, // atau gunakan null jika masih menjadi pemilik
+  },
+  {
     position: "Pemilik Bisnis",
     company: "PT Kodingin Digital Nusantara",
     location: "Ngawi, Jawa Timur",
@@ -76,8 +73,8 @@ const careerExp = ref([
     position: "Magang Fullstack Web Developer",
     company: "PT Humma Teknologi Indonesia",
     location: "Karangploso, Kab. Malang, Jawa Timur",
-    startDate: "Februari 2023",
-    endDate: "Sekarang", // atau gunakan null jika masih bekerja di sana
+    startDate: "05 Februari 2024",
+    endDate: "31 Juli 2024", // atau gunakan null jika masih bekerja di sana
   },
   {
     position: "Chief Technology Officer & Co-Founder",
@@ -118,5 +115,4 @@ const careerExp = ref([
 ]);
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,0 +1,56 @@
+name: cakadi-cv
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cakadi-cv-app
+    restart: unless-stopped
+    # PostgreSQL and Redis run on the host, not in Docker. `host-gateway`
+    # resolves to the host's address on the bridge below (172.27.0.1).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      NODE_ENV: production
+      HOST: "0.0.0.0"
+      PORT: 3000
+      APP_URL: ${APP_URL:-http://localhost:3001}
+      APP_KEY: ${APP_KEY:-}
+      APP_PREVIOUS_KEY: ${APP_PREVIOUS_KEY:-}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://cakadi:cakadi@host.docker.internal:5432/cakadi_cv}
+      # `prisma migrate deploy` needs a session-mode connection. On Supabase
+      # that is the port-5432 pooler; the transaction pooler (6543) deadlocks
+      # on the migration advisory lock. Defaults to DATABASE_URL when unset.
+      MIGRATE_DATABASE_URL: ${MIGRATE_DATABASE_URL:-}
+      REDIS_URL: ${REDIS_URL:-redis://host.docker.internal:6379/0}
+      MAIL_MAILER: ${MAIL_MAILER:-smtp}
+      # Mailpit runs on the host too, SMTP on 1025.
+      MAIL_HOST: ${MAIL_HOST:-host.docker.internal}
+      MAIL_PORT: ${MAIL_PORT:-1025}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      MAIL_ENCRYPTION: ${MAIL_ENCRYPTION:-}
+      MAIL_FROM_ADDRESS: ${MAIL_FROM_ADDRESS:-admin@masadi.net}
+      MAIL_FROM_NAME: ${MAIL_FROM_NAME:-Cakadi CV}
+      NUXT_TURNSTILE_SITE_KEY: ${NUXT_TURNSTILE_SITE_KEY:-}
+      NUXT_TURNSTILE_SECRET_KEY: ${NUXT_TURNSTILE_SECRET_KEY:-}
+    ports:
+      - "${APP_PORT:-3001}:3000"
+    networks:
+      cakadi_bridge:
+        ipv4_address: 172.27.0.10
+        ipv6_address: fd2a:1c3e:9b56::10
+
+networks:
+  cakadi_bridge:
+    name: cakadi-cv-bridge
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16
+          gateway: 172.27.0.1
+        - subnet: fd2a:1c3e:9b56::/64
+          gateway: fd2a:1c3e:9b56::1

@@ -1,0 +1,18 @@
+.git
+.github
+.vscode
+.idea
+.nuxt
+.output
+.vercel
+node_modules
+*.log
+.env
+.env.*
+!.env.example
+compose*.yaml
+compose*.yml
+# Note: these exclusions apply to the build context only. In development the
+# working tree is bind-mounted over /app by compose.override.yaml, so .nuxt,
+# .env and node_modules are shadowed by named volumes there instead.
+README.md

@@ -1,6 +1,14 @@
 import prisma from "../../lib/prisma.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
+interface AcademicScore {
+  [key: string]: string | number;
+  type: string;
+  label: string;
+  value: number;
+  scale: number;
+}
+
 interface Education {
   name: string;
   logo: string | null;
@@ -12,6 +20,7 @@ interface Education {
   start: Date;
   end: Date | null;
   place: string;
+  academic_score?: AcademicScore | null;
 }
 
 const educationData: Education[] = [
@@ -26,6 +35,12 @@ const educationData: Education[] = [
     start: new Date("2022-07-12"),
     end: null,
     place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
+    academic_score: {
+      type: "gpa",
+      label: "IPK",
+      value: 3.34,
+      scale: 4.0,
+    },
   },
   {
     name: "SMA Negeri 1 Ngawi",
@@ -39,6 +54,12 @@ const educationData: Education[] = [
     end: new Date("2021-03-17"),
     place:
       "Jl. Ahmad Yani No.45, Wareng, Beran, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63216",
+    academic_score: {
+      type: "school_exam",
+      label: "Nilai Ujian Sekolah",
+      value: 80.25,
+      scale: 100,
+    },
   },
   {
     name: "SMP Negeri 1 Padas",
@@ -52,6 +73,7 @@ const educationData: Education[] = [
     end: new Date("2018-03-17"),
     place:
       "Jl. Raya Padas-Ngawi, Padas I, Padas, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+    academic_score: null,
   },
   {
     name: "SD Negeri Munggut 1",
@@ -65,6 +87,7 @@ const educationData: Education[] = [
     end: new Date("2015-06-17"),
     place:
       "Jl. A. Yani No.35, Munggut, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
+    academic_score: null,
   },
   {
     name: "TPQ Al-Falahiyyah",
@@ -77,6 +100,7 @@ const educationData: Education[] = [
     start: new Date("2007-05-21"),
     end: new Date("2009-03-17"),
     place: "Tangerang, Banten",
+    academic_score: null,
   },
 ];
 

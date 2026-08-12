@@ -36,8 +36,9 @@ model Education {
   studyProgram String?
   start        DateTime
   end          DateTime?
-  place        String
-  created_at   DateTime  @default(now())
+  place          String
+  academic_score Json?
+  created_at     DateTime  @default(now())
   updated_at   DateTime  @default(now()) @updatedAt
 
   @@map("educations")
