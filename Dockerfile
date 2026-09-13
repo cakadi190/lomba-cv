@@ -94,4 +94,4 @@ EXPOSE 3000
 #
 # `db migrate --advance-ref db` is the Prisma 8 Mongo equivalent of the old
 # `migrate deploy` — applies pending migrations and advances the `db` ref.
-CMD ["sh", "-c", "bun node_modules/prisma/build/index.js db migrate --advance-ref db && bun run .output/server/index.mjs"]
+CMD ["sh", "-c", "bun node_modules/prisma/dist/prisma.js db migrate --advance-ref db && bun run .output/server/index.mjs"]

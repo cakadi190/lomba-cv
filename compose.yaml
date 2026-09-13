@@ -6,8 +6,9 @@ x-app-common: &app-common
     context: .
     dockerfile: Dockerfile
   restart: unless-stopped
-  # MongoDB and Redis run on the host, not in Docker. `host-gateway`
-  # resolves to the host's address on the bridge.
+  # Redis and Mailpit still run on the host and are reached via
+  # host.docker.internal (Mongo instead uses the fixed 172.17.0.1 gateway
+  # IP directly — see MONGODB_URL in .env.example).
   extra_hosts:
     - "host.docker.internal:host-gateway"
   env_file:
@@ -22,8 +23,20 @@ x-app-common: &app-common
     timeout: 5s
     retries: 5
 
+networks:
+  # Docker's own default "bridge" network (172.17.0.0/16 on the production
+  # host), shared with vettrak's compose project, so both apps get fixed,
+  # predictable IPs that mongod's bindIp already trusts (see
+  # vettrak/docs/mongodb-native-setup.md) instead of routing through
+  # host.docker.internal. Declared external since it already exists.
+  default:
+    name: bridge
+    external: true
+
 services:
-  # Blue/Green deployment: only one color is up in production at a time.
+  # Blue/Green deployment: only one color is up in production at a time, but
+  # both are briefly up together during a flip (new one health-checked before
+  # the old one stops) — so each color needs its OWN fixed IP, not a shared one.
   # scripts/deploy-bluegreen.sh toggles which profile is active and flips
   # the Nginx upstream to point at it. Prefixed lombacv-* (vettrak uses
   # vettrak-*) so containers/images from both apps are easy to tell apart.
@@ -31,6 +44,9 @@ services:
     <<: *app-common
     container_name: lombacv-blue
     profiles: ["blue"]
+    networks:
+      default:
+        ipv4_address: 172.17.0.5
     ports:
       - "127.0.0.1:5010:3000"
 
@@ -38,5 +54,8 @@ services:
     <<: *app-common
     container_name: lombacv-green
     profiles: ["green"]
+    networks:
+      default:
+        ipv4_address: 172.17.0.8
     ports:
       - "127.0.0.1:5011:3000"
