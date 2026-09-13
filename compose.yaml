@@ -7,7 +7,7 @@ x-app-common: &app-common
     dockerfile: Dockerfile
   restart: unless-stopped
   # Redis and Mailpit still run on the host and are reached via
-  # host.docker.internal (Mongo instead uses the fixed 172.19.0.1 gateway
+  # host.docker.internal (Mongo instead uses the fixed 172.21.0.1 gateway
   # IP directly — see MONGODB_URL in .env.example).
   extra_hosts:
     - "host.docker.internal:host-gateway"
@@ -28,7 +28,7 @@ networks:
   # network (only user-defined networks support that), so lomba-cv gets its
   # own user-defined bridge network. Create it once on the host before the
   # first deploy:
-  #   docker network create lombacv-net --subnet 172.19.0.0/16
+  #   docker network create lombacv-net --subnet 172.21.0.0/16
   # vettrak gets its own separate network (vettrak-net, 172.18.0.0/16) — see
   # vettrak/docs/mongodb-native-setup.md for how mongod trusts both gateways.
   default:
@@ -48,7 +48,7 @@ services:
     profiles: ["blue"]
     networks:
       default:
-        ipv4_address: 172.19.0.5
+        ipv4_address: 172.21.0.5
     ports:
       - "127.0.0.1:5010:3000"
 
@@ -58,6 +58,6 @@ services:
     profiles: ["green"]
     networks:
       default:
-        ipv4_address: 172.19.0.8
+        ipv4_address: 172.21.0.8
     ports:
       - "127.0.0.1:5011:3000"

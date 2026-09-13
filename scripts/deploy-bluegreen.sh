@@ -43,7 +43,7 @@ echo "==> Deploying new color:  $new_color (app=$app_port)"
 # fresh host doesn't need a manual one-time step remembered before the first
 # deploy.
 docker network inspect lombacv-net >/dev/null 2>&1 || \
-  docker network create lombacv-net --subnet 172.19.0.0/16
+  docker network create lombacv-net --subnet 172.21.0.0/16
 
 docker compose --profile "$new_color" up -d --force-recreate
 
