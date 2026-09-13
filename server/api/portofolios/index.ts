@@ -1,11 +1,10 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
 
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
-    const _portofolioModel = prisma.portfolio;
 
     const page = Math.max(1, parseInt(query?.page as string, 10) || 1);
     const perPage = Math.min(
@@ -17,34 +16,47 @@ export default defineEventHandler(async (event) => {
     const cacheKey = `portfolios:list:page:${page}:perPage:${perPage}`;
 
     return await Cache.remember(cacheKey, 3600, async () => {
-      const portfoliosPromise = _portofolioModel.findMany({
-        skip,
-        take: perPage,
-        include: {
-          categories: {
-            include: {
-              category: true,
-            },
-          },
-        },
-        orderBy: {
-          updated_at: "desc",
-        },
-      });
+      const portfolios = await db.orm.portfolios
+        .orderBy({ updatedAt: -1 })
+        .offset(skip)
+        .limit(perPage)
+        .all();
 
-      const totalCountPromise = _portofolioModel.count();
+      const totalCount = (await db.orm.portfolios.all()).length;
 
-      const [portfolios, totalCount] = await Promise.all([
-        portfoliosPromise,
-        totalCountPromise,
-      ]);
+      // The old PortfolioCategoryLink join table is gone — categories are
+      // now referenced by `categoryIds: ObjectId[]` on the Portfolio
+      // document. Resolve categories per portfolio with an application-level
+      // lookup instead of a SQL join. The Mongo ORM `.where(...)` only
+      // supports object equality today (no `.in()` — see prisma-8 skill,
+      // queries-mongo.md), so all categories are fetched and matched in JS
+      // rather than filtered server-side.
+      const allCategoryIds = new Set(
+        portfolios.flatMap((p) => p.categoryIds.map((id) => String(id))),
+      );
+      const categories =
+        allCategoryIds.size > 0
+          ? (await db.orm.portfolio_categories.all()).filter((category) =>
+              allCategoryIds.has(String(category._id)),
+            )
+          : [];
+      const categoriesById = new Map(
+        categories.map((category) => [String(category._id), category]),
+      );
+
+      const data = portfolios.map((portfolio) => ({
+        ...portfolio,
+        categories: portfolio.categoryIds
+          .map((id) => categoriesById.get(String(id)))
+          .filter((category) => category !== undefined),
+      }));
 
       const hasNextPage = skip + perPage < totalCount;
       const hasPrevPage = page > 1;
 
       return {
         code: 200,
-        data: portfolios,
+        data,
         hasNextPage,
         hasPrevPage,
         totalPage: Math.ceil(totalCount / perPage),

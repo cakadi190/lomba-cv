@@ -1,12 +1,10 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
   try {
-    const portfolio = await prisma.portfolio.findUnique({
-      where: { slug },
-    });
+    const portfolio = await db.orm.portfolios.where({ slug }).first();
 
     if (!portfolio) {
       throw createError({

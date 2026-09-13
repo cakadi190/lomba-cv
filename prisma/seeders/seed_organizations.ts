@@ -1,4 +1,4 @@
-import prisma from "../../lib/prisma.js";
+import { db } from "../db.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 const organizationData = [
@@ -40,11 +40,14 @@ const organizationData = [
 ];
 
 async function seedOrganizations() {
-  await truncateTable("organization");
+  await truncateTable("organizations");
 
   for (const organization of organizationData) {
-    await prisma.organization.create({
-      data: organization,
+    const now = new Date();
+    await db.orm.organizations.create({
+      ...organization,
+      createdAt: now,
+      updatedAt: now,
     });
   }
 }

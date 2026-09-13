@@ -1,5 +1,5 @@
 import { getRandomColor } from "../../app/utils/colors.js";
-import prisma from "../../lib/prisma.js";
+import { db } from "../db.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 const categories = [
@@ -10,11 +10,15 @@ const categories = [
 ];
 
 async function seedPortofolioCategories() {
-  await truncateTable("portfolioCategory");
+  await truncateTable("portfolio_categories");
+
+  const now = new Date();
 
   for (const category of categories) {
-    await prisma.portfolioCategory.create({
-      data: category,
+    await db.orm.portfolio_categories.create({
+      ...category,
+      createdAt: now,
+      updatedAt: now,
     });
   }
 }

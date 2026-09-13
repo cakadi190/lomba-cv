@@ -1,18 +1,19 @@
-import prisma from "~~/lib/prisma.js";
+import { db } from "~~/prisma/db.js";
 import { truncateTable } from "~~/prisma/seeders/util/truncate_tables.js";
 import { hashPassword } from "~~/server/lib/utils/auth.js";
 
 async function seedUsers() {
-  await truncateTable("user");
+  await truncateTable("users");
 
   const hashedPassword = hashPassword("@DIBoo190203");
 
-  await prisma.user.create({
-    data: {
-      name: "Amir Zuhdi Wibowo",
-      email: "me@masadi.net",
-      password: hashedPassword,
-    },
+  const now = new Date();
+  await db.orm.users.create({
+    name: "Amir Zuhdi Wibowo",
+    email: "me@masadi.net",
+    password: hashedPassword,
+    createdAt: now,
+    updatedAt: now,
   });
 }
 

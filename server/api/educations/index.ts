@@ -1,5 +1,5 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
 
 export default defineEventHandler(async (event) => {
@@ -16,13 +16,11 @@ export default defineEventHandler(async (event) => {
     const cacheKey = `educations:list:page:${page}:perPage:${perPage}`;
 
     return await Cache.remember(cacheKey, 3600, async () => {
-      const educations = await prisma.education.findMany({
-        skip,
-        take: perPage,
-        orderBy: {
-          start: "desc",
-        },
-      });
+      const educations = await db.orm.educations
+        .orderBy({ start: -1 })
+        .offset(skip)
+        .limit(perPage)
+        .all();
 
       return { code: 200, data: educations };
     });

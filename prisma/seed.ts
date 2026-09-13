@@ -1,5 +1,5 @@
 import "dotenv/config";
-import prisma from "../lib/prisma.js";
+import { db } from "./db.js";
 
 import seedAwards from "./seeders/seed_awards.js";
 import seedCareers from "./seeders/seed_careers.js";
@@ -14,50 +14,53 @@ import { truncateTable } from "./seeders/util/truncate_tables.js";
 
 async function main() {
   try {
-    await truncateTable("award");
-    await truncateTable("portfolio");
-    await truncateTable("portfolioCategory");
-    await truncateTable("portfolioCategoryLink");
-    await truncateTable("career");
-    await truncateTable("education");
-    await truncateTable("organization");
-    await truncateTable("coffeePlace");
-    await truncateTable("user");
+    await truncateTable("awards");
+    await truncateTable("portfolios");
+    await truncateTable("portfolio_categories");
+    await truncateTable("careers");
+    await truncateTable("educations");
+    await truncateTable("organizations");
+    await truncateTable("coffee_places");
+    await truncateTable("users");
 
     await seedUsers();
-    console.log("\x1b[32m\u2714  Users seeded successfully");
+    console.log("\x1b[32m✔  Users seeded successfully");
 
     await seedAwards();
-    console.log("\x1b[32m\u2714  Awards seeded successfully");
+    console.log("\x1b[32m✔  Awards seeded successfully");
 
     await seedPortofolioCategories();
-    console.log("\x1b[32m\u2714  Portofolio Categories seeded successfully");
+    console.log("\x1b[32m✔  Portofolio Categories seeded successfully");
 
     await seedPortofolio();
-    console.log("\x1b[32m\u2714  Portofolio seeded successfully");
+    console.log("\x1b[32m✔  Portofolio seeded successfully");
 
+    // NOTE: PortfolioCategoryLink is gone — categories are now referenced by
+    // `categoryIds: ObjectId[]` directly on the Portfolio document. This
+    // seeder now updates each Portfolio's categoryIds instead of creating
+    // join rows.
     await seedPortofolioCategoryLinks();
     console.log(
-      "\x1b[32m\u2714  Portofolio Category Links seeded successfully",
+      "\x1b[32m✔  Portofolio Category Links seeded successfully",
     );
 
     await seedOrganizations();
-    console.log("\x1b[32m\u2714  Organizations seeded successfully");
+    console.log("\x1b[32m✔  Organizations seeded successfully");
 
     await seedCareers();
-    console.log("\x1b[32m\u2714  Careers seeded successfully");
+    console.log("\x1b[32m✔  Careers seeded successfully");
 
     await seedEducations();
-    console.log("\x1b[32m\u2714  Educations seeded successfully");
+    console.log("\x1b[32m✔  Educations seeded successfully");
 
     await seedCoffeePlaces();
-    console.log("\x1b[32m\u2714  Coffee Places seeded successfully");
+    console.log("\x1b[32m✔  Coffee Places seeded successfully");
   } catch (error) {
-    await prisma.$disconnect();
-    console.error("\x1b[31m\u2718  Error seeding data:", error);
+    console.error("\x1b[31m✘  Error seeding data:", error);
+    await db.close();
     process.exit(1);
   } finally {
-    await prisma.$disconnect();
+    await db.close();
     process.exit(0);
   }
 }

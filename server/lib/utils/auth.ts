@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import type { H3Event } from "h3";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cookie } from "../facades/cookie";
 import { getAppKeys } from "./keys";
 
@@ -189,17 +189,19 @@ export async function getAuthenticatedUser(event: H3Event) {
   const decoded = verifyToken(token);
   if (typeof decoded?.userId !== "string") return null;
 
-  const user = await prisma.user.findUnique({
-    where: { id: decoded.userId },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      created_at: true,
-    },
-  });
+  const user = await db.orm.users
+    .select("_id", "name", "email", "createdAt")
+    .where({ _id: decoded.userId })
+    .first();
 
-  return user;
+  if (!user) return null;
+
+  return {
+    id: String(user._id),
+    name: user.name,
+    email: user.email,
+    created_at: user.createdAt,
+  };
 }
 
 /**

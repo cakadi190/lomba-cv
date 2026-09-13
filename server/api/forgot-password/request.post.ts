@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { forgotPasswordRequestSchema } from "~~/lib/zod/schemas/forgotPassword";
 import { Cache } from "~~/server/lib/facades/cache";
 import { Mail } from "~~/server/lib/facades/mail";
@@ -53,9 +53,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Check if user exists in database
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const user = await db.orm.users.where({ email }).first();
 
     if (!user) {
       logger.info(

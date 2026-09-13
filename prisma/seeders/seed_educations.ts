@@ -1,4 +1,4 @@
-import prisma from "../../lib/prisma.js";
+import { db } from "../db.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 interface AcademicScore {
@@ -20,7 +20,7 @@ interface Education {
   start: Date;
   end: Date | null;
   place: string;
-  academic_score?: AcademicScore | null;
+  academicScore: AcademicScore | null;
 }
 
 const educationData: Education[] = [
@@ -35,7 +35,7 @@ const educationData: Education[] = [
     start: new Date("2022-07-12"),
     end: null,
     place: "Jl. Serayu, Taman, Kota Madiun, Jawa Timur",
-    academic_score: {
+    academicScore: {
       type: "gpa",
       label: "IPK",
       value: 3.34,
@@ -54,7 +54,7 @@ const educationData: Education[] = [
     end: new Date("2021-03-17"),
     place:
       "Jl. Ahmad Yani No.45, Wareng, Beran, Kec. Ngawi, Kabupaten Ngawi, Jawa Timur 63216",
-    academic_score: {
+    academicScore: {
       type: "school_exam",
       label: "Nilai Ujian Sekolah",
       value: 80.25,
@@ -73,7 +73,7 @@ const educationData: Education[] = [
     end: new Date("2018-03-17"),
     place:
       "Jl. Raya Padas-Ngawi, Padas I, Padas, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
-    academic_score: null,
+    academicScore: null,
   },
   {
     name: "SD Negeri Munggut 1",
@@ -87,7 +87,7 @@ const educationData: Education[] = [
     end: new Date("2015-06-17"),
     place:
       "Jl. A. Yani No.35, Munggut, Kec. Padas, Kabupaten Ngawi, Jawa Timur 63281",
-    academic_score: null,
+    academicScore: null,
   },
   {
     name: "TPQ Al-Falahiyyah",
@@ -100,16 +100,19 @@ const educationData: Education[] = [
     start: new Date("2007-05-21"),
     end: new Date("2009-03-17"),
     place: "Tangerang, Banten",
-    academic_score: null,
+    academicScore: null,
   },
 ];
 
 async function seedEducations() {
-  await truncateTable("education");
+  await truncateTable("educations");
 
   for (const education of educationData) {
-    await prisma.education.create({
-      data: education,
+    const now = new Date();
+    await db.orm.educations.create({
+      ...education,
+      createdAt: now,
+      updatedAt: now,
     });
   }
 }

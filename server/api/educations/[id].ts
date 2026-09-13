@@ -1,12 +1,10 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, "id");
   try {
-    const education = await prisma.education.findUnique({
-      where: { id },
-    });
+    const education = await db.orm.educations.where({ _id: id }).first();
 
     if (!education) {
       throw createError({

@@ -1,12 +1,12 @@
-import { defineConfig, env } from "prisma/config";
-import "dotenv/config";
+import 'dotenv/config';
+import { definePrismaConfig } from '@prisma/cli-engine';
+import { defineConfig as ormConfig } from '@prisma/orm-mongo/config';
 
-export default defineConfig({
-  schema: "prisma/schema.prisma",
-  migrations: {
-    path: "prisma/migrations",
-  },
-  datasource: {
-    url: env("DATABASE_URL"),
-  },
+export default definePrismaConfig({
+  orm: ormConfig({
+    contract: "./prisma/contract.prisma",
+    db: {
+      connection: process.env['MONGODB_URL']!,
+    },
+  }),
 });

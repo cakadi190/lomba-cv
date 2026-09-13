@@ -1,0 +1,1495 @@
+{
+  "schemaVersion": "1",
+  "targetFamily": "mongo",
+  "target": "mongo",
+  "profileHash": "251b3ce23f6c9f561892e7c1af9d2cc941a13d64ba1aa7226b90036b09568cc3",
+  "roots": {
+    "awards": {
+      "model": "Award",
+      "namespace": "__unbound__"
+    },
+    "careers": {
+      "model": "Career",
+      "namespace": "__unbound__"
+    },
+    "coffee_places": {
+      "model": "CoffeePlace",
+      "namespace": "__unbound__"
+    },
+    "educations": {
+      "model": "Education",
+      "namespace": "__unbound__"
+    },
+    "organizations": {
+      "model": "Organization",
+      "namespace": "__unbound__"
+    },
+    "portfolio_categories": {
+      "model": "PortfolioCategory",
+      "namespace": "__unbound__"
+    },
+    "portfolios": {
+      "model": "Portfolio",
+      "namespace": "__unbound__"
+    },
+    "users": {
+      "model": "User",
+      "namespace": "__unbound__"
+    }
+  },
+  "domain": {
+    "namespaces": {
+      "__unbound__": {
+        "enum": {
+          "CafePrice": {
+            "codecId": "mongo/string@1",
+            "members": [
+              {
+                "name": "CHEAP",
+                "value": "CHEAP"
+              },
+              {
+                "name": "MEDIUM",
+                "value": "MEDIUM"
+              },
+              {
+                "name": "EXPENSIVE",
+                "value": "EXPENSIVE"
+              }
+            ]
+          },
+          "WifiSpeed": {
+            "codecId": "mongo/string@1",
+            "members": [
+              {
+                "name": "WEAK",
+                "value": "WEAK"
+              },
+              {
+                "name": "MEDIUM",
+                "value": "MEDIUM"
+              },
+              {
+                "name": "STRONG",
+                "value": "STRONG"
+              }
+            ]
+          }
+        },
+        "models": {
+          "Award": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "award": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "date": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "event": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "icon": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "rank": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/int32@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "year": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/int32@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "awards"
+            }
+          },
+          "Career": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "company": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "endDate": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "location": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "position": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "startDate": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "careers"
+            }
+          },
+          "CoffeePlace": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "address": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "close": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "image": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "mapCoordinate": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "mapUrl": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "open": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "parkFee": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/int32@1",
+                  "kind": "scalar"
+                }
+              },
+              "price": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "CafePrice",
+                  "namespaceId": "__unbound__",
+                  "plane": "domain"
+                }
+              },
+              "recomended": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "region": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "wifiProvider": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "wifiSpeed": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "WifiSpeed",
+                  "namespaceId": "__unbound__",
+                  "plane": "domain"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "coffee_places"
+            }
+          },
+          "Education": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "academicScore": {
+                "nullable": true,
+                "type": {
+                  "kind": "valueObject",
+                  "name": "AcademicScore"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "department": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "end": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "grade": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "level": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "logo": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "place": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "start": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "studyProgram": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "web": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "educations"
+            }
+          },
+          "Organization": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "desc": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "orgName": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "period": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "organizations"
+            }
+          },
+          "Portfolio": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "careerIds": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "categoryIds": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "demoLink": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "desc": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "galleries": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "kind": "valueObject",
+                  "name": "PortfolioGallery"
+                }
+              },
+              "image": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "private": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/bool@1",
+                  "kind": "scalar"
+                }
+              },
+              "ratings": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "kind": "valueObject",
+                  "name": "PortfolioRating"
+                }
+              },
+              "shortDesc": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "slug": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "sourceCode": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "techstack": {
+                "many": true,
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "portfolios"
+            }
+          },
+          "PortfolioCategory": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "color": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "portfolio_categories"
+            }
+          },
+          "User": {
+            "fields": {
+              "_id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/objectId@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "email": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "password": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "updatedAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "collection": "users"
+            }
+          }
+        },
+        "valueObjects": {
+          "AcademicScore": {
+            "fields": {
+              "label": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "scale": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/double@1",
+                  "kind": "scalar"
+                }
+              },
+              "type": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "value": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/double@1",
+                  "kind": "scalar"
+                }
+              }
+            }
+          },
+          "PortfolioGallery": {
+            "fields": {
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "description": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "imageUrl": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              }
+            }
+          },
+          "PortfolioRating": {
+            "fields": {
+              "comment": {
+                "nullable": true,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "createdAt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/date@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/string@1",
+                  "kind": "scalar"
+                }
+              },
+              "rating": {
+                "nullable": false,
+                "type": {
+                  "codecId": "mongo/int32@1",
+                  "kind": "scalar"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "storage": {
+    "namespaces": {
+      "__unbound__": {
+        "entries": {
+          "collection": {
+            "awards": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "award": {
+                      "bsonType": "string"
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "date": {
+                      "bsonType": [
+                        "null",
+                        "date"
+                      ]
+                    },
+                    "event": {
+                      "bsonType": "string"
+                    },
+                    "icon": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "rank": {
+                      "bsonType": [
+                        "null",
+                        "int"
+                      ]
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    },
+                    "year": {
+                      "bsonType": "int"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "award",
+                    "createdAt",
+                    "event",
+                    "updatedAt",
+                    "year"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "careers": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "company": {
+                      "bsonType": "string"
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "endDate": {
+                      "bsonType": [
+                        "null",
+                        "date"
+                      ]
+                    },
+                    "location": {
+                      "bsonType": "string"
+                    },
+                    "position": {
+                      "bsonType": "string"
+                    },
+                    "startDate": {
+                      "bsonType": "date"
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "company",
+                    "createdAt",
+                    "location",
+                    "position",
+                    "startDate",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "coffee_places": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "address": {
+                      "bsonType": "string"
+                    },
+                    "close": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "description": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "image": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "mapCoordinate": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "mapUrl": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "name": {
+                      "bsonType": "string"
+                    },
+                    "open": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "parkFee": {
+                      "bsonType": [
+                        "null",
+                        "int"
+                      ]
+                    },
+                    "price": {
+                      "bsonType": "string",
+                      "enum": [
+                        "CHEAP",
+                        "MEDIUM",
+                        "EXPENSIVE"
+                      ]
+                    },
+                    "recomended": {
+                      "bsonType": [
+                        "null",
+                        "bool"
+                      ]
+                    },
+                    "region": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    },
+                    "wifiProvider": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "wifiSpeed": {
+                      "bsonType": "string",
+                      "enum": [
+                        "WEAK",
+                        "MEDIUM",
+                        "STRONG"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "address",
+                    "createdAt",
+                    "name",
+                    "price",
+                    "updatedAt",
+                    "wifiSpeed"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "educations": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "academicScore": {
+                      "oneOf": [
+                        {
+                          "bsonType": "null"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "bsonType": "object",
+                          "properties": {
+                            "label": {
+                              "bsonType": "string"
+                            },
+                            "scale": {
+                              "bsonType": "double"
+                            },
+                            "type": {
+                              "bsonType": "string"
+                            },
+                            "value": {
+                              "bsonType": "double"
+                            }
+                          },
+                          "required": [
+                            "label",
+                            "scale",
+                            "type",
+                            "value"
+                          ]
+                        }
+                      ]
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "department": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "end": {
+                      "bsonType": [
+                        "null",
+                        "date"
+                      ]
+                    },
+                    "grade": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "level": {
+                      "bsonType": "string"
+                    },
+                    "logo": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "name": {
+                      "bsonType": "string"
+                    },
+                    "place": {
+                      "bsonType": "string"
+                    },
+                    "start": {
+                      "bsonType": "date"
+                    },
+                    "studyProgram": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    },
+                    "web": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "createdAt",
+                    "level",
+                    "name",
+                    "place",
+                    "start",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "organizations": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "desc": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "orgName": {
+                      "bsonType": "string"
+                    },
+                    "period": {
+                      "bsonType": "string"
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "createdAt",
+                    "orgName",
+                    "period",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "portfolio_categories": {
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "color": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "name": {
+                      "bsonType": "string"
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "createdAt",
+                    "name",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "portfolios": {
+              "indexes": [
+                {
+                  "keys": [
+                    {
+                      "direction": 1,
+                      "field": "slug"
+                    }
+                  ],
+                  "kind": "mongo-index",
+                  "unique": true
+                }
+              ],
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "careerIds": {
+                      "bsonType": "array",
+                      "items": {
+                        "bsonType": "objectId"
+                      }
+                    },
+                    "categoryIds": {
+                      "bsonType": "array",
+                      "items": {
+                        "bsonType": "objectId"
+                      }
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "demoLink": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "desc": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "galleries": {
+                      "bsonType": "array",
+                      "items": {
+                        "additionalProperties": false,
+                        "bsonType": "object",
+                        "properties": {
+                          "createdAt": {
+                            "bsonType": "date"
+                          },
+                          "description": {
+                            "bsonType": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "id": {
+                            "bsonType": "string"
+                          },
+                          "imageUrl": {
+                            "bsonType": "string"
+                          }
+                        },
+                        "required": [
+                          "createdAt",
+                          "id",
+                          "imageUrl"
+                        ]
+                      }
+                    },
+                    "image": {
+                      "bsonType": "string"
+                    },
+                    "name": {
+                      "bsonType": "string"
+                    },
+                    "private": {
+                      "bsonType": "bool"
+                    },
+                    "ratings": {
+                      "bsonType": "array",
+                      "items": {
+                        "additionalProperties": false,
+                        "bsonType": "object",
+                        "properties": {
+                          "comment": {
+                            "bsonType": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "createdAt": {
+                            "bsonType": "date"
+                          },
+                          "id": {
+                            "bsonType": "string"
+                          },
+                          "rating": {
+                            "bsonType": "int"
+                          }
+                        },
+                        "required": [
+                          "createdAt",
+                          "id",
+                          "rating"
+                        ]
+                      }
+                    },
+                    "shortDesc": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "slug": {
+                      "bsonType": "string"
+                    },
+                    "sourceCode": {
+                      "bsonType": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "techstack": {
+                      "bsonType": "array",
+                      "items": {
+                        "bsonType": "string"
+                      }
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "careerIds",
+                    "categoryIds",
+                    "createdAt",
+                    "galleries",
+                    "image",
+                    "name",
+                    "private",
+                    "ratings",
+                    "slug",
+                    "techstack",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            },
+            "users": {
+              "indexes": [
+                {
+                  "keys": [
+                    {
+                      "direction": 1,
+                      "field": "email"
+                    }
+                  ],
+                  "kind": "mongo-index",
+                  "unique": true
+                }
+              ],
+              "kind": "mongo-collection",
+              "validator": {
+                "jsonSchema": {
+                  "additionalProperties": false,
+                  "bsonType": "object",
+                  "properties": {
+                    "_id": {
+                      "bsonType": "objectId"
+                    },
+                    "createdAt": {
+                      "bsonType": "date"
+                    },
+                    "email": {
+                      "bsonType": "string"
+                    },
+                    "name": {
+                      "bsonType": "string"
+                    },
+                    "password": {
+                      "bsonType": "string"
+                    },
+                    "updatedAt": {
+                      "bsonType": "date"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "createdAt",
+                    "email",
+                    "name",
+                    "password",
+                    "updatedAt"
+                  ]
+                },
+                "kind": "mongo-validator",
+                "validationAction": "error",
+                "validationLevel": "strict"
+              }
+            }
+          },
+          "valueSet": {
+            "CafePrice": {
+              "kind": "valueSet",
+              "values": [
+                "CHEAP",
+                "MEDIUM",
+                "EXPENSIVE"
+              ]
+            },
+            "WifiSpeed": {
+              "kind": "valueSet",
+              "values": [
+                "WEAK",
+                "MEDIUM",
+                "STRONG"
+              ]
+            }
+          }
+        },
+        "id": "__unbound__",
+        "kind": "mongo-database"
+      }
+    },
+    "storageHash": "4b83a98159a07f649387becac283bf973fcb69271dbe257f490b40e50ccb7b4a"
+  },
+  "capabilities": {},
+  "extensions": {},
+  "meta": {},
+  "_generated": {
+    "warning": "⚠️  GENERATED FILE - DO NOT EDIT",
+    "message": "This file is automatically generated by \"prisma contract emit\".",
+    "regenerate": "To regenerate, run: prisma contract emit"
+  }
+}

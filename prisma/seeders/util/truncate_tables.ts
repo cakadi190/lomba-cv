@@ -1,63 +1,33 @@
-import type { PrismaClient } from "@prisma/client";
-import prisma from "../../../lib/prisma.js";
+import { db } from "../../db.js";
 
-type TableName = keyof PrismaClient;
-const databaseType = process.env.DATABASE_TYPE;
+// Mongo collection names, matching the `db.orm.<collection>` keys emitted
+// from contract.prisma's `@@map(...)` storage names.
+export type CollectionName =
+  | "users"
+  | "educations"
+  | "organizations"
+  | "careers"
+  | "portfolio_categories"
+  | "awards"
+  | "portfolios"
+  | "coffee_places";
 
 /**
- * Disables foreign key constraints based on the database type.
+ * Deletes every document in the given Mongo collection.
+ *
+ * Mongo has no foreign-key constraints to disable/enable around this (unlike
+ * the old Postgres truncate helper), so this is a straight bulk delete.
  *
  * @since 1.0.1
  * @async
  * @function
+ * @param {CollectionName} collectionName - The collection to clear.
  */
-const disableForeignKeys = async () => {
-  if (databaseType === "postgresql") {
-    await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL DEFERRED;");
-  } else if (databaseType === "mysql") {
-    await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 0;");
-  } else if (databaseType === "sqlite") {
-    await prisma.$executeRawUnsafe("PRAGMA foreign_keys = OFF;");
-  }
-};
-
-/**
- * Enables foreign key constraints based on the database type.
- *
- * @since 1.0.1
- * @async
- * @function
- */
-const enableForeignKeys = async () => {
-  if (databaseType === "postgresql") {
-    await prisma.$executeRawUnsafe("SET CONSTRAINTS ALL IMMEDIATE;");
-  } else if (databaseType === "mysql") {
-    await prisma.$executeRawUnsafe("SET FOREIGN_KEY_CHECKS = 1;");
-  } else if (databaseType === "sqlite") {
-    await prisma.$executeRawUnsafe("PRAGMA foreign_keys = ON;");
-  }
-};
-
-/**
- * Truncates the specified table and removes all its data.
- *
- * @since 1.0.1
- * @async
- * @function
- * @param {TableName} tableName - The name of the table to truncate.
- * @throws Will throw an error if the table does not exist or cannot be truncated.
- */
-export const truncateTable = async (tableName: TableName): Promise<void> => {
-  const models = Object.keys(prisma) as TableName[];
-
-  if (!models.includes(tableName)) {
-    throw new Error(
-      `Table ${tableName as string} does not exist or cannot be truncated.`,
-    );
-  }
-
-  await disableForeignKeys();
-  // biome-ignore lint/suspicious/noExplicitAny: dynamic client model invocation
-  await (prisma[tableName] as any).deleteMany({});
-  await enableForeignKeys();
+export const truncateTable = async (
+  collectionName: CollectionName,
+): Promise<void> => {
+  // `db.orm.<collection>.deleteAll()` is the ORM's unqualified-write escape
+  // hatch (no preceding `.where(...)` needed) for clearing every document in
+  // the collection.
+  await db.orm[collectionName].deleteAll();
 };

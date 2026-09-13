@@ -1,31 +1,27 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
 
 export default defineEventHandler(async (_event) => {
   try {
-    const _coffeeShopsModel = prisma.coffeePlace;
-
     const cacheKey = "coffee_shops:regions";
 
     return await Cache.remember(cacheKey, 3600, async () => {
-      // Ambil region unik dari database yang tidak null dan tidak kosong
-      const coffeePlaces = await _coffeeShopsModel.findMany({
-        where: {
-          AND: [{ region: { not: null } }, { region: { not: "" } }],
-        },
-        select: {
-          region: true,
-        },
-        distinct: ["region"],
-        orderBy: {
-          region: "asc",
-        },
-      });
+      // Ambil region unik dari database yang tidak null dan tidak kosong.
+      // No `distinct` on the Mongo ORM lane, so dedupe in JS after reading
+      // just the region field.
+      const coffeePlaces = await db.orm.coffee_places
+        .select("region")
+        .orderBy({ region: 1 })
+        .all();
 
-      const regions = coffeePlaces
-        .map((item) => item.region)
-        .filter((region): region is string => !!region);
+      const regions = Array.from(
+        new Set(
+          coffeePlaces
+            .map((item) => item.region)
+            .filter((region): region is string => !!region),
+        ),
+      ).sort();
 
       return {
         code: 200,

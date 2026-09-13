@@ -1,21 +1,10 @@
-import prisma from "../../../lib/prisma";
+import { db } from "../../../prisma/db";
 import { route } from "../../../lib/route";
 
 export default defineSitemapEventHandler(async () => {
-  const portfolios = await prisma.portfolio.findMany({
-    select: {
-      name: true,
-      slug: true,
-      updated_at: true,
-      image: true,
-      galleries: {
-        select: {
-          imageUrl: true,
-          description: true,
-        },
-      },
-    },
-  });
+  const portfolios = await db.orm.portfolios
+    .select("name", "slug", "updatedAt", "image", "galleries")
+    .all();
 
   return portfolios.map((portfolio) => {
     const images = [];
@@ -41,7 +30,7 @@ export default defineSitemapEventHandler(async () => {
 
     return {
       loc: route("portfolios.show", portfolio.slug),
-      lastmod: portfolio.updated_at,
+      lastmod: portfolio.updatedAt,
       gzip: true,
       images: images.length > 0 ? images : undefined,
     };

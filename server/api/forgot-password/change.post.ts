@@ -1,5 +1,5 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { forgotPasswordChangeSchema } from "~~/lib/zod/schemas/forgotPassword";
 import { Cache } from "~~/server/lib/facades/cache";
 import { hashPassword } from "~~/server/lib/utils/auth";
@@ -47,9 +47,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Check if user exists
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    const user = await db.orm.users.where({ email }).first();
 
     if (!user) {
       logger.warn(
@@ -64,11 +62,9 @@ export default defineEventHandler(async (event) => {
 
     // Update password in DB
     const hashedPassword = hashPassword(password);
-    await prisma.user.update({
-      where: { email },
-      data: {
-        password: hashedPassword,
-      },
+    await db.orm.users.where({ email }).update({
+      password: hashedPassword,
+      updatedAt: new Date(),
     });
 
     logger.info({ email }, "Kata sandi user berhasil diperbarui");

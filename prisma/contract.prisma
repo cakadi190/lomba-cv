@@ -1,0 +1,177 @@
+// use prisma-8
+
+// # For User / Auth # //
+model User {
+  id        ObjectId @id @map("_id")
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("users")
+}
+
+// Structured academic score (was a free-form Json column in Postgres).
+// Mongo PSL has no Json type, but the shape is fixed, so it maps cleanly
+// to a value object instead.
+type AcademicScore {
+  type  String
+  label String
+  value Float
+  scale Float
+}
+
+// # For Education # //
+model Education {
+  id            ObjectId       @id @map("_id")
+  name          String
+  logo          String?
+  web           String?
+  level         String
+  grade         String?
+  department    String?
+  studyProgram  String?
+  start         DateTime
+  end           DateTime?
+  place         String
+  academicScore AcademicScore?
+  createdAt     DateTime
+  updatedAt     DateTime
+
+  @@map("educations")
+}
+
+// # For Organization EXP # //
+model Organization {
+  id        ObjectId @id @map("_id")
+  orgName   String
+  desc      String?
+  period    String
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("organizations")
+}
+
+// # For Career EXP # //
+model Career {
+  id        ObjectId  @id @map("_id")
+  position  String
+  company   String
+  location  String
+  startDate DateTime
+  endDate   DateTime?
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("careers")
+}
+
+// # For Portfolio Categories # //
+model PortfolioCategory {
+  id        ObjectId @id @map("_id")
+  name      String
+  color     String?
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("portfolio_categories")
+}
+
+// # For Award EXP # //
+model Award {
+  id        ObjectId  @id @map("_id")
+  event     String
+  award     String
+  icon      String?
+  year      Int
+  rank      Int?
+  date      DateTime?
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("awards")
+}
+
+// Embedded value objects for Portfolio's owned, low-cardinality children.
+// Always read/written together with their parent Portfolio, so they live
+// as arrays on the document instead of separate collections. `id` is set
+// by application code (e.g. crypto.randomUUID()) since Mongo PSL has no
+// @default(uuid()) for value-object fields.
+type PortfolioRating {
+  id        String
+  rating    Int
+  comment   String?
+  createdAt DateTime
+}
+
+type PortfolioGallery {
+  id          String
+  imageUrl    String
+  description String?
+  createdAt   DateTime
+}
+
+// # For Portfolio # //
+model Portfolio {
+  id          ObjectId           @id @map("_id")
+  name        String
+  slug        String             @unique
+  image       String
+  techstack   String[]
+  shortDesc   String?
+  desc        String?
+  demoLink    String?
+  sourceCode  String?
+  private     Boolean
+  // Plain many-to-many links (no extra attributes on the edge), kept as
+  // ObjectId arrays instead of PortfolioLink/PortfolioCategoryLink join
+  // collections from the Postgres schema.
+  categoryIds ObjectId[]
+  careerIds   ObjectId[]
+  ratings     PortfolioRating[]
+  galleries   PortfolioGallery[]
+  createdAt   DateTime
+  updatedAt   DateTime
+
+  @@map("portfolios")
+}
+
+enum WifiSpeed {
+  WEAK   = "WEAK"
+  MEDIUM = "MEDIUM"
+  STRONG = "STRONG"
+}
+
+enum CafePrice {
+  CHEAP     = "CHEAP"
+  MEDIUM    = "MEDIUM"
+  EXPENSIVE = "EXPENSIVE"
+}
+
+// # For Coffee Places # //
+// wifiSpeed/price/recomended defaults, parkFee (was BigInt), and the
+// timestamps are no longer defaulted in the contract (Mongo PSL doesn't
+// support @default on these) — set them explicitly in application code.
+model CoffeePlace {
+  id            ObjectId  @id @map("_id")
+  name          String
+  address       String
+  description   String?
+  mapCoordinate String?
+  mapUrl        String?
+  image         String?
+  wifiProvider  String?
+  wifiSpeed     WifiSpeed
+  price         CafePrice
+  parkFee       Int?
+  close         String?
+  open          String?
+  region        String?
+  recomended    Boolean?
+  createdAt     DateTime
+  updatedAt     DateTime
+
+  @@map("coffee_places")
+}

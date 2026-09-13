@@ -1,20 +1,20 @@
-import prisma from "../../lib/prisma.js";
-import { truncateTable } from "./util/truncate_tables.js";
+import { db } from "../db.js";
 
 const portoData = async () => {
-  const portfolios = await prisma.portfolio.findMany({
-    select: { id: true },
-  });
-  return portfolios.map((portfolio: { id: string }) => portfolio.id);
+  const portfolios = await db.orm.portfolios.select("_id").all();
+  return portfolios.map((portfolio) => portfolio._id);
 };
 
 const portoCategoryData = async () => {
-  const categories = await prisma.portfolioCategory.findMany({
-    select: { id: true },
-  });
-  return categories.map((category: { id: string }) => category.id);
+  const categories = await db.orm.portfolio_categories.select("_id").all();
+  return categories.map((category) => category._id);
 };
 
+// The old PortfolioCategoryLink join table is gone in the Mongo contract —
+// categories are now referenced by a `categoryIds: ObjectId[]` array
+// directly on the Portfolio document. This seeder pushes the relevant
+// category id into each target portfolio's `categoryIds` array instead of
+// creating separate join rows.
 async function seedPortofolioCategoryLinks() {
   const ids = await portoData();
   const categories = await portoCategoryData();
@@ -43,13 +43,11 @@ async function seedPortofolioCategoryLinks() {
     { portfolioId: ids[21], categoryId: categories[0] },
   ];
 
-  // Optionally truncate the table before seeding
-  await truncateTable("portfolioCategoryLink");
-
   for (const link of portfolioCategoryLinks) {
-    await prisma.portfolioCategoryLink.create({
-      data: link,
-    });
+    if (!link.portfolioId || !link.categoryId) continue;
+    await db.orm.portfolios
+      .where({ _id: link.portfolioId })
+      .update((p) => [p.categoryIds.push(link.categoryId)]);
   }
 }
 

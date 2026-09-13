@@ -6,7 +6,7 @@ import {
   nuxt,
   php,
 } from "../../app/components/techstack.js";
-import prisma from "../../lib/prisma.js";
+import { db } from "../db.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 interface PortfolioItem {
@@ -304,18 +304,29 @@ const myPortofolio: PortfolioItem[] = [
 ];
 
 async function seedPortofolio() {
-  await truncateTable("portfolio");
+  await truncateTable("portfolios");
 
   for (const item of myPortofolio) {
-    await prisma.portfolio.create({
-      data: {
-        name: item.name,
-        slug: item.slug,
-        image: item.image,
-        techstack: JSON.stringify(item.techstack),
-        shortDesc: item.shortDesc,
-        desc: item.desc,
-      },
+    const now = new Date();
+    // categoryIds/careerIds start empty — the old PortfolioCategoryLink
+    // join table is gone in the Mongo contract; seed_portofolio_category.ts
+    // populates `categoryIds` on these documents afterward.
+    await db.orm.portfolios.create({
+      name: item.name,
+      slug: item.slug,
+      image: item.image,
+      techstack: item.techstack,
+      shortDesc: item.shortDesc,
+      desc: item.desc ?? null,
+      demoLink: item.demoLink ?? null,
+      sourceCode: item.sourceCode ?? null,
+      private: item.private ?? false,
+      categoryIds: [],
+      careerIds: [],
+      ratings: [],
+      galleries: [],
+      createdAt: now,
+      updatedAt: now,
     });
   }
 }

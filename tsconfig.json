@@ -2,16 +2,19 @@
   // https://nuxt.com/docs/guide/concepts/typescript
   "compilerOptions": {
     "target": "ES2019",
-    "module": "ES2022",
+    "module": "preserve",
     "strict": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "types": ["node"]
+    "types": [
+      "node"
+    ],
+    "resolveJsonModule": true
   },
   "extends": "./.nuxt/tsconfig.json",
   "include": [

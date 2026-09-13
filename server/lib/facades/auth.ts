@@ -1,5 +1,5 @@
 import type { H3Event } from "h3";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import {
   deleteAuthCookie,
   getAuthenticatedUser,
@@ -120,9 +120,9 @@ export class SessionGuard {
       return false;
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: credentials.email },
-    });
+    const user = await db.orm.users
+      .where({ email: credentials.email })
+      .first();
 
     if (!user) {
       return false;
@@ -132,7 +132,15 @@ export class SessionGuard {
       return false;
     }
 
-    this.login(user, remember);
+    this.login(
+      {
+        id: String(user._id),
+        name: user.name,
+        email: user.email,
+        created_at: user.createdAt,
+      },
+      remember,
+    );
     return true;
   }
 }

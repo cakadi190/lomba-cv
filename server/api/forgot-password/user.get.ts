@@ -1,5 +1,5 @@
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
 
 export default defineEventHandler(async (event) => {
@@ -32,13 +32,10 @@ export default defineEventHandler(async (event) => {
     }
 
     // Get user info
-    const user = await prisma.user.findUnique({
-      where: { email },
-      select: {
-        name: true,
-        email: true,
-      },
-    });
+    const user = await db.orm.users
+      .select("name", "email")
+      .where({ email })
+      .first();
 
     if (!user) {
       logger.warn(

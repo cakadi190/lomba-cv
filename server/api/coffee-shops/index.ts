@@ -1,26 +1,10 @@
-import type { Prisma } from "@prisma/client";
 import { logger } from "~~/lib/pino";
-import prisma from "~~/lib/prisma";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
-
-// biome-ignore lint/suspicious/noExplicitAny: helper to convert BigInt in dynamic objects
-const convertBigInt = (obj: any): any => {
-  if (typeof obj !== "object" || obj === null) return obj;
-  if (Array.isArray(obj)) {
-    return obj.map((item) => convertBigInt(item));
-  }
-  return Object.fromEntries(
-    Object.entries(obj).map(([key, value]) => [
-      key,
-      typeof value === "bigint" ? value.toString() : convertBigInt(value),
-    ]),
-  );
-};
 
 export default defineEventHandler(async (event) => {
   try {
     const query = getQuery(event);
-    const _coffeeShopsModel = prisma.coffeePlace;
 
     const page = Math.max(1, Number(query?.page) || 1);
     const perPage = Math.min(100, Math.max(1, Number(query?.perPage) || 12));
@@ -29,39 +13,33 @@ export default defineEventHandler(async (event) => {
     const city = query?.city ? String(query.city) : undefined;
     const search = query?.search ? String(query.search) : undefined;
 
-    const where: Prisma.CoffeePlaceWhereInput = {};
-
-    if (city) {
-      where.region = {
-        equals: city,
-        mode: "insensitive",
-      };
-    }
-
-    if (search) {
-      where.name = {
-        contains: search,
-        mode: "insensitive",
-      };
-    }
+    // NOTE: the Mongo ORM `.where(...)` only supports object equality today
+    // (see prisma-8 skill, queries-mongo.md). Case-insensitive / substring
+    // filters (`contains`/`mode: "insensitive"`) aren't available through
+    // that surface yet, so city/search filtering is applied in JS below
+    // after fetching the page's candidate rows. This is a judgment call
+    // since a proper text-index / regex filter would need the MongoFilterExpr
+    // façade-gap helpers.
 
     const cacheKey = `coffee_shops:list:page:${page}:perPage:${perPage}:city:${city || "all"}:search:${search || "all"}`;
 
     return await Cache.remember(cacheKey, 3600, async () => {
-      const [coffeeShops, totalCount] = await Promise.all([
-        _coffeeShopsModel.findMany({
-          where,
-          skip,
-          take: perPage,
-          orderBy: [{ recomended: "desc" }, { updated_at: "asc" }],
-        }),
-        _coffeeShopsModel.count({
-          where,
-        }),
-      ]);
+      let all = await db.orm.coffee_places
+        .orderBy({ recomended: -1, updatedAt: 1 })
+        .all();
 
-      // Konversi BigInt ke string
-      const serializedCoffeeShops = convertBigInt(coffeeShops);
+      if (city) {
+        const cityLower = city.toLowerCase();
+        all = all.filter((c) => c.region?.toLowerCase() === cityLower);
+      }
+
+      if (search) {
+        const searchLower = search.toLowerCase();
+        all = all.filter((c) => c.name.toLowerCase().includes(searchLower));
+      }
+
+      const totalCount = all.length;
+      const coffeeShops = all.slice(skip, skip + perPage);
 
       const totalPages = Math.ceil(totalCount / perPage);
       const hasNextPage = page < totalPages;
@@ -69,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
       return {
         code: 200,
-        data: serializedCoffeeShops,
+        data: coffeeShops,
         hasNextPage,
         hasPrevPage,
         totalPage: totalPages,

@@ -1,4 +1,4 @@
-import prisma from "../../lib/prisma.js";
+import { db } from "../db.js";
 import { truncateTable } from "./util/truncate_tables.js";
 
 const awardData = [
@@ -78,11 +78,14 @@ const awardData = [
 ];
 
 async function seedAwards() {
-  await truncateTable("award");
+  await truncateTable("awards");
 
   for (const award of awardData) {
-    await prisma.award.create({
-      data: award,
+    const now = new Date();
+    await db.orm.awards.create({
+      ...award,
+      createdAt: now,
+      updatedAt: now,
     });
   }
 }
