@@ -44,6 +44,10 @@ echo "==> Deploying new color:  $new_color (app=$app_port)"
 # deploy.
 docker network inspect lombacv-net >/dev/null 2>&1 || \
   docker network create lombacv-net --subnet 172.21.0.0/16
+# mongo-net is shared with vettrak so both apps can reach the single
+# replica set member at one gateway (see docs/mongodb-native-setup.md).
+docker network inspect mongo-net >/dev/null 2>&1 || \
+  docker network create mongo-net --subnet 172.20.0.0/24
 
 docker compose --profile "$new_color" up -d --force-recreate
 

@@ -7,8 +7,8 @@ x-app-common: &app-common
     dockerfile: Dockerfile
   restart: unless-stopped
   # Redis and Mailpit still run on the host and are reached via
-  # host.docker.internal (Mongo instead uses the fixed 172.21.0.1 gateway
-  # IP directly — see MONGODB_URL in .env.example).
+  # host.docker.internal (Mongo instead uses mongo-net's fixed gateway IP
+  # directly — see MONGODB_URL in .env.example).
   extra_hosts:
     - "host.docker.internal:host-gateway"
   env_file:
@@ -34,6 +34,16 @@ networks:
   default:
     name: lombacv-net
     external: true
+  # A single native mongod serves both lomba-cv and vettrak, but a replica
+  # set (required for transactions) can only advertise ONE host for its
+  # member — a per-app bridge gateway (172.21.0.1 here) isn't reachable from
+  # the other app's isolated bridge. mongo-net is attached to both apps'
+  # containers so there's one gateway (172.20.0.1) both can actually reach.
+  # Create it once on the host:
+  #   docker network create mongo-net --subnet 172.20.0.0/24
+  mongo-net:
+    name: mongo-net
+    external: true
 
 services:
   # Blue/Green deployment: only one color is up in production at a time, but
@@ -49,6 +59,7 @@ services:
     networks:
       default:
         ipv4_address: 172.21.0.5
+      mongo-net: {}
     ports:
       - "127.0.0.1:5010:3000"
 
@@ -59,5 +70,6 @@ services:
     networks:
       default:
         ipv4_address: 172.21.0.8
+      mongo-net: {}
     ports:
       - "127.0.0.1:5011:3000"
