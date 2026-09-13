@@ -5,7 +5,8 @@
 #   docker compose -f compose.yaml up -d --build
 #
 services:
-  app:
+  lombacv-blue:
+    profiles: !override []
     build:
       target: dev
     # A dev container that dies should stay dead and show its error, not loop.

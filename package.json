@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
-  "packageManager": "bun@1.3.10",
+  "packageManager": "bun@1.4.0",
   "scripts": {
     "build": "prisma contract emit && nuxt build",
     "dev": "nuxt dev",
@@ -16,7 +16,7 @@
     "key:rotate-fix": "bun server/scripts/key.ts rotate-fix",
     "docker:up": "docker compose up --build -d",
     "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f app",
+    "docker:logs": "docker compose logs -f lombacv-blue",
     "db:migrate": "prisma db migrate --advance-ref db",
     "format": "biome format --write .",
     "lint": "biome check .",

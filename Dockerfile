@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 # ---- install: full dependency tree, cached across builds -------------------
-FROM oven/bun:1.3.10 AS dependencies
+FROM oven/bun:1.4 AS dependencies
 WORKDIR /app
 
 ENV NUXT_TELEMETRY_DISABLED=1
@@ -31,45 +31,45 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 ENV NODE_ENV=development
 EXPOSE 3000
 
-# `migrate deploy` is advisory here: a schema that is already current, or a
+# `db migrate` is advisory here: a schema that is already current, or a
 # database that is briefly down, must not stop the dev server from booting.
-CMD ["sh", "-c", "bunx prisma generate && (bunx prisma migrate deploy || echo '[dev] migrate skipped'); exec bunx nuxt dev --host 0.0.0.0 --port 3000"]
+CMD ["sh", "-c", "bunx prisma contract emit && (bunx prisma db migrate --advance-ref db || echo '[dev] migrate skipped'); exec bunx nuxt dev --host 0.0.0.0 --port 3000"]
 
-# ---- migrate-cli: isolated tree for `prisma migrate deploy` ----------------
+# ---- migrate-cli: isolated tree for `prisma db migrate` --------------------
 # Nitro bundles every runtime dependency (including the generated Prisma
 # client) into .output, so the only thing the runtime image still needs from
-# npm is the migrate CLI. Installing it standalone keeps that at ~250MB
-# instead of shipping the 1.2GB dev tree.
-FROM oven/bun:1.3.10 AS migrate-cli
+# npm is the migrate CLI plus the Mongo target adapter it drives. Installing
+# it standalone keeps that far smaller than shipping the 1.2GB dev tree.
+FROM oven/bun:1.4 AS migrate-cli
 WORKDIR /migrate
 
 ENV BUN_CONFIG_MAX_HTTP_REQUESTS=8
 
-# Versions kept in step with package.json's devDependencies.
+# Versions kept in step with package.json's dependencies/devDependencies.
 RUN --mount=type=cache,target=/root/.bun/install/cache,sharing=locked \
   echo '{"name":"migrate","private":true}' > package.json \
-  && bun add --ignore-scripts prisma@7.9.0 dotenv@17.4.2
+  && bun add --ignore-scripts prisma@8.0.0-rc.14 @prisma/orm-mongo@8.0.0-rc.11 dotenv@17.4.2
 
 # ---- build ----------------------------------------------------------------
 FROM dependencies AS build
 WORKDIR /app
 
-# prisma.config.ts resolves DATABASE_URL eagerly. Neither `generate` nor the
-# Nuxt build talks to a database, so a placeholder satisfies it; the real URL
-# is injected at runtime by compose.
-ENV DATABASE_URL=postgresql://placeholder:placeholder@localhost:5432/placeholder
+# prisma.config.ts resolves MONGODB_URL eagerly. Neither `contract emit` nor
+# the Nuxt build talks to a database, so a placeholder satisfies it; the real
+# URL is injected at runtime by compose.
+ENV MONGODB_URL=mongodb://placeholder:placeholder@localhost:27017/placeholder
 
-# Schema first: `prisma generate` then only re-runs when the schema changes.
+# Contract first: `prisma contract emit` then only re-runs when it changes.
 COPY prisma ./prisma
 COPY prisma.config.ts ./
-RUN bunx prisma generate
+RUN bunx prisma contract emit
 
 COPY . .
 RUN --mount=type=cache,target=/app/node_modules/.cache,sharing=locked \
   bunx nuxt build
 
 # ---- runtime --------------------------------------------------------------
-FROM oven/bun:1.3.10-slim AS runtime
+FROM oven/bun:1.4-slim AS runtime
 WORKDIR /app
 
 # Prisma engines need OpenSSL; TLS-backed services need the CA bundle.
@@ -92,7 +92,6 @@ EXPOSE 3000
 # Invoke the CLI by path: `bunx prisma` treats the local install as a miss and
 # re-resolves the whole tree from npm on every container start.
 #
-# Migrations need a session-mode connection (Supabase port 5432); the app
-# itself is fine on the transaction pooler (6543). MIGRATE_DATABASE_URL
-# overrides the URL for the migrate step only.
-CMD ["sh", "-c", "DATABASE_URL=\"${MIGRATE_DATABASE_URL:-$DATABASE_URL}\" bun node_modules/prisma/build/index.js migrate deploy && bun run .output/server/index.mjs"]
+# `db migrate --advance-ref db` is the Prisma 8 Mongo equivalent of the old
+# `migrate deploy` — applies pending migrations and advances the `db` ref.
+CMD ["sh", "-c", "bun node_modules/prisma/build/index.js db migrate --advance-ref db && bun run .output/server/index.mjs"]
