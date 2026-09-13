@@ -49,6 +49,11 @@ export default defineNuxtConfig({
   css: ["~/assets/scss/app.scss"],
 
   nitro: {
+    // Runtime is Bun (see Dockerfile), not Node: the default node-server
+    // preset traces packages' "node" export condition, so a package like
+    // srvx (used by @nuxt/image's ipx) only ships its node.mjs adapter and
+    // is missing the bun.mjs one bun's resolver actually needs at runtime.
+    preset: "bun",
     prerender: {
       crawlLinks: false,
       failOnError: false,
