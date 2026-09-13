@@ -46,7 +46,7 @@ pipeline {
     // Server tujuan — sama dengan vettrak (satu VPS, satu mongod native)
     DEPLOY_HOST = 'root@103.235.72.17'
     // Folder di server yang berisi compose.yaml untuk service ini
-    DEPLOY_PATH = '/www/lomba-cv'
+    DEPLOY_PATH = '/www/lombacv'
   }
 
   stages {
