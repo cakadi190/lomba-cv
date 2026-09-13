@@ -11,14 +11,24 @@ void deployImage() {
       scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" "\$ENV_FILE" ${DEPLOY_HOST}:${DEPLOY_PATH}/.env
       scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" compose.yaml ${DEPLOY_HOST}:${DEPLOY_PATH}/compose.yaml
       scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" scripts/deploy-bluegreen.sh ${DEPLOY_HOST}:${DEPLOY_PATH}/deploy-bluegreen.sh
+      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" deploy/nginx/cakadi.web.id.conf ${DEPLOY_HOST}:${DEPLOY_PATH}/cakadi.web.id.conf
 
       ssh -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" ${DEPLOY_HOST} bash -c '
         set -e
         cd ${DEPLOY_PATH}
         gunzip -c ${IMAGE_ARCHIVE} | docker load
         chmod +x deploy-bluegreen.sh
+
+        if [ ! -f ${NGINX_SITE_FILE} ]; then
+          echo "==> Provisioning Nginx site ${NGINX_SITE_FILE} (first deploy)"
+          cp cakadi.web.id.conf ${NGINX_SITE_FILE}
+          ln -sf ${NGINX_SITE_FILE} /etc/nginx/sites-enabled/cakadi.web.id
+          nginx -t
+          systemctl reload nginx
+        fi
+
         ./deploy-bluegreen.sh ${DEPLOY_PATH}
-        rm -f ${IMAGE_ARCHIVE}
+        rm -f ${IMAGE_ARCHIVE} cakadi.web.id.conf
         docker image prune -f
       '
     """
