@@ -86,6 +86,7 @@ COPY --from=migrate-cli /migrate/node_modules ./node_modules
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/package.json /app/prisma.config.ts ./
 COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/migrations ./migrations
 
 EXPOSE 3000
 
