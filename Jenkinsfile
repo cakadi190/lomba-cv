@@ -19,10 +19,11 @@ void deployImage() {
         gunzip -c ${IMAGE_ARCHIVE} | docker load
         chmod +x deploy-bluegreen.sh
 
-        if [ ! -f ${NGINX_SITE_FILE} ]; then
-          echo "==> Provisioning Nginx site ${NGINX_SITE_FILE} (first deploy)"
-          cp cakadi.web.id.conf ${NGINX_SITE_FILE}
-          ln -sf ${NGINX_SITE_FILE} /etc/nginx/sites-enabled/cakadi.web.id
+        NGINX_SITE_FILE="\${NGINX_SITE_FILE:-/etc/nginx/sites-available/cakadi.web.id}"
+        if [ ! -f "\$NGINX_SITE_FILE" ]; then
+          echo "==> Provisioning Nginx site \$NGINX_SITE_FILE (first deploy)"
+          cp cakadi.web.id.conf "\$NGINX_SITE_FILE"
+          ln -sf "\$NGINX_SITE_FILE" /etc/nginx/sites-enabled/cakadi.web.id
           nginx -t
           systemctl reload nginx
         fi

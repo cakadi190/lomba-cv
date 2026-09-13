@@ -7,7 +7,7 @@ x-app-common: &app-common
     dockerfile: Dockerfile
   restart: unless-stopped
   # Redis and Mailpit still run on the host and are reached via
-  # host.docker.internal (Mongo instead uses the fixed 172.17.0.1 gateway
+  # host.docker.internal (Mongo instead uses the fixed 172.19.0.1 gateway
   # IP directly — see MONGODB_URL in .env.example).
   extra_hosts:
     - "host.docker.internal:host-gateway"
@@ -24,13 +24,15 @@ x-app-common: &app-common
     retries: 5
 
 networks:
-  # Docker's own default "bridge" network (172.17.0.0/16 on the production
-  # host), shared with vettrak's compose project, so both apps get fixed,
-  # predictable IPs that mongod's bindIp already trusts (see
-  # vettrak/docs/mongodb-native-setup.md) instead of routing through
-  # host.docker.internal. Declared external since it already exists.
+  # Docker won't allow a fixed ipv4_address on the literal default "bridge"
+  # network (only user-defined networks support that), so lomba-cv gets its
+  # own user-defined bridge network. Create it once on the host before the
+  # first deploy:
+  #   docker network create lombacv-net --subnet 172.19.0.0/16
+  # vettrak gets its own separate network (vettrak-net, 172.18.0.0/16) — see
+  # vettrak/docs/mongodb-native-setup.md for how mongod trusts both gateways.
   default:
-    name: bridge
+    name: lombacv-net
     external: true
 
 services:
@@ -46,7 +48,7 @@ services:
     profiles: ["blue"]
     networks:
       default:
-        ipv4_address: 172.17.0.5
+        ipv4_address: 172.19.0.5
     ports:
       - "127.0.0.1:5010:3000"
 
@@ -56,6 +58,6 @@ services:
     profiles: ["green"]
     networks:
       default:
-        ipv4_address: 172.17.0.8
+        ipv4_address: 172.19.0.8
     ports:
       - "127.0.0.1:5011:3000"

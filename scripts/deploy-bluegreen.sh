@@ -38,6 +38,13 @@ esac
 echo "==> Current active color: $current_color"
 echo "==> Deploying new color:  $new_color (app=$app_port)"
 
+# compose.yaml declares this network external (fixed IPs require a
+# user-defined network, unlike the default "bridge") — create it here so a
+# fresh host doesn't need a manual one-time step remembered before the first
+# deploy.
+docker network inspect lombacv-net >/dev/null 2>&1 || \
+  docker network create lombacv-net --subnet 172.19.0.0/16
+
 docker compose --profile "$new_color" up -d --force-recreate
 
 echo "==> Waiting for $new_color to become healthy..."
