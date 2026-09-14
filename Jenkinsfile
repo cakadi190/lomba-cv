@@ -7,13 +7,30 @@ void deployImage() {
     sshUserPrivateKey(credentialsId: env.DEPLOY_SSH_CRED_ID, keyFileVariable: 'SSH_KEY')
   ]) {
     sh """#!/usr/bin/env bash
-      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" ${IMAGE_ARCHIVE} ${DEPLOY_HOST}:${DEPLOY_PATH}/${IMAGE_ARCHIVE}
-      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" "\$ENV_FILE" ${DEPLOY_HOST}:${DEPLOY_PATH}/.env
-      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" compose.yaml ${DEPLOY_HOST}:${DEPLOY_PATH}/compose.yaml
-      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" scripts/deploy-bluegreen.sh ${DEPLOY_HOST}:${DEPLOY_PATH}/deploy-bluegreen.sh
-      scp -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" deploy/nginx/cakadi.web.id.conf ${DEPLOY_HOST}:${DEPLOY_PATH}/cakadi.web.id.conf
+      set -euo pipefail
 
-      ssh -o StrictHostKeyChecking=accept-new -i "\$SSH_KEY" ${DEPLOY_HOST} bash -c '
+      SSH_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -i "\$SSH_KEY")
+
+      scp_retry() {
+        local src="\$1" dest="\$2" attempt
+        for attempt in 1 2 3; do
+          if scp "\${SSH_OPTS[@]}" "\$src" "\$dest"; then
+            return 0
+          fi
+          echo "scp failed (attempt \$attempt/3) for \$src -> \$dest, retrying..." >&2
+          sleep 5
+        done
+        echo "scp failed after 3 attempts for \$src -> \$dest" >&2
+        return 1
+      }
+
+      scp_retry ${IMAGE_ARCHIVE} ${DEPLOY_HOST}:${DEPLOY_PATH}/${IMAGE_ARCHIVE}
+      scp_retry "\$ENV_FILE" ${DEPLOY_HOST}:${DEPLOY_PATH}/.env
+      scp_retry compose.yaml ${DEPLOY_HOST}:${DEPLOY_PATH}/compose.yaml
+      scp_retry scripts/deploy-bluegreen.sh ${DEPLOY_HOST}:${DEPLOY_PATH}/deploy-bluegreen.sh
+      scp_retry deploy/nginx/cakadi.web.id.conf ${DEPLOY_HOST}:${DEPLOY_PATH}/cakadi.web.id.conf
+
+      ssh "\${SSH_OPTS[@]}" ${DEPLOY_HOST} bash -c '
         set -e
         cd ${DEPLOY_PATH}
         gunzip -c ${IMAGE_ARCHIVE} | docker load
