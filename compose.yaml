@@ -17,6 +17,12 @@ x-app-common: &app-common
     NODE_ENV: production
     HOST: "0.0.0.0"
     PORT: 3000
+    # Nitro only overrides runtimeConfig.public.baseUrl at runtime via this
+    # exact name (NUXT_PUBLIC_BASE_URL) — it does not re-read APP_URL from
+    # nuxt.config.ts after build, since that's only evaluated at build time
+    # (see Dockerfile's build stage). Derived from APP_URL (set in .env) so
+    # only one variable needs updating per environment.
+    NUXT_PUBLIC_BASE_URL: ${APP_URL}
   healthcheck:
     test: ["CMD", "bun", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
     interval: 10s

@@ -106,7 +106,7 @@ export class Router {
    */
   static resolveBaseUrl(): string {
     return (
-      process.env.NEXT_PUBLIC_APP_URL ??
+      process.env.APP_URL ??
       (typeof window === "undefined" ? "" : window.location.origin)
     );
   }
