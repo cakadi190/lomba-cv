@@ -43,7 +43,7 @@ echo "==> Deploying new color:  $new_color (app=$app_port)"
 # fresh host doesn't need a manual one-time step remembered before the first
 # deploy.
 docker network inspect lombacv-net >/dev/null 2>&1 || \
-  docker network create lombacv-net --subnet 172.21.0.0/16
+  docker network create lombacv-net --subnet 172.18.0.0/16
 # mongo-net is shared with vettrak so both apps can reach the single
 # replica set member at one gateway (see docs/mongodb-native-setup.md).
 # It's the host's "docker-bridge" network (172.20.0.0/16, gateway
