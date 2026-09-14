@@ -77,7 +77,7 @@ pipeline {
     // Kredensial file .env produksi (Jenkins: "Secret file")
     ENV_FILE_CRED_ID = 'lombacv-env'
     // Server tujuan — sama dengan vettrak (satu VPS, satu mongod native)
-    DEPLOY_HOST = 'root@103.235.72.17'
+    DEPLOY_HOST = 'root@103.245.39.22'
     // Folder di server yang berisi compose.yaml untuk service ini
     DEPLOY_PATH = '/www/lombacv'
   }
@@ -106,7 +106,7 @@ pipeline {
         sh '''
           echo "NODE_NAME=${NODE_NAME}"
           hostname
-          timeout 5 bash -c "cat < /dev/null > /dev/tcp/103.235.72.17/22" && echo "PORT OPEN" || echo "PORT TIMEOUT"
+          timeout 5 bash -c "cat < /dev/null > /dev/tcp/103.245.39.22/22" && echo "PORT OPEN" || echo "PORT TIMEOUT"
         '''
       }
     }
