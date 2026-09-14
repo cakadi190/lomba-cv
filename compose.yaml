@@ -23,6 +23,13 @@ x-app-common: &app-common
     # (see Dockerfile's build stage). Derived from APP_URL (set in .env) so
     # only one variable needs updating per environment.
     NUXT_PUBLIC_BASE_URL: ${APP_URL}
+  # Host has only ~1.88GB RAM total, shared with vettrak's containers and a
+  # native mongod (~200MB). Blue/green briefly runs both colors of BOTH apps
+  # at once during a flip, so caps here need headroom for 4 app containers +
+  # mongod without OOM-killing anything. 320MB fits real usage (~291MB RSS
+  # observed for this Nitro process) with a little room to grow.
+  mem_limit: 320m
+  mem_reservation: 192m
   healthcheck:
     test: ["CMD", "bun", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
     interval: 10s
