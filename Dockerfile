@@ -84,6 +84,13 @@ ENV PORT=3000
 
 COPY --from=migrate-cli /migrate/node_modules ./node_modules
 COPY --from=build /app/.output ./.output
+# ipx (used by @nuxt/image) hardcodes require("srvx/node") in its local
+# filesystem storage adapter regardless of runtime, but Nitro's dependency
+# trace for the "bun" preset only follows the "bun" export condition, so the
+# "node" adapter subpath never gets copied into .output/server/node_modules
+# on its own. Supplying the full package as a sibling of ipx lets Bun's
+# module resolution (which walks up node_modules directories) find it.
+COPY --from=build /app/node_modules/srvx ./.output/server/node_modules/srvx
 COPY --from=build /app/package.json /app/prisma.config.ts ./
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/migrations ./migrations
