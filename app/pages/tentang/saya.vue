@@ -42,7 +42,8 @@
               <div class="mb-5 pb-5 border-bottom">
                 <div class="row gy-4">
                   <div class="col-md-5">
-                    <nuxt-img preload src="/images/programmer.svg" v-motion :enter="enterSlideFromLeftToRight"
+                    <!-- SVG dilayani langsung, bukan lewat nuxt-img/_ipx: lihat app-brand.vue -->
+                    <img src="/images/programmer.svg" alt="Ilustrasi programmer" v-motion :enter="enterSlideFromLeftToRight"
                       :initial="initialSlideFromLeftToRight" class="w-100" />
                   </div>
                   <div class="col-md-7" v-motion :enter="enterSlideFromRightToLeft"

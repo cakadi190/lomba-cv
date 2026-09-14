@@ -1,20 +1,23 @@
 <template>
   <nuxt-link :to="to" :class="linkClass" class="d-inline-flex">
     <!-- Logo Berwarna untuk Mode Terang -->
-    <nuxt-img
+    <!-- SVG dilayani langsung (bukan lewat nuxt-img/_ipx): vector tidak
+         butuh resize raster, dan menghindari ipx yang salah set
+         Content-Type untuk SVG di bawah runtime Bun. -->
+    <img
       class="site-logo logo-light"
       src="/images/brands/logo-color.svg"
       :height="elementHeight"
+      :width="elementWidth"
       alt="Logo Mas Adi"
-      :placeholder="[elementWidth, elementHeight]"
     />
     <!-- Logo Putih untuk Mode Gelap -->
-    <nuxt-img
+    <img
       class="site-logo logo-dark"
       src="/images/brands/logo-white.svg"
       :height="elementHeight"
+      :width="elementWidth"
       alt="Logo Mas Adi"
-      :placeholder="[elementWidth, elementHeight]"
     />
   </nuxt-link>
 </template>
