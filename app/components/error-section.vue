@@ -1,6 +1,6 @@
 <template>
 	<div class="text-center">
-		<nuxt-img preload class="mb-4" :src="imgSrc" :alt="imgAlt" :height="imgHeight" />
+		<img preload class="mb-4" :src="imgSrc" :alt="imgAlt" :height="imgHeight" />
 		<h3>{{ title }}</h3>
 		<p class="text-muted">{{ text }}</p>
 	</div>
