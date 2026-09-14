@@ -39,10 +39,11 @@ networks:
   # member — a per-app bridge gateway (172.21.0.1 here) isn't reachable from
   # the other app's isolated bridge. mongo-net is attached to both apps'
   # containers so there's one gateway (172.20.0.1) both can actually reach.
-  # Create it once on the host:
-  #   docker network create mongo-net --subnet 172.20.0.0/24
+  # This is the host's pre-existing "docker-bridge" network (172.20.0.0/16,
+  # gateway 172.20.0.1) — reused as-is rather than creating a new mongo-net
+  # with an overlapping subnet (Docker refuses overlapping pools).
   mongo-net:
-    name: mongo-net
+    name: docker-bridge
     external: true
 
 services:

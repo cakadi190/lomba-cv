@@ -46,8 +46,11 @@ docker network inspect lombacv-net >/dev/null 2>&1 || \
   docker network create lombacv-net --subnet 172.21.0.0/16
 # mongo-net is shared with vettrak so both apps can reach the single
 # replica set member at one gateway (see docs/mongodb-native-setup.md).
-docker network inspect mongo-net >/dev/null 2>&1 || \
-  docker network create mongo-net --subnet 172.20.0.0/24
+# It's the host's "docker-bridge" network (172.20.0.0/16, gateway
+# 172.20.0.1) reused as-is — a separate mongo-net with an overlapping
+# subnet is rejected by Docker's pool overlap check.
+docker network inspect docker-bridge >/dev/null 2>&1 || \
+  docker network create docker-bridge --subnet 172.20.0.0/16
 
 docker compose --profile "$new_color" up -d --force-recreate
 
