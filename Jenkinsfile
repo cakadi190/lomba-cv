@@ -9,18 +9,23 @@ void deployImage() {
     sh """#!/usr/bin/env bash
       set -euo pipefail
 
-      SSH_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -i "\$SSH_KEY")
+      SSH_OPTS=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=10 -o ConnectionAttempts=3 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -i "\$SSH_KEY")
 
       scp_retry() {
-        local src="\$1" dest="\$2" attempt
-        for attempt in 1 2 3; do
+        local src="\$1" dest="\$2" attempt delay
+        local delays=(5 15 30 60)
+        for attempt in 1 2 3 4 5; do
           if scp "\${SSH_OPTS[@]}" "\$src" "\$dest"; then
             return 0
           fi
-          echo "scp failed (attempt \$attempt/3) for \$src -> \$dest, retrying..." >&2
-          sleep 5
+          if [ "\$attempt" -eq 5 ]; then
+            break
+          fi
+          delay="\${delays[\$((attempt - 1))]}"
+          echo "scp failed (attempt \$attempt/5) for \$src -> \$dest, retrying in \${delay}s..." >&2
+          sleep "\$delay"
         done
-        echo "scp failed after 3 attempts for \$src -> \$dest" >&2
+        echo "scp failed after 5 attempts for \$src -> \$dest" >&2
         return 1
       }
 
