@@ -96,6 +96,16 @@ pipeline {
       }
     }
 
+    stage('Debug Network') {
+      steps {
+        sh '''
+          echo "NODE_NAME=${NODE_NAME}"
+          hostname
+          timeout 5 bash -c "cat < /dev/null > /dev/tcp/103.235.72.17/22" && echo "PORT OPEN" || echo "PORT TIMEOUT"
+        '''
+      }
+    }
+
     stage('Ship & Deploy') {
       steps {
         script {
