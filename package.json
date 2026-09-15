@@ -70,7 +70,7 @@
     "@nuxt/icon": "^2.5.1",
     "@types/bootstrap": "^5.2.11",
     "@types/jquery": "^4.0.1",
-    "@types/node": "^26.5.1",
+    "@types/node": "^26.6.0",
     "@vesp/nuxt-fontawesome": "^2.0.0",
     "dotenv": "^17.4.2",
     "pino-pretty": "^13.1.3",

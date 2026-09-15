@@ -10,7 +10,7 @@ async function seedUsers() {
   const now = new Date();
   await db.orm.users.create({
     name: "Amir Zuhdi Wibowo",
-    email: "me@masadi.net",
+    email: "me@cakadi.web.id",
     password: hashedPassword,
     createdAt: now,
     updatedAt: now,
