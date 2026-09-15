@@ -40,7 +40,7 @@
                               :placeholder="15"
 															:alt="item.logo ? item.name : 'KEMENDIKBUD'"
 															class="w-100 ratio ratio-1x1"
-															sizes="80px"
+															sizes="160px"
 														/>
 													</div>
 												</div>
@@ -215,9 +215,7 @@
 <script lang="ts" setup>
 import {
   enterSlideFromBottomToTop,
-  enterSlideFromLeftToRight,
-  initialSlideFromBottomToTop,
-  initialSlideFromLeftToRight,
+  initialSlideFromBottomToTop
 } from "~/components/motion";
 
 import { usePageSeo } from "~~/lib/seo";

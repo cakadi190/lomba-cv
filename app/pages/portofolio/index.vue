@@ -15,14 +15,14 @@
                 title="Tunggu Sebentar" text="Sistem sedang memuat konten dari peladen" />
             </div>
             <div class="col-md-6 text-center mx-auto" v-else-if="error">
-              <error-section img-src="/images/errors/404.svg" img-alt="Tidak Ditemukan" img-height="250"
-                title="Ups, Terjadi kesalahan" text="Saat ini kami sedang memperbaiki kesalahan ini" />
+              <error-section :img-src="apiError.imgSrc" img-alt="Tidak Ditemukan" img-height="250"
+                :title="apiError.title" :text="apiError.text" />
             </div>
             <div class="col-md-6 text-center mx-auto" v-else-if="
-              !pending && !error && (!portofolios?.data || portofolios.data.length === 0 || portofolios.code === 500)
+              !pending && !error && (!portofolios?.data || portofolios.data.length === 0)
             ">
               <error-section img-src="/images/errors/404.svg" img-alt="Tidak Ditemukan" img-height="250"
-                title="Ups, Terjadi kesalahan" text="Saat ini kami sedang memperbaiki kesalahan ini" />
+                title="Belum Ada Portofolio" text="Belum ada portofolio yang tersedia saat ini" />
             </div>
             <div class="col-md-12 mx-auto" v-else-if="!pending && !error && portofolios?.data?.length > 0">
               <div class="row">
@@ -93,6 +93,8 @@ const {
   error,
   refresh,
 } = await usePortfoliosList(page);
+
+const apiError = computed(() => useApiErrorMessage(error.value?.statusCode));
 
 const next = () => {
   page.value++;

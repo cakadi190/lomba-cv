@@ -32,13 +32,13 @@ export default defineEventHandler(async (event) => {
       // queries-mongo.md), so all categories are fetched and matched in JS
       // rather than filtered server-side.
       const allCategoryIds = new Set(
-        portfolios.flatMap((p) => p.categoryIds.map((id) => String(id))),
+        portfolios.flatMap((p) => (p.categoryIds ?? []).map((id) => String(id))),
       );
       const categories =
         allCategoryIds.size > 0
           ? (await db.orm.portfolio_categories.all()).filter((category) =>
-              allCategoryIds.has(String(category._id)),
-            )
+            allCategoryIds.has(String(category._id)),
+          )
           : [];
       const categoriesById = new Map(
         categories.map((category) => [String(category._id), category]),
@@ -46,10 +46,12 @@ export default defineEventHandler(async (event) => {
 
       const data = portfolios.map((portfolio) => ({
         ...portfolio,
-        categories: portfolio.categoryIds
+        categories: (portfolio.categoryIds ?? [])
           .map((id) => categoriesById.get(String(id)))
           .filter((category) => category !== undefined),
       }));
+
+      console.log(data.length)
 
       const hasNextPage = skip + perPage < totalCount;
       const hasPrevPage = page > 1;

@@ -17,9 +17,9 @@ defineProps<{
           <h5 class="card-title mb-0">{{ data.name }}</h5>
           <div v-if="data.categories.length">
             <span
-              :style="{ backgroundColor: data.categories[0].category.color, color: getColorContrastText(data.categories[0].category.color) }"
+              :style="{ backgroundColor: data.categories[0].color, color: getColorContrastText(data.categories[0].color) }"
               class="badge">
-              {{ data.categories[0].category.name }}
+              {{ data.categories[0].name }}
             </span>
           </div>
         </div>
@@ -28,7 +28,7 @@ defineProps<{
         </div>
 
         <div class="techstacks">
-          <Icon :name="item" size="24" v-for="(item, index) in JSON.parse(data.techstack || [])" :key="index" />
+          <Icon :name="item" size="24" v-for="(item, index) in (Array.isArray(data.techstack) ? data.techstack : JSON.parse(data.techstack || '[]'))" :key="index" />
         </div>
       </div>
     </nuxt-link>

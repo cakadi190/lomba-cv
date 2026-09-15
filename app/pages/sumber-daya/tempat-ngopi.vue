@@ -216,6 +216,7 @@ const previous = () => {
   border-bottom: 1px solid var(--bs-border-color);
   display: flex;
   gap: 1rem;
+  padding-inline: 1rem;
 
   >* {
     width: calc(25% - .5rem);

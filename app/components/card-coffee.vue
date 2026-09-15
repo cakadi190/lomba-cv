@@ -6,7 +6,7 @@ defineProps<{
 
 <template>
   <div class="wrapper">
-    <button type="button" data-bs-toggle="modal" :data-bs-target="`#${data.id}`"
+    <button type="button" data-bs-toggle="modal" :data-bs-target="`#${data._id}`"
       class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100">
       <div class="rounded-3 card-img-top">
         <nuxt-img loading="lazy" :src="data.image ?? '/images/coffee-default.webp'" :alt="data.name"
@@ -40,12 +40,12 @@ defineProps<{
   </div>
 
   <teleport to="body">
-    <div class="modal fade" :id="data.id" tabindex="-1" role="dialog" :aria-labelledby="`label-${data.id}`"
+    <div class="modal fade" :id="data._id" tabindex="-1" role="dialog" :aria-labelledby="`label-${data._id}`"
       aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" :id="`label-${data.id}`">{{ data.name }}</h5>
+            <h5 class="modal-title" :id="`label-${data._id}`">{{ data.name }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -84,12 +84,15 @@ defineProps<{
 
               <div class="col-md-12">
                 <div class="card card-body">
-                  <p class="text-muted mb-2">Alamat</p>
-                  <h5 class="mb-0">
-                    {{ data.address }}.&nbsp;&nbsp;<a :href="data.map_url" target="_blank"
+                  <div class="d-flex gap-2 justify-content-between">
+                    <p class="text-muted mb-2">Alamat</p>
+                    <a v-if="data.mapUrl" :href="data.mapUrl" target="_blank"
                       rel="noopener noreferrer">Arahkan Saya
                       <Icon name="humbleicons:external-link" />
                     </a>
+                  </div>
+                  <h5 class="mb-0">
+                    {{ data.address }}
                   </h5>
                 </div>
               </div>

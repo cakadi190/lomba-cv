@@ -7,6 +7,13 @@ let redisClient: Redis | null = null;
  * Supports both Nuxt runtimeConfig and direct environment variable fallback (for scripts).
  */
 export function getRedisClient(): Redis {
+  // retryStrategy below gives up after a few attempts and leaves the
+  // client permanently in "end" status — recreate it instead of reusing
+  // a dead connection for the rest of the process lifetime.
+  if (redisClient && redisClient.status === "end") {
+    redisClient = null;
+  }
+
   if (!redisClient) {
     let redisUrl = "";
     try {

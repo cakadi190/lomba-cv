@@ -21,11 +21,11 @@
 					</div>
 					<div class="col-md-6 text-center mx-auto" v-else-if="error">
 						<error-section
-							img-src="/images/errors/404.svg"
+							:img-src="apiError.imgSrc"
 							img-alt="Tidak Ditemukan"
 							img-height="250"
-							title="Ups, Terjadi kesalahan"
-							text="Saat ini kami sedang memperbaiki kesalahan ini"
+							:title="apiError.title"
+							:text="apiError.text"
 						/>
 					</div>
 					<div
@@ -36,8 +36,8 @@
 							img-src="/images/errors/404.svg"
 							img-alt="Tidak Ditemukan"
 							img-height="250"
-							title="Ups, Terjadi kesalahan"
-							text="Saat ini kami sedang memperbaiki kesalahan ini"
+							title="Tidak Ditemukan"
+							text="Portofolio yang Anda cari tidak tersedia"
 						/>
 					</div>
 					<div class="col-md-12" v-else-if="data">
@@ -55,6 +55,7 @@ const { params } = useRoute();
 
 // Data Fetching from Server
 const { data, error, status } = usePortfolioDetails(() => params.id as string);
+const apiError = computed(() => useApiErrorMessage(error.value?.statusCode));
 
 import { usePageSeo } from "~~/lib/seo";
 
