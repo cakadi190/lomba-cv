@@ -1,4 +1,5 @@
 import "dotenv/config";
+import readline from "node:readline/promises";
 import { Cache } from "../server/lib/facades/cache.js";
 import { db } from "./db.js";
 import seedAwards from "./seeders/seed_awards.js";
@@ -44,7 +45,36 @@ async function warmCacheConnection(): Promise<void> {
   }
 }
 
+/**
+ * Mirrors Laravel's "Application In Production" confirmation for destructive
+ * artisan commands: prompts before truncating in production unless --force
+ * was passed.
+ */
+async function confirmDestructiveRun(): Promise<void> {
+  const isProduction = process.env.NODE_ENV === "production";
+  const isForced = process.argv.includes("--force");
+
+  if (!isProduction || isForced) return;
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  const answer = await rl.question(
+    "\x1b[33m⚠  Application In Production. This will truncate and reseed the database. Continue? (yes/no): ",
+  );
+  rl.close();
+
+  if (answer.trim().toLowerCase() !== "yes") {
+    console.log("\x1b[31m✘  Seeding cancelled");
+    process.exit(1);
+  }
+}
+
 async function main() {
+  await confirmDestructiveRun();
+
   const cacheReady = warmCacheConnection();
 
   try {

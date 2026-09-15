@@ -10,6 +10,7 @@
     "preview": "nuxt preview",
     "postinstall": "prisma contract emit && nuxt prepare",
     "seed": "bun prisma/seed.ts",
+    "seed:fresh": "bun prisma/seed.ts",
     "key:generate": "bun server/scripts/key.ts generate",
     "key:show": "bun server/scripts/key.ts show",
     "key:status": "bun server/scripts/key.ts status",
