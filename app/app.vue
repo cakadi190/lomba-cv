@@ -26,7 +26,7 @@ useHead({
     lang: "id",
   },
   titleTemplate: (titleChunk: any) => {
-    return titleChunk ? `${titleChunk} • Mas Adi` : "Mas Adi";
+    return titleChunk ? `${titleChunk} • Cak Adi` : "Cak Adi";
   },
   link: [
     {
@@ -111,7 +111,7 @@ useHead({
     },
     {
       name: "application-name",
-      content: "Catatan Mas Adi",
+      content: "Catatan Cak Adi",
     },
     {
       name: "msapplication-TileColor",

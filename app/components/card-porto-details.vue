@@ -4,7 +4,7 @@
       preload
 			:src="data?.image"
 			class="w-100 rounded-4 border overflow-hidden"
-			alt="Mas Adi Website"
+			alt="Cak Adi Website"
 		/>
 
 		<div
@@ -52,7 +52,7 @@
 
 					<div class="d-flex gap-3 align-items-center">
 						<Icon
-							v-for="(item, index) in JSON.parse(data?.techstack)"
+							v-for="(item, index) in data?.techstack ?? []"
 							:key="index"
 							:name="item"
 							size="32"

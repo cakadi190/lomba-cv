@@ -8,7 +8,7 @@
 				</div>
 
 				<div class="col-md-4">
-					<div class="card sticky-top rounded-4">
+					<div class="card sticky-top rounded-4 overflow-hidden">
 						<div class="card-header p-4">
 							<h4 class="mb-0">Navigasi</h4>
 						</div>

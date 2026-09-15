@@ -184,10 +184,10 @@
 </template>
 
 <script lang="ts" setup>
-import { route } from "~~/lib/route";
-import { usePageSeo } from "~~/lib/seo";
 import "dayjs/locale/id";
 import { Autoplay, EffectCreative } from "swiper/modules";
+import { route } from "~~/lib/route";
+import { usePageSeo } from "~~/lib/seo";
 
 const dayjs = useDayjs();
 dayjs.locale("id");
@@ -278,7 +278,7 @@ usePageSeo({
   schemaType: "ProfilePage",
   keyword: [
     "Amir Zuhdi Wibowo",
-    "Mas Adi",
+    "Cak Adi",
     "fullstack web developer Ngawi",
   ],
 });

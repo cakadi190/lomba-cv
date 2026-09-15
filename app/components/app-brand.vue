@@ -6,7 +6,7 @@
       src="/images/brands/logo-color.svg"
       format="svg"
       :height="elementHeight"
-      alt="Logo Mas Adi"
+      alt="Logo Cak Adi"
       :placeholder="[elementWidth, elementHeight]"
     />
     <!-- Logo Putih untuk Mode Gelap -->
@@ -15,7 +15,7 @@
       src="/images/brands/logo-white.svg"
       format="svg"
       :height="elementHeight"
-      alt="Logo Mas Adi"
+      alt="Logo Cak Adi"
       :placeholder="[elementWidth, elementHeight]"
     />
   </nuxt-link>

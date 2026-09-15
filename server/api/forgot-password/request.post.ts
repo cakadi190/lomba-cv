@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 import { logger } from "~~/lib/pino";
-import { db } from "~~/prisma/db";
 import { forgotPasswordRequestSchema } from "~~/lib/zod/schemas/forgotPassword";
+import { db } from "~~/prisma/db";
 import { Cache } from "~~/server/lib/facades/cache";
 import { Mail } from "~~/server/lib/facades/mail";
 
@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
 
     // Send reset email
     await Mail.to(email)
-      .subject("Atur Ulang Kata Sandi Akun Catatan Mas Adi Anda")
+      .subject("Atur Ulang Kata Sandi Akun Catatan Cak Adi Anda")
       .template("forgot-password", {
         "Nama Pengguna": user.name,
         ResetUrl: resetUrl,

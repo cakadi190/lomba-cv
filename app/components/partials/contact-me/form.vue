@@ -29,7 +29,7 @@
 							id="fullName"
 							type="text"
 							class="form-control"
-							placeholder="Mis: Mas Adi"
+							placeholder="Mis: Cak Adi"
 						/>
 					</div>
 				</div>

@@ -4,33 +4,33 @@ export type SeoMetadata = {
   title: string | Ref<string> | ComputedRef<string> | (() => string);
   description?: string | Ref<string> | ComputedRef<string> | (() => string);
   keyword?:
-    | string
-    | string[]
-    | Ref<string | string[]>
-    | ComputedRef<string | string[]>
-    | (() => string | string[]);
+  | string
+  | string[]
+  | Ref<string | string[]>
+  | ComputedRef<string | string[]>
+  | (() => string | string[]);
   image?: string | Ref<string> | ComputedRef<string> | (() => string);
   type?:
-    | "website"
-    | "article"
-    | "book"
-    | "profile"
-    | "music.song"
-    | "music.album"
-    | "music.playlist"
-    | "music.radio_station"
-    | "video.movie"
-    | "video.episode"
-    | "video.tv_show"
-    | "video.other"
-    | "payment.link";
+  | "website"
+  | "article"
+  | "book"
+  | "profile"
+  | "music.song"
+  | "music.album"
+  | "music.playlist"
+  | "music.radio_station"
+  | "video.movie"
+  | "video.episode"
+  | "video.tv_show"
+  | "video.other"
+  | "payment.link";
   canonical?: string | Ref<string> | ComputedRef<string> | (() => string);
   schemaType?:
-    | "WebPage"
-    | "ProfilePage"
-    | "CollectionPage"
-    | "ContactPage"
-    | "CreativeWork";
+  | "WebPage"
+  | "ProfilePage"
+  | "CollectionPage"
+  | "ContactPage"
+  | "CreativeWork";
   noindex?: boolean;
   nofollow?: boolean;
 };
@@ -102,9 +102,9 @@ export function usePageSeo(metadata: SeoMetadata) {
           index === pathSegments.length - 1
             ? pageTitle
             : segment
-                .split("-")
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" "),
+              .split("-")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" "),
         item: new URL(
           `/${pathSegments.slice(0, index + 1).join("/")}`,
           siteUrl,
@@ -119,7 +119,7 @@ export function usePageSeo(metadata: SeoMetadata) {
           "@type": "Person",
           "@id": personId,
           name: "Amir Zuhdi Wibowo",
-          alternateName: "Mas Adi",
+          alternateName: "Cak Adi",
           url: `${siteUrl}/tentang/saya`,
           image: {
             "@type": "ImageObject",
@@ -137,8 +137,8 @@ export function usePageSeo(metadata: SeoMetadata) {
           "@type": "WebSite",
           "@id": websiteId,
           url: `${siteUrl}/`,
-          name: "Mas Adi",
-          alternateName: "Catatan Mas Adi",
+          name: "Cak Adi",
+          alternateName: "Catatan Cak Adi",
           inLanguage: "id-ID",
           publisher: { "@id": personId },
         },
@@ -197,7 +197,7 @@ export function usePageSeo(metadata: SeoMetadata) {
     twitterCard: "summary_large_image",
     ogUrl: canonical,
     ogType: metadata.type || "website",
-    ogSiteName: "Mas Adi",
+    ogSiteName: "Cak Adi",
     ogLocale: "id_ID",
     twitterCreator: "@cakadi190",
   });
@@ -222,11 +222,11 @@ export function usePageSeo(metadata: SeoMetadata) {
     ],
     script: structuredData.value
       ? [
-          {
-            type: "application/ld+json",
-            innerHTML: computed(() => JSON.stringify(structuredData.value)),
-          },
-        ]
+        {
+          type: "application/ld+json",
+          innerHTML: computed(() => JSON.stringify(structuredData.value)),
+        },
+      ]
       : [],
   });
 }

@@ -23,7 +23,7 @@ export default defineNuxtConfig({
       password: process.env.MAIL_PASSWORD || "",
       encryption: process.env.MAIL_ENCRYPTION || "",
       fromAddress: process.env.MAIL_FROM_ADDRESS || "hello@example.com",
-      fromName: process.env.MAIL_FROM_NAME || "Catatan Mas Adi",
+      fromName: process.env.MAIL_FROM_NAME || "Catatan Cak Adi",
     },
     turnstile: {
       secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY || "",

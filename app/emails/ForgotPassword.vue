@@ -21,7 +21,7 @@
       </EStyle>
     </EHead>
     <EBody style="margin: 0; padding: 0; background-color: #ffffff;">
-      <EPreview>Permintaan atur ulang kata sandi akun Catatan Mas Adi Anda.</EPreview>
+      <EPreview>Permintaan atur ulang kata sandi akun Catatan Cak Adi Anda.</EPreview>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
         <tr>
           <td align="center" style="padding: 24px 12px;">
@@ -38,7 +38,7 @@
                     <tr>
                       <td style="font-size: 18px; font-weight: bold; color: #2563eb;">
                         <a href="https://v3.masadi.net/">
-                          <img alt="Logo Mas Adi" src="https://v3.masadi.net/images/brands/logo-color.svg" style="width: auto; height: 48px; display: block; border: 0;" />
+                          <img alt="Logo Cak Adi" src="https://v3.masadi.net/images/brands/logo-color.svg" style="width: auto; height: 48px; display: block; border: 0;" />
                         </a>
                       </td>
                     </tr>
@@ -79,7 +79,7 @@
                     <tr>
                       <td style="font-size: 14px; color: #4b5563; line-height: 1.6;">
                         Halo <strong>{{ namaPengguna }}</strong>,<br><br>
-                        Kami menerima permintaan untuk mengatur ulang kata sandi akun Catatan Mas Adi Anda. Silakan klik tombol di bawah ini untuk melanjutkan proses atur ulang kata sandi Anda.
+                        Kami menerima permintaan untuk mengatur ulang kata sandi akun Catatan Cak Adi Anda. Silakan klik tombol di bawah ini untuk melanjutkan proses atur ulang kata sandi Anda.
                       </td>
                     </tr>
                   </table>
@@ -131,7 +131,7 @@
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                       <td style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
-                        &copy; 2024 Catatan Mas Adi. Seluruh hak cipta dilindungi.<br>
+                        &copy; 2024 Catatan Cak Adi. Seluruh hak cipta dilindungi.<br>
                         Jika Anda butuh bantuan, hubungi tim dukungan kami.
                       </td>
                     </tr>

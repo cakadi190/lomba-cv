@@ -123,7 +123,7 @@ const techStack = ref<TechStackItem[]>([
 				</div>
 				<div class="col-md-5">
 					<nuxt-img preload v-motion :initial="initialSlideFromRightToLeft" :enter="enterSlideFromRightToLeft"
-						src="/images/fotoku.min.png" alt="Mas Adi" :placeholder="4500" densities="1x 2x 3x"
+						src="/images/fotoku.min.png" alt="Cak Adi" :placeholder="4500" densities="1x 2x 3x"
 						class="w-100" />
 				</div>
 			</div>
