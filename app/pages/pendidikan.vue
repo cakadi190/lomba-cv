@@ -33,13 +33,14 @@
 											<div class="row align-items-start align-items-md-center">
 												<div class="col-4 col-md-3">
 													<div class="bg-white rounded-circle p-3">
-														<nuxt-img preload
+														<nuxt-img loading="lazy"
 															:src="
 																item.logo ?? '/images/education/default.png'
 															"
                               :placeholder="15"
 															:alt="item.logo ? item.name : 'KEMENDIKBUD'"
 															class="w-100 ratio ratio-1x1"
+															sizes="80px"
 														/>
 													</div>
 												</div>

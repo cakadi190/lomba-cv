@@ -9,8 +9,8 @@ defineProps<{
 <template>
   <div class="wrapper">
     <nuxt-link :to="route('portfolios.show', { slug: data.slug })" class="card h-100 overflow-hidden rounded-4">
-      <nuxt-img preload :src="data.image" class="rounded-3 card-img-top" :alt="data.name" :placeholder="[16, 9]"
-        densities="x1 x2 x3" />
+      <nuxt-img loading="lazy" :src="data.image" class="rounded-3 card-img-top" :alt="data.name"
+        :placeholder="[16, 9]" sizes="sm:100vw md:50vw lg:33vw" densities="x1 x2" />
 
       <div class="card-body p-4">
         <div class="d-flex gap-2 mb-2 justify-content-between">

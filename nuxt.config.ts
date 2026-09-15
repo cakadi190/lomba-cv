@@ -116,22 +116,24 @@ export default defineNuxtConfig({
       cdn: "cdn.cakadi.eu.org",
       unsplash: "https://images.unsplash.com",
     },
-    cloudflare: {
-      baseURL: "https://cdn.cakadi.eu.org",
-    },
+    // NOTE: Cloudflare Image Resizing (an @nuxt/image "cloudflare" provider)
+    // would offload resize/format conversion to the edge instead of running
+    // sharp in our own container, but that feature requires a Pro+ plan or
+    // Cloudflare Images — the zone is currently on Free, so it's not usable
+    // yet. Revisit this if/when the plan changes.
   },
 
   site: {
-    url: "https://www.masadi.net",
+    url: "https://www.cakadi.web.id",
   },
 
   robots: {
     allow: "/",
-    sitemap: "https://www.masadi.net/sitemap.xml",
+    sitemap: "https://www.cakadi.web.id/sitemap.xml",
   },
 
   sitemap: {
-    hostname: "https://www.masadi.net",
+    hostname: "https://www.cakadi.web.id",
     exclude: ["/admin/**", "/auth/**", "/forgot-password/**"],
     autoAlternativeAliases: true,
     autoI18n: true,

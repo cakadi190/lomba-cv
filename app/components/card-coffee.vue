@@ -9,8 +9,8 @@ defineProps<{
     <button type="button" data-bs-toggle="modal" :data-bs-target="`#${data.id}`"
       class="card h-100 overflow-hidden rounded-4 text-start bg-transparent p-0 w-100">
       <div class="rounded-3 card-img-top">
-        <nuxt-img preload :src="data.image ?? '/images/coffee-default.webp'" :alt="data.name" densities="x1 x2"
-          :placeholder="[16, 9]" />
+        <nuxt-img loading="lazy" :src="data.image ?? '/images/coffee-default.webp'" :alt="data.name"
+          densities="x1 x2" :placeholder="[16, 9]" sizes="sm:100vw md:50vw lg:33vw" />
       </div>
 
       <div class="card-body p-4">
@@ -50,8 +50,8 @@ defineProps<{
           </div>
           <div class="modal-body">
             <div class="thumbnail">
-              <nuxt-img preload :src="data.image ?? '/images/coffee-default.webp'" class="rounded-3 w-100 border"
-                :alt="data.name" densities="x1 x2" />
+              <nuxt-img loading="lazy" :src="data.image ?? '/images/coffee-default.webp'" class="rounded-3 w-100 border"
+                :alt="data.name" densities="x1 x2" sizes="500px" />
             </div>
 
             <p class="mt-3 mb-0">{{ data.description }}</p>
