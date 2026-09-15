@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import {
-	enterSlideFromLeftToRight,
-	enterSlideFromRightToLeft,
-	initialSlideFromLeftToRight,
-	initialSlideFromRightToLeft,
-} from "../../motion";
 import { route } from "~~/lib/route";
+import {
+    enterSlideFromLeftToRight,
+    enterSlideFromRightToLeft,
+    initialSlideFromLeftToRight,
+    initialSlideFromRightToLeft,
+} from "../../motion";
 
 defineOptions({ name: "HeaderHome" });
 
@@ -21,10 +21,10 @@ useHead({
 		{
 			key: "og:canonical",
 			name: "canonical",
-			content: "https://www.masadi.net",
+			content: "https://www.cakadi.web.id",
 		},
 
-		{ key: "og:url", name: "og:url", content: "https://www.masadi.net" },
+		{ key: "og:url", name: "og:url", content: "https://www.cakadi.web.id" },
 		{
 			key: "og:description",
 			name: "og:description",

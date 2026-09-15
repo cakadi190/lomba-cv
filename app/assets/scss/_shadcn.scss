@@ -18,33 +18,58 @@ $shadcn-duration: 150ms;
 // -----------------------------------------------------------------------------
 // Dropdown
 // -----------------------------------------------------------------------------
+//
+// Bootstrap flips `.dropdown-menu` between `display:none`/`block` purely via
+// the `.show` class with no exit-transition hook, so a plain CSS transition
+// on `.show` only ever animates the *open*. The `dropdown-animations.client`
+// plugin drives two extra classes so both directions animate, for every
+// orientation (dropdown/dropup/dropend/dropstart) and alignment
+// (-start/-end):
+//   .show              -> menu is in the DOM/visible (Bootstrap-controlled)
+//   .dropdown-menu-anim-in    -> added a frame after `.show` to animate in
+//   .dropdown-menu-closing    -> kept visible (display:block) while the
+//                                closing transition plays, then removed
 .dropdown-menu {
   padding: 0.375rem;
   border: 1px solid $shadcn-border-color;
   border-radius: $shadcn-radius;
   box-shadow: $shadcn-shadow;
-
-  // Bootstrap toggles display:none <-> display:block with no transition hook,
-  // so we drive visibility off opacity/transform and let it stay in the flow
-  // just long enough to animate out.
-  opacity: 0;
-  transform: scale(0.95) translateY(-4px);
   transform-origin: top left;
-  transition: opacity $shadcn-duration $shadcn-ease, transform $shadcn-duration $shadcn-ease;
-  pointer-events: none;
 
-  &[data-bs-popper] {
-    transform-origin: top center;
-
-    &[data-popper-placement^="top"] {
-      transform-origin: bottom center;
-    }
+  // Sub-menus opening sideways (dropend/dropstart) animate from the edge
+  // they emerge from; -end alignment flips the horizontal anchor.
+  &[data-popper-placement^="top"] {
+    transform-origin: bottom left;
   }
 
-  &.show {
+  &[data-popper-placement$="end"] {
+    transform-origin: top right;
+  }
+
+  &[data-popper-placement^="top"][data-popper-placement$="end"] {
+    transform-origin: bottom right;
+  }
+
+  &[data-popper-placement^="right"] {
+    transform-origin: left center;
+  }
+
+  &[data-popper-placement^="left"] {
+    transform-origin: right center;
+  }
+
+  &.show,
+  &.dropdown-menu-closing {
     display: block;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity $shadcn-duration $shadcn-ease, transform $shadcn-duration $shadcn-ease;
+    pointer-events: none;
+  }
+
+  &.show.dropdown-menu-anim-in {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
     pointer-events: auto;
   }
 }
@@ -146,7 +171,8 @@ $shadcn-duration: 150ms;
 
 // Respect users who've asked the OS to reduce motion.
 @media (prefers-reduced-motion: reduce) {
-  .dropdown-menu,
+  .dropdown-menu.show,
+  .dropdown-menu.dropdown-menu-closing,
   .modal.fade .modal-dialog,
   .modal-backdrop.fade,
   .tooltip.fade,

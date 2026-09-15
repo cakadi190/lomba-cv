@@ -134,7 +134,7 @@ defineOptions({ name: "ContactDetails" });
 const email: Ref<string> = ref("me@cakadi.id");
 const altEmail: Ref<string> = ref("cakadi190@gmail.com");
 const phone: Ref<string> = ref("081234771365");
-const website: Ref<string> = ref("https://www.masadi.net");
+const website: Ref<string> = ref("https://www.cakadi.web.id");
 
 const socialMediaLinks = ref([
   { platform: "Facebook", url: "https://www.facebook.com/cakadi190" },
