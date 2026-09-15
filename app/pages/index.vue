@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import BlogHomeSection from "~/components/partials/home/blog-home.vue";
 import elkuslaSection from "~/components/partials/home/elkusla.vue";
 import HeaderHome from "~/components/partials/home/header-home.vue";
+import PortfolioHomeSection from "~/components/partials/home/portfolio-home.vue";
 import { usePageSeo } from "~~/lib/seo";
 
 // SEO META
@@ -15,6 +17,8 @@ usePageSeo({
   <div id="homepage">
     <header-home />
     <elkusla-section />
+    <portfolio-home-section />
+    <blog-home-section />
   </div>
 </template>
 

@@ -1,0 +1,272 @@
+[
+  {
+    "id": "collection.post_categories.create",
+    "label": "Create collection post_categories",
+    "operationClass": "additive",
+    "precheck": [
+      {
+        "description": "collection post_categories does not exist",
+        "source": {
+          "kind": "listCollections"
+        },
+        "filter": {
+          "kind": "field",
+          "field": "name",
+          "op": "$eq",
+          "value": "post_categories"
+        },
+        "expect": "notExists"
+      }
+    ],
+    "execute": [
+      {
+        "description": "create collection post_categories",
+        "command": {
+          "kind": "createCollection",
+          "collection": "post_categories",
+          "validator": {
+            "$jsonSchema": {
+              "additionalProperties": false,
+              "bsonType": "object",
+              "properties": {
+                "_id": {
+                  "bsonType": "objectId"
+                },
+                "color": {
+                  "bsonType": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "createdAt": {
+                  "bsonType": "date"
+                },
+                "name": {
+                  "bsonType": "string"
+                },
+                "updatedAt": {
+                  "bsonType": "date"
+                }
+              },
+              "required": [
+                "_id",
+                "createdAt",
+                "name",
+                "updatedAt"
+              ]
+            }
+          },
+          "validationLevel": "strict",
+          "validationAction": "error"
+        }
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "validator.posts.update",
+    "label": "Update validator on posts",
+    "operationClass": "destructive",
+    "precheck": [
+      {
+        "description": "collection posts exists",
+        "source": {
+          "kind": "listCollections"
+        },
+        "filter": {
+          "kind": "field",
+          "field": "name",
+          "op": "$eq",
+          "value": "posts"
+        },
+        "expect": "exists"
+      }
+    ],
+    "execute": [
+      {
+        "description": "modify posts",
+        "command": {
+          "kind": "collMod",
+          "collection": "posts",
+          "validator": {
+            "$jsonSchema": {
+              "additionalProperties": false,
+              "bsonType": "object",
+              "properties": {
+                "_id": {
+                  "bsonType": "objectId"
+                },
+                "categoryIds": {
+                  "bsonType": "array",
+                  "items": {
+                    "bsonType": "objectId"
+                  }
+                },
+                "content": {
+                  "bsonType": "string"
+                },
+                "coverImage": {
+                  "bsonType": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "createdAt": {
+                  "bsonType": "date"
+                },
+                "excerpt": {
+                  "bsonType": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "published": {
+                  "bsonType": "bool"
+                },
+                "publishedAt": {
+                  "bsonType": [
+                    "null",
+                    "date"
+                  ]
+                },
+                "slug": {
+                  "bsonType": "string"
+                },
+                "tags": {
+                  "bsonType": "array",
+                  "items": {
+                    "bsonType": "string"
+                  }
+                },
+                "title": {
+                  "bsonType": "string"
+                },
+                "updatedAt": {
+                  "bsonType": "date"
+                }
+              },
+              "required": [
+                "_id",
+                "categoryIds",
+                "content",
+                "createdAt",
+                "published",
+                "slug",
+                "tags",
+                "title",
+                "updatedAt"
+              ]
+            }
+          },
+          "validationLevel": "strict",
+          "validationAction": "error"
+        }
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "validator applied on posts",
+        "source": {
+          "kind": "listCollections"
+        },
+        "filter": {
+          "kind": "and",
+          "exprs": [
+            {
+              "kind": "field",
+              "field": "name",
+              "op": "$eq",
+              "value": "posts"
+            },
+            {
+              "kind": "field",
+              "field": "options.validationLevel",
+              "op": "$eq",
+              "value": "strict"
+            },
+            {
+              "kind": "field",
+              "field": "options.validationAction",
+              "op": "$eq",
+              "value": "error"
+            },
+            {
+              "kind": "field",
+              "field": "options.validator.$jsonSchema",
+              "op": "$eq",
+              "value": {
+                "additionalProperties": false,
+                "bsonType": "object",
+                "properties": {
+                  "_id": {
+                    "bsonType": "objectId"
+                  },
+                  "categoryIds": {
+                    "bsonType": "array",
+                    "items": {
+                      "bsonType": "objectId"
+                    }
+                  },
+                  "content": {
+                    "bsonType": "string"
+                  },
+                  "coverImage": {
+                    "bsonType": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "createdAt": {
+                    "bsonType": "date"
+                  },
+                  "excerpt": {
+                    "bsonType": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "published": {
+                    "bsonType": "bool"
+                  },
+                  "publishedAt": {
+                    "bsonType": [
+                      "null",
+                      "date"
+                    ]
+                  },
+                  "slug": {
+                    "bsonType": "string"
+                  },
+                  "tags": {
+                    "bsonType": "array",
+                    "items": {
+                      "bsonType": "string"
+                    }
+                  },
+                  "title": {
+                    "bsonType": "string"
+                  },
+                  "updatedAt": {
+                    "bsonType": "date"
+                  }
+                },
+                "required": [
+                  "_id",
+                  "categoryIds",
+                  "content",
+                  "createdAt",
+                  "published",
+                  "slug",
+                  "tags",
+                  "title",
+                  "updatedAt"
+                ]
+              }
+            }
+          ]
+        },
+        "expect": "exists"
+      }
+    ]
+  }
+]

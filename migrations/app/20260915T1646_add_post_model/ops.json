@@ -1,0 +1,166 @@
+[
+  {
+    "id": "collection.posts.create",
+    "label": "Create collection posts",
+    "operationClass": "additive",
+    "precheck": [
+      {
+        "description": "collection posts does not exist",
+        "source": {
+          "kind": "listCollections"
+        },
+        "filter": {
+          "kind": "field",
+          "field": "name",
+          "op": "$eq",
+          "value": "posts"
+        },
+        "expect": "notExists"
+      }
+    ],
+    "execute": [
+      {
+        "description": "create collection posts",
+        "command": {
+          "kind": "createCollection",
+          "collection": "posts",
+          "validator": {
+            "$jsonSchema": {
+              "additionalProperties": false,
+              "bsonType": "object",
+              "properties": {
+                "_id": {
+                  "bsonType": "objectId"
+                },
+                "content": {
+                  "bsonType": "string"
+                },
+                "coverImage": {
+                  "bsonType": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "createdAt": {
+                  "bsonType": "date"
+                },
+                "excerpt": {
+                  "bsonType": [
+                    "null",
+                    "string"
+                  ]
+                },
+                "published": {
+                  "bsonType": "bool"
+                },
+                "publishedAt": {
+                  "bsonType": [
+                    "null",
+                    "date"
+                  ]
+                },
+                "slug": {
+                  "bsonType": "string"
+                },
+                "tags": {
+                  "bsonType": "array",
+                  "items": {
+                    "bsonType": "string"
+                  }
+                },
+                "title": {
+                  "bsonType": "string"
+                },
+                "updatedAt": {
+                  "bsonType": "date"
+                }
+              },
+              "required": [
+                "_id",
+                "content",
+                "createdAt",
+                "published",
+                "slug",
+                "tags",
+                "title",
+                "updatedAt"
+              ]
+            }
+          },
+          "validationLevel": "strict",
+          "validationAction": "error"
+        }
+      }
+    ],
+    "postcheck": []
+  },
+  {
+    "id": "index.posts.create(slug:1)",
+    "label": "Create index on posts (slug:1)",
+    "operationClass": "additive",
+    "precheck": [
+      {
+        "description": "index does not already exist on posts",
+        "source": {
+          "kind": "listIndexes",
+          "collection": "posts"
+        },
+        "filter": {
+          "kind": "field",
+          "field": "key",
+          "op": "$eq",
+          "value": {
+            "slug": 1
+          }
+        },
+        "expect": "notExists"
+      }
+    ],
+    "execute": [
+      {
+        "description": "create index on posts",
+        "command": {
+          "kind": "createIndex",
+          "collection": "posts",
+          "keys": [
+            {
+              "direction": 1,
+              "field": "slug"
+            }
+          ],
+          "unique": true,
+          "name": "slug_1"
+        }
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "index exists on posts",
+        "source": {
+          "kind": "listIndexes",
+          "collection": "posts"
+        },
+        "filter": {
+          "kind": "and",
+          "exprs": [
+            {
+              "kind": "field",
+              "field": "key",
+              "op": "$eq",
+              "value": {
+                "slug": 1
+              }
+            },
+            {
+              "kind": "field",
+              "field": "unique",
+              "op": "$eq",
+              "value": true
+            }
+          ]
+        },
+        "expect": "exists"
+      }
+    ]
+  }
+]

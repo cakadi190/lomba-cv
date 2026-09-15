@@ -49,6 +49,8 @@ export const ROUTES = {
   "api.mail.send": "/api/mail/sendmail",
   "api.portfolios.index": "/api/portofolios",
   "api.portfolios.show": "/api/portofolios/:slug",
+  "api.blog.index": "/api/blog",
+  "api.blog.show": "/api/blog/:slug",
   "api.sitemap.urls": "/api/__sitemap__/urls",
 } as const;
 

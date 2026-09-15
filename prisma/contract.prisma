@@ -138,6 +138,37 @@ model Portfolio {
   @@map("portfolios")
 }
 
+// # For Blog Post Categories # //
+model PostCategory {
+  id        ObjectId @id @map("_id")
+  name      String
+  color     String?
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("post_categories")
+}
+
+// # For Blog Posts # //
+model Post {
+  id            ObjectId    @id @map("_id")
+  title         String
+  slug          String      @unique
+  excerpt       String?
+  content       String
+  coverImage    String?
+  tags          String[]
+  published     Boolean
+  publishedAt   DateTime?
+  // Plain many-to-many link, kept as an ObjectId array — same pattern as
+  // Portfolio.categoryIds, resolved against post_categories in app code.
+  categoryIds   ObjectId[]
+  createdAt     DateTime
+  updatedAt     DateTime
+
+  @@map("posts")
+}
+
 enum WifiSpeed {
   WEAK   = "WEAK"
   MEDIUM = "MEDIUM"

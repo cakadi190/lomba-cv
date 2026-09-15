@@ -91,6 +91,23 @@ export const trim = (text: string): string => {
 };
 
 /**
+ * Format sebuah tanggal menjadi teks yang mudah dibaca dalam Bahasa Indonesia.
+ * @param {string | Date} date - Tanggal yang akan diformat.
+ * @param {string} [locale='id-ID'] - Locale yang digunakan untuk format.
+ * @returns {string} Tanggal yang sudah diformat, mis. "16 September 2026".
+ */
+export const formatDate = (
+  date: string | Date,
+  locale: string = "id-ID",
+): string => {
+  return new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+};
+
+/**
  * Format a number as a currency string.
  *
  * @param {number} amount - The number to be formatted.

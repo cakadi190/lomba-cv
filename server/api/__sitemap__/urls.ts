@@ -6,7 +6,7 @@ export default defineSitemapEventHandler(async () => {
     .select("name", "slug", "updatedAt", "image", "galleries")
     .all();
 
-  return portfolios.map((portfolio) => {
+  const portfolioUrls = portfolios.map((portfolio) => {
     const images = [];
 
     if (portfolio.image) {
@@ -35,4 +35,20 @@ export default defineSitemapEventHandler(async () => {
       images: images.length > 0 ? images : undefined,
     };
   });
+
+  const posts = await db.orm.posts
+    .where({ published: true })
+    .select("title", "slug", "updatedAt", "coverImage")
+    .all();
+
+  const postUrls = posts.map((post) => ({
+    loc: route("blog.show", post.slug),
+    lastmod: post.updatedAt,
+    gzip: true,
+    images: post.coverImage
+      ? [{ loc: post.coverImage, title: post.title }]
+      : undefined,
+  }));
+
+  return [...portfolioUrls, ...postUrls];
 });

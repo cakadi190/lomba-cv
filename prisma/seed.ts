@@ -9,6 +9,9 @@ import seedOrganizations from "./seeders/seed_organizations.js";
 import seedPortofolio from "./seeders/seed_portofolio.js";
 import seedPortofolioCategories from "./seeders/seed_portofolio_categories.js";
 import seedPortofolioCategoryLinks from "./seeders/seed_portofolio_category.js";
+import seedPostCategories from "./seeders/seed_post_categories.js";
+import seedPostCategoryLinks from "./seeders/seed_post_category.js";
+import seedPosts from "./seeders/seed_posts.js";
 import seedUsers from "./seeders/seed_users.js";
 import { truncateTable } from "./seeders/util/truncate_tables.js";
 
@@ -23,7 +26,10 @@ async function warmCacheConnection(): Promise<void> {
     const client = Cache.client();
     if (client.status === "ready") return;
     await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error("Redis connection timed out")), 5000);
+      const timeout = setTimeout(
+        () => reject(new Error("Redis connection timed out")),
+        5000,
+      );
       client.once("ready", () => {
         clearTimeout(timeout);
         resolve();
@@ -50,6 +56,8 @@ async function main() {
     await truncateTable("organizations");
     await truncateTable("coffee_places");
     await truncateTable("users");
+    await truncateTable("posts");
+    await truncateTable("post_categories");
 
     await seedUsers();
     console.log("\x1b[32m✔  Users seeded successfully");
@@ -68,9 +76,7 @@ async function main() {
     // seeder now updates each Portfolio's categoryIds instead of creating
     // join rows.
     await seedPortofolioCategoryLinks();
-    console.log(
-      "\x1b[32m✔  Portofolio Category Links seeded successfully",
-    );
+    console.log("\x1b[32m✔  Portofolio Category Links seeded successfully");
 
     await seedOrganizations();
     console.log("\x1b[32m✔  Organizations seeded successfully");
@@ -83,6 +89,15 @@ async function main() {
 
     await seedCoffeePlaces();
     console.log("\x1b[32m✔  Coffee Places seeded successfully");
+
+    await seedPostCategories();
+    console.log("\x1b[32m✔  Post Categories seeded successfully");
+
+    await seedPosts();
+    console.log("\x1b[32m✔  Posts seeded successfully");
+
+    await seedPostCategoryLinks();
+    console.log("\x1b[32m✔  Post Category Links seeded successfully");
 
     try {
       await cacheReady;

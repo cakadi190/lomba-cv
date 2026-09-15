@@ -18,7 +18,7 @@ import type {
 } from '@prisma/orm-mongo/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'c88eba4519fc8a7710df97012f6e5468ad5dee68a2782003c91a4385b5ce9bf5'>;
+  StorageHashBase<'fa27860884c05d246d924a40fc59c8bc29c7727dfb6700efbfada2ab0a2e84ef'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'251b3ce23f6c9f561892e7c1af9d2cc941a13d64ba1aa7226b90036b09568cc3'>;
@@ -162,14 +162,6 @@ export type FieldOutputTypes = {
       readonly tags: ReadonlyArray<CodecTypes['mongo/string@1']['output']>;
       readonly published: CodecTypes['mongo/bool@1']['output'];
       readonly publishedAt: CodecTypes['mongo/date@1']['output'] | null;
-      readonly categoryIds: ReadonlyArray<CodecTypes['mongo/objectId@1']['output']>;
-      readonly createdAt: CodecTypes['mongo/date@1']['output'];
-      readonly updatedAt: CodecTypes['mongo/date@1']['output'];
-    };
-    readonly PostCategory: {
-      readonly _id: CodecTypes['mongo/objectId@1']['output'];
-      readonly name: CodecTypes['mongo/string@1']['output'];
-      readonly color: CodecTypes['mongo/string@1']['output'] | null;
       readonly createdAt: CodecTypes['mongo/date@1']['output'];
       readonly updatedAt: CodecTypes['mongo/date@1']['output'];
     };
@@ -284,14 +276,6 @@ export type FieldInputTypes = {
       readonly tags: ReadonlyArray<CodecTypes['mongo/string@1']['input']>;
       readonly published: CodecTypes['mongo/bool@1']['input'];
       readonly publishedAt: CodecTypes['mongo/date@1']['input'] | null;
-      readonly categoryIds: ReadonlyArray<CodecTypes['mongo/objectId@1']['input']>;
-      readonly createdAt: CodecTypes['mongo/date@1']['input'];
-      readonly updatedAt: CodecTypes['mongo/date@1']['input'];
-    };
-    readonly PostCategory: {
-      readonly _id: CodecTypes['mongo/objectId@1']['input'];
-      readonly name: CodecTypes['mongo/string@1']['input'];
-      readonly color: CodecTypes['mongo/string@1']['input'] | null;
       readonly createdAt: CodecTypes['mongo/date@1']['input'];
       readonly updatedAt: CodecTypes['mongo/date@1']['input'];
     };
@@ -392,14 +376,6 @@ export namespace Models {
     updatedAt: CodecTypes['mongo/date@1']['output'];
     readonly [RelationKeys]?: never;
   };
-  export type unbound_PostCategory = {
-    _id: CodecTypes['mongo/objectId@1']['output'];
-    name: CodecTypes['mongo/string@1']['output'];
-    color: CodecTypes['mongo/string@1']['output'] | null;
-    createdAt: CodecTypes['mongo/date@1']['output'];
-    updatedAt: CodecTypes['mongo/date@1']['output'];
-    readonly [RelationKeys]?: never;
-  };
   export type unbound_Post = {
     _id: CodecTypes['mongo/objectId@1']['output'];
     title: CodecTypes['mongo/string@1']['output'];
@@ -410,7 +386,6 @@ export namespace Models {
     tags: ReadonlyArray<CodecTypes['mongo/string@1']['output']>;
     published: CodecTypes['mongo/bool@1']['output'];
     publishedAt: CodecTypes['mongo/date@1']['output'] | null;
-    categoryIds: ReadonlyArray<CodecTypes['mongo/objectId@1']['output']>;
     createdAt: CodecTypes['mongo/date@1']['output'];
     updatedAt: CodecTypes['mongo/date@1']['output'];
     readonly [RelationKeys]?: never;
@@ -446,7 +421,6 @@ export declare const models: {
     PortfolioCategory: Models.unbound_PortfolioCategory;
     Award: Models.unbound_Award;
     Portfolio: Models.unbound_Portfolio;
-    PostCategory: Models.unbound_PostCategory;
     Post: Models.unbound_Post;
     CoffeePlace: Models.unbound_CoffeePlace;
   };
@@ -755,26 +729,6 @@ type ContractBase = Omit<
                 readonly validationAction: 'error';
               };
             };
-            readonly post_categories: {
-              readonly kind: 'mongo-collection';
-              readonly validator: {
-                readonly kind: 'mongo-validator';
-                readonly jsonSchema: {
-                  readonly bsonType: 'object';
-                  readonly properties: {
-                    readonly _id: { readonly bsonType: 'objectId' };
-                    readonly name: { readonly bsonType: 'string' };
-                    readonly color: { readonly bsonType: readonly ['null', 'string'] };
-                    readonly createdAt: { readonly bsonType: 'date' };
-                    readonly updatedAt: { readonly bsonType: 'date' };
-                  };
-                  readonly additionalProperties: false;
-                  readonly required: readonly ['_id', 'createdAt', 'name', 'updatedAt'];
-                };
-                readonly validationLevel: 'strict';
-                readonly validationAction: 'error';
-              };
-            };
             readonly posts: {
               readonly kind: 'mongo-collection';
               readonly indexes: readonly [
@@ -801,17 +755,12 @@ type ContractBase = Omit<
                     };
                     readonly published: { readonly bsonType: 'bool' };
                     readonly publishedAt: { readonly bsonType: readonly ['null', 'date'] };
-                    readonly categoryIds: {
-                      readonly bsonType: 'array';
-                      readonly items: { readonly bsonType: 'objectId' };
-                    };
                     readonly createdAt: { readonly bsonType: 'date' };
                     readonly updatedAt: { readonly bsonType: 'date' };
                   };
                   readonly additionalProperties: false;
                   readonly required: readonly [
                     '_id',
-                    'categoryIds',
                     'content',
                     'createdAt',
                     'published',
@@ -889,10 +838,6 @@ type ContractBase = Omit<
     readonly portfolios: {
       readonly namespace: '__unbound__' & NamespaceId;
       readonly model: 'Portfolio';
-    };
-    readonly post_categories: {
-      readonly namespace: '__unbound__' & NamespaceId;
-      readonly model: 'PostCategory';
     };
     readonly posts: { readonly namespace: '__unbound__' & NamespaceId; readonly model: 'Post' };
     readonly coffee_places: {
@@ -1290,11 +1235,6 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/date@1' };
               };
-              readonly categoryIds: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/objectId@1' };
-                readonly many: true;
-              };
               readonly createdAt: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/date@1' };
@@ -1306,32 +1246,6 @@ type ContractBase = Omit<
             };
             readonly relations: Record<string, never>;
             readonly storage: { readonly collection: 'posts' };
-          };
-          readonly PostCategory: {
-            readonly fields: {
-              readonly _id: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/objectId@1' };
-              };
-              readonly name: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/string@1' };
-              };
-              readonly color: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/string@1' };
-              };
-              readonly createdAt: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/date@1' };
-              };
-              readonly updatedAt: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'mongo/date@1' };
-              };
-            };
-            readonly relations: Record<string, never>;
-            readonly storage: { readonly collection: 'post_categories' };
           };
           readonly User: {
             readonly fields: {

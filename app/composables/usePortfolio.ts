@@ -43,6 +43,17 @@ export function usePortfolioDetails(slug: MaybeRefOrGetter<string>) {
   );
 }
 
+export function useLatestPortfolios(limit = 3) {
+  return useFetch<PaginatedResponse<Portfolio>>(
+    () => route("api.portfolios.index", { perPage: limit, page: 1 }),
+    {
+      method: "GET",
+      lazy: true,
+      server: false,
+    },
+  );
+}
+
 export function usePortfolioTotalCount() {
   return useFetch<number>(route("api.portfolios.index"), {
     method: "GET",
