@@ -1,7 +1,5 @@
 import crypto from "node:crypto";
 
-let generatedKey: Buffer | null = null;
-
 /**
  * Parses an environment key string into a Buffer.
  * Supports base64 prefixed keys (e.g. 'base64:...') or raw utf-8 strings.
@@ -23,21 +21,26 @@ function parseKey(keyStr: string): Buffer {
 
 /**
  * Retrieves the application keys for encryption and signing.
- * Resolves APP_KEY first, falling back to JWT_SECRET, or generating a random key in production.
+ * Resolves APP_KEY first, falling back to JWT_SECRET.
  * Parses APP_PREVIOUS_KEYS as a comma-separated list of fallback keys.
+ *
+ * Deliberately does NOT fall back to a randomly generated key in production:
+ * a key that changes across restarts silently invalidates every existing
+ * "auth_token" cookie (including remembered 30-day sessions), forcing every
+ * user to log in again. Failing fast at boot surfaces a misconfigured
+ * deployment immediately instead of as a mysterious logout bug.
  */
 export function getAppKeys(): { key: Buffer; previous: Buffer[] } {
   let appKeyRaw = process.env.APP_KEY || process.env.JWT_SECRET;
 
   if (!appKeyRaw) {
     if (process.env.NODE_ENV === "production") {
-      if (!generatedKey) {
-        console.warn(
-          "WARNING: Neither APP_KEY nor JWT_SECRET environment variables are set. Generating a random key for session signing and encryption.",
-        );
-        generatedKey = crypto.randomBytes(32);
-      }
-      return { key: generatedKey, previous: [] };
+      throw new Error(
+        "APP_KEY (or JWT_SECRET) is not set. Refusing to start with an auto-generated key, " +
+          "since that would invalidate every session on each restart. Set APP_KEY in the " +
+          "environment (see `bun run key:generate`) — for Docker, make sure the .env file with " +
+          "APP_KEY exists on the host and is picked up via `env_file` in compose.yaml.",
+      );
     }
     // Development fallback
     appKeyRaw = "base64:dGhpcy1pcy1hLTMyLWNoYXJhY3Rlci1rZXktMTIzNA==";
