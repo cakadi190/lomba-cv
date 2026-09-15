@@ -41,22 +41,22 @@ networks:
   # network (only user-defined networks support that), so lomba-cv gets its
   # own user-defined bridge network. Create it once on the host before the
   # first deploy:
-  #   docker network create lombacv-net --subnet 172.18.0.0/16
-  # vettrak gets its own separate network (vettrak-net, 172.19.0.0/16) — see
+  #   docker network create lombacv-net --subnet 172.21.0.0/16
+  # vettrak gets its own separate network (vettrak-net, 172.18.0.0/16) — see
   # vettrak/docs/mongodb-native-setup.md for how mongod trusts both gateways.
   default:
     name: lombacv-net
     external: true
   # A single native mongod serves both lomba-cv and vettrak, but a replica
   # set (required for transactions) can only advertise ONE host for its
-  # member — a per-app bridge gateway (172.18.0.1 here) isn't reachable from
+  # member — a per-app bridge gateway (172.21.0.1 here) isn't reachable from
   # the other app's isolated bridge. mongo-net is attached to both apps'
   # containers so there's one gateway (172.20.0.1) both can actually reach.
-  # This is the host's pre-existing "docker-bridge" network (172.20.0.0/16,
-  # gateway 172.20.0.1) — reused as-is rather than creating a new mongo-net
+  # This is the host's pre-existing "mongo-net" network (172.20.0.0/24,
+  # gateway 172.20.0.1) — reused as-is rather than creating a new network
   # with an overlapping subnet (Docker refuses overlapping pools).
   mongo-net:
-    name: docker-bridge
+    name: mongo-net
     external: true
 
 services:
@@ -72,7 +72,7 @@ services:
     profiles: ["blue"]
     networks:
       default:
-        ipv4_address: 172.18.0.5
+        ipv4_address: 172.21.0.5
       mongo-net: {}
     ports:
       - "127.0.0.1:5010:3000"
@@ -83,7 +83,7 @@ services:
     profiles: ["green"]
     networks:
       default:
-        ipv4_address: 172.18.0.8
+        ipv4_address: 172.21.0.8
       mongo-net: {}
     ports:
       - "127.0.0.1:5011:3000"

@@ -43,14 +43,14 @@ echo "==> Deploying new color:  $new_color (app=$app_port)"
 # fresh host doesn't need a manual one-time step remembered before the first
 # deploy.
 docker network inspect lombacv-net >/dev/null 2>&1 || \
-  docker network create lombacv-net --subnet 172.18.0.0/16
+  docker network create lombacv-net --subnet 172.21.0.0/16
 # mongo-net is shared with vettrak so both apps can reach the single
 # replica set member at one gateway (see docs/mongodb-native-setup.md).
-# It's the host's "docker-bridge" network (172.20.0.0/16, gateway
-# 172.20.0.1) reused as-is — a separate mongo-net with an overlapping
+# It's the host's pre-existing "mongo-net" network (172.20.0.0/24, gateway
+# 172.20.0.1) reused as-is — creating it with a different, overlapping
 # subnet is rejected by Docker's pool overlap check.
-docker network inspect docker-bridge >/dev/null 2>&1 || \
-  docker network create docker-bridge --subnet 172.20.0.0/16
+docker network inspect mongo-net >/dev/null 2>&1 || \
+  docker network create mongo-net --subnet 172.20.0.0/24
 
 docker compose --profile "$new_color" up -d --force-recreate
 
