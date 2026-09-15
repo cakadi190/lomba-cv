@@ -8,7 +8,9 @@ export type CollectionName =
   | "portfolio_categories"
   | "awards"
   | "portfolios"
-  | "coffee_places";
+  | "coffee_places"
+  | "posts"
+  | "post_categories";
 
 export const truncateTable = async (
   collectionName: CollectionName,
