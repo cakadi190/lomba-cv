@@ -25,7 +25,18 @@ export function getRedisClient(): Redis {
       throw new Error("REDIS_URL is not configured.");
     }
 
-    redisClient = new Redis(redisUrl);
+    redisClient = new Redis(redisUrl, {
+      // Redis is a cache, not a source of truth: fail fast instead of
+      // hanging requests for tens of seconds (default maxRetriesPerRequest
+      // is 20 with growing backoff) when Redis is unreachable.
+      maxRetriesPerRequest: 1,
+      connectTimeout: 2000,
+      enableOfflineQueue: false,
+      retryStrategy(times) {
+        if (times > 3) return null;
+        return Math.min(times * 200, 1000);
+      },
+    });
 
     redisClient.on("error", (err) => {
       console.error("Redis connection error:", err);

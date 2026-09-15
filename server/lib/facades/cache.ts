@@ -23,7 +23,14 @@ export class Cache {
     key: string,
     defaultValue: T | null = null,
   ): Promise<T | null> {
-    const value = await Cache.client().get(key);
+    let value: string | null;
+    try {
+      value = await Cache.client().get(key);
+    } catch (err) {
+      // Cache is best-effort: a Redis outage must not fail the caller.
+      console.error("Cache.get failed, treating as cache miss:", err);
+      return defaultValue;
+    }
     if (value === null) {
       return defaultValue;
     }
@@ -44,10 +51,15 @@ export class Cache {
   static async put(key: string, value: unknown, ttl?: number): Promise<void> {
     const stringValue =
       typeof value === "object" ? JSON.stringify(value) : String(value);
-    if (ttl !== undefined && ttl !== null) {
-      await Cache.client().set(key, stringValue, "EX", ttl);
-    } else {
-      await Cache.client().set(key, stringValue);
+    try {
+      if (ttl !== undefined && ttl !== null) {
+        await Cache.client().set(key, stringValue, "EX", ttl);
+      } else {
+        await Cache.client().set(key, stringValue);
+      }
+    } catch (err) {
+      // Best-effort: failing to warm the cache should not fail the request.
+      console.error("Cache.put failed, skipping cache write:", err);
     }
   }
 
