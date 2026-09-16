@@ -14,7 +14,7 @@ const { logout } = useAuth();
 async function handleLogout() {
   try {
     await logout();
-    navigateTo(route("auth.login"));
+    await navigateTo(route("auth.login"));
   } catch (err) {
     console.error("Gagal logout:", err);
   }

@@ -106,7 +106,7 @@ async function handleLogin() {
     });
 
     // Redirect to admin dashboard
-    navigateTo(route("admin.index"));
+    await navigateTo(route("admin.index"));
   } catch (err) {
     // Reset Turnstile token on validation/login error
     token.value = null;
