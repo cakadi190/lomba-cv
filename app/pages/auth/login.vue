@@ -79,6 +79,10 @@ import { useLogin } from "~/composables/auth/useLogin";
 import { route } from "~~/lib/route";
 import { usePageSeo } from "~~/lib/seo";
 
+definePageMeta({
+  middleware: "guest",
+});
+
 usePageSeo({
   title: "Masuk",
   description: "Masuk ke panel admin",

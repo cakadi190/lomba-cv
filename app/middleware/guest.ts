@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(async () => {
   const { profileFetch } = useAuth();
   const { data, error } = await profileFetch;
 
-  if (error.value || !data.value?.data) {
-    return navigateTo(route("auth.login"), { replace: true });
+  if (!error.value && data.value?.data) {
+    return navigateTo(route("admin.index"), { replace: true });
   }
 });
