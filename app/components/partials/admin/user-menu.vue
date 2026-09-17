@@ -3,7 +3,7 @@
     <button type="button" class="user-menu-toggle" id="user-menu-toggle" data-bs-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <span class="user-avatar">{{ userInitials }}</span>
-      <span class="user-menu-info">
+      <span class="user-menu-info d-none d-lg-flex">
         <span class="user-menu-name">{{ user?.name }}</span>
         <span class="user-menu-email">{{ user?.email }}</span>
       </span>

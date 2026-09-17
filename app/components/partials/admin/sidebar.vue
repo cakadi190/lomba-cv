@@ -58,6 +58,8 @@ const menuGroups = [
     label: "Lainnya",
     items: [
       { label: "Pantau Kendaraan", to: "/admin/educations", icon: "fa6-solid:bullseye" },
+      { label: "Tempat Ngopi", to: "/admin/coffee-places", icon: "fa6-solid:mug-saucer" },
+      { label: "Buku Tamu", to: "/admin/guest-book", icon: "fa6-solid:bookmark" },
       { label: "Pesan Dari Formulir", to: "/admin/contact-forms", icon: "fa6-solid:envelope" },
     ],
   },

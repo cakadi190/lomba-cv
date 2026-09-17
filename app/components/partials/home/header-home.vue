@@ -1,240 +1,236 @@
 <script lang="ts" setup>
 import { route } from "~~/lib/route";
 import {
-    enterSlideFromLeftToRight,
-    enterSlideFromRightToLeft,
-    initialSlideFromLeftToRight,
-    initialSlideFromRightToLeft,
+  enterSlideFromLeftToRight,
+  enterSlideFromRightToLeft,
+  initialSlideFromLeftToRight,
+  initialSlideFromRightToLeft,
 } from "../../motion";
 
 defineOptions({ name: "HeaderHome" });
 
 useHead({
-	title: "Beranda",
-	meta: [
-		{
-			key: "description",
-			name: "description",
-			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-		},
-		{
-			key: "og:canonical",
-			name: "canonical",
-			content: "https://www.cakadi.web.id",
-		},
+  title: "Beranda",
+  meta: [
+    {
+      key: "description",
+      name: "description",
+      content:
+        "Web Resmi Amir Zuhdi Wibowo yang mana adalah Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+    },
+    {
+      key: "og:canonical",
+      name: "canonical",
+      content: "https://www.cakadi.web.id",
+    },
 
-		{ key: "og:url", name: "og:url", content: "https://www.cakadi.web.id" },
-		{
-			key: "og:description",
-			name: "og:description",
-			content:
-				"Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
-		},
-	],
+    { key: "og:url", name: "og:url", content: "https://www.cakadi.web.id" },
+    {
+      key: "og:description",
+      name: "og:description",
+      content:
+        "Web Resmi Amir Zuhdi Wibowo yang mana adalah seorang Software Engineer dan Wirausahawan yang suka desain dan atau semua hal yang berbau teknologi.",
+    },
+  ],
 });
 
 type TechStackItem = {
-	icon?: string;
-	name?: string;
-	type?: "separator";
+  icon?: string;
+  name?: string;
+  type?: "separator";
 };
 
 const techStack = ref<TechStackItem[]>([
-	{ icon: "devicon:laravel", name: "Laravel" },
-	{ icon: "devicon:vuejs", name: "VueJS" },
-	{ icon: "devicon:bootstrap", name: "Bootstrap" },
-	{ icon: "devicon:nuxtjs", name: "NuxtJS" },
-	{ icon: "devicon:nextjs", name: "NextJS" },
-	{ icon: "devicon:docker", name: "Docker" },
-	{ type: "separator" },
-	{ icon: "devicon:vscode", name: "Visual Studio Code" },
-	{ icon: "devicon:figma", name: "Figma" },
-	{ icon: "devicon:ubuntu", name: "Linux Ubuntu" },
+  { icon: "devicon:laravel", name: "Laravel" },
+  { icon: "devicon:vuejs", name: "VueJS" },
+  { icon: "devicon:bootstrap", name: "Bootstrap" },
+  { icon: "devicon:nuxtjs", name: "NuxtJS" },
+  { icon: "devicon:nextjs", name: "NextJS" },
+  { icon: "devicon:docker", name: "Docker" },
+  { type: "separator" },
+  { icon: "devicon:vscode", name: "Visual Studio Code" },
+  { icon: "devicon:figma", name: "Figma" },
+  { icon: "devicon:ubuntu", name: "Linux Ubuntu" },
 ]);
 </script>
 
 <template>
-	<header id="masthead">
-		<div class="container">
-			<div class="row gy-4">
-				<div class="col-md-7 text-center text-lg-start">
-					<div v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight"
-						class="breaking-news">
-						Website ini mendapatkan penghargaan 🏆
-						<a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi
-							Desain Website Personal CV Maroon Day HIMAFORKA
-							Universitas Teknologi Digital Indonesia<span
-								class="d-none d-xl-none d-xxl-inline-block">&nbsp;(d/h STMIK AKAKOM
-								Yogyakarta)</span></a>
-						tahun 2024.
-					</div>
+  <header id="masthead">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-7 text-center text-lg-start">
+          <div v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight" class="breaking-news">
+            Website ini mendapatkan penghargaan 🏆
+            <a href="https://www.instagram.com/p/C6faMQ2yld-/?img_index=2" target="_blank">#3 Kompetisi
+              Desain Website Personal CV Maroon Day HIMAFORKA
+              Universitas Teknologi Digital Indonesia<span class="d-none d-xl-none d-xxl-inline-block">&nbsp;(d/h STMIK
+                AKAKOM
+                Yogyakarta)</span></a>
+            tahun 2024.
+          </div>
 
-					<h2 class="h4" v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
-						Halo rek! 👋 Perkenalkan, Namaku...
-					</h2>
-					<h1 class="main-title justify-content-center justify-content-lg-start" v-motion
-						:initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
-						<div>
-							<span class="text-primary text-decoration-underline">A</span>
-							<span>mir&nbsp;</span>
-							<span>Zuh</span>
-							<span class="text-primary text-decoration-underline">di</span>
-						</div>
-						<span>Wibowo, A.Md.Kom.</span>
-					</h1>
-					<p v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight"
-						class="mb-4 main-desc">
-						Seorang <strong>Software Engineer</strong> dan <strong>Wirausahawan</strong> yang berbasis di
-						Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang
-						berbau <strong>teknologi</strong>.
-					</p>
+          <h2 class="h4" v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
+            Halo rek! 👋 Perkenalkan, Namaku...
+          </h2>
+          <h1 class="main-title justify-content-center justify-content-lg-start" v-motion
+            :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
+            <div>
+              <span class="text-primary text-decoration-underline">A</span>
+              <span>mir&nbsp;</span>
+              <span>Zuh</span>
+              <span class="text-primary text-decoration-underline">di</span>
+            </div>
+            <span>Wibowo, A.Md.Kom.</span>
+          </h1>
+          <p v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight" class="mb-4 main-desc">
+            Seorang <strong>Software Engineer</strong> dan <strong>Wirausahawan</strong> yang berbasis di
+            Kabupaten Ngawi yang suka sekali dengan desain dan juga hal yang
+            berbau <strong>teknologi</strong>.
+          </p>
 
-					<div class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center">
-						<nuxt-link :to="route('contact')" class="btn btn-primary d-flex align-items-center gap-2"
-							v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
-							<Icon name="fa6-solid:phone" />
-							<span>Hubungi Saya</span>
-						</nuxt-link>
+          <div class="d-flex pb-2 gap-2 justify-content-center justify-content-lg-start align-items-center">
+            <nuxt-link :to="route('contact')" class="btn btn-primary d-flex align-items-center gap-2" v-motion
+              :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
+              <Icon name="fa6-solid:phone" />
+              <span>Hubungi Saya</span>
+            </nuxt-link>
 
-						<nuxt-link to="https://s.id/cvnyaCakAdi"
-							class="btn btn-outline-primary d-flex align-items-center gap-2" v-motion
-							:initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
-							<Icon name="fa6-solid:file-pdf" />
-							<span>Resume</span>
-						</nuxt-link>
-					</div>
+            <nuxt-link to="https://s.id/cvnyaCakAdi" class="btn btn-outline-primary d-flex align-items-center gap-2"
+              v-motion :initial="initialSlideFromLeftToRight" :enter="enterSlideFromLeftToRight">
+              <Icon name="fa6-solid:file-pdf" />
+              <span>Resume</span>
+            </nuxt-link>
+          </div>
 
-					<div class="d-flex pt-4 flex-column gap-2" v-motion :initial="initialSlideFromLeftToRight"
-						:enter="enterSlideFromLeftToRight">
-						<h5 class="text-center text-lg-start">
-							<em>Tech Stack</em> Andalan Saya
-						</h5>
+          <div class="d-flex pt-4 flex-column gap-2" v-motion :initial="initialSlideFromLeftToRight"
+            :enter="enterSlideFromLeftToRight">
+            <h5 class="text-center text-lg-start">
+              <em>Tech Stack</em> Andalan Saya
+            </h5>
 
-						<div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-							<span class="tech-stack" data-bs-toggle="tooltip" data-bs-placement="top"
-								v-bind="item.name ? { 'data-bs-title': item.name } : {}"
-								v-for="(item, index) in techStack" :key="index">
-								<div class="vr h-100" v-if="item.type === 'separator'"></div>
-								<Icon v-else :name="item.icon" size="32" />
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-5">
-					<nuxt-img preload v-motion :initial="initialSlideFromRightToLeft" :enter="enterSlideFromRightToLeft"
-						src="/images/fotoku.min.png" alt="Cak Adi" :placeholder="4500" densities="1x 2x 3x"
-						class="w-100" />
-				</div>
-			</div>
-		</div>
-	</header>
+            <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+              <span class="tech-stack" data-bs-toggle="tooltip" data-bs-placement="top"
+                v-bind="item.name ? { 'data-bs-title': item.name } : {}" v-for="(item, index) in techStack"
+                :key="index">
+                <div class="vr h-100" v-if="item.type === 'separator'"></div>
+                <Icon v-else :name="item.icon" size="32" />
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <nuxt-img preload v-motion :initial="initialSlideFromRightToLeft" :enter="enterSlideFromRightToLeft"
+            src="/images/fotoku.webp" alt="Cak Adi" :placeholder="4500" densities="1x 2x 3x" class="w-100" />
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <style lang="scss" scoped>
 .breaking-news {
-	display: block;
-	margin-bottom: 1.5rem;
-	background: rgba(var(--bs-primary-rgb), 0.125);
-	padding: 1rem 1.5rem;
-	color: rgba(var(--bs-primary-rgb), 1);
-	border-radius: 0.75rem;
+  display: block;
+  margin-bottom: 1.5rem;
+  background: rgba(var(--bs-primary-rgb), 0.125);
+  padding: 1rem 1.5rem;
+  color: rgba(var(--bs-primary-rgb), 1);
+  border-radius: 0.75rem;
 }
 
 #masthead {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -2;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(226 232 240 / 0.8)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(226 232 240 / 0.8)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
 
-		[data-bs-theme="dark"] & {
-			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / .1)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
-		}
-	}
+    [data-bs-theme="dark"] & {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / .1)' stroke-dasharray='5 3' transform='scale(1%2c -1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+    }
+  }
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -1;
-		background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0.25));
 
-		[data-bs-theme="dark"] & {
-			background: linear-gradient(to top,
-					rgb(var(--bs-body-bg-rgb)),
-					rgba(var(--bs-body-bg-rgb), 0.125));
-		}
-	}
+    [data-bs-theme="dark"] & {
+      background: linear-gradient(to top,
+          rgb(var(--bs-body-bg-rgb)),
+          rgba(var(--bs-body-bg-rgb), 0.125));
+    }
+  }
 
-	.row {
-		min-height: 100dvh;
-		align-items: center;
-		justify-content: center;
-		padding-top: 7.5rem;
-		padding-bottom: 7.5rem;
-	}
+  .row {
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+  }
 
-	.main-title {
-		display: inline-flex;
-		align-items: center;
-		flex-wrap: wrap;
-		font-size: 4rem;
-		font-weight: 600;
-		gap: .5rem;
+  .main-title {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 4rem;
+    font-weight: 600;
+    gap: .5rem;
 
-		>* {
-			display: inline-flex;
-		}
+    >* {
+      display: inline-flex;
+    }
 
-		@media screen and (max-width: 1600px) {
-			font-size: 3rem;
-		}
+    @media screen and (max-width: 1600px) {
+      font-size: 3rem;
+    }
 
-		@media screen and (max-width: 1200px) {
-			font-size: 2.5rem;
-		}
+    @media screen and (max-width: 1200px) {
+      font-size: 2.5rem;
+    }
 
-		@media screen and (max-width: 768px) {
-			font-size: 2rem;
-		}
-	}
+    @media screen and (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
 
-	.main-desc {
-		font-size: 1.5rem;
-		opacity: 0.65 !important;
+  .main-desc {
+    font-size: 1.5rem;
+    opacity: 0.65 !important;
 
-		@media screen and (max-width: 1600px) {
-			font-size: 1.25rem;
-		}
+    @media screen and (max-width: 1600px) {
+      font-size: 1.25rem;
+    }
 
-		@media screen and (max-width: 1200px) {
-			font-size: 1.25rem;
-		}
+    @media screen and (max-width: 1200px) {
+      font-size: 1.25rem;
+    }
 
-		@media screen and (max-width: 768px) {
-			font-size: 1rem;
-		}
-	}
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
 
-	.tech-stack {
-		filter: grayscale(100%);
-		transition: all 0.2s;
-		cursor: pointer;
+  .tech-stack {
+    filter: grayscale(100%);
+    transition: all 0.2s;
+    cursor: pointer;
 
-		&:hover {
-			filter: grayscale(0);
-		}
-	}
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
 }
 </style>
