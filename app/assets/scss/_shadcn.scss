@@ -33,7 +33,6 @@ $shadcn-duration: 150ms;
   padding: 0.375rem;
   border: 1px solid $shadcn-border-color;
   border-radius: $shadcn-radius;
-  box-shadow: $shadcn-shadow;
   transform-origin: top left;
 
   // Sub-menus opening sideways (dropend/dropstart) animate from the edge
@@ -171,6 +170,7 @@ $shadcn-duration: 150ms;
 
 // Respect users who've asked the OS to reduce motion.
 @media (prefers-reduced-motion: reduce) {
+
   .dropdown-menu.show,
   .dropdown-menu.dropdown-menu-closing,
   .modal.fade .modal-dialog,

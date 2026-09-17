@@ -110,6 +110,7 @@ async function handleLogin() {
     });
 
     // Redirect to admin dashboard
+    clearNuxtData("auth-me");
     await navigateTo(route("admin.index"));
   } catch (err) {
     // Reset Turnstile token on validation/login error

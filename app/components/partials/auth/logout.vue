@@ -14,6 +14,7 @@ const { logout } = useAuth();
 async function handleLogout() {
   try {
     await logout();
+    clearNuxtData("auth-me");
     await navigateTo(route("auth.login"));
   } catch (err) {
     console.error("Gagal logout:", err);
@@ -24,6 +25,6 @@ async function handleLogout() {
 <template>
   <!-- biome-ignore lint/a11y/noStaticElementInteractions: dynamic component behaves as an interactive element -->
   <component :is="as" @click="handleLogout">
-    <slot />
+    <slot></slot>
   </component>
 </template>

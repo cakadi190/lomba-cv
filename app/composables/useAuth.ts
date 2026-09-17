@@ -14,7 +14,9 @@ export interface ProfileResponse {
 }
 
 export function useAuth() {
-  const profileFetch = useFetch<ProfileResponse>(route("api.auth.me"));
+  const profileFetch = useFetch<ProfileResponse>(route("api.auth.me"), {
+    key: "auth-me",
+  });
   const { logout } = useLogout();
 
   return {
