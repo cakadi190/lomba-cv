@@ -9,8 +9,8 @@
 
 <script lang="ts" setup>
 import backToTop from "~/components/back-to-top.vue";
-import navbarMain from "./partial/navbar.vue";
-import footerMain from "./partial/footer.vue";
+import navbarMain from "./partial/default/navbar.vue";
+import footerMain from "./partial/default/footer.vue";
 </script>
 
 <style lang="scss" scoped>
